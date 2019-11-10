@@ -1,4 +1,6 @@
-# 42
+# 42sh
 
-## build shell
+### Description
+
+### How to build shell
 cmake . && make
