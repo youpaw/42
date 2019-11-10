@@ -27,12 +27,16 @@
 *.so.*
 *.dylib
 
-# Executables
+# Build and Executables
 *.out
 *.app
 *.i*86
 *.x86_64
 *.hex
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+.idea/
 42sh
 
 # Debug files
