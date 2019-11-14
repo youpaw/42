@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/a17641238/CLionProjects/repo/cmake-build-debug/CMakeFiles /Users/a17641238/CLionProjects/repo/cmake-build-debug/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/a17641238/CLionProjects/repo/cmake-build-debug/CMakeFiles /Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/CMakeFiles/progress.marks
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/lib/libcc/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/a17641238/CLionProjects/repo/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/lib/libcc/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,71 +97,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/lib/libcc/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/lib/libcc/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named 42sh
+# Convenience name for target.
+src/lib/libcc/CMakeFiles/cc.dir/rule:
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/lib/libcc/CMakeFiles/cc.dir/rule
+.PHONY : src/lib/libcc/CMakeFiles/cc.dir/rule
 
-# Build rule for target.
-42sh: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 42sh
-.PHONY : 42sh
+# Convenience name for target.
+cc: src/lib/libcc/CMakeFiles/cc.dir/rule
 
-# fast build rule for target.
-42sh/fast:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/build
-.PHONY : 42sh/fast
-
-#=============================================================================
-# Target rules for targets named cc
-
-# Build rule for target.
-cc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cc
 .PHONY : cc
 
 # fast build rule for target.
 cc/fast:
-	$(MAKE) -f src/lib/libcc/CMakeFiles/cc.dir/build.make src/lib/libcc/CMakeFiles/cc.dir/build
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f src/lib/libcc/CMakeFiles/cc.dir/build.make src/lib/libcc/CMakeFiles/cc.dir/build
 .PHONY : cc/fast
 
-src/bin/42sh/main.o: src/bin/42sh/main.c.o
+strcmp.o: strcmp.c.o
 
-.PHONY : src/bin/42sh/main.o
+.PHONY : strcmp.o
 
 # target to build an object file
-src/bin/42sh/main.c.o:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/bin/42sh/main.c.o
-.PHONY : src/bin/42sh/main.c.o
+strcmp.c.o:
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f src/lib/libcc/CMakeFiles/cc.dir/build.make src/lib/libcc/CMakeFiles/cc.dir/strcmp.c.o
+.PHONY : strcmp.c.o
 
-src/bin/42sh/main.i: src/bin/42sh/main.c.i
+strcmp.i: strcmp.c.i
 
-.PHONY : src/bin/42sh/main.i
+.PHONY : strcmp.i
 
 # target to preprocess a source file
-src/bin/42sh/main.c.i:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/bin/42sh/main.c.i
-.PHONY : src/bin/42sh/main.c.i
+strcmp.c.i:
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f src/lib/libcc/CMakeFiles/cc.dir/build.make src/lib/libcc/CMakeFiles/cc.dir/strcmp.c.i
+.PHONY : strcmp.c.i
 
-src/bin/42sh/main.s: src/bin/42sh/main.c.s
+strcmp.s: strcmp.c.s
 
-.PHONY : src/bin/42sh/main.s
+.PHONY : strcmp.s
 
 # target to generate assembly for a file
-src/bin/42sh/main.c.s:
-	$(MAKE) -f CMakeFiles/42sh.dir/build.make CMakeFiles/42sh.dir/src/bin/42sh/main.c.s
-.PHONY : src/bin/42sh/main.c.s
+strcmp.c.s:
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(MAKE) -f src/lib/libcc/CMakeFiles/cc.dir/build.make src/lib/libcc/CMakeFiles/cc.dir/strcmp.c.s
+.PHONY : strcmp.c.s
 
 # Help Target
 help:
@@ -171,11 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... 42sh"
 	@echo "... cc"
-	@echo "... src/bin/42sh/main.o"
-	@echo "... src/bin/42sh/main.i"
-	@echo "... src/bin/42sh/main.s"
+	@echo "... strcmp.o"
+	@echo "... strcmp.i"
+	@echo "... strcmp.s"
 .PHONY : help
 
 
@@ -187,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/a17641238/CLionProjects/repo/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

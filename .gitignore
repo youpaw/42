@@ -52,3 +52,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Undefined Files
+.DS_Store
+Makefile # need to be returned after all
