@@ -38,6 +38,9 @@ CMakeFiles/
 cmake_install.cmake
 .idea/
 42sh
+# TODO need to be returned after all
+**/Makefile
+cmake-build-debug/42sh.cbp
 
 # Debug files
 *.dSYM/
@@ -55,4 +58,3 @@ dkms.conf
 
 # Undefined Files
 .DS_Store
-Makefile # TODO need to be returned after all

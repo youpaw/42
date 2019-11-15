@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "cc.h"
-#include <templates.h>
 
 int main(int ac, char *av[], char *en[])
 {
