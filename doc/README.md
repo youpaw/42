@@ -1,6 +1,4 @@
-# 42sh
+# Documentation for 42sh
 
-### Description
+### Posix
 
-### How to build shell
-cmake . && make
