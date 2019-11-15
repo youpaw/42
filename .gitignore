@@ -40,7 +40,7 @@ cmake_install.cmake
 42sh
 # TODO need to be returned after all
 **/Makefile
-cmake-build-debug/42sh.cbp
+cmake-build-debug/
 
 # Debug files
 *.dSYM/
