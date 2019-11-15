@@ -7,5 +7,3 @@ cmake . && make
 ./42sh
 
 ### Description
-
-
