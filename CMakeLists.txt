@@ -8,9 +8,9 @@ set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
 add_executable(${PROJECT_NAME} src/bin/42sh/main.c)
 
-#target_include_directories(${PROJECT_NAME} PRIVATE "src/lib/libcc")
-include_directories("src/lib/libcc")
-add_subdirectory("src/lib/libcc")
+#add libcc to the project
+set(LIBCC_DIR "src/lib/libcc")
+include_directories(${LIBCC_DIR})
+add_subdirectory(${LIBCC_DIR})
 
-#target_include_directories("src/lib/libcc")
 target_link_libraries(${PROJECT_NAME} cc)

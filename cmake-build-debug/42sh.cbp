@@ -8,124 +8,136 @@
 		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\lib\;CMake Files\src\lib\libcc\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="42sh">
-				<Option output="/Users/a17641238/CLionProjects/repo/cmake-build-debug/42sh" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug"/>
+				<Option output="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/42sh" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/a17641238/CLionProjects/repo/src/lib/libcc"/>
+					<Add directory="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 42sh"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 42sh"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="42sh/fast">
-				<Option output="/Users/a17641238/CLionProjects/repo/cmake-build-debug/42sh" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug"/>
+				<Option output="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/42sh" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/a17641238/CLionProjects/repo/src/lib/libcc"/>
+					<Add directory="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 42sh/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 42sh/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cc">
-				<Option output="/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/build/libcc.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc"/>
+				<Option output="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/libcc.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 cc"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 cc"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cc/fast">
-				<Option output="/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/build/libcc.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc"/>
+				<Option output="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/libcc.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 cc/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/a17641238/CLionProjects/repo/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 cc/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/andrew/Documents/Programming/42/42sh/cmake-build-debug/src/lib/libcc/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/a17641238/CLionProjects/repo/src/bin/42sh/main.c">
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/src/bin/42sh/main.c">
 			<Option target="42sh"/>
 		</Unit>
-		<Unit filename="/Users/a17641238/CLionProjects/repo/src/lib/libcc/strcmp.c">
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc/nstrjoin.c">
 			<Option target="cc"/>
 		</Unit>
-		<Unit filename="/Users/a17641238/CLionProjects/repo/CMakeLists.txt">
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc/strcmp.c">
+			<Option target="cc"/>
+		</Unit>
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc/xmalloc.c">
+			<Option target="cc"/>
+		</Unit>
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/Users/a17641238/CLionProjects/repo/src/lib/libcc/CMakeLists.txt">
+		<Unit filename="/Users/andrew/Documents/Programming/42/42sh/src/lib/libcc/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\lib\libcc\"/>
 		</Unit>
 	</Project>

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "cc.h"
 
 /*
 **	(const) char * args are binded in one string
@@ -24,7 +25,7 @@ char		*nstrjoin(int n, ...)
 		len += strlen(ptr);
 	}
 	va_end(argptr);
-	str = (char *)malloc(len + 1);
+	str = (char *)xmalloc(len + 1);
 	bzero(str, len + 1);
 	va_start(argptr, n);
 	while (n_cpy--)
