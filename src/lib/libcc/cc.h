@@ -25,9 +25,11 @@
 
 # undef	strcmp
 # undef nstrjoin
+# undef strstr
 
 int			strcmp(const char *s1, const char *s2);
 char		*nstrjoin(int n, ...);
+char 		*strstr(const char *haystack, const char *needle);
 
 /*
 **

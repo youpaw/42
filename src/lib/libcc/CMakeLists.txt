@@ -10,5 +10,5 @@ message("___________________________________________kek")
 #set(LIBRARY_OUTPUT_PATH "build")
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 ADD_LIBRARY(cc STATIC
-        strcmp.c nstrjoin.c xmalloc.c)
+        strcmp.c nstrjoin.c xmalloc.c strstr.c)
 
