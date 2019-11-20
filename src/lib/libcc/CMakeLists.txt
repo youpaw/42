@@ -15,5 +15,12 @@ ADD_LIBRARY(cc STATIC
 		xmalloc.c
 		memset.c
 		strstr.c
+		isspace.c
+		memmove.c
+		strdup.c
+		strlen.c
+		strcpy.c
+		strcat.c
+		bzero.c
 		)
 

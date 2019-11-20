@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   bzero.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/20 21:33:34 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/20 21:12:27 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/20 21:12:27 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc.h"
 
-char		*strnew(size_t size)
+void	bzero(void *s, size_t n)
 {
-	char	*res;
-
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	memset(s, 0, n);
 }

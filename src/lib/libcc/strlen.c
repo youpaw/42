@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   strlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/20 21:33:34 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/20 20:45:08 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/20 20:52:03 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include <stdlib.h>
 
-char		*strnew(size_t size)
+size_t	strlen(const char *s)
 {
-	char	*res;
+	size_t i;
 
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	i = 0;
+	if (!s)
+		return (0);
+	while (*s++)
+		if (++i == 0)
+			break ;
+	return (i);
 }

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   strcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/20 21:33:34 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/20 20:44:21 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/20 20:44:21 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
-
-char		*strnew(size_t size)
+char	*strcpy(char *dst, const char *src)
 {
-	char	*res;
+	char *head;
 
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	head = dst;
+	while (*src)
+		*dst++ = *src++;
+	*dst = '\0';
+	return (head);
 }

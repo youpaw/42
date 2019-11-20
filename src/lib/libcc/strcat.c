@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   strcat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/20 21:33:34 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/20 21:14:24 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/20 21:14:24 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc.h"
 
-char		*strnew(size_t size)
+char	*strcat(char *s1, const char *s2)
 {
-	char	*res;
+	size_t i;
 
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	i = strlen(s1);
+	while (*s2)
+	{
+		s1[i] = *s2;
+		s2++;
+		i++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

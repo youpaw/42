@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/20 21:33:34 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/20 20:45:47 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/20 20:52:03 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include <stdlib.h>
 
-char		*strnew(size_t size)
+void	*memmove(void *dst, const void *src, size_t len)
 {
-	char	*res;
+	unsigned char	*tmpdst;
+	unsigned char	*tmpsrc;
 
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	if (!src && !dst)
+		return (NULL);
+	tmpdst = (unsigned char*)dst;
+	tmpsrc = (unsigned char*)src;
+	if (tmpsrc < tmpdst)
+		while (len--)
+			*(tmpdst + len) = *(tmpsrc + len);
+	else
+		while (len--)
+			*tmpdst++ = *tmpsrc++;
+	return (dst);
 }
