@@ -22,5 +22,9 @@ ADD_LIBRARY(cc STATIC
 		strcpy.c
 		strcat.c
 		bzero.c
+		strncmp.c
+		strncpy.c
+		strsub.c
+		fdputs.c
 		)
 

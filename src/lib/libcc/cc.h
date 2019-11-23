@@ -22,28 +22,39 @@
 // ####################################################
 
 /*
+**	chars
+*/
+
+# undef isspace
+
+int			isspace(int c);
+
+/*
 **	strings
 */
 
 # undef strnew
 # undef	strcmp
+# undef strncmp
 # undef nstrjoin
 # undef strstr
 # undef strcpy
+# undef strncpy
 # undef strdup
 # undef strlen
-# undef isspace
 
 char 		*strnew(size_t size);
-int			strcmp(const char *s1, const char *s2);
-char		*nstrjoin(int n, ...);
-char 		*strstr(const char *haystack, const char *needle);
-char		*strcpy(char *dst, const char *src);
-char		*strdup(const char *s1);
 size_t		strlen(const char *s);
+char		*strdup(const char *s1);
+int			strcmp(const char *s1, const char *s2);
+int			strncmp(const char *s1, const char *s2, size_t n);
+char		*strcpy(char *dst, const char *src);
+char		*strncpy(char *dest, const char *src, size_t n);
 char		*strcat(char *s1, const char *s2);
+char		*nstrjoin(int n, ...);
+char		*strsub(char const *s, unsigned int start, size_t len);
+char 		*strstr(const char *haystack, const char *needle);
 long long	atoll(const char *str);
-int			isspace(int c);
 
 /*
 **	mems
@@ -63,6 +74,6 @@ void		bzero(void *s, size_t n);
 **	Writes
 */
 
-
+int			fdputs(const char *restrict s, int stream);
 
 #endif
