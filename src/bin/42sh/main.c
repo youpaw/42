@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "cc.h"
 
 int main(int ac, char *av[], char *en[])
 {
-	printf("Hello, 42sh!\n");
+	fdputs("Hello, 42sh!\n", 1);
 	return (0);
 }

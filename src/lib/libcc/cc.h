@@ -5,29 +5,15 @@
 
 // TODO implement the following functions in cc lib:
 
-// strings
-/*
- * strcpy
- * strcat
- *
- */
-
-// mem
-/*
- * memcpy, memmove etc.
- *
- *
- */
-
-// ####################################################
-
 /*
 **	chars
 */
 
 # undef isspace
+# undef isdigit
 
 int			isspace(int c);
+int			isdigit(int c);
 
 /*
 **	strings
@@ -42,6 +28,7 @@ int			isspace(int c);
 # undef strncpy
 # undef strdup
 # undef strlen
+# undef	atoll
 
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
@@ -54,6 +41,7 @@ char		*strcat(char *s1, const char *s2);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
+char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
 
 /*

@@ -26,5 +26,7 @@ ADD_LIBRARY(cc STATIC
 		strncpy.c
 		strsub.c
 		fdputs.c
-		)
+		atoll.c
+		isdigit.c
+		strsplitcharset.c)
 
