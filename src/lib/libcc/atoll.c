@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   atoll.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:31 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/24 01:11:22 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "cc.h"
+#include <limits.h>
 
-void		*xmalloc(size_t size)
+long long	atoll(const char *str)
 {
-	void	*ptr;
+	int			sig;
+	long long	res;
 
-	ptr = malloc(size);
-	if (ptr)
-		return (ptr);
-	write(2, "malloc() failed, exit...\n", 25);
-	exit(EXIT_FAILURE);
+	sig = 1;
+	res = 0;
+	while (isspace(*str))
+		str++;
+	if (*str == '-')
+		sig = -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str && isdigit(*str))
+	{
+		if (sig > 0 && res > (LONG_MAX - (*str - '0')) / 10)
+			return (LONG_MAX);
+		if (sig < 0 && res * sig < (LONG_MIN + (*str - '0')) / 10)
+			return (LONG_MIN);
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (res * sig);
 }

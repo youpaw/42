@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:31 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/20 20:43:35 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "cc.h"
 
-void		*xmalloc(size_t size)
+char	*strdup(const char *s1)
 {
-	void	*ptr;
+	char	*str;
 
-	ptr = malloc(size);
-	if (ptr)
-		return (ptr);
-	write(2, "malloc() failed, exit...\n", 25);
-	exit(EXIT_FAILURE);
+	if (!(str = strnew(strlen(s1))))
+		return (NULL);
+	return (strcpy(str, s1));
 }

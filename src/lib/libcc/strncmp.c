@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:31 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/23 23:25:33 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 
-void		*xmalloc(size_t size)
+int		strncmp(const char *s1, const char *s2, size_t n)
 {
-	void	*ptr;
+	size_t			i;
+	unsigned char	*ps1;
+	unsigned char	*ps2;
 
-	ptr = malloc(size);
-	if (ptr)
-		return (ptr);
-	write(2, "malloc() failed, exit...\n", 25);
-	exit(EXIT_FAILURE);
+	ps1 = (unsigned char*)s1;
+	ps2 = (unsigned char*)s2;
+	i = 0;
+	while ((ps1[i] || ps2[i]) && i < n)
+	{
+		if (ps1[i] != ps2[i])
+			return (ps1[i] - ps2[i]);
+		i++;
+	}
+	return (0);
 }

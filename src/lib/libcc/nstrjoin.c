@@ -1,12 +1,17 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "cc.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nstrjoin.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/20 21:17:44 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-**	(const) char * args are binded in one string
-*/
+#include <stdarg.h>
+#include "cc.h"
 
 char		*nstrjoin(int n, ...)
 {

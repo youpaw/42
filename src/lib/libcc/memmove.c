@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:31 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/20 20:45:47 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 
-void		*xmalloc(size_t size)
+void	*memmove(void *dst, const void *src, size_t len)
 {
-	void	*ptr;
+	unsigned char	*tmpdst;
+	unsigned char	*tmpsrc;
 
-	ptr = malloc(size);
-	if (ptr)
-		return (ptr);
-	write(2, "malloc() failed, exit...\n", 25);
-	exit(EXIT_FAILURE);
+	if (!src && !dst)
+		return (NULL);
+	tmpdst = (unsigned char*)dst;
+	tmpsrc = (unsigned char*)src;
+	if (tmpsrc < tmpdst)
+		while (len--)
+			*(tmpdst + len) = *(tmpsrc + len);
+	else
+		while (len--)
+			*tmpdst++ = *tmpsrc++;
+	return (dst);
 }

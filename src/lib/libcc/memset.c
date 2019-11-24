@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmalloc.c                                          :+:      :+:    :+:   */
+/*   memset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:31 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/20 21:17:54 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/24 03:23:42 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include <stddef.h>
 
-void		*xmalloc(size_t size)
+void				*memset(void *b, int c, size_t len)
 {
-	void	*ptr;
+	size_t			i;
+	unsigned char	*uc;
 
-	ptr = malloc(size);
-	if (ptr)
-		return (ptr);
-	write(2, "malloc() failed, exit...\n", 25);
-	exit(EXIT_FAILURE);
+	i = 0;
+	uc = (unsigned char*)b;
+	while (i < len)
+		uc[i++] = (unsigned char)c;
+	return (uc);
 }
