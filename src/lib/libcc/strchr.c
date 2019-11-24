@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strsub.c                                           :+:      :+:    :+:   */
+/*   strchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/23 23:24:24 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/24 02:48:48 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/24 03:17:39 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/24 03:18:17 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#define NULL ((void *)0)
 
-char	*strsub(char const *s, unsigned int start, size_t len)
+char	*strchr(const char *s, int c)
 {
-	char *sub;
-
-	if (!s || !(sub = strnew(len)))
+	while (*s)
+	{
+		if (*s++ == (char)c)
+			return ((char*)(s - 1));
+	}
+	if (*s == (char)c)
+		return ((char*)s);
+	else
 		return (NULL);
-	return (strncpy(sub, &s[start], len));
 }

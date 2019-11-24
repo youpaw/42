@@ -28,5 +28,6 @@ ADD_LIBRARY(cc STATIC
 		fdputs.c
 		atoll.c
 		isdigit.c
-		strsplitcharset.c)
+		strsplitcharset.c
+		strchr.c)
 

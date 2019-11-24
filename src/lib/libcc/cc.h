@@ -29,6 +29,7 @@ int			isdigit(int c);
 # undef strdup
 # undef strlen
 # undef	atoll
+# undef strchr
 
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
@@ -38,6 +39,7 @@ int			strncmp(const char *s1, const char *s2, size_t n);
 char		*strcpy(char *dst, const char *src);
 char		*strncpy(char *dest, const char *src, size_t n);
 char		*strcat(char *s1, const char *s2);
+char		*strchr(const char *s, int c);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
