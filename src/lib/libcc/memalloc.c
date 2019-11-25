@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   memalloc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/24 03:17:39 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/24 17:30:42 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/25 19:55:14 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/25 19:55:55 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define NULL ((void *)0)
+#include "cc.h"
 
-char	*strchr(const char *s, int c)
+void	*memalloc(size_t size)
 {
-	while (*s)
-	{
-		if (*s++ == (char)c)
-			return ((char*)(s - 1));
-	}
-	if (*s == (char)c)
-		return ((char*)s);
-	else
+	void	*ptr;
+
+	ptr = xmalloc(size);
+	if (!ptr)
 		return (NULL);
+	bzero(ptr, size);
+	return (ptr);
 }

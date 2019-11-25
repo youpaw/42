@@ -29,5 +29,10 @@ ADD_LIBRARY(cc STATIC
 		atoll.c
 		isdigit.c
 		strsplitcharset.c
-		strchr.c vec_init.c vec_push.c)
+		strchr.c
+		vec_init.c
+		vec_push.c
+		memalloc.c
+		memcpy.c
+		strtrim.c)
 

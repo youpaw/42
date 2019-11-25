@@ -45,6 +45,7 @@ char		*strchr(const char *s, int c);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
+char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
 
@@ -55,11 +56,14 @@ long long	atoll(const char *str);
 # undef xmalloc
 # undef memset
 # undef memmove
+# undef memcpy
 # undef bzero
 
 void		*xmalloc(size_t size);
 void		*memset(void *b, int c, size_t len);
+void		*memcpy(void *dst, const void *src, size_t n);
 void		*memmove(void *dst, const void *src, size_t len);
+void		*memalloc(size_t size);
 void		bzero(void *s, size_t n);
 
 /*
