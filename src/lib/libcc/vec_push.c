@@ -20,7 +20,7 @@ t_vec	*vec_push(t_vec *vec, void *content)
 			return (NULL);
 		}
 		vec->capacity *= 2;
-		memcpy(vec->data, tmp, sizeof(void *) * vec->total);
+		memmove(vec->data, tmp, sizeof(void *) * vec->total);
 		free(tmp);
 		(((void **)vec->data))[vec->total] = strdup(content);
 		vec->total += 1;
