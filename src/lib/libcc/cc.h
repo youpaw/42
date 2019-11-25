@@ -2,6 +2,8 @@
 # define LIBCC_H
 
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // TODO implement the following functions in cc lib:
 
@@ -43,6 +45,7 @@ char		*strchr(const char *s, int c);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
+char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
 
@@ -53,11 +56,14 @@ long long	atoll(const char *str);
 # undef xmalloc
 # undef memset
 # undef memmove
+# undef memcpy
 # undef bzero
 
 void		*xmalloc(size_t size);
 void		*memset(void *b, int c, size_t len);
+void		*memcpy(void *dst, const void *src, size_t n);
 void		*memmove(void *dst, const void *src, size_t len);
+void		*memalloc(size_t size);
 void		bzero(void *s, size_t n);
 
 /*
@@ -65,5 +71,19 @@ void		bzero(void *s, size_t n);
 */
 
 int			fdputs(const char *restrict s, int stream);
+
+/*
+** Vector
+*/
+
+typedef struct	s_vec
+{
+	void		*data;
+	size_t		capacity;
+	size_t		total;
+}				t_vec;
+
+t_vec			*vec_init(size_t capacity);
+t_vec			*vec_push(t_vec *vec, void *content);
 
 #endif

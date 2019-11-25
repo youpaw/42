@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   memcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/24 03:17:39 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/25 19:48:50 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define NULL ((void *)0)
+#include <stdlib.h>
 
-char	*strchr(const char *s, int c)
+void	*memcpy(void *dst, const void *src, size_t n)
 {
-	while (*s)
-	{
-		if (*s++ == (char)c)
-			return ((char*)(s - 1));
-	}
-	if (*s == (char)c)
-		return ((char*)s);
-	else
+	unsigned char *td;
+	unsigned char *ts;
+
+	td = (unsigned char*)dst;
+	ts = (unsigned char*)src;
+	if (!dst && !src)
 		return (NULL);
+	while (n--)
+		*td++ = *ts++;
+	return (dst);
 }

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   strtrim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/24 03:17:39 by dbutterw          #+#    #+#             */
+/*   Created: 2019/11/25 19:47:13 by dbutterw          #+#    #+#             */
 /*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define NULL ((void *)0)
+#include "cc.h"
 
-char	*strchr(const char *s, int c)
+char	*strtrim(char const *s)
 {
-	while (*s)
-	{
-		if (*s++ == (char)c)
-			return ((char*)(s - 1));
-	}
-	if (*s == (char)c)
-		return ((char*)s);
-	else
+	size_t	len;
+	size_t	i;
+
+	if (!s)
 		return (NULL);
+	i = 0;
+	len = strlen(s);
+	while (i < len && isspace(s[i]))
+		i++;
+	while (len > i && isspace(s[len - 1]))
+		len--;
+	return (strsub(s, i, len - i));
 }
