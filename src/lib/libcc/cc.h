@@ -2,6 +2,8 @@
 # define LIBCC_H
 
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // TODO implement the following functions in cc lib:
 
@@ -65,5 +67,19 @@ void		bzero(void *s, size_t n);
 */
 
 int			fdputs(const char *restrict s, int stream);
+
+/*
+** Vector
+*/
+
+typedef struct	s_vec
+{
+	void		*data;
+	size_t		capacity;
+	size_t		total;
+}				t_vec;
+
+t_vec			*vec_init(size_t capacity);
+t_vec			*vec_push(t_vec *vec, void *content);
 
 #endif

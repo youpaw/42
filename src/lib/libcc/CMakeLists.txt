@@ -29,5 +29,5 @@ ADD_LIBRARY(cc STATIC
 		atoll.c
 		isdigit.c
 		strsplitcharset.c
-		strchr.c)
+		strchr.c vec_init.c vec_push.c)
 
