@@ -9,7 +9,9 @@ file(MAKE_DIRECTORY ${LIBCC_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(cc STATIC
-        strnew.c
+		file_exists.c
+		str_equals.c
+		strnew.c
 		strcmp.c
 		nstrjoin.c
 		xmalloc.c
@@ -34,5 +36,7 @@ ADD_LIBRARY(cc STATIC
 		vec_push.c
 		memalloc.c
 		memcpy.c
-		strtrim.c)
+		strtrim.c
+		str_starts_with.c
+		)
 
