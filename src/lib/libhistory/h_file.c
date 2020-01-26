@@ -3,10 +3,13 @@
 Int write_to_history(const char *command) - принимает команду и дописывает ее в конец файла инициализации.
 void get_reset() - сбрасывает счётчик и при последующем вызове команд get * они будут работать с самого начала.*/
 #include "cc.h"
+#include "h_dlist.h"
+#include "history.h"
 # include <fcntl.h>
 # include <sys/stat.h>
 
-int	g_fd = -1;
+static int	g_fd = -1;
+static const char g_separator[] = "\n----------------------\n";
 
 int		create_or_open(const char *path)
 {
@@ -26,9 +29,12 @@ int		h_init(const char *path)
 	g_fd = create_or_open(path);
 	if (g_fd < 0)
 	{
-		perror("create file failed\n");
+		//debug_printf
+		//perror("create file failed\n");
+		return (E_FAIL);
 	}
-	return (g_fd >= 0 ? E_OK : E_FAIL);
+
+	return (lst_load(g_fd, g_separator, h_append));
 }
 
 void		h_close()
@@ -38,6 +44,7 @@ void		h_close()
 		close(g_fd);
 		g_fd = -1;
 	}
+	h_free();
 }
 
 int h_save_new()
@@ -46,32 +53,5 @@ int h_save_new()
 	{
 		return (E_FAIL);
 	}
+	return (lst_save(&h_get_head()->list, g_fd, g_separator));
 }
-/*
-int h_get_prev(char *out)
-{
-	if (out == NULL)
-	{
-		return (E_FAIL);
-	}
-	//if (!has_previous())
-	{
-		*out = 0;
-		return (E_FAIL);
-	}
-
-}
-
-int h_get_next(char *out)
-{
-	if (out == NULL)
-	{
-		return (E_FAIL);
-	}
-	//if (!has_previous())
-	{
-		*out = 0;
-		return (E_FAIL);
-	}
-
-}*/

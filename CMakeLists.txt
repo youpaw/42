@@ -12,5 +12,22 @@ add_executable(${PROJECT_NAME} src/bin/42sh/main.c)
 set(LIBCC_DIR "src/lib/libcc")
 include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
-
 target_link_libraries(${PROJECT_NAME} cc)
+
+#add liblists to the project
+set(LIBLISTS_DIR "src/lib/liblists")
+include_directories(${LIBLISTS_DIR})
+add_subdirectory(${LIBLISTS_DIR})
+target_link_libraries(${PROJECT_NAME} lists)
+
+#add libhistory to the project
+set(LIBH_DIR "src/lib/libhistory")
+include_directories(${LIBH_DIR})
+add_subdirectory(${LIBH_DIR})
+target_link_libraries(${PROJECT_NAME} history)
+
+#add libhistory_tests to the project
+set(LIBHT_DIR "src/lib/libhistory_tests")
+include_directories(${LIBHT_DIR})
+add_subdirectory(${LIBHT_DIR})
+target_link_libraries(${PROJECT_NAME} history_tests)

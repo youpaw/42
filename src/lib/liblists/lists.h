@@ -1,7 +1,7 @@
 #ifndef LISTS_H
 
 # define LISTS_H
-
+# include "cc.h"
 # include <stdlib.h>
 
 # define BOOL int
@@ -39,5 +39,7 @@ void			lst_remove_sorted(t_list **list, t_list *to_remove
 	, void (*free_content)(void *, size_t));
 t_list *lst_get_last(t_list *n);
 void			lst_append(t_list *node, t_list *new);
+int		lst_save(t_list *head, int fd, const char *separator);
+int		lst_load(int fd, const char *separator, void (*add)(const char *));
 
 #endif

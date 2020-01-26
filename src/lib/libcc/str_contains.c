@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   h_dlist.h                                          :+:      :+:    :+:   */
+/*   str_contains.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darugula <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 13:00:51 by darugula          #+#    #+#             */
-/*   Updated: 2020/01/01 13:00:52 by darugula         ###   ########.fr       */
+/*   Created: 2019/11/20 21:14:24 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_DLIST_H
-# define H_DLIST_H
-# include "lists.h"
+#include "cc.h"
 
-void		h_free(void);
-t_d_list *h_get_head();
-
-#endif 
-
+int		str_contains(const char *str, const char *substr)
+{
+	return (strstr2(str, substr) != NULL);
+}

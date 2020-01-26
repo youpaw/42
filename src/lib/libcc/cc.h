@@ -48,6 +48,8 @@ int			isdigit(int c);
 # undef	atoll
 # undef strchr
 
+char			*str_append(char *s1, const char *s2);
+int			str_contains(const char *str, const char *substr);
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
 char		*strdup(const char *s1);
@@ -60,6 +62,7 @@ char		*strchr(const char *s, int c);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
+char *strstr2(const char *haystack, const char *needle);
 char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);

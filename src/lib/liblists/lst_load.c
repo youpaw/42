@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstiter.c                                          :+:      :+:    :+:   */
+/*   lst_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darugula <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,34 @@
 
 #include "lists.h"
 
-void	lstiter(t_list *lst, void (*f)(t_list *))
+void		extract_value(char *dst, char *rest, const char *separator)
 {
-	if (lst == NULL)
+	int n;
+
+	n = strstr2(rest, separator) - rest;
+	strncpy(dst, rest, n);
+	dst[n] = 0;
+	strcpy(rest, rest + n + strlen(separator));
+}
+
+int		lst_load(int fd, const char *separator, void (*add)(const char*))
+{
+	int	r; 
+#define BUF_LEN 1
+#define MAX_COMMAND_LENGTH 300
+	char buffer[BUF_LEN + 1];
+	char rest[MAX_COMMAND_LENGTH + 1];
+	char cmd[MAX_COMMAND_LENGTH + 1];
+	rest[0] = 0;
+	while ((r = read(fd, buffer, BUF_LEN)) > 0)
 	{
-		return ;
+		buffer[r] = 0;
+		str_append(rest, buffer);
+		if (str_contains(rest, separator))
+		{
+			extract_value(cmd, rest, separator);
+			add((const char*)cmd);
+		}
 	}
-	f(lst);
-	lstiter(lst->next, f);
+	return (E_OK);
 }
