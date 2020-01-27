@@ -71,7 +71,7 @@ char		*strstr(const char *haystack, const char *needle)
 		return (NULL);
 	if (!*needle)
 		return ((char*)haystack);
-	table = (int*)xmalloc(sizeof(char) * strlen(needle));
+	table = (int*)xmalloc(sizeof(int) * strlen(needle));
 	init_table(needle, table);
 	res = findstr(haystack, needle, table);
 	free(table);
