@@ -7,6 +7,21 @@
 
 // TODO implement the following functions in cc lib:
 
+# define TRUE 1
+# define FALSE 0
+
+/*
+**	error codes
+*/
+# define E_OK 1
+# define E_FAIL 0
+
+
+/*
+**	files
+*/
+int	file_exists(const char *path);
+
 /*
 **	chars
 */
@@ -33,6 +48,8 @@ int			isdigit(int c);
 # undef	atoll
 # undef strchr
 
+char			*str_append(char *s1, const char *s2);
+int			str_contains(const char *str, const char *substr);
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
 char		*strdup(const char *s1);
@@ -48,6 +65,9 @@ char 		*strstr(const char *haystack, const char *needle);
 char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
+
+int		str_equals(char const *s1, char const *s2);
+int		str_starts_with(char const *str, const char *start);
 
 /*
 **	mems

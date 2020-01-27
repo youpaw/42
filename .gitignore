@@ -58,3 +58,8 @@ dkms.conf
 
 # Undefined Files
 .DS_Store
+
+# vs
+.vs/
+out/build/WSL-Debug/
+out/build/x64-Debug/
