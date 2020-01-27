@@ -2,51 +2,15 @@
 #include "history.h"
 #include "h_dlist.h"
 #include <stdio.h>
-
-void		prev_next_fail_on_empty()
-{
-	int	r;
-	char	out[1000];
-
-	*out = 1;
-	r = h_get_prev(out);
-	if (r == E_OK || *out != 0)
-	{
-		printf("h_get_prev should fail on empty history\n");
-		exit(1);
-	}
-	*out = 1;
-	r = h_get_next(out);
-	if (r == E_OK || *out != 0)
-	{
-		printf("h_get_next should fail on empty history\n");
-		exit(2);
-	}
-}
+#include "utils.h"
 
 void		test_new_file()
 {
 	int	r;
-	char rm_file[] = "rm /tmp/42history";
-	char *file = rm_file + 3;
-	if (file_exists(file))
-	{
-		system(rm_file);
-		if (file_exists(file))
-		{
-			printf("could not delete file: '%s'\n", file);
-			exit(2);
-		}
-	}
-	r = h_init(file);
-	if (r != E_OK)
-	{
-		printf("h_init(%s) failed\n", file);
-		exit(3);
-	}
-
+	char *file = "/tmp/42history";
+	delete_file(file);
+	load_history(file);
 	prev_next_fail_on_empty();
-	
 	h_close();
 }
 
@@ -77,45 +41,19 @@ void		test_h_init()
 void		free_should_not_fail_on_empty()
 {
 	h_free();
+	h_free();
 }
 
 void		test_get_prev()
 {
-	int r;
-	char out[2];
-
 	h_free();
 	h_append("1");
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals("1", out))
-	{
-		printf("get_prev should not fail after add\n");
-		exit(1);
-	}
+	assert_get_prev("1");
 	h_append("2");
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals("2", out))
-	{
-		printf("get_prev should not fail after add\n");
-		exit(1);
-	}
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals("1", out))
-	{
-		printf("get_prev should not fail after add\n");
-		exit(1);
-	}
-	*out = 1;
-	r = h_get_prev(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("get_prev should fail at the beginning of the list\n");
-		exit(1);
-	}
-
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+	prev_should_fail();
 	h_free();
 }
 
@@ -126,60 +64,16 @@ void		test_get_next()
 
 	h_free();
 	h_append("1");
-	*out = 1;
-	r = h_get_next(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("h_get_next should fail after append\n");
-		exit(1);
-	}
+	next_should_fail();
 	h_append("2");
-	*out = 1;
-	r = h_get_next(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("h_get_next should fail after append\n");
-		exit(1);
-	}
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals(out, "2"))
-	{
-		printf("h_get_prev should return last\n");
-		exit(1);
-	}
-	*out = 1;
-	r = h_get_next(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("h_get_next should fail after append, get_prev\n");
-		exit(1);
-	}
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals(out, "1"))
-	{
-		printf("h_get_prev should return 1\n");
-		exit(1);
-	}
-	*out = 1;
-	r = h_get_prev(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("get_prev should fail at the beginning of the list\n");
-		exit(1);
-	}
-	*out = 0;
-	r = h_get_next(out);
-	if (r != E_OK || !str_equals(out, "2"))
-	{
-		printf("h_get_next should rturn 2\n");
-		exit(1);
-	}
-
+	next_should_fail();
+	assert_get_prev("2");
+	next_should_fail();
+	assert_get_prev("1");
+	prev_should_fail();
+	assert_get_next("2");
 	h_free();
 }
-
 
 void		free_deletes_all()
 {
@@ -188,6 +82,15 @@ void		free_deletes_all()
 	prev_next_fail_on_empty();
 }
 
+void		duplicate_is_not_added()
+{
+	h_free();
+	prev_next_fail_on_empty();
+	h_append("1");
+	h_append("1");
+	assert_get_prev("1");
+	prev_should_fail();
+}
 
 void		test_in_memory()
 {
@@ -196,58 +99,178 @@ void		test_in_memory()
 	free_deletes_all();
 	test_get_prev();
 	test_get_next();
+	duplicate_is_not_added();
 }
 
-void		test_save_load()
-{
-	char	out[2];
-	int	r;
-	char rm_file[] = "rm /tmp/42history";
-	char *file = rm_file + 3;
-	if (file_exists(file))
-	{
-		system(rm_file);
-		if (file_exists(file))
-		{
-			printf("could not delete file: '%s'\n", file);
-			exit(2);
-		}
-	}
-	r = h_init(file);
-	if (r != E_OK)
-	{
-		printf("h_init(%s) failed\n", file);
-		exit(3);
-	}
 
-	prev_next_fail_on_empty();
+void		empty_not_fail()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_close();
+}
+
+void		one_is_saved()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
 
 	h_append("1");
 	h_save_new();
 	h_close();
 	prev_next_fail_on_empty();
-	h_init(file);
-	*out = 1;
-	r = h_get_next(out);
-	if (r != E_FAIL || *out != 0)
-	{
-		printf("h_get_next should fail after h_init\n");
-		exit(4);
-	}
-	*out = 0;
-	r = h_get_prev(out);
-	if (r != E_OK || !str_equals("1", out))
-	{
-		printf("h_get_prev should return last after h_init\n");
-		exit(5);
-	}
+	load_history(file);
+	next_should_fail();
+	assert_get_prev("1");
 
 	h_close();
+}
+
+void		only_new_are_appended_after_load()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_append("1");
+	h_save_new();
+	h_close();
+
+	load_history(file);
+	h_append("2");
+	h_save_new();
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+	h_close();
+
+	load_history(file);
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+
+	h_close();
+}
+
+void		only_new_are_appended_after_save()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_append("1");
+	h_save_new();
+
+	h_append("2");
+	h_save_new();
+	h_close();
+
+	load_history(file);
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+	h_close();
+}
+
+void		nothing_appended()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_append("1");
+	h_save_new();
+	h_close();
+
+	load_history(file);
+	h_save_new();
+	h_close();
+
+	load_history(file);
+	assert_get_prev("1");
+	prev_should_fail();
+
+	h_close();
+}
+
+void		two_are_saved()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_append("1");
+	h_append("2");
+	h_save_new();
+	h_close();
+	prev_next_fail_on_empty();
+	load_history(file);
+	next_should_fail();
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+	assert_get_next("2");
+	next_should_fail();
+
+	h_close();
+}
+
+void		multilines_are_saved()
+{
+	char *file = "/tmp/42history";
+
+	delete_file(file);
+	load_history(file);
+
+	h_append("line1\nline2\nline3");
+	h_append("2");
+	h_save_new();
+	h_close();
+	prev_next_fail_on_empty();
+	load_history(file);
+	next_should_fail();
+	assert_get_prev("2");
+	assert_get_prev("line1\nline2\nline3");
+	prev_should_fail();
+	assert_get_next("2");
+	next_should_fail();
+
+	h_close();
+}
+
+void		test_save_load()
+{
+	empty_not_fail();
+	one_is_saved();
+	two_are_saved();
+	multilines_are_saved();
+	only_new_are_appended_after_load();
+	only_new_are_appended_after_save();
+	nothing_appended();
+
+	char *file = "/tmp/42history";
 
 	prev_next_fail_on_empty();
-	h_init(file);
-
-
+	
+	load_history(file);
+	h_append("2");
+	h_save_new();
+	h_close();
+	prev_next_fail_on_empty();
+	load_history(file);
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+	h_close();
 }
 
 
@@ -255,13 +278,7 @@ void		test_history()
 {
 	test_save_load();
 	test_in_memory();
-	h_free();
-	h_append("1");
-	h_free();
 	test_h_init();
-	h_free();
-	h_append("1");
-	h_free();
 	test_new_file();
 
 	fdputs("history:\tok\n", STDOUT_FILENO);

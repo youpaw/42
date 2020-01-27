@@ -7,7 +7,8 @@ file(MAKE_DIRECTORY ${BUILD_DIRECTORY})
 
 
 ADD_LIBRARY(history_tests STATIC
-        tests.c)
+        tests.c
+        utils.c)
 
         
 target_link_libraries(history_tests cc)
