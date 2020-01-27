@@ -16,7 +16,7 @@ void		extract_value(char *dst, char *rest, const char *separator)
 {
 	int n;
 
-	n = strstr2(rest, separator) - rest;
+	n = strstr(rest, separator) - rest;
 	strncpy(dst, rest, n);
 	dst[n] = 0;
 	strcpy(rest, rest + n + strlen(separator));
@@ -28,7 +28,7 @@ int		lst_load(int fd, const char *separator, void (*add)(const char*))
 #define BUF_LEN 1
 #define MAX_COMMAND_LENGTH 300
 	char buffer[BUF_LEN + 1];
-	char rest[MAX_COMMAND_LENGTH + 1];
+	char rest[MAX_COMMAND_LENGTH + 1 + strlen(separator)];
 	char cmd[MAX_COMMAND_LENGTH + 1];
 	rest[0] = 0;
 	while ((r = read(fd, buffer, BUF_LEN)) > 0)

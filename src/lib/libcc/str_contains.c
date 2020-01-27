@@ -14,5 +14,5 @@
 
 int		str_contains(const char *str, const char *substr)
 {
-	return (strstr2(str, substr) != NULL);
+	return (strstr(str, substr) != NULL);
 }
