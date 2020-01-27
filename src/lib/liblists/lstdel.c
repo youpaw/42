@@ -12,7 +12,7 @@
 
 #include "lists.h"
 
-void	lstdel(t_list **alst, void (*del)(void *, size_t))
+void	lstdel(t_list **alst, void (*del)(void *))
 {
 	t_list *node;
 	t_list *next;
@@ -21,7 +21,7 @@ void	lstdel(t_list **alst, void (*del)(void *, size_t))
 	while (node)
 	{
 		next = node->next;
-		del(node->content, node->content_size);
+		del(node->content);
 		free(node);
 		node = next;
 	}

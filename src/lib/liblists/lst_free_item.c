@@ -12,12 +12,7 @@
 
 #include "lists.h"
 
-void	lst_free_item(void *item, size_t size)
+void	lst_free_item(void *item)
 {
-	if (size == 0)
-	{
-		exit(1);
-	}
-	//debug_printf("free item: '%s' (%p)\n", (char*)item, item);
 	free(item);
 }
