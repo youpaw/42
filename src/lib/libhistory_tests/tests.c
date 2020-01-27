@@ -92,6 +92,22 @@ void		duplicate_is_not_added()
 	prev_should_fail();
 }
 
+void			append_resets_current()
+{
+	free_history();
+	h_append("1");
+	h_append("2");
+	h_append("3");
+	assert_get_prev("3");
+	assert_get_prev("2");
+	h_append("4");
+	assert_get_prev("4");
+	assert_get_prev("3");
+	assert_get_prev("2");
+	assert_get_prev("1");
+	prev_should_fail();
+}
+
 void		test_in_memory()
 {
 	prev_next_fail_on_empty();
@@ -100,8 +116,8 @@ void		test_in_memory()
 	test_get_prev();
 	test_get_next();
 	duplicate_is_not_added();
+	append_resets_current();
 }
-
 
 void		empty_not_fail()
 {
