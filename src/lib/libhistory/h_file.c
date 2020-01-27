@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cc.h"
 #include "h_dlist.h"
 #include "history.h"
-# include <fcntl.h>
-# include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
 static int	g_fd = -1;
 static const char g_separator[] = "\n----------------------\n";
