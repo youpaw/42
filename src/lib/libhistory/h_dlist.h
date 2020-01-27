@@ -14,7 +14,7 @@
 # define H_DLIST_H
 # include "lists.h"
 
-void		h_free(void);
+int		h_free(void);
 t_list *h_get_head();
 t_list *h_get_last();
 

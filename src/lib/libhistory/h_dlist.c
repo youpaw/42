@@ -21,16 +21,14 @@ t_d_list *g_head = NULL;
 t_d_list *g_current = NULL;
 t_d_list *g_last = NULL;
 
-
 void		h_append(const char *content)
 {
-	t_d_list *l;
+	t_d_list		*l;
 
 	if (g_last != NULL && str_equals(content, (const char *)(g_last->list.content)))
 	{
 		return ;
 	}
-	l = NULL;
 	l = dlst_new(strdup(content), -1);
 	l->prev = g_last;
 	if (g_last == NULL)
@@ -44,20 +42,20 @@ void		h_append(const char *content)
 	g_current = NULL;
 }
 
-void		h_free(void)
+int		h_free(void)
 {
 	if (g_head == NULL)
 	{
-		return;
+		return (E_OK);
 	}
 	lst_free((t_list **)&g_head);
 	g_last = NULL;
 	g_current = NULL;
 	if (g_head != NULL)
 	{
-		//debug_printf("g_head != NULL\n");
-		exit(1);
+		return (E_FAIL);
 	}
+	return (E_OK);
 }
 
 t_list *h_get_head()

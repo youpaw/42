@@ -11,7 +11,7 @@ void		test_new_file()
 	delete_file(file);
 	load_history(file);
 	prev_next_fail_on_empty();
-	h_close();
+	close_file();
 }
 
 void		test_h_init()
@@ -34,14 +34,14 @@ void		test_h_init()
 		printf("h_init should fail on reopen\n");
 		exit(1);
 	}
-	h_close();
+	close_file();
 }
 
 
 void		free_should_not_fail_on_empty()
 {
-	h_free();
-	h_free();
+	free_history();
+	free_history();
 }
 
 void		test_get_prev()
@@ -54,7 +54,7 @@ void		test_get_prev()
 	assert_get_prev("1");
 	prev_should_fail();
 	prev_should_fail();
-	h_free();
+	free_history();
 }
 
 void		test_get_next()
@@ -62,7 +62,7 @@ void		test_get_next()
 	int r;
 	char out[2];
 
-	h_free();
+	free_history();
 	h_append("1");
 	next_should_fail();
 	h_append("2");
@@ -72,19 +72,19 @@ void		test_get_next()
 	assert_get_prev("1");
 	prev_should_fail();
 	assert_get_next("2");
-	h_free();
+	free_history();
 }
 
 void		free_deletes_all()
 {
 	h_append("1");
-	h_free();
+	free_history();
 	prev_next_fail_on_empty();
 }
 
 void		duplicate_is_not_added()
 {
-	h_free();
+	free_history();
 	prev_next_fail_on_empty();
 	h_append("1");
 	h_append("1");
@@ -110,7 +110,7 @@ void		empty_not_fail()
 	delete_file(file);
 	load_history(file);
 
-	h_close();
+	close_file();
 }
 
 void		one_is_saved()
@@ -122,13 +122,13 @@ void		one_is_saved()
 
 	h_append("1");
 	h_save_new();
-	h_close();
+	close_file();
 	prev_next_fail_on_empty();
 	load_history(file);
 	next_should_fail();
 	assert_get_prev("1");
 
-	h_close();
+	close_file();
 }
 
 void		only_new_are_appended_after_load()
@@ -140,7 +140,7 @@ void		only_new_are_appended_after_load()
 
 	h_append("1");
 	h_save_new();
-	h_close();
+	close_file();
 
 	load_history(file);
 	h_append("2");
@@ -148,14 +148,14 @@ void		only_new_are_appended_after_load()
 	assert_get_prev("2");
 	assert_get_prev("1");
 	prev_should_fail();
-	h_close();
+	close_file();
 
 	load_history(file);
 	assert_get_prev("2");
 	assert_get_prev("1");
 	prev_should_fail();
 
-	h_close();
+	close_file();
 }
 
 void		only_new_are_appended_after_save()
@@ -170,13 +170,13 @@ void		only_new_are_appended_after_save()
 
 	h_append("2");
 	h_save_new();
-	h_close();
+	close_file();
 
 	load_history(file);
 	assert_get_prev("2");
 	assert_get_prev("1");
 	prev_should_fail();
-	h_close();
+	close_file();
 }
 
 void		nothing_appended()
@@ -188,17 +188,17 @@ void		nothing_appended()
 
 	h_append("1");
 	h_save_new();
-	h_close();
+	close_file();
 
 	load_history(file);
 	h_save_new();
-	h_close();
+	close_file();
 
 	load_history(file);
 	assert_get_prev("1");
 	prev_should_fail();
 
-	h_close();
+	close_file();
 }
 
 void		two_are_saved()
@@ -211,7 +211,7 @@ void		two_are_saved()
 	h_append("1");
 	h_append("2");
 	h_save_new();
-	h_close();
+	close_file();
 	prev_next_fail_on_empty();
 	load_history(file);
 	next_should_fail();
@@ -221,7 +221,7 @@ void		two_are_saved()
 	assert_get_next("2");
 	next_should_fail();
 
-	h_close();
+	close_file();
 }
 
 void		multilines_are_saved()
@@ -234,7 +234,7 @@ void		multilines_are_saved()
 	h_append("line1\nline2\nline3");
 	h_append("2");
 	h_save_new();
-	h_close();
+	close_file();
 	prev_next_fail_on_empty();
 	load_history(file);
 	next_should_fail();
@@ -244,7 +244,7 @@ void		multilines_are_saved()
 	assert_get_next("2");
 	next_should_fail();
 
-	h_close();
+	close_file();
 }
 
 void		test_save_load()
@@ -264,13 +264,13 @@ void		test_save_load()
 	load_history(file);
 	h_append("2");
 	h_save_new();
-	h_close();
+	close_file();
 	prev_next_fail_on_empty();
 	load_history(file);
 	assert_get_prev("2");
 	assert_get_prev("1");
 	prev_should_fail();
-	h_close();
+	close_file();
 }
 
 

@@ -45,14 +45,14 @@ int		h_init(const char *path)
 	return (E_OK);
 }
 
-void		h_close()
+int		h_close()
 {
 	if (g_fd != -1)
 	{
 		close(g_fd);
 		g_fd = -1;
 	}
-	h_free();
+	return (h_free());
 }
 
 int h_save_new()

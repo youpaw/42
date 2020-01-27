@@ -86,3 +86,27 @@ void		load_history(const char *file)
 		exit(3);
 	}
 }
+
+void		close_file()
+{
+	int	r;
+
+	r = h_close();
+	if (r != E_OK)
+	{
+		printf("h_close failed\n");
+		exit(3);
+	}
+}
+
+void		free_history()
+{
+	int	r;
+
+	r = h_free();
+	if (r != E_OK)
+	{
+		printf("h_free failed\n");
+		exit(3);
+	}
+}
