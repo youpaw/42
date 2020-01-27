@@ -14,6 +14,7 @@ ADD_LIBRARY(lists STATIC
     lst_find.c
     lst_free.c
     lst_free_item.c
+    lst_get_last.c
     lst_insert.c
     lstiter.c
     lstmap.c

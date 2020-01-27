@@ -12,15 +12,6 @@
 
 #include "lists.h"
 
-t_list	*lst_get_last(t_list *n)
-{
-	while (n->next != NULL)
-	{
-		n = n->next;
-	}
-	return (n);
-}
-
 void	lst_insert_after(t_list *node, t_list *new)
 {
 	t_list *next;

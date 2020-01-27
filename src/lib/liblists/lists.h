@@ -19,15 +19,16 @@ typedef struct	s_double_list
 	struct s_double_list *prev;
 }				t_d_list;
 
-t_list *lst_new(void const *content, size_t content_size);
-t_d_list *dlst_new(void const *content, size_t content_size);
+t_list		*lst_new(void const *content, size_t content_size);
+t_d_list		*dlst_new(void const *content, size_t content_size);
 void			lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			lstdel(t_list **alst, void (*del)(void *, size_t));
 void			lstadd(t_list **alst, t_list *new);
-t_list *lst_find(t_list *lst, void *p, BOOL(*f)(t_list *, void *));
+t_list		*lst_find(t_list *lst, void *p, BOOL(*f)(t_list *, void *));
 void			lst_free_item(void *item, size_t size);
 void			lst_free(t_list **head);
-void *lst_reduce(t_list *lst, void (*f)(t_list *, void *), void *a);
+t_list		*lst_get_last(t_list *lst);
+void			*lst_reduce(t_list *lst, void (*f)(t_list *, void *), void *a);
 int				lst_count(t_list *lst);
 void			lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list *lstmap(t_list *lst, t_list *(*f)(t_list *elem));
