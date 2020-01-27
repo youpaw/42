@@ -62,7 +62,6 @@ char		*strchr(const char *s, int c);
 char		*nstrjoin(int n, ...);
 char		*strsub(char const *s, unsigned int start, size_t len);
 char 		*strstr(const char *haystack, const char *needle);
-char *strstr2(const char *haystack, const char *needle);
 char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
