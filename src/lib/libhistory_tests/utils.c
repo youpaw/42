@@ -42,8 +42,10 @@ void		assert_get(int (*get)(char *), const char *expected)
 	if (r != E_OK || !str_equals(expected, actual))
 	{
 		printf("get* failed: expected: '%s', actual: '%s'\n", expected, actual);
+		free(actual);
 		exit(1);
 	}
+	free(actual);
 }
 
 void		assert_get_prev(const char *expected)
