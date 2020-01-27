@@ -12,9 +12,7 @@
 
 
 /*
-Int get_prev(char *out) - при первичном вызове вернёт строку с последней записанной командой, при повторном вызове вернёт предпоследнюю команду и т.д.если дошел до первой команды строку зануляет и возвращает код ошибки .
-Int get_next(const char *out) аналогично, но в другую сторону.
-Int write_to_history(const char *command) - принимает команду и дописывает ее в конец файла инициализации.
+
 void get_reset() - сбрасывает счётчик и при последующем вызове команд get * они будут работать с самого начала.*/
 #include "cc.h"
 #include "lists.h"
@@ -28,8 +26,10 @@ void		h_append(const char *content)
 {
 	t_d_list *l;
 
-	int *q = malloc(1000);
-	free(q);
+	if (g_last != NULL && str_equals(content, (const char *)(g_last->list.content)))
+	{
+		return ;
+	}
 	l = NULL;
 	l = dlst_new(strdup(content), -1);
 	l->prev = g_last;
@@ -60,7 +60,12 @@ void		h_free(void)
 	}
 }
 
-t_d_list *h_get_head()
+t_list *h_get_head()
 {
-	return (g_head);
+	return (g_head == NULL ? NULL : (t_list*) g_head);
+}
+
+t_list *h_get_last()
+{
+	return (h_get_head() == NULL ? NULL : lst_get_last(h_get_head()));
 }

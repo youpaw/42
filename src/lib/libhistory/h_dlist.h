@@ -15,7 +15,8 @@
 # include "lists.h"
 
 void		h_free(void);
-t_d_list *h_get_head();
+t_list *h_get_head();
+t_list *h_get_last();
 
 #endif 
 
