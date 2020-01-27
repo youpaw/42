@@ -29,10 +29,6 @@ int		h_init(const char *path)
 {
 	int	r;
 
-	if (path == NULL)
-	{
-		return (2);
-	}
 	if (g_fd != -1)
 	{
 		return (3);

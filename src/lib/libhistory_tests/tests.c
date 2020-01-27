@@ -21,6 +21,12 @@ void		test_h_init()
 	{
 		printf("h_init should fail on NULL path\n");
 		exit(1);
+	} 
+	r = h_init("");
+	if (r == E_OK)
+	{
+		printf("h_init should fail on NULL path\n");
+		exit(1);
 	}
 	r = h_init(".42history");
 	if (r != E_OK)
