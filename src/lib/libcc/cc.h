@@ -48,7 +48,8 @@ int			isdigit(int c);
 # undef	atoll
 # undef strchr
 
-char			*str_append(char *s1, const char *s2);
+char		*str_append(char *s1, const char *s2);
+char		*str_append_char(char *s1, const char c);
 int			str_contains(const char *str, const char *substr);
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);

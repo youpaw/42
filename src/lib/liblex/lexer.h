@@ -40,7 +40,6 @@ enum e_token_type
 	l_double_semi,
 
 	l_newline,
-	l_word,
 	l_io_number,
 	l_double_less,
 	l_double_great,
@@ -73,6 +72,7 @@ struct		s_tokens
 
 typedef struct s_tokens t_tokens;
 typedef struct s_token t_token;
+typedef enum e_token_type t_token_type;
 
 /*
 **  lex_* returns t_token ptr allocated my malloc().
@@ -86,6 +86,10 @@ void 		destruct_tokens(t_tokens *tokens);
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
 void 		print_tokens(t_token *tokens);
+char *type_to_string(t_token_type t);
 
+# define	E_OK 1
+# define	E_UNDEFINED_TOKEN E_OK + 1
+# define	E_NULL_INPUT E_UNDEFINED_TOKEN + 1
 
 #endif
