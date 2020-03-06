@@ -27,17 +27,17 @@ int	process_escape(t_stream *s, int *need_advance)
 	return (0);
 }
 
-int	process_single_quote(t_stream *s)
+int	process_quote(t_stream *s, char quote)
 {
 	advance(s);
-	while(get_current_char(s) != '\'' && !is_eos(s))
+	while (get_current_char(s) != quote && !is_eos(s))
 	{
 		append_char_to_token(s);
 		advance(s);
 	}
-	if(get_current_char(s) != '\'')
+	if (get_current_char(s) != quote)
 	{
-		set_error(s, E_MISSING_SECOND_SINGLE_QUOTE);
+		set_error(s, quote == '"' ? E_MISSING_SECOND_DOUBLE_QUOTE : E_MISSING_SECOND_SINGLE_QUOTE);
 		return (1);
 	}
 	else
@@ -45,6 +45,11 @@ int	process_single_quote(t_stream *s)
 		advance(s);
 		return (0);
 	}
+}
+
+int	process_single_quote(t_stream *s)
+{
+	return (process_quote(s, '\''));
 }
 
 int	try_quote(t_stream *s, int *b)
@@ -56,6 +61,10 @@ int	try_quote(t_stream *s, int *b)
 	if (get_current_char(s) == '\'')
 	{
 		return (process_single_quote(s));
+	}
+	if (get_current_char(s) == '"')
+	{
+		return (process_quote(s, '\"'));
 	}
 	return (0);
 }
