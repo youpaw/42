@@ -58,9 +58,13 @@ void	loop_body()
 void	main_loop()
 {
 
-	while (!is_eos(g_stream))
+	while (!is_eos(g_stream) && !is_error(g_stream))
 	{
 		loop_body();
+	}
+	if (is_error(g_stream))
+	{
+		return;
 	}
 	if (get_token(g_stream)[0] != 0)
 	{
@@ -87,8 +91,9 @@ void	tokenize_string(t_tlist *tokens, const char *string)
 	g_stream = xmalloc(sizeof(t_stream));
 	g_stream->raw = (char *)string;
 	g_stream->current_token = strnew(strlen(string));
-	tokens->error = E_OK;
+	g_stream->error = E_OK;
 	main_loop();
+	tokens->error = g_stream->error;
 	g_tokens = NULL;
 	g_current = NULL;
 	//free(g_stream->raw);

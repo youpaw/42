@@ -4,7 +4,8 @@
 #include "lexer.h"
 #include "lexer_internal.h"
 
-void	test_zero_size(const char *str, int e)
+
+void	test_error(const char *str, int e)
 {
 	t_tokens *tokens = lex_str(str);
 
@@ -31,7 +32,17 @@ void	test(const char *str, const char *expected, int size)
 
 void		test_lex()
 {
+
+	test("''1", "[ 1 ] [ word ]\n", 1);
+//	test("''", "[  ] [ word ]\n", 1);
+	test_error("'", E_MISSING_SECOND_SINGLE_QUOTE);
+	test("1''", "[ 1 ] [ word ]\n", 1);
+	test("'\"'", "[ \" ] [ word ]\n", 1);
+	test("'$~\"'", "[ $~\" ] [ word ]\n", 1);
+	test_error("\"", E_MISSING_SECOND_DOUBLE_QUOTE);
+	test("""", "[  ] [ word ]\n", 1);
 	test("q\"", "[ q\" ] [ word ]\n", 1);
+	test("q\'", "[ q' ] [ word ]\n", 1);
 	test("\\q", "[ q ] [ word ]\n", 1);
 	test("<<-q", "[ <<- ] [ double_less_dash ]\n[ q ] [ word ]\n", 2);
 	test("<<-", "[ <<- ] [ double_less_dash ]\n", 1);
@@ -46,8 +57,8 @@ void		test_lex()
 	//test(" ( ", "[ ( ] [ left_brace ]\n", 1);
 	//test(")(", "[ ) ] [ right_brace ]\n[ ( ] [ left_brace ]\n", 2);
 	//test("(", "[ ( ] [ left_brace ]\n", 1);
-	test_zero_size("", E_OK);
-	test_zero_size(NULL, E_NULL_INPUT);
+	test_error("", E_OK);
+	test_error(NULL, E_NULL_INPUT);
 	//print_tokens(tokens);
 
 

@@ -27,11 +27,35 @@ int	process_escape(t_stream *s, int *need_advance)
 	return (0);
 }
 
+int	process_single_quote(t_stream *s)
+{
+	advance(s);
+	while(get_current_char(s) != '\'' && !is_eos(s))
+	{
+		append_char_to_token(s);
+		advance(s);
+	}
+	if(get_current_char(s) != '\'')
+	{
+		set_error(s, E_MISSING_SECOND_SINGLE_QUOTE);
+		return (1);
+	}
+	else
+	{
+		advance(s);
+		return (0);
+	}
+}
+
 int	try_quote(t_stream *s, int *b)
 {
 	if (get_current_char(s) == '\\')
 	{
 		return (process_escape(s, b));
+	}
+	if (get_current_char(s) == '\'')
+	{
+		return (process_single_quote(s));
 	}
 	return (0);
 }

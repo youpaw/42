@@ -39,3 +39,18 @@ char *get_token(t_stream *s)
 {
 	return (s->current_token);
 }
+
+int		is_error(t_stream *s)
+{
+	return (get_error(s) != E_OK);
+}
+
+void	set_error(t_stream *s, int error)
+{
+	s->error = error;
+}
+
+int		get_error(t_stream *s)
+{
+	return (s->error);
+}

@@ -91,5 +91,7 @@ char *type_to_string(t_token_type t);
 # define	E_OK 1
 # define	E_UNDEFINED_TOKEN E_OK + 1
 # define	E_NULL_INPUT E_UNDEFINED_TOKEN + 1
+# define	E_MISSING_SECOND_SINGLE_QUOTE E_NULL_INPUT + 1
+# define	E_MISSING_SECOND_DOUBLE_QUOTE E_MISSING_SECOND_SINGLE_QUOTE + 1
 
 #endif
