@@ -27,13 +27,61 @@ int	process_escape(t_stream *s, int *need_advance)
 	return (0);
 }
 
+int	process_escape_in_dquote(t_stream *s)
+{
+
+	advance(s);
+	//	/$	token += $; return 1
+	if (!is_eos(s) && str_contains_char("$\\\"`", get_current_char(s)))
+	{
+		//append_char_to_token(s);
+		return (0);
+	}
+
+	append_custom_char_to_token(s, '\\');
+	//	/	token += /; return 1
+	if (is_eos(s))
+	{
+		return (1);
+	}
+	//	/"	token += /; return 1
+	if (get_current_char(s) == '"')
+	{
+		return (1);
+	}
+	//	/?	token += /?; return 1;
+	//append_char_to_token(s);
+	return (0);
+}
+
+int	process_special(t_stream *s, char quote)
+{
+	if (quote != '"')
+	{
+		return (0);
+	}
+	if (get_current_char(s) == '\\')
+	{
+		return (process_escape_in_dquote(s));
+	}
+	return (0);
+}
+
 int	process_quote(t_stream *s, char quote)
 {
 	advance(s);
 	while (get_current_char(s) != quote && !is_eos(s))
 	{
-		append_char_to_token(s);
-		advance(s);
+		if (!process_special(s, quote))
+		{
+			append_char_to_token(s);
+			advance(s);
+		}
+		if (is_eos(s))
+		{
+			set_error(s, E_MISSING_SECOND_DOUBLE_QUOTE);
+			return (1);
+		}
 	}
 	if (get_current_char(s) != quote)
 	{

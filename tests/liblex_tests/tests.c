@@ -31,8 +31,17 @@ void	test(const char *str, const char *expected, int size)
 }
 
 void		test_lex()
-{
-
+{//$   `   "   \   <newline>
+	test("\"\\\\\"", "[ \\ ] [ word ]\n", 1);				//"\\" -> \
+	test("\"\\$\"", "[ $ ] [ word ]\n", 1);					//"\$" -> &
+	test("\"\\\"\"", "[ \" ] [ word ]\n", 1);				//"\"" -> "
+	test("\"\\`\"", "[ ` ] [ word ]\n", 1);					//"\`" -> `
+	test("\"\\n\"", "[ \\n ] [ word ]\n", 1);				//"\n" -> \n
+	test_error("\"\\", E_MISSING_SECOND_DOUBLE_QUOTE);		//
+	test_error("\"\\\"", E_MISSING_SECOND_DOUBLE_QUOTE);	//"\"
+	test("\"\\1\"", "[ \\1 ] [ word ]\n", 1);				//"\1"
+	test("\"\\\"\"", "[ \" ] [ word ]\n", 1);				//"\""
+	
 	test("q\\\"", "[ q\" ] [ word ]\n", 1);
 	test("q\\'", "[ q' ] [ word ]\n", 1);
 	test("\\q", "[ q ] [ word ]\n", 1);
@@ -42,10 +51,11 @@ void		test_lex()
 	test_error("'", E_MISSING_SECOND_SINGLE_QUOTE);
 	test("1''", "[ 1 ] [ word ]\n", 1);
 	test("'\"'", "[ \" ] [ word ]\n", 1);
-	test("'$~\"'", "[ $~\" ] [ word ]\n", 1);
+	test("'\\$~\"'", "[ \\$~\" ] [ word ]\n", 1);			//'\$~"'	\$~"
 	test_error("\"", E_MISSING_SECOND_DOUBLE_QUOTE);
 //	test("""", "[  ] [ word ]\n", 1);
 	test("""", "", 0);
+	test("\"\"", "", 0);
 	test("<<-q", "[ <<- ] [ double_less_dash ]\n[ q ] [ word ]\n", 2);
 	test("<<-", "[ <<- ] [ double_less_dash ]\n", 1);
 	test("\\nq", "[ \\n ] [ newline ]\n[ q ] [ word ]\n", 2);

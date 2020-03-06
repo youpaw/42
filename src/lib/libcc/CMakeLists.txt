@@ -13,6 +13,7 @@ ADD_LIBRARY(cc STATIC
 		str_append.c
 		str_append_char.c
 		str_contains.c
+		str_contains_char.c
 		str_equals.c
 		strnew.c
 		strcmp.c
