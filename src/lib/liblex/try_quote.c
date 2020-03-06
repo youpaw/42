@@ -5,6 +5,24 @@ int	is_quote(char c)
 	return (c == '\'' || c == '"');
 }
 
+int	get_missing_second_quote_error(char quote)
+{
+	if (quote == '\'')
+	{
+		return (E_MISSING_SECOND_SINGLE_QUOTE);
+	}
+	if (quote == '"')
+	{
+		return (E_MISSING_SECOND_DOUBLE_QUOTE);
+	}
+	if (quote == '`')
+	{
+		return (E_MISSING_SECOND_BACK_QUOTE);
+	}
+	fdputs("unexpected quote\n", STDERR_FILENO);
+	exit(5);
+}
+
 int	process_escape(t_stream *s, int *need_advance)
 {
 	advance(s);
@@ -13,7 +31,7 @@ int	process_escape(t_stream *s, int *need_advance)
 		append_custom_char_to_token(s, '\\');
 		return (1);
 	}
-	if (get_current_char(s)=='n')
+	if (get_current_char(s) == 'n')
 	{
 		if (get_token(s)[0] != 0)
 		{
@@ -54,6 +72,22 @@ int	process_escape_in_dquote(t_stream *s)
 	return (0);
 }
 
+int	process_back_quote_in_dquote(t_stream *s)
+{
+	advance(s);
+	while (get_current_char(s) != '`' && !is_eos(s))
+	{
+
+	}
+
+	if (is_eos(s))
+	{
+		set_error(s, E_MISSING_SECOND_BACK_QUOTE);
+		return (1);
+	}
+
+}
+
 int	process_special(t_stream *s, char quote)
 {
 	if (quote != '"')
@@ -63,6 +97,10 @@ int	process_special(t_stream *s, char quote)
 	if (get_current_char(s) == '\\')
 	{
 		return (process_escape_in_dquote(s));
+	}
+	if (get_current_char(s) == '`')
+	{
+		return (process_quote(s, '`'));
 	}
 	return (0);
 }
@@ -77,15 +115,19 @@ int	process_quote(t_stream *s, char quote)
 			append_char_to_token(s);
 			advance(s);
 		}
+		if (is_error(s))
+		{
+			return (1);
+		}
 		if (is_eos(s))
 		{
-			set_error(s, E_MISSING_SECOND_DOUBLE_QUOTE);
+			set_error(s, get_missing_second_quote_error(quote));
 			return (1);
 		}
 	}
 	if (get_current_char(s) != quote)
 	{
-		set_error(s, quote == '"' ? E_MISSING_SECOND_DOUBLE_QUOTE : E_MISSING_SECOND_SINGLE_QUOTE);
+		set_error(s, get_missing_second_quote_error(quote));
 		return (1);
 	}
 	else

@@ -32,7 +32,8 @@ int		try_parse_type(const char *t, t_token_type *type);
 int		try_one(const char *t, t_token_type *type);
 int		try_other(const char *t, t_token_type *type);
 int		try_operator(t_stream*, int *b);
-int	try_quote(t_stream *s, int *b);
+int		try_quote(t_stream *s, int *b);
+int		process_quote(t_stream *s, char quote);
 
 
 char *tokens_to_string(t_tokens *tokens);
