@@ -37,15 +37,29 @@ int		append_c2t()
 	return 1;
 }
 
+int		handle_new_line(t_stream *s)
+{
+	if (get_current_char(s) == '\n')
+	{
+		if ( get_token(s)[0] != 0)
+		{
+			add_token(get_token(s), l_word);
+		}
+		return (1);
+	}
+	return (0);
+}
+
 int		try_parse_token()
 {
 	int	b;
 
 	b = 1;
 	return (
-		try_operator(g_stream, &b) 
-		|| try_quote(g_stream, &b) 
-		|| handle_operator_start(g_stream));
+		try_operator(g_stream, &b)
+		|| try_quote(g_stream, &b)
+		|| handle_operator_start(g_stream))
+		|| handle_new_line(g_stream);
 }
 
 void	loop_body()

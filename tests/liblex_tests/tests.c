@@ -32,15 +32,21 @@ void	test(const char *str, const char *expected, int size)
 
 void		test_lex()
 {
+
+	//test("\n", "[ ] [ word ]\n", 1);
+//	test("''", "[  ] [ word ]\n", 1);
+//	test("""", "[  ] [ word ]\n", 1);
+//	test("\"``\"", "[  ] [ word ]\n", 1);				//"``"
+	test("1\n", "[ 1 ] [ word ]\n", 1);
+	test("1\n2", "[ 1 ] [ word ]\n[ 2 ] [ word ]\n", 2);
+
 	test("q\\>>", "[ q> ] [ word ]\n[ > ] [ word ]\n", 2);				//q\>>	q>>
 	test("q>>", "[ q ] [ word ]\n[ >> ] [ double_great ]\n", 2);
 	test("q'>'>", "[ q> ] [ word ]\n[ > ] [ word ]\n", 2);
 	test("q'>>'", "[ q>> ] [ word ]\n", 1);
 	test(">>>>", "[ >> ] [ double_great ]\n[ >> ] [ double_great ]\n", 2);
 	
-//	test("''", "[  ] [ word ]\n", 1);
-//	test("""", "[  ] [ word ]\n", 1);
-//	test("\"``\"", "[  ] [ word ]\n", 1);				//"``"
+
 	test_error("\"`\"", E_MISSING_SECOND_BACK_QUOTE);	//"`"
 
 	//$   `   "   \   <newline>
@@ -73,7 +79,6 @@ void		test_lex()
 	test("q\\n", "[ q ] [ word ]\n[ \\n ] [ newline ]\n", 2);
 	test("\\", "[ \\ ] [ word ]\n", 1);
 	test("\\\"", "[ \" ] [ word ]\n", 1);
-	//test("\n", "[ \n ] [new_line] ",  1);
 	//test(" {", "[ { ] [ left_brace ]\n", 1);
 	//test("{ ", "[ ( ] [ left_brace ]\n", 1);
 	//test(" ( ", "[ ( ] [ left_brace ]\n", 1);
@@ -83,7 +88,6 @@ void		test_lex()
 	test_error("", E_OK);
 	test_error(NULL, E_NULL_INPUT);
 	//print_tokens(tokens);
-
 
 	fdputs("lex:\tok\n", STDOUT_FILENO);
 }
