@@ -41,8 +41,8 @@ int	process_escape(t_stream *s, int *need_advance)
 		add_token(get_token(s), l_newline);
 		return (1);
 	}
-	//append_char_to_token(s);
-	return (0);
+	append_char_to_token(s);
+	return (1);
 }
 
 int	process_escape_in_dquote(t_stream *s)

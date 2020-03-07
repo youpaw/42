@@ -37,22 +37,24 @@ int		append_c2t()
 	return 1;
 }
 
-void	loop_body()
+int		try_parse_token()
 {
 	int	b;
 
 	b = 1;
-	try_operator(g_stream, &b) || try_quote(g_stream, &b) || append_c2t();
-	//if (b)
-	//{
-	//	;
+	return (
+		try_operator(g_stream, &b) 
+		|| try_quote(g_stream, &b) 
+		|| handle_operator_start(g_stream));
+}
+
+void	loop_body()
+{
+	try_parse_token() || append_c2t();
 	if (!is_eos(g_stream))
 	{
 		advance(g_stream);
 	}
-		
-	//}
-	
 }
 
 void	main_loop()
@@ -69,14 +71,14 @@ void	main_loop()
 	if (get_token(g_stream)[0] != 0)
 	{
 		//int b;
-		//int	r = try_operator(g_stream, &b);
-		//if (!r)
-		//{
-		//	g_tokens->error = E_UNDEFINED_TOKEN;
-		//	add_token(get_token(g_stream), l_undefined);
-		//}
+		int	r = try_parse_token();
+		if (!r)
+		{
+			//g_tokens->error = E_UNDEFINED_TOKEN;
+			//add_token(get_token(g_stream), l_undefined);
+			add_token(get_token(g_stream), l_word);
+		}
 
-		add_token(get_token(g_stream), l_word);
 	}
 }
 
