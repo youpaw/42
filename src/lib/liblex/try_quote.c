@@ -23,7 +23,7 @@ int	get_missing_second_quote_error(char quote)
 	exit(5);
 }
 
-int	process_escape(t_stream *s, int *need_advance)
+int	process_escape(t_stream *s)
 {
 	advance(s);
 	if (is_eos(s))
@@ -148,11 +148,11 @@ int	process_single_quote(t_stream *s)
 	return (process_quote(s, '\''));
 }
 
-int	try_quote(t_stream *s, int *b)
+int	try_quote(t_stream *s)
 {
 	if (get_current_char(s) == '\\')
 	{
-		return (process_escape(s, b));
+		return (process_escape(s));
 	}
 	if (get_current_char(s) == '\'')
 	{

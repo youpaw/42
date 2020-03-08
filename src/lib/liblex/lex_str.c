@@ -9,10 +9,6 @@ void		destruct_tokens(t_tokens *tokens)
 	{
 		free(tokens->raw);
 	}
-	//while (++i < tokens->size)
-	//{
-	//	free_token(tokens->tokens + i);
-	//}
 	if (tokens->tokens != NULL)
 	{
 		free(tokens->tokens);

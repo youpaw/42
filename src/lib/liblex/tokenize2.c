@@ -88,14 +88,12 @@ int		handle_comment(t_stream *s)
 	}
 	return (0);
 }
+
 int		try_parse_token()
 {
-	int	b;
-
-	b = 1;
 	return (
-		try_operator(g_stream, &b)
-		|| try_quote(g_stream, &b)
+		try_operator(g_stream)
+		|| try_quote(g_stream)
 		|| handle_operator_start(g_stream))
 		|| handle_new_line(g_stream)
 		|| handle_space(g_stream)
@@ -125,12 +123,9 @@ void	main_loop()
 	}
 	if (get_token(g_stream)[0] != 0)
 	{
-		//int b;
 		int	r = try_parse_token();
 		if (!r)
 		{
-			//g_tokens->error = E_UNDEFINED_TOKEN;
-			//add_token(get_token(g_stream), l_undefined);
 			add_token(get_token(g_stream), l_word);
 		}
 

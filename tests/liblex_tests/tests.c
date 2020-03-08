@@ -32,7 +32,6 @@ void	test(const char *str, const char *expected, int size)
 
 void		test_lex()
 {
-
 	test("\"`1`\"", "[ `1` ] [ word ]\n", 1);
 	test("1#2\n3", "[ 1 ] [ io_number ]\n[ 3 ] [ io_number ]\n", 2);
 
@@ -67,11 +66,7 @@ void		test_lex()
 	test("q'>'>", "[ q> ] [ word ]\n[ > ] [ word ]\n", 2);
 	test("q'>>'", "[ q>> ] [ word ]\n", 1);
 	test(">>>>", "[ >> ] [ double_great ]\n[ >> ] [ double_great ]\n", 2);
-	
 
-	test_error("\"`\"", E_MISSING_SECOND_BACK_QUOTE);	//"`"
-
-	//$   `   "   \   <newline>
 	test("\"\\\\\"", "[ \\ ] [ word ]\n", 1);				//"\\" -> \   "
 	test("\"\\$\"", "[ $ ] [ word ]\n", 1);					//"\$" -> &
 	test("\"\\\"\"", "[ \" ] [ word ]\n", 1);				//"\"" -> "
@@ -79,6 +74,7 @@ void		test_lex()
 	test("\"\\n\"", "[ \\n ] [ word ]\n", 1);				//"\n" -> \n
 	test_error("\"\\", E_MISSING_SECOND_DOUBLE_QUOTE);		//
 	test_error("\"\\\"", E_MISSING_SECOND_DOUBLE_QUOTE);	//"\"
+	test_error("\"`\"", E_MISSING_SECOND_BACK_QUOTE);	//"`"
 	test("\"\\1\"", "[ \\1 ] [ word ]\n", 1);				//"\1"
 	test("\"\\\"\"", "[ \" ] [ word ]\n", 1);				//"\""
 	
@@ -103,7 +99,6 @@ void		test_lex()
 	test("\\\"", "[ \" ] [ word ]\n", 1);
 	test_error("", E_OK);
 	test_error(NULL, E_NULL_INPUT);
-	//print_tokens(tokens);
 
 	fdputs("lex:\tok\n", STDOUT_FILENO);
 }

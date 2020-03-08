@@ -3,7 +3,6 @@
 
 void	free_token(t_token *t)
 {
-	//free(t->raw);
 	free(t);
 }
 
@@ -90,7 +89,6 @@ void	copy_tokens(t_token *dst, t_list *n)
 {
 	while (n != NULL)
 	{
-		//dst = (t_token *)malloc(sizeof(t_token));
 		copy_token(dst, (t_token *)n->content);
 		n = n->next;
 		dst++;

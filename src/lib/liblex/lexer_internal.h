@@ -25,15 +25,15 @@ void		tokenize_string(t_tlist *tokens, const char *string);
 t_tokens	*to_tokens(t_tlist*);
 void		add_token(char *raw, t_token_type type);
 
-t_tokens *create_empty_tokens();
+t_tokens	*create_empty_tokens();
 
 
 int		try_parse_type(const char *t, t_token_type *type);
 int		try_one(const char *t, t_token_type *type);
 int		try_other(const char *t, t_token_type *type);
-int		try_operator(t_stream*, int *b);
+int		try_operator(t_stream*);
 int		handle_operator_start(t_stream *s);
-int		try_quote(t_stream *s, int *b);
+int		try_quote(t_stream *s);
 int		process_quote(t_stream *s, char quote);
 
 

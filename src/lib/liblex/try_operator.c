@@ -12,7 +12,7 @@ int	is_still_operator(t_stream *s, const char *t)
 	return ((! is_eos(s) && strlen(t) == 1 && is_start_of_operator(*t)) || (try_parse_type(t, &type) && is_operator(type)));
 }
 
-int	try_operator(t_stream *s, int *b)
+int	try_operator(t_stream *s)
 {
 	t_token_type type;
 	char	*tmp;

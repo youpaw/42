@@ -86,7 +86,7 @@ void 		destruct_tokens(t_tokens *tokens);
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
 void 		print_tokens(t_token *tokens);
-char *type_to_string(t_token_type t);
+char		*type_to_string(t_token_type t);
 
 # define	E_OK 1
 # define	E_UNDEFINED_TOKEN E_OK + 1
