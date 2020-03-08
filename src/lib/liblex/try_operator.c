@@ -30,6 +30,7 @@ int	try_operator(t_stream *s, int *b)
 		tmp = str_append_char(strdup(get_token(s)), get_current_char(s));
 	}
 	free(tmp);
+	type = l_word;
 	try_parse_type(get_token(s), &type);
 	add_token(get_token(s), type);
 

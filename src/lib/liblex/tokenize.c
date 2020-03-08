@@ -24,6 +24,32 @@ void		destruct_tlist(t_tlist *tokens)
 	}
 }
 
+void	recognize(t_token *t)
+{
+	if (t->type == l_word)
+	{
+		try_parse_type(t->raw, &t->type);
+		if (t->type == l_undefined)
+		{
+			t->type = l_word;
+		}
+	}
+}
+
+t_tlist *recognize_tokens(t_tlist *tokens)
+{
+	t_list *n;
+
+	n = tokens->tokens;
+	while (n != NULL)
+	{
+		recognize((t_token*)n->content);
+		n = n->next;
+	}
+
+
+	return (tokens);
+}
 
 t_tlist *tokenize(const char *string)
 {
@@ -40,7 +66,7 @@ t_tlist *tokenize(const char *string)
 	}
 	tokens->raw = strdup(string);
 	tokenize_string(tokens, string);
-	return (tokens);
+	return (recognize_tokens(tokens));
 }
 
 void	copy_token(t_token *dst, t_token *src)

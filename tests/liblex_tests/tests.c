@@ -33,20 +33,24 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
+	test("ls>1.txt", "[ ls ] [ word ]\n[ > ] [ word ]\n[ 1.txt ] [ word ]\n", 3);
+
 	test(" 1", "[ 1 ] [ word ]\n", 1);
 	test("1 ", "[ 1 ] [ word ]\n", 1);
 	test("    1", "[ 1 ] [ word ]\n", 1);
 	test("1    ", "[ 1 ] [ word ]\n", 1);
 	test("    1      ", "[ 1 ] [ word ]\n", 1);
 	test(" 1  2  ", "[ 1 ] [ word ]\n[ 2 ] [ word ]\n", 2);
+	//1#2\n3
 
-
-	//test(" {", "[ { ] [ left_brace ]\n", 1);
-	//test("{ ", "[ ( ] [ left_brace ]\n", 1);
-	//test(" ( ", "[ ( ] [ left_brace ]\n", 1);
-	//test("}{", "[ ) ] [ right_brace ]\n[ ( ] [ left_brace ]\n", 2);
-	//test("{", "[ { ] [ left_brace ]\n", 1);
-	//test("}", "[ } ] [ right_brace ]\n", 1);
+	test("!", "[ ! ] [ bang ]\n", 1);
+	test(" {", "[ { ] [ left_brace ]\n", 1);
+	test("{ ", "[ { ] [ left_brace ]\n", 1);
+	test(" { ", "[ { ] [ left_brace ]\n", 1);
+	//test("}{", "[ } ] [ right_brace ]\n[ { ] [ left_brace ]\n", 2);
+	test("}{", "[ }{ ] [ word ]\n", 1);
+	test("{", "[ { ] [ left_brace ]\n", 1);
+	test("}", "[ } ] [ right_brace ]\n", 1);
 	test("\n", "[ \\n ] [ newline ]\n", 1);
 //	test(" ", "[  ] [ word ]\n", 1);
 //	test("''", "[  ] [ word ]\n", 1);
