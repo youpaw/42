@@ -33,7 +33,7 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
-	//test("1#2\n3", "[1] [word]\n[3] [word]", 2);
+	test("1#2\n3", "[ 1 ] [ io_number ]\n[ 3 ] [ io_number ]\n", 2);
 
 	test("1", "[ 1 ] [ io_number ]\n", 1);
 	test("ls>1.txt", "[ ls ] [ word ]\n[ > ] [ word ]\n[ 1.txt ] [ word ]\n", 3);

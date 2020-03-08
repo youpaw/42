@@ -67,6 +67,27 @@ int		handle_space(t_stream *s)
 	return (0);
 }
 
+void	advance_till_eol(t_stream *s)
+{
+	while (!is_eos(s)&&get_current_char(s)!='\n')
+	{
+		advance(s);
+	}
+}
+
+int		handle_comment(t_stream *s)
+{
+	if (get_current_char(s) == '#')
+	{
+		if (get_token(s)[0] != 0)
+		{
+			add_token(get_token(s), l_word);
+		}
+		advance_till_eol(s);
+		return (1);
+	}
+	return (0);
+}
 int		try_parse_token()
 {
 	int	b;
@@ -78,6 +99,7 @@ int		try_parse_token()
 		|| handle_operator_start(g_stream))
 		|| handle_new_line(g_stream)
 		|| handle_space(g_stream)
+		|| handle_comment(g_stream)
 		;
 }
 
