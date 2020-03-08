@@ -33,6 +33,7 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
+	test("\"`1`\"", "[ `1` ] [ word ]\n", 1);
 	test("1#2\n3", "[ 1 ] [ io_number ]\n[ 3 ] [ io_number ]\n", 2);
 
 	test("1", "[ 1 ] [ io_number ]\n", 1);

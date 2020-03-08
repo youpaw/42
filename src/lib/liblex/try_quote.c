@@ -72,12 +72,14 @@ int	process_escape_in_dquote(t_stream *s)
 	return (0);
 }
 
-int	process_back_quote_in_dquote(t_stream *s)
+int	process_back_quote_inside_double_quote(t_stream *s)
 {
+	append_char_to_token(s);
 	advance(s);
-	while (get_current_char(s) != '`' && !is_eos(s))
+	while (!is_eos(s) && get_current_char(s) != '`')
 	{
-
+		append_char_to_token(s);
+		advance(s);
 	}
 
 	if (is_eos(s))
@@ -85,6 +87,10 @@ int	process_back_quote_in_dquote(t_stream *s)
 		set_error(s, E_MISSING_SECOND_BACK_QUOTE);
 		return (1);
 	}
+	append_char_to_token(s);
+	advance(s);
+
+	return (1);
 
 }
 
@@ -100,7 +106,7 @@ int	process_special(t_stream *s, char quote)
 	}
 	if (get_current_char(s) == '`')
 	{
-		return (process_quote(s, '`'));
+		return (process_back_quote_inside_double_quote(s));
 	}
 	return (0);
 }
