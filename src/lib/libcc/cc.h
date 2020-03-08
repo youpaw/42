@@ -52,6 +52,7 @@ char		*str_append(char *s1, const char *s2);
 char		*str_append_char(char *s1, const char c);
 int			str_contains(const char *str, const char *substr);
 int			str_contains_char(const char *str, const char c);
+int			isnumber(const char *str);
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
 char		*strdup(const char *s1);

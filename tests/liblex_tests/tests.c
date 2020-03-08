@@ -33,15 +33,17 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
+	//test("1#2\n3", "[1] [word]\n[3] [word]", 2);
+
+	test("1", "[ 1 ] [ io_number ]\n", 1);
 	test("ls>1.txt", "[ ls ] [ word ]\n[ > ] [ word ]\n[ 1.txt ] [ word ]\n", 3);
 
-	test(" 1", "[ 1 ] [ word ]\n", 1);
-	test("1 ", "[ 1 ] [ word ]\n", 1);
-	test("    1", "[ 1 ] [ word ]\n", 1);
-	test("1    ", "[ 1 ] [ word ]\n", 1);
-	test("    1      ", "[ 1 ] [ word ]\n", 1);
-	test(" 1  2  ", "[ 1 ] [ word ]\n[ 2 ] [ word ]\n", 2);
-	//1#2\n3
+	test(" 1", "[ 1 ] [ io_number ]\n", 1);
+	test("1 ", "[ 1 ] [ io_number ]\n", 1);
+	test("    1", "[ 1 ] [ io_number ]\n", 1);
+	test("1    ", "[ 1 ] [ io_number ]\n", 1);
+	test("    1      ", "[ 1 ] [ io_number ]\n", 1);
+	test(" 1  2  ", "[ 1 ] [ io_number ]\n[ 2 ] [ io_number ]\n", 2);
 
 	test("!", "[ ! ] [ bang ]\n", 1);
 	test(" {", "[ { ] [ left_brace ]\n", 1);
@@ -56,8 +58,8 @@ void		test_lex()
 //	test("''", "[  ] [ word ]\n", 1);
 //	test("""", "[  ] [ word ]\n", 1);
 //	test("\"``\"", "[  ] [ word ]\n", 1);				//"``"
-	test("1\n", "[ 1 ] [ word ]\n[ \\n ] [ newline ]\n", 2);
-	test("1\n2", "[ 1 ] [ word ]\n[ \\n ] [ newline ]\n[ 2 ] [ word ]\n", 3);
+	test("1\n", "[ 1 ] [ io_number ]\n[ \\n ] [ newline ]\n", 2);
+	test("1\n2", "[ 1 ] [ io_number ]\n[ \\n ] [ newline ]\n[ 2 ] [ io_number ]\n", 3);
 
 	test("q\\>>", "[ q> ] [ word ]\n[ > ] [ word ]\n", 2);				//q\>>	q>>
 	test("q>>", "[ q ] [ word ]\n[ >> ] [ double_great ]\n", 2);
@@ -82,10 +84,10 @@ void		test_lex()
 	test("q\\\"", "[ q\" ] [ word ]\n", 1);
 	test("q\\'", "[ q' ] [ word ]\n", 1);
 	test("\\q", "[ q ] [ word ]\n", 1);
-	test("''1", "[ 1 ] [ word ]\n", 1);
+	test("''1", "[ 1 ] [ io_number ]\n", 1);
 	test("''", "", 0);
 	test_error("'", E_MISSING_SECOND_SINGLE_QUOTE);
-	test("1''", "[ 1 ] [ word ]\n", 1);
+	test("1''", "[ 1 ] [ io_number ]\n", 1);
 	test("'\"'", "[ \" ] [ word ]\n", 1);
 	test("'\\$~\"'", "[ \\$~\" ] [ word ]\n", 1);			//'\$~"'	\$~"
 	test_error("\"", E_MISSING_SECOND_DOUBLE_QUOTE);

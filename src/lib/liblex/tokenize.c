@@ -24,11 +24,22 @@ void		destruct_tlist(t_tlist *tokens)
 	}
 }
 
+int		recognize_number(t_token *t)
+{
+	if (isnumber(t->raw))
+	{
+		t->type = l_io_number;
+		return (1);
+	}
+	return (0);
+}
+
 void	recognize(t_token *t)
 {
 	if (t->type == l_word)
 	{
-		try_parse_type(t->raw, &t->type);
+		try_parse_type(t->raw, &t->type) 
+		|| recognize_number(t);
 		if (t->type == l_undefined)
 		{
 			t->type = l_word;

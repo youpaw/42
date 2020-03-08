@@ -20,6 +20,7 @@ void	add_token(char *raw, t_token_type type)
 
 	new = xmalloc(sizeof(t_list));
 	new->content = t;
+	new->next = NULL;
 
 	if (g_current != NULL)
 	{

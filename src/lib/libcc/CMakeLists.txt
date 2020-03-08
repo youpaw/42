@@ -10,6 +10,7 @@ file(MAKE_DIRECTORY ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(cc STATIC
 		file_exists.c
+		isnumber.c
 		str_append.c
 		str_append_char.c
 		str_contains.c
