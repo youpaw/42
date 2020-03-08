@@ -17,6 +17,7 @@ void	clear_token(t_stream *s);
 void	append_char_to_token(t_stream *s);
 void	append_custom_char_to_token(t_stream *s, char c);
 char	*get_token(t_stream *s);
+void	set_token(t_stream *s, char *new);
 int		is_error(t_stream *s);
 void	set_error(t_stream *s, int error);
 int		get_error(t_stream *s);

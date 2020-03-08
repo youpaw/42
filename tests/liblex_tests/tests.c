@@ -33,12 +33,12 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
-	//test("\n", "[ ] [ word ]\n", 1);
+	test("\n", "[ \\n ] [ newline ]\n", 1);
 //	test("''", "[  ] [ word ]\n", 1);
 //	test("""", "[  ] [ word ]\n", 1);
 //	test("\"``\"", "[  ] [ word ]\n", 1);				//"``"
-	test("1\n", "[ 1 ] [ word ]\n", 1);
-	test("1\n2", "[ 1 ] [ word ]\n[ 2 ] [ word ]\n", 2);
+	test("1\n", "[ 1 ] [ word ]\n[ \\n ] [ newline ]\n", 2);
+	test("1\n2", "[ 1 ] [ word ]\n[ \\n ] [ newline ]\n[ 2 ] [ word ]\n", 3);
 
 	test("q\\>>", "[ q> ] [ word ]\n[ > ] [ word ]\n", 2);				//q\>>	q>>
 	test("q>>", "[ q ] [ word ]\n[ >> ] [ double_great ]\n", 2);

@@ -13,6 +13,7 @@ void	add_token(char *raw, t_token_type type)
 
 	t = (t_token *)xmalloc(sizeof(t_token));
 	strcpy(t->raw, raw);
+	t->raw[strlen(raw)] = 0;
 	t->type = type;
 
 	memset(raw, 0, strlen(raw));
@@ -45,6 +46,8 @@ int		handle_new_line(t_stream *s)
 		{
 			add_token(get_token(s), l_word);
 		}
+		set_token(s, "\\n");
+		add_token(get_token(s), l_newline);
 		return (1);
 	}
 	return (0);

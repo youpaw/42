@@ -33,6 +33,13 @@ void	append_char_to_token(t_stream *s)
 void	append_custom_char_to_token(t_stream *s, char c)
 {
 	str_append_char(s->current_token, c);
+	str_append_char(s->current_token, 0);
+}
+
+void	set_token(t_stream *s, char *new)
+{
+	strcpy(s->current_token, new);
+	s->current_token[strlen(new)] = 0;
 }
 
 char *get_token(t_stream *s)
