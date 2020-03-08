@@ -42,12 +42,25 @@ int		handle_new_line(t_stream *s)
 {
 	if (get_current_char(s) == '\n')
 	{
-		if ( get_token(s)[0] != 0)
+		if (get_token(s)[0] != 0)
 		{
 			add_token(get_token(s), l_word);
 		}
 		set_token(s, "\\n");
 		add_token(get_token(s), l_newline);
+		return (1);
+	}
+	return (0);
+}
+
+int		handle_space(t_stream *s)
+{
+	if (get_current_char(s) == ' ')
+	{
+		if (get_token(s)[0] != 0)
+		{
+			add_token(get_token(s), l_word);
+		}
 		return (1);
 	}
 	return (0);
@@ -62,7 +75,9 @@ int		try_parse_token()
 		try_operator(g_stream, &b)
 		|| try_quote(g_stream, &b)
 		|| handle_operator_start(g_stream))
-		|| handle_new_line(g_stream);
+		|| handle_new_line(g_stream)
+		|| handle_space(g_stream)
+		;
 }
 
 void	loop_body()

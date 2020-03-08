@@ -33,7 +33,22 @@ void	test(const char *str, const char *expected, int size)
 void		test_lex()
 {
 
+	test(" 1", "[ 1 ] [ word ]\n", 1);
+	test("1 ", "[ 1 ] [ word ]\n", 1);
+	test("    1", "[ 1 ] [ word ]\n", 1);
+	test("1    ", "[ 1 ] [ word ]\n", 1);
+	test("    1      ", "[ 1 ] [ word ]\n", 1);
+	test(" 1  2  ", "[ 1 ] [ word ]\n[ 2 ] [ word ]\n", 2);
+
+
+	//test(" {", "[ { ] [ left_brace ]\n", 1);
+	//test("{ ", "[ ( ] [ left_brace ]\n", 1);
+	//test(" ( ", "[ ( ] [ left_brace ]\n", 1);
+	//test("}{", "[ ) ] [ right_brace ]\n[ ( ] [ left_brace ]\n", 2);
+	//test("{", "[ { ] [ left_brace ]\n", 1);
+	//test("}", "[ } ] [ right_brace ]\n", 1);
 	test("\n", "[ \\n ] [ newline ]\n", 1);
+//	test(" ", "[  ] [ word ]\n", 1);
 //	test("''", "[  ] [ word ]\n", 1);
 //	test("""", "[  ] [ word ]\n", 1);
 //	test("\"``\"", "[  ] [ word ]\n", 1);				//"``"
@@ -79,12 +94,6 @@ void		test_lex()
 	test("q\\n", "[ q ] [ word ]\n[ \\n ] [ newline ]\n", 2);
 	test("\\", "[ \\ ] [ word ]\n", 1);
 	test("\\\"", "[ \" ] [ word ]\n", 1);
-	//test(" {", "[ { ] [ left_brace ]\n", 1);
-	//test("{ ", "[ ( ] [ left_brace ]\n", 1);
-	//test(" ( ", "[ ( ] [ left_brace ]\n", 1);
-	//test("}{", "[ ) ] [ right_brace ]\n[ ( ] [ left_brace ]\n", 2);
-	//test("{", "[ { ] [ left_brace ]\n", 1);
-	//test("}", "[ } ] [ right_brace ]\n", 1);
 	test_error("", E_OK);
 	test_error(NULL, E_NULL_INPUT);
 	//print_tokens(tokens);
