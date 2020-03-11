@@ -52,3 +52,13 @@ char *tokens_to_string(t_tokens *tokens)
 	to_string(dst, tokens);
 	return (dst);
 }
+
+
+void 		print_tokens(t_token *tokens)
+{
+	char *str;
+
+	str = tokens_to_string(tokens);
+	fdputs(str, STDOUT_FILENO);
+	free(str);
+}
