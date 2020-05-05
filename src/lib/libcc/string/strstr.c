@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_mem.h"
+#include "cc_str.h"
 #include <stdlib.h>
 
 static void	init_table(const char *needle, int *table)

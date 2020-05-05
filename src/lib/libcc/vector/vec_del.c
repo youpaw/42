@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtrim.c                                          :+:      :+:    :+:   */
+/*   ft_vector_del.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 19:47:13 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/12/14 16:07:50 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_vec.h"
 
-char	*strtrim(char const *s)
+void	vec_del(t_vec **vector)
 {
-	size_t	len;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	len = strlen(s);
-	while (i < len && isspace(s[i]))
-		i++;
-	while (len > i && isspace(s[len - 1]))
-		len--;
-	return (strsub(s, i, len - i));
+	if (!vector || !*vector)
+		return ;
+	free((*vector)->data);
+	free(*vector);
 }

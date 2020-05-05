@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bzero.c                                            :+:      :+:    :+:   */
+/*   ft_vector_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:12:27 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/12/07 18:50:43 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_vec.h"
+#include "cc_mem.h"
 
-void	bzero(void *s, size_t n)
+t_vec	*vec_init(size_t capacity, size_t datasize)
 {
-	memset(s, 0, n);
+	t_vec *vector;
+
+	vector = (t_vec*)xmalloc(sizeof(t_vec));
+	vector->data = xmalloc(datasize * capacity + datasize);
+	bzero(vector->data, datasize * capacity + datasize);
+	vector->datasize = datasize;
+	vector->capacity = capacity;
+	vector->size = 0;
+	return (vector);
 }

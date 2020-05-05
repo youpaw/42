@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnew.c                                           :+:      :+:    :+:   */
+/*   memalloc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:17:21 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/11/25 19:55:14 by dbutterw          #+#    #+#             */
+/*   Updated: 2019/11/25 20:06:13 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_mem.h"
 
-char		*strnew(size_t size)
+void	*memalloc(size_t size)
 {
-	char	*res;
+	void	*ptr;
 
-	res = xmalloc(size + 1);
-	memset(res, 0, size + 1);
-	return (res);
+	ptr = xmalloc(size);
+	bzero(ptr, size);
+	return (ptr);
 }

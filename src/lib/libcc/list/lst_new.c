@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strcat.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:14:24 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/09/08 21:29:37 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_lst.h"
+#include "cc_mem.h"
 
-char	*strcat(char *s1, const char *s2)
+t_list	*lst_new(void *content)
 {
-	size_t i;
+	t_list *newlst;
 
-	i = strlen(s1);
-	while (*s2)
-	{
-		s1[i] = *s2;
-		s2++;
-		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
+	newlst = (t_list*)xmalloc(sizeof(t_list));
+	newlst->content = content;
+	newlst->next = NULL;
+	return (newlst);
 }

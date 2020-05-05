@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memalloc.c                                         :+:      :+:    :+:   */
+/*   ft_lstcircle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 19:55:14 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:13 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/12/30 18:42:40 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_lst.h"
 
-void	*memalloc(size_t size)
+void	lst_circle(t_list *list)
 {
-	void	*ptr;
+	t_list *head;
 
-	ptr = xmalloc(size);
-	bzero(ptr, size);
-	return (ptr);
+	if (!list)
+		return ;
+	head = list;
+	while (list->next)
+		list = list->next;
+	list->next = head;
 }

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
+#include "cc_mem.h"
+#include "cc_str.h"
 
 static int		is_separator(char c, char *charset)
 {

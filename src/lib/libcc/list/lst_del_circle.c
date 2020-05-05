@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdputs.c                                           :+:      :+:    :+:   */
+/*   ft_lstdelcircle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/24 00:34:32 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2019/12/30 18:47:50 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc.h"
-#include <unistd.h>
+#include "cc_lst.h"
 
-int	fdputs(const char *restrict s, int stream)
+void	lst_del_circle(t_list **list, void (*del)(void*))
 {
-	return (write(stream, s, strlen(s)));
+	t_list *check;
+	t_list *head;
+	t_list *tmp;
+
+	if (!list || !*list)
+		return ;
+	check = *list;
+	head = (*list)->next;
+	while (check != head)
+	{
+		tmp = head;
+		head = head->next;
+		lst_del_one(&tmp, del);
+	}
+	lst_del_one(&check, del);
 }
