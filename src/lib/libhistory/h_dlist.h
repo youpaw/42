@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strstr.c                                           :+:      :+:    :+:   */
+/*   h_dlist.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darugula <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 21:00:11 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Created: 2020/01/01 13:00:51 by darugula          #+#    #+#             */
+/*   Updated: 2020/01/01 13:00:52 by darugula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc_str.h"
+#ifndef H_DLIST_H
+# define H_DLIST_H
+# include "lists.h"
 
-char		*strstr(const char *haystack, const char *needle)
-{
-	return (strnstr(haystack, needle, strlen(haystack)));
-}
+int		h_free(void);
+t_list *h_get_head();
+t_list *h_get_last();
+
+#endif 
+

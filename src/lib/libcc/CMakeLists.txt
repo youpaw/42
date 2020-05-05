@@ -26,6 +26,7 @@ ADD_LIBRARY(cc STATIC
 		string/strtrim.c
 		string/strsplitcharset.c
 		string/strchr.c
+		string/strnstr.c
 		char/isspace.c
 		char/isdigit.c
 		memory/xmalloc.c
