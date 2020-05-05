@@ -9,17 +9,8 @@ file(MAKE_DIRECTORY ${LIBCC_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(lex STATIC
-		is_operator.c
-		lex_str.c
-		stream.c
-		tokenize.c
-		tokenize2.c
-		tokens_to_string.c
-		try_operator.c
-		try_parse.c
-		try_quote.c
-		type_to_string.c
-		)
+        type_to_string.c
+		lex_str.c)
 
 
 target_link_libraries(lex cc)

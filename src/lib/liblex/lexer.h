@@ -25,6 +25,7 @@
 # define LEXER_H
 
 # define MAX_LEXEM_LEN 1024
+# define N_TOKEN_TYPES 19
 
 # include <stddef.h>
 
@@ -80,19 +81,48 @@ typedef enum e_token_type t_token_type;
 
 t_tokens	*lex_stream(int fd);
 t_tokens	*lex_str(const char *string);
+int 		verify_input(const char *string);
+int			recognize_tokens(t_tokens *tokens);
 
-void 		destruct_tokens(t_tokens *tokens);
+void 		destruct_tokens(t_tokens **tokens);
 
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
-void 		print_tokens(t_token *tokens);
-char		*type_to_string(t_token_type t);
 
-# define	E_OK 1
+void 		print_tokens(t_tokens *tokens);
+
+static const char *g_token_types_map[N_TOKEN_TYPES] = {
+		"undefined",
+		"word",
+		"name",
+		"and_if",
+		"or_if",
+		"double_semi",
+		"newline",
+		"io_number",
+		"double_less",
+		"double_great",
+		"less_and",
+		"great_and",
+		"less_great",
+		"double_less_dash",
+		"clobber",
+		"left_brace",
+		"right_brace",
+		"bang",
+		"token"
+};
+
+const char		*type_to_string(t_token_type t);
+
+# define	E_OK 0
 # define	E_UNDEFINED_TOKEN E_OK + 1
 # define	E_NULL_INPUT E_UNDEFINED_TOKEN + 1
 # define	E_MISSING_SECOND_SINGLE_QUOTE E_NULL_INPUT + 1
 # define	E_MISSING_SECOND_DOUBLE_QUOTE E_MISSING_SECOND_SINGLE_QUOTE + 1
 # define	E_MISSING_SECOND_BACK_QUOTE E_MISSING_SECOND_DOUBLE_QUOTE + 1
+# define	E_MISSING_SECOND_SQUARE_BRACE E_MISSING_SECOND_BACK_QUOTE + 1
+# define	E_MISSING_SECOND_ROUND_BRACE E_MISSING_SECOND_SQUARE_BRACE + 1
+# define	E_MISSING_SECOND_FIGURE_BRACE E_MISSING_SECOND_ROUND_BRACE + 1
 
 #endif

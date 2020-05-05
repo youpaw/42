@@ -1,41 +1,30 @@
+//
+// Created by youpaw on 04.05.2020.
+//
+
 #include "lexer.h"
-#include <stdlib.h>
-#include "lexer_internal.h"
+#include "cc.h"
 
-void		destruct_tokens(t_tokens *tokens)
-{
-	int	i = -1;
-	if (tokens->raw != NULL)
-	{
-		free(tokens->raw);
-	}
-	if (tokens->tokens != NULL)
-	{
-		free(tokens->tokens);
-	}
-}
-
-t_tokens *create_empty_tokens()
+static t_tokens *init_tokens_struct(const char *string)
 {
 	t_tokens *tokens;
 
-	tokens = (t_tokens *)xmalloc(sizeof(t_tokens));
-
-	tokens->size = 0;
+	tokens = xmalloc(sizeof(t_tokens));
+	tokens->raw = strdup(string);
+	tokens->error = E_OK;
 	tokens->tokens = NULL;
-	tokens->error = 0;
-	tokens->raw = NULL;
-
+	tokens->size = 0;
 	return (tokens);
 }
 
-t_tokens *lex_str(const char *string)
+t_tokens	*lex_str(const char *string)
 {
-	t_tokens	*tokens;
-	t_tlist *tlist;
+	t_tokens *tokens;
 
-	tlist = tokenize(string);
-	tokens = to_tokens(tlist);
-	destruct_tlist(tlist);
+	tokens = init_tokens_struct(string);
+	//expand bang
+	verify_input(string);
+	//on success write to history
+	recognize_tokens(tokens);
 	return (tokens);
 }
