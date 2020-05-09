@@ -14,12 +14,6 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
-#add liblists to the project
-set(LIBLISTS_DIR "lib/liblists")
-include_directories(${LIBLISTS_DIR})
-add_subdirectory(${LIBLISTS_DIR})
-target_link_libraries(${PROJECT_NAME} lists)
-
 #add libhistory to the project
 set(LIBH_DIR "lib/libhistory")
 include_directories(${LIBH_DIR})
