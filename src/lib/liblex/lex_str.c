@@ -3,6 +3,8 @@
 //
 
 #include "lexer.h"
+#include "lex_recognize.h"
+#include "lex_validate.h"
 #include "cc.h"
 
 static t_tokens *init_tokens_struct(const char *string)
@@ -22,9 +24,9 @@ t_tokens	*lex_str(const char *string)
 	t_tokens *tokens;
 
 	tokens = init_tokens_struct(string);
-	//expand bang
-	verify_input(string);
-	//on success write to history
+	if ((tokens->error = validate_input(&(tokens->raw))))
+		return (tokens);
+	//write raw to history
 	recognize_tokens(tokens);
 	return (tokens);
 }

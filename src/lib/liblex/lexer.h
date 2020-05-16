@@ -26,9 +26,9 @@
 
 # define MAX_LEXEM_LEN 1024
 # define N_TOKEN_TYPES 19
-
+# define N_STATES 4
+# define N_BRACES 3
 # include <stddef.h>
-
 
 enum e_token_type
 {
@@ -71,19 +71,35 @@ struct		s_tokens
 	size_t		size; // размер массива
 };
 
+enum e_state{
+	l_back_slash,
+	l_single_quote,
+	l_double_quote,
+	l_unset
+};
+
+enum e_brace{
+	l_round_brace,
+	l_figure_brace,
+	l_square_brace
+};
+
+struct s_brace_raw{
+	char open;
+	char close;
+};
+
+typedef enum e_state t_state;
+typedef enum e_brace t_brace;
 typedef struct s_tokens t_tokens;
 typedef struct s_token t_token;
 typedef enum e_token_type t_token_type;
-
 /*
 **  lex_* returns t_token ptr allocated my malloc().
 */
 
 t_tokens	*lex_stream(int fd);
-t_tokens	*lex_str(const char *string);
-int 		verify_input(const char *string);
-int			recognize_tokens(t_tokens *tokens);
-
+t_tokens	*lex_str(const char *string);;
 void 		destruct_tokens(t_tokens **tokens);
 
 // prints the array of tokens in the following format
@@ -115,14 +131,18 @@ static const char *g_token_types_map[N_TOKEN_TYPES] = {
 
 const char		*type_to_string(t_token_type t);
 
+static const struct s_brace_raw g_brace_map[N_BRACES] = {
+		{'(', ')'},
+		{'{', '}'},
+		{'[', ']'}
+};
+
+int				get_brace(char c, t_brace *brace);
+
+
 # define	E_OK 0
 # define	E_UNDEFINED_TOKEN E_OK + 1
 # define	E_NULL_INPUT E_UNDEFINED_TOKEN + 1
-# define	E_MISSING_SECOND_SINGLE_QUOTE E_NULL_INPUT + 1
-# define	E_MISSING_SECOND_DOUBLE_QUOTE E_MISSING_SECOND_SINGLE_QUOTE + 1
-# define	E_MISSING_SECOND_BACK_QUOTE E_MISSING_SECOND_DOUBLE_QUOTE + 1
-# define	E_MISSING_SECOND_SQUARE_BRACE E_MISSING_SECOND_BACK_QUOTE + 1
-# define	E_MISSING_SECOND_ROUND_BRACE E_MISSING_SECOND_SQUARE_BRACE + 1
-# define	E_MISSING_SECOND_FIGURE_BRACE E_MISSING_SECOND_ROUND_BRACE + 1
+# define	E_INCOMPLETE_INPUT E_NULL_INPUT + 1
 
 #endif
