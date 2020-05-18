@@ -14,6 +14,7 @@ static t_validate *init_validate(char *raw)
 	validate = xmalloc(sizeof(t_validate));
 	validate->raw = raw;
 	validate->print_cmd = 0;
+	validate->expanding = 0;
 	validate->index = 0;
 	validate->size = strlen(raw);
 	validate->state = l_unset;

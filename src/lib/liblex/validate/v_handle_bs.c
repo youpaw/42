@@ -10,7 +10,7 @@ int 	v_handle_bs(t_validate *validate)
 	char c;
 
 	c = validate->raw[validate->index];
-	if (c == '\n')
+	if (!validate->expanding && c == '\n')
 	{
 		if (validate->index == validate->size - 1)
 			return (E_INCOMPLETE_INPUT);
@@ -20,4 +20,5 @@ int 	v_handle_bs(t_validate *validate)
 		validate->size -= 2;
 	}
 	validate->state = l_unset;
+	return (E_OK);
 }

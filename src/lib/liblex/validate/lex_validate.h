@@ -4,12 +4,13 @@
 
 #ifndef LEX_VALIDATE_H
 #define LEX_VALIDATE_H
-#define N_STACK_SIZE 15
+#define N_STACK_SIZE 5
 #include "lexer.h"
 
 struct s_validate{
 	char *raw;
 	char print_cmd;
+	char expanding;
 	size_t index;
 	size_t size;
 	enum e_state state;

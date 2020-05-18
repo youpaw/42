@@ -9,6 +9,7 @@ static void init_dollar(t_validate *validate, t_state *cpy)
 {
 	*cpy = validate->state;
 	validate->state = l_unset;
+	validate->expanding = 1;
 	validate->index+=2;
 }
 
@@ -59,5 +60,6 @@ int 	v_handle_dollar(t_validate *validate)
 		error = E_INCOMPLETE_INPUT;
 	vec_del(&stack);
 	validate->state = cpy;
+	validate->expanding = 0;
 	return (error);
 }

@@ -63,5 +63,6 @@ int 	v_handle_bang(t_validate *validate)
 	free(validate->raw);
 	validate->raw = res;
 	validate->print_cmd = 1;
+	validate->index--;
 	return (E_OK);
 }
