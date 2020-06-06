@@ -14,6 +14,12 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
+#add libenv to the project
+set(LIBENV_DIR "lib/libenv")
+include_directories(${LIBENV_DIR})
+add_subdirectory(${LIBENV_DIR})
+target_link_libraries(${PROJECT_NAME} env)
+
 #add libhistory to the project
 #set(LIBH_DIR "lib/libhistory")
 #include_directories(${LIBH_DIR})
