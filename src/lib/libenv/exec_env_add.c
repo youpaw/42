@@ -4,6 +4,7 @@
 
 #include "env.h"
 #include "string/cc_str.h"
+#include "char/cc_char.h"
 #include <stdlib.h>
 
 int 		exec_env_add(const char *field)
@@ -11,7 +12,8 @@ int 		exec_env_add(const char *field)
 	int cnt;
 	size_t name_len;
 
-	if (!(name_len = get_name_length(field)))
+	name_len = get_name_length(field);
+	if (!name_len || isdigit(field[0]) || field[name_len] != '=')
 		return (1);
 	cnt = 0;
 	while (g_exec_env[cnt] && strncmp(g_exec_env[cnt], field, name_len) != 0)

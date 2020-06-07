@@ -7,7 +7,7 @@
 
 static int char_valid(char c)
 {
-	return (!(isalnum(c) || c == '_'));
+	return (isalnum(c) || c == '_');
 }
 
 size_t get_name_length(const char *field)
@@ -17,14 +17,7 @@ size_t get_name_length(const char *field)
 	index = 0;
 	if (isdigit(field[index]))
 		return (1);
-	index++;
-	while (field[index] && field[index] != '=')
-	{
-		if (char_valid(field[index]))
-			return (1);
+	while (char_valid(field[index]))
 		index++;
-	}
-	if (field[index] != '=')
-		return (0);
 	return (index);
 }

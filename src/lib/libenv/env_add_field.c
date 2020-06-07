@@ -6,6 +6,7 @@
 #include "env.h"
 #include "string/cc_str.h"
 #include "memory/cc_mem.h"
+#include "char/cc_char.h"
 
 static t_env	*new_node(t_table_type type, char *name, char *val)
 {
@@ -25,7 +26,8 @@ int 	env_add_field(t_table_type type, const char *field, int rewrite)
 	char		*val;
 	size_t		name_len;
 
-	if (!(name_len = get_name_length(field)))
+	name_len = get_name_length(field);
+	if (!name_len || isdigit(field[0]) || field[name_len] != '=')
 		return (1);
 	name = strsub(field, 0, name_len);
 	val = strdup(field + name_len + 1);
