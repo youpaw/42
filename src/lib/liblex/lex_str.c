@@ -3,8 +3,6 @@
 //
 
 #include "lexer.h"
-#include "lex_recognize.h"
-#include "lex_validate.h"
 #include "cc.h"
 
 static t_tokens *init_tokens_struct(const char *string)
@@ -13,7 +11,7 @@ static t_tokens *init_tokens_struct(const char *string)
 
 	tokens = xmalloc(sizeof(t_tokens));
 	tokens->raw = strdup(string);
-	tokens->error = E_OK;
+	tokens->error = 0;
 	tokens->tokens = NULL;
 	tokens->size = 0;
 	return (tokens);
@@ -24,9 +22,9 @@ t_tokens	*lex_str(const char *string)
 	t_tokens *tokens;
 
 	tokens = init_tokens_struct(string);
-	if ((tokens->error = validate_input(&(tokens->raw))))
-		return (tokens);
+	//validate input
 	//write raw to history
-	recognize_tokens(tokens);
+	//expand substitutions
+	//recognize
 	return (tokens);
 }

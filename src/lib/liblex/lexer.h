@@ -26,8 +26,6 @@
 
 # define MAX_LEXEM_LEN 1024
 # define N_TOKEN_TYPES 19
-# define N_STATES 4
-# define N_BRACES 3
 # include <stddef.h>
 
 enum e_token_type
@@ -71,26 +69,6 @@ struct		s_tokens
 	size_t		size; // размер массива
 };
 
-enum e_state{
-	l_back_slash,
-	l_single_quote,
-	l_double_quote,
-	l_unset
-};
-
-enum e_brace{
-	l_round_brace,
-	l_figure_brace,
-	l_square_brace
-};
-
-struct s_brace_raw{
-	char open;
-	char close;
-};
-
-typedef enum e_state t_state;
-typedef enum e_brace t_brace;
 typedef struct s_tokens t_tokens;
 typedef struct s_token t_token;
 typedef enum e_token_type t_token_type;
@@ -131,18 +109,7 @@ static const char *g_token_types_map[N_TOKEN_TYPES] = {
 
 const char		*type_to_string(t_token_type t);
 
-static const struct s_brace_raw g_brace_map[N_BRACES] = {
-		{'(', ')'},
-		{'{', '}'},
-		{'[', ']'}
-};
-
-int				get_brace(char c, t_brace *brace);
-
-
-# define	E_OK 0
-# define	E_UNDEFINED_TOKEN E_OK + 1
-# define	E_NULL_INPUT E_UNDEFINED_TOKEN + 1
-# define	E_INCOMPLETE_INPUT E_NULL_INPUT + 1
+# define	E_LEXER 10
+# define	E_UNDEFINED_TOKEN E_LEXER + 1
 
 #endif
