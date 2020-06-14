@@ -13,18 +13,9 @@
 #include "cc_vec.h"
 #include "cc_mem.h"
 
-size_t	vec_remove(t_vec *vector, size_t size)
+size_t	vec_rm_last(t_vec *vector)
 {
-	void *pdata;
-
-	if (!size)
-		return (0);
 	if (!vector->size)
 		return (0);
-	if (size > vector->size)
-		size = vector->size;
-	pdata = vector->data + (vector->size - size) * vector->datasize;
-	bzero(pdata, vector->datasize * size);
-	vector->size -= size;
-	return (vector->size);
+	return (vec_rm_at(vector, vector->size - 1));
 }

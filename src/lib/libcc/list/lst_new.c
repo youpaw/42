@@ -13,12 +13,21 @@
 #include "cc_lst.h"
 #include "cc_mem.h"
 
-t_list	*lst_new(void *content)
+t_list	*lst_new(void *content, size_t size)
 {
 	t_list *newlst;
 
 	newlst = (t_list*)xmalloc(sizeof(t_list));
-	newlst->content = content;
+	if (!content)
+	{
+		newlst->content = NULL;
+		newlst->content = 0;
+	}
+	else
+	{
+		newlst->content = xmalloc(size);
+		newlst->content = memmove(newlst->content, content, size);
+	}
 	newlst->next = NULL;
 	return (newlst);
 }

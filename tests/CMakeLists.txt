@@ -16,24 +16,29 @@ target_link_libraries(${PROJECT_NAME} cc)
 #add liblists to the project
 target_link_libraries(${PROJECT_NAME} lists)
 
+
+#add libtestutils to the project
+target_link_libraries(${PROJECT_NAME} testutils)
+
 #add libhistory to the project
 target_link_libraries(${PROJECT_NAME} history)
+
+#add liblex to the project
+target_link_libraries(${PROJECT_NAME} lex)
 
 
 include_directories (
     ../src/lib/libcc
     ../src/lib/libhistory
+    ../src/lib/liblex
     ../src/lib/liblists
                      )
 
-  message(STATUS "{{CMAKE_CURRENT_SOURCE_DIR}}='${CMAKE_CURRENT_SOURCE_DIR}'")
-
-
-
-get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-  message(STATUS "dir='${dir}'")
-endforeach()
+#add libtestutils to the project
+set(LIBTU_DIR "libtestutils")
+include_directories(${LIBTU_DIR})
+add_subdirectory(${LIBTU_DIR})
+target_link_libraries(${PROJECT_NAME} testutils)
 
 
 #add libhistory_tests to the project
@@ -41,4 +46,11 @@ set(LIBHT_DIR "libhistory_tests")
 include_directories(${LIBHT_DIR})
 add_subdirectory(${LIBHT_DIR})
 target_link_libraries(${PROJECT_NAME} history_tests)
+
+
+#add liblex_tests to the project
+set(LIBLT_DIR "liblex_tests")
+include_directories(${LIBLT_DIR})
+add_subdirectory(${LIBLT_DIR})
+target_link_libraries(${PROJECT_NAME} lex_tests)
 

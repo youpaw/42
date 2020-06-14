@@ -20,9 +20,9 @@ target_link_libraries(${PROJECT_NAME} cc)
 #add_subdirectory(${LIBH_DIR})
 #target_link_libraries(${PROJECT_NAME} history)
 
-#add libhistory_tests to the project
-#set(LIBHT_DIR "lib/libhistory_tests")
-#include_directories(${LIBHT_DIR})
-#add_subdirectory(${LIBHT_DIR})
-#target_link_libraries(${PROJECT_NAME} history_tests)
+#add liblex to the project
+set(LIBLEX_DIR "lib/liblex")
+include_directories(${LIBLEX_DIR})
+add_subdirectory(${LIBLEX_DIR})
+target_link_libraries(${PROJECT_NAME} lex)
 
