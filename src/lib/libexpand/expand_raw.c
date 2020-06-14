@@ -42,7 +42,7 @@ int expand_raw(char **raw, int (*handler)(t_expand *))
 	int error;
 
 	if (!raw || !*raw || !**raw)
-		return (1);
+		return (E_NULL_INPUT);
 	error = 0;
 	expand = init_expand(*raw);
 	while (expand->index < expand->size)
@@ -56,7 +56,7 @@ int expand_raw(char **raw, int (*handler)(t_expand *))
 		expand->index++;
 	}
 	if (!error && expand->state != e_unset)
-		error = 2;
+		error = E_INCOMPLETE_INPUT;
 	*raw = expand->raw;
 	free(expand);
 	return (error);

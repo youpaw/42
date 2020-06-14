@@ -67,4 +67,7 @@ static const struct s_brace_raw g_brace_map[N_BRACES] = {
 
 int		get_brace(char c, t_brace *brace);
 
+# define	E_EXPAND 30
+# define	E_NULL_INPUT E_EXPAND + 1
+# define	E_INCOMPLETE_INPUT E_NULL_INPUT + 1
 #endif //EXPAND_H
