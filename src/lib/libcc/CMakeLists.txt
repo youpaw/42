@@ -38,7 +38,7 @@ ADD_LIBRARY(cc STATIC
 		vector/vec_del.c
 		vector/vec_init.c
 		vector/vec_push.c
-		vector/vec_remove.c
+		vector/vec_rm_last.c
 		math/max.c
 		math/min.c
 		search/avl_del.c
@@ -54,5 +54,6 @@ ADD_LIBRARY(cc STATIC
 		list/lst_iter.c
 		list/lst_map.c
 		list/lst_new.c
+		vector/vec_rm_at.c vector/vec_get_at.c vector/vec_get_last.c
 		char/isalpha.c char/isupper.c char/islower.c char/isalnum.c search/avl_balance.c search/avl_get_node.c search/avl_pop.c search/avl_map_prefix.c search/avl_map_infix.c search/avl_map_postfix.c)
 

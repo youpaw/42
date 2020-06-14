@@ -6,10 +6,11 @@
 typedef struct		s_list
 {
 	void			*content;
+	size_t			size;
 	struct s_list	*next;
 }					t_list;
 
-t_list				*lst_new(void *content);
+t_list				*lst_new(void *content, size_t size);
 
 void				lst_del_one(t_list **alst, void (*del)(void*));
 
