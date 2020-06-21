@@ -8,6 +8,7 @@
 # define N_STATES 5
 # define N_STACK_SIZE 5
 #include <stddef.h>
+#include "vector/cc_vec.h"
 
 enum e_state{
 	e_back_slash,
@@ -15,7 +16,6 @@ enum e_state{
 	e_double_quote,
 	e_dollar,
 	e_bang,
-	e_unset
 };
 
 enum e_brace{
@@ -26,12 +26,12 @@ enum e_brace{
 
 struct s_expand{
 	char *raw;
-	int flags;
 	size_t index;
 	size_t size;
-	enum e_state state;
+	t_vec *states;
 };
 
+typedef enum e_state t_state;
 typedef enum e_brace t_brace;
 typedef struct s_expand t_expand;
 
