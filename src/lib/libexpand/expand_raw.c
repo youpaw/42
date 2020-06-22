@@ -58,7 +58,7 @@ static t_expand *init_expand(char *raw)
 	expand->raw = raw;
 	expand->index = 0;
 	expand->size = strlen(raw);
-	expand->states = vec_init(N_STACK_SIZE, sizeof(t_state));
+	expand->states = vec_new(N_STACK_SIZE, sizeof(t_state));
 	return (expand);
 }
 

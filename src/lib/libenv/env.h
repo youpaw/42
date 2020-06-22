@@ -8,7 +8,7 @@
 #define N_MAX_EXEC_ENV 1024
 
 #include <glob.h>
-#include "search/cc_search.h"
+#include "search/cc_avl.h"
 
 static int	g_exit_code = 0;
 static char *g_av[N_MAX_AV];

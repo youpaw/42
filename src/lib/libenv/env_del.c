@@ -3,7 +3,7 @@
 //
 
 #include "env.h"
-#include "search/cc_search.h"
+#include "search/cc_avl.h"
 #include <stdlib.h>
 
 static void	del(t_env **content)

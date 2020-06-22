@@ -2,13 +2,13 @@
 // Created by youpaw on 02.06.2020.
 //
 
-#include "cc_search.h"
+#include "cc_avl.h"
 #include "cc_math.h"
 
-static t_avl		*right_rotate(t_avl *y)
+static t_avl_tree		*right_rotate(t_avl_tree *y)
 {
-	t_avl *x;
-	t_avl *t;
+	t_avl_tree *x;
+	t_avl_tree *t;
 
 	x = y->left;
 	t = x->right;
@@ -21,10 +21,10 @@ static t_avl		*right_rotate(t_avl *y)
 	return (x);
 }
 
-static t_avl		*left_rotate(t_avl *x)
+static t_avl_tree		*left_rotate(t_avl_tree *x)
 {
-	t_avl *y;
-	t_avl *t;
+	t_avl_tree *y;
+	t_avl_tree *t;
 
 	y = x->right;
 	t = y->left;
@@ -37,24 +37,26 @@ static t_avl		*left_rotate(t_avl *x)
 	return (y);
 }
 
-t_avl		*avl_balance(t_avl *node, void *params, \
-int (*cmp)(const void *, const void *, void *))
+t_avl_tree		*avl_balance(t_avl_tree *node, int params, \
+int (*cmp)(const void *, const void *, int))
 {
 	int balance;
 
 	if (!node)
 		return (node);
 	balance = avl_get_height(node->left) - avl_get_height(node->right);
-	if (balance > 1 && cmp(node->left->content, node->content, params) < 0)
+	if (balance > 1 && cmp(node->left->pair->key, node->pair->key, params) < 0)
 		return (right_rotate(node));
-	if (balance < -1 && cmp( node->right->content, node->content, params) > 0)
+	if (balance < -1 && \
+	        cmp( node->right->pair->key, node->pair->key, params) > 0)
 		return (left_rotate(node));
-	if (balance > 1 && cmp(node->left->content, node->content, params) > 0)
+	if (balance > 1 && cmp(node->left->pair->key, node->pair->key, params) > 0)
 	{
 		node->left = left_rotate(node->left);
 		return (right_rotate(node));
 	}
-	if (balance < -1 && cmp(node->right->content, node->content, params) < 0)
+	if (balance < -1 && \
+		cmp(node->right->pair->key, node->pair->key, params) < 0)
 	{
 		node->right = right_rotate(node->right);
 		return (left_rotate(node));
