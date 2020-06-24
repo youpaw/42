@@ -7,11 +7,5 @@
 
 t_env		*env_get_field(const char *name)
 {
-	t_avl *node;
-
-	node = avl_get_node(g_env, name, NULL, \
-	(int (*)(const void *, const void *, void *)) &env_cmp);
-	if (node)
-		return (node->content);
-	return (NULL);
+	return (hash_get_val(g_env, name));
 }

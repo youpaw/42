@@ -5,15 +5,15 @@
 #ifndef ENV_H
 #define ENV_H
 #define N_MAX_AV 10
-#define N_MAX_EXEC_ENV 1024
+#define N_MAX_EXEC_ENV 256
+#define N_MAX_ENV 256
 
 #include <glob.h>
-#include "search/cc_avl.h"
-
+#include "hash/cc_hash.h"
 static int	g_exit_code = 0;
 static char *g_av[N_MAX_AV];
-static char *g_exec_env[N_MAX_EXEC_ENV + 1];
-static t_avl *g_env;
+static t_hash_table *g_exec_env;
+static t_hash_table *g_env;
 
 enum e_table_type{
 	e_env,
@@ -21,7 +21,6 @@ enum e_table_type{
 };
 
 struct s_env{
-	char *name;
 	char *val;
 	enum e_table_type type;
 };
@@ -31,14 +30,13 @@ typedef struct s_env t_env;
 
 void		env_init(const char **env);
 void		env_del(void);
-int 		env_cmp(const t_env *src, const t_env *dst, void *params);
+void 		env_del_pair(t_hash_pair *pair);
 
 size_t		get_name_length(const char *field);
 
 t_env		*env_get_field(const char *name);
 const char 	*env_get_field_val(const char *name);
-void		env_del_field(const char *name);
-int 		env_add_field(t_table_type type, const char *field, int rewrite);
+int 		env_add_field(t_table_type type, const char *field);
 
 void		exec_env_init(void);
 int 		exec_env_add(const char *field);

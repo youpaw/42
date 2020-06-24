@@ -17,6 +17,7 @@
 # undef strlen
 # undef	atoll
 # undef strchr
+# undef strhash
 
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
@@ -35,4 +36,5 @@ char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
 int			fdputs(const char *restrict s, int stream);
+size_t		strhash(const unsigned char *str);
 #endif //CC_STR_H
