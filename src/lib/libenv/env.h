@@ -40,6 +40,7 @@ int 		env_add_field(t_table_type type, const char *field);
 
 void		exec_env_init(void);
 int 		exec_env_add(const char *field);
+char 		**exec_env_2array(void);
 
 void 		av_init(const char *name, const char **av);
 void 		av_set(const char **av);
