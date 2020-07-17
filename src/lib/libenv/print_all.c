@@ -5,14 +5,19 @@
 #include "env.h"
 #include "string/cc_str.h"
 
-static void	print_field(t_env *field)
+static void	print_field(const t_hash_pair *pair)
 {
-	fdputs(field->name, 1);
-	fdputs("=", 1);
-	fdputs(field->val, 1);
+	t_env *field;
+
+	if ((field = pair->value))
+	{
+		fdputs(pair->key, 1);
+		fdputs("=", 1);
+		fdputs(field->val, 1);
+	}
 }
 
 void		print_all(void)
 {
-	avl_map_infix(g_env, (void (*)(void *)) &print_field);
+	hash_iter_pair(g_env, &print_field);
 }

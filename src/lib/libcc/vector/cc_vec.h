@@ -1,6 +1,14 @@
-//
-// Created by youpaw on 29.02.2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cc_vec.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 17:23:43 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/07/17 17:23:43 by dbutterw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CC_VEC_H
 # define CC_VEC_H
@@ -14,7 +22,7 @@ typedef struct		s_vec
 	size_t			size;
 }					t_vec;
 
-t_vec				*vec_init(size_t capacity, size_t datasize);
+t_vec				*vec_new(size_t capacity, size_t datasize);
 void				vec_push(t_vec *vector, void *data);
 size_t				vec_rm_last(t_vec *vector);
 size_t				vec_rm_at(t_vec *vector, size_t index);

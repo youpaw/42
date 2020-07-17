@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cc_math.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 17:21:30 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/07/17 17:21:30 by dbutterw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CC_MATH_H
 # define CC_MATH_H
 # include <stdlib.h>
-
+# include <stdint.h>
 # undef min
 # undef max
 
-ssize_t				min(ssize_t x, ssize_t y);
-ssize_t				max(ssize_t x, ssize_t y);
+int64_t 	min(int64_t x, int64_t y);
+int64_t				max(int64_t x, int64_t y);
 
 #endif
