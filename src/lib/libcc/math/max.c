@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-ssize_t max(ssize_t x, ssize_t y)
+int64_t max(int64_t x, int64_t y)
 {
 	if (x < y)
 		return (y);
