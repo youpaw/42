@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-long long int min(long long int x, long long int y)
+#include <stdint.h>
+
+int64_t min(int64_t x, int64_t y)
 {
 	if (x > y)
 		return (y);

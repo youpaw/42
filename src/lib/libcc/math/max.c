@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-long long int max(long long int x, long long int y)
+
+#include <stdint.h>
+
+int64_t max(int64_t x, int64_t y)
 {
 	if (x < y)
 		return (y);
