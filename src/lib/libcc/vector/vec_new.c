@@ -13,7 +13,7 @@
 #include "cc_vec.h"
 #include "cc_mem.h"
 
-t_vec	*vec_init(size_t capacity, size_t datasize)
+t_vec	*vec_new(size_t capacity, size_t datasize)
 {
 	t_vec *vector;
 
