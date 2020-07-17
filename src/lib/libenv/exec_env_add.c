@@ -5,30 +5,32 @@
 #include "env.h"
 #include "string/cc_str.h"
 #include "char/cc_char.h"
-#include <stdlib.h>
+#include "memory/cc_mem.h"
+
+static t_env 	*new_field(char *val)
+{
+	t_env		*field;
+
+	field = xmalloc(sizeof(t_env));
+	field->val = val;
+	field->type = e_env;
+	return (field);
+}
 
 int 		exec_env_add(const char *field)
 {
-	int cnt;
-	size_t name_len;
+	t_hash_pair pair;
+	char		*name;
+	char		*val;
+	size_t		name_len;
 
 	name_len = get_name_length(field);
 	if (!name_len || isdigit(field[0]) || field[name_len] != '=')
 		return (1);
-	cnt = 0;
-	while (g_exec_env[cnt] && strncmp(g_exec_env[cnt], field, name_len) != 0)
-		cnt++;
-	if (g_exec_env[cnt])
-	{
-		free(g_exec_env[cnt]);
-		g_exec_env[cnt] = strdup(field);
-	}
-	else if (cnt < N_MAX_EXEC_ENV)
-	{
-		g_exec_env[cnt++] = strdup(field);
-		g_exec_env[cnt] = NULL;
-	}
-	else
-		return (1);
+	name = strsub(field, 0, name_len);
+	val = strdup(field + name_len + 1);
+	pair.key = name;
+	pair.value = new_field(val);
+	hash_insert(g_exec_env, &pair);
 	return (0);
 }

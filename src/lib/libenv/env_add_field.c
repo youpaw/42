@@ -8,20 +8,19 @@
 #include "memory/cc_mem.h"
 #include "char/cc_char.h"
 
-static t_env	*new_node(t_table_type type, char *name, char *val)
+static t_env 	*new_field(t_table_type type, char *val)
 {
-	t_env		*node;
+	t_env		*field;
 
-	node = xmalloc(sizeof(t_env));
-	node->name = name;
-	node->val = val;
-	node->type = type;
-	return (node);
+	field = xmalloc(sizeof(t_env));
+	field->val = val;
+	field->type = type;
+	return (field);
 }
 
-int 	env_add_field(t_table_type type, const char *field, int rewrite)
+int 	env_add_field(t_table_type type, const char *field)
 {
-	t_env		*node;
+	t_hash_pair pair;
 	char		*name;
 	char		*val;
 	size_t		name_len;
@@ -31,16 +30,8 @@ int 	env_add_field(t_table_type type, const char *field, int rewrite)
 		return (1);
 	name = strsub(field, 0, name_len);
 	val = strdup(field + name_len + 1);
-	if ((node = env_get_field(name)))
-	{
-		free(node->val);
-		free(name);
-		node->val = val;
-		if (rewrite)
-			node->type = type;
-	}
-	else
-		avl_insert(g_env, avl_new_node(new_node(type, name, val)), NULL, \
-    (int (*)(const void *, const void *, void *)) &env_cmp);
+	pair.key = name;
+	pair.value = new_field(type, val);
+	hash_insert(g_env, &pair);
 	return (0);
 }
