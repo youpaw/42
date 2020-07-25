@@ -6,7 +6,7 @@
 #define EXPAND_H
 # define N_BRACES 3
 # define N_STATES 5
-# define N_STACK_SIZE 5
+# define STATES_STACK_SIZE 5
 #include <stddef.h>
 #include "vector/cc_vec.h"
 
@@ -16,6 +16,7 @@ enum e_state{
 	e_double_quote,
 	e_dollar,
 	e_bang,
+	e_unset
 };
 
 enum e_brace{
@@ -25,10 +26,10 @@ enum e_brace{
 };
 
 struct s_expand{
-	char *raw;
-	size_t index;
-	size_t size;
-	t_vec *states;
+	char			*raw;
+	size_t			index;
+	size_t			size;
+	t_vec			*states;
 };
 
 typedef enum e_state t_state;
@@ -43,12 +44,11 @@ static const char g_state_map[N_STATES] = {
 		'!'
 };
 
-int 	expand_raw(char **raw, int (*handler)(t_expand *));
+int expand_raw(char **raw, int (*handler)(t_state, t_expand *),
+			   int (*dollar_handler)(t_expand *));
 
-int 	validate_input_handler(t_expand *expand);
-int 	validate_input(char **raw);
-int 	expand_input_handler(t_expand *expand);
-int 	expand_lexer(char **raw);
+int		expand_input_handler(t_state current, t_expand *expand);
+int 	expand_input(char **raw);
 int 	expand_exec_handler(t_expand *expand);
 int 	expand_exec(char **raw);
 
