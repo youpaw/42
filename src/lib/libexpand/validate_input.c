@@ -4,7 +4,7 @@
 
 #include "expand.h"
 
-int 	validate_input(char **raw)
+int 	expand_input(char **raw)
 {
-	return (expand_raw(raw, &validate_input_handler));
+	return (expand_raw(raw, &expand_input_handler, NULL));
 }

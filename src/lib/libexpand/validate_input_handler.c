@@ -19,6 +19,7 @@ static int 	handle_bs(t_expand *expand)
 		expand->index -= 2;
 		expand->size -= 2;
 	}
+	vec_rm_last(expand->states);
 	return (0);
 }
 
@@ -28,38 +29,36 @@ static int 	handle_dq(t_expand *expand)
 
 	c = expand->raw[expand->index];
 	if (c == '!')
-		expand->state = e_bang;
+		vec_push(expand->states, (void *)e_bang);
 	else if (c == '$')
-		expand->state = e_dollar;
+		vec_push(expand->states, (void *)e_dollar);
 	else if (c == '\\')
 		expand->index++;
 	else if (c == '\"')
-		expand->state = e_unset;
+		vec_rm_last(expand->states);
 	return (0);
 }
 
-static int 	handle_bang(t_expand *expand)
+static int 	handle_sq(t_expand *expand)
 {
+	while (expand->raw[expand->index] != '\'' && expand->index < expand->size)
+		expand->index++;
+	if (expand->index == expand->size)
+		return (E_INCOMPLETE_INPUT);
+	vec_rm_last(expand->states);
 	return (0);
 }
 
-static int 	handle_dollar(t_expand *expand)
-{
-
-}
-
-int 	validate_input_handler(t_expand *expand)
+int expand_input_handler(t_state current, t_expand *expand)
 {
 	int error;
 
-	if (expand->state == e_back_slash)
-		error = handle_bs(expand);
-	else if (expand->state == e_double_quote)
-		error = handle_dq(expand);
-	else if (expand->state == e_bang)
-		error = handle_bang(expand);
-	else if (expand->state == e_dollar)
-		error = handle_dollar(expand);
 	error = 0;
+	if (current == e_back_slash)
+		error = handle_bs(expand);
+	else if (current == e_double_quote)
+		error = handle_dq(expand);
+	else if (current == e_single_quote)
+		error = handle_sq(expand);
 	return (error);
 }
