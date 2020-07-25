@@ -6,7 +6,7 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 17:23:06 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/07/17 17:23:06 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:17:35 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # undef strlen
 # undef	atoll
 # undef strchr
+# undef strhash
 
 char 		*strnew(size_t size);
 size_t		strlen(const char *s);
@@ -43,4 +44,5 @@ char		*strtrim(char const *s);
 char		**strsplitcharset(char const *s, char *charset);
 long long	atoll(const char *str);
 int			fdputs(const char *restrict s, int stream);
+size_t		strhash(const unsigned char *str);
 #endif //CC_STR_H

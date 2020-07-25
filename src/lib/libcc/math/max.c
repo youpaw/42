@@ -6,11 +6,14 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 17:21:19 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/07/17 17:21:19 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:17:35 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long long int max(long long int x, long long int y)
+
+#include <stdint.h>
+
+int64_t max(int64_t x, int64_t y)
 {
 	if (x < y)
 		return (y);
