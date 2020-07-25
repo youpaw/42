@@ -26,5 +26,9 @@ t_tokens	*lex_str(const char *string)
 	//write raw to history
 	//expand substitutions
 	//recognize
+
+
+
+
 	return (tokens);
 }

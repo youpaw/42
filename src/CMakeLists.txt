@@ -21,10 +21,10 @@ add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
 
 #add libexpand to the project
-set(LIBEXPAND_DIR "lib/libexpand")
-include_directories(${LIBEXPAND_DIR})
-add_subdirectory(${LIBEXPAND_DIR})
-target_link_libraries(${PROJECT_NAME} expand)
+#set(LIBEXPAND_DIR "lib/libexpand")
+#include_directories(${LIBEXPAND_DIR})
+#add_subdirectory(${LIBEXPAND_DIR})
+#target_link_libraries(${PROJECT_NAME} expand)
 
 #add libhistory to the project
 #set(LIBH_DIR "lib/libhistory")

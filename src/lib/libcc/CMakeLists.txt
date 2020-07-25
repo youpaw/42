@@ -67,5 +67,15 @@ ADD_LIBRARY(cc STATIC
 		avl/avl_map_prefix.c
 		avl/avl_map_infix.c
 		avl/avl_map_postfix.c
-		hash/hash_new.c hash/hash_insert.c hash/hash_get.c hash/hash_get_pair.c hash/hash_get_val.c hash/hash_del_one.c hash/hash_del.c avl/avl_new.c avl/avl_get_pair.c avl/avl_get_val.c)
+		hash/hash_new.c
+		hash/hash_insert.c
+		hash/hash_get.c
+		hash/hash_get_pair.c
+		hash/hash_get_val.c
+		hash/hash_del_one.c
+		hash/hash_del.c
+		avl/avl_new.c
+		avl/avl_get_pair.c
+		avl/avl_get_val.c
+		string/strhash.c hash/hash_iter.c hash/hash_iter_pair.c)
 
