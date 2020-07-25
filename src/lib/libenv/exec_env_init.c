@@ -6,6 +6,8 @@
 #include "string/cc_str.h"
 #include "memory/cc_mem.h"
 
+t_hash_table *g_exec_env;
+
 static t_env	*cpy_field(t_env *field)
 {
 	t_env *cpy;
