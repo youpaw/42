@@ -5,6 +5,9 @@
 #include "env.h"
 #include "string/cc_str.h"
 
+int	g_exit_code = 0;
+t_hash_table *g_env;
+
 void	env_init(const char **env)
 {
 	int cnt;
