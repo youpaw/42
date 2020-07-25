@@ -5,6 +5,8 @@
 #include "env.h"
 #include "string/cc_str.h"
 
+char *g_av[N_MAX_AV];
+
 void	av_init(const char *name, const char **av)
 {
 	int cnt;

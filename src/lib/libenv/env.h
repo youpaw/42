@@ -10,10 +10,10 @@
 
 #include <glob.h>
 #include "hash/cc_hash.h"
-static int	g_exit_code = 0;
-static char *g_av[N_MAX_AV];
-static t_hash_table *g_exec_env;
-static t_hash_table *g_env;
+extern int	g_exit_code;
+extern char *g_av[N_MAX_AV];
+extern t_hash_table *g_exec_env;
+extern t_hash_table *g_env;
 
 enum e_table_type{
 	e_env,
