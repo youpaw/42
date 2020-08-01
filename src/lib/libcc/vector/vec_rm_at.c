@@ -7,19 +7,18 @@
 
 size_t	vec_rm_at(t_vec *vector, size_t index)
 {
-	void *pdata;
+	size_t cnt;
 
 	if (!vector || !vector->size)
 		return (0);
 	if (index >= vector->size)
 		return (vector->size);
-	pdata = vector->data + index * vector->datasize;
 	if (index < (vector->size - 1))
 	{
-		memmove(pdata, pdata + vector->datasize, (vector->size - index - 1) * vector->datasize);
-		pdata += (vector->size - index - 1) * vector->datasize;
+		cnt = index + 1;
+		while (cnt <= vector->size)
+			vector->data[index++] = vector->data[cnt++];
 	}
-	bzero(pdata, vector->datasize);
 	vector->size--;
 	return (vector->size);
 }

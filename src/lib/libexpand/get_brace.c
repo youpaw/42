@@ -4,6 +4,12 @@
 
 #include "expand.h"
 
+const struct s_brace_raw g_brace_map[N_BRACES] = {
+		{'(', ')'},
+		{'{', '}'},
+		{'[', ']'}
+};
+
 int get_brace(char c, t_brace *brace)
 {
 	int cnt;

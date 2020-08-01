@@ -15,12 +15,11 @@
 
 t_vec	*vec_new(size_t capacity, size_t datasize)
 {
-	t_vec *vector;
+	t_vec	*vector;
 
 	vector = (t_vec*)xmalloc(sizeof(t_vec));
-	vector->data = xmalloc(datasize * capacity + datasize);
-	bzero(vector->data, datasize * capacity + datasize);
-	vector->datasize = datasize;
+	vector->data = (void **)xmalloc(datasize * capacity + datasize);
+	vector->data[0] = NULL;
 	vector->capacity = capacity;
 	vector->size = 0;
 	return (vector);

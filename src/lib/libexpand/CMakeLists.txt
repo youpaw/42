@@ -10,7 +10,9 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 
 ADD_LIBRARY(expand STATIC
         expand_raw.c
-        validate_input.c get_brace.c validate_input_handler.c)
+        expand_input.c
+        get_brace.c
+        expand_input_handler.c)
 
 target_link_libraries(expand cc)
 target_link_libraries(expand env)

@@ -7,6 +7,14 @@
 #include "memory/cc_mem.h"
 #include "string/cc_str.h"
 
+const char g_state_map[N_STATES] = {
+		'\\',
+		'\'',
+		'"',
+		'$',
+		'!'
+};
+
 static t_state 	get_current_state(t_expand *expand)
 {
 	int		cnt;
@@ -29,14 +37,14 @@ static t_state 	get_current_state(t_expand *expand)
 
 static t_expand *init_expand(char *raw)
 {
-	t_expand *expand;
+	t_expand	*expand;
 
 	expand = xmalloc(sizeof(t_expand));
 	expand->raw = raw;
 	expand->index = 0;
 	expand->size = strlen(raw);
 	expand->states = vec_new(STATES_STACK_SIZE, sizeof(t_state));
-	vec_push(expand->states, (void *)e_unset);
+	vec_push(expand->states, (void *) e_unset);
 	return (expand);
 }
 
@@ -57,7 +65,7 @@ int expand_raw(char **raw, int (*handler)(t_state, t_expand *), \
 			break ;
 		expand->index++;
 	}
-	if (!error && expand->states->size == 1)
+	if (!error && expand->states->size > 1)
 		error = E_INCOMPLETE_INPUT;
 	*raw = expand->raw;
 	vec_del(&(expand->states));
