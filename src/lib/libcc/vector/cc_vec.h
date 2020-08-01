@@ -16,7 +16,7 @@
 
 typedef struct		s_vec
 {
-	void			*data;
+	void			**data;
 	size_t			datasize;
 	size_t			capacity;
 	size_t			size;

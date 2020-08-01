@@ -36,15 +36,7 @@ typedef enum e_state t_state;
 typedef enum e_brace t_brace;
 typedef struct s_expand t_expand;
 
-static const char g_state_map[N_STATES] = {
-		'\\',
-		'\'',
-		'"',
-		'$',
-		'!'
-};
-
-int expand_raw(char **raw, int (*handler)(t_state, t_expand *),
+int		expand_raw(char **raw, int (*handler)(t_state, t_expand *),
 			   int (*dollar_handler)(t_expand *));
 
 int		expand_input_handler(t_state current, t_expand *expand);
@@ -57,12 +49,6 @@ void 	remove_quotes(char *raw);
 struct s_brace_raw{
 	char open;
 	char close;
-};
-
-static const struct s_brace_raw g_brace_map[N_BRACES] = {
-		{'(', ')'},
-		{'{', '}'},
-		{'[', ']'}
 };
 
 int		get_brace(char c, t_brace *brace);

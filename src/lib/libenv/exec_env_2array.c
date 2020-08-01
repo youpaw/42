@@ -34,7 +34,7 @@ char 		**exec_env_2array(void)
 		}
 		cnt++;
 	}
-	arr = vec->data;
+	arr = (char **) vec->data;
 	free(vec);
 	return (arr);
 }
