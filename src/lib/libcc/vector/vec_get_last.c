@@ -4,9 +4,11 @@
 
 #include "cc_vec.h"
 
-void	*vec_get_last(t_vec *vector)
+int		vec_get_last(void *dst, t_vec *vector)
 {
-	if (!vector || !vector->size)
-		return (NULL);
-	return (vec_get_at(vector, vector->size-1));
+	if (!vector)
+		return (VEC_DNE);
+	if (!vector->size)
+		return (VEC_OOB);
+	return (vec_get_at(dst, vector, vector->size-1));
 }

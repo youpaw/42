@@ -13,14 +13,16 @@
 #include "cc_vec.h"
 #include "cc_mem.h"
 
-t_vec	*vec_new(size_t capacity, size_t datasize)
+t_vec	*vec_new(size_t capacity, size_t datasize, void (*del)(void *))
 {
 	t_vec	*vector;
 
 	vector = (t_vec*)xmalloc(sizeof(t_vec));
-	vector->data = (void **)xmalloc(datasize * capacity + datasize);
-	vector->data[0] = NULL;
+	vector->data = xmalloc(datasize * (capacity + 1));
 	vector->capacity = capacity;
+	vector->datasize = datasize;
 	vector->size = 0;
+	vector->del = del;
+	bzero(vector->data, datasize);
 	return (vector);
 }

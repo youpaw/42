@@ -7,6 +7,8 @@
 # define N_BRACES 3
 # define N_STATES 5
 # define STATES_STACK_SIZE 5
+# define BRACES_STACK_SIZE 5
+# define N_EXPAND_FLAGS 2
 #include <stddef.h>
 #include "vector/cc_vec.h"
 
@@ -25,11 +27,17 @@ enum e_brace{
 	e_square_brace
 };
 
+enum e_expand_flags{
+	e_print_command,
+	e_handling_dollar
+};
+
 struct s_expand{
 	char			*raw;
 	size_t			index;
 	size_t			size;
 	t_vec			*states;
+	char 			flags[N_EXPAND_FLAGS];
 };
 
 typedef enum e_state t_state;

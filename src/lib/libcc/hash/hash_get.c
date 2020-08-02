@@ -4,7 +4,7 @@
 
 #include "cc_hash.h"
 
-static t_list	*get_item(t_list *bucket, void *key, \
+static t_list	*get_item(t_list *bucket, const void *key, \
 	int (*cmp)(const void *, const void *))
 {
 	while (bucket && cmp(((t_hash_pair*)(bucket->content))->key, key))
@@ -16,6 +16,6 @@ t_list 			*hash_get(t_hash_table *table, const void *key)
 {
 	size_t index;
 
-	index = table->hasher(key);
+	index = table->hasher(key) % table->size;
 	return (get_item(table->buckets[index], key, table->cmp));
 }

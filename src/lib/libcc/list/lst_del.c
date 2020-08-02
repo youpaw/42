@@ -16,7 +16,7 @@ void	lst_del(t_list **alst, void (*del)(void *))
 {
 	t_list *tmp;
 
-	if (!alst || !del)
+	if (!alst || !*alst || !del)
 		return ;
 	while (*alst)
 	{

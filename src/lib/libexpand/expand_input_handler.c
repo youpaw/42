@@ -25,13 +25,20 @@ static int 	handle_bs(t_expand *expand)
 
 static int 	handle_dq(t_expand *expand)
 {
+	t_state state;
 	char c;
 
 	c = expand->raw[expand->index];
 	if (c == '!')
-		vec_push(expand->states, (void *)e_bang);
+	{
+		state = e_bang;
+		vec_push(expand->states, &state);
+	}
 	else if (c == '$')
-		vec_push(expand->states, (void *)e_dollar);
+	{
+		state = e_dollar;
+		vec_push(expand->states, &state);
+	}
 	else if (c == '\\')
 		expand->index++;
 	else if (c == '\"')
