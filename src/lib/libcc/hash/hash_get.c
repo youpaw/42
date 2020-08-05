@@ -4,7 +4,7 @@
 
 #include "cc_hash.h"
 
-static t_list	*get_item(t_list *bucket, void *key, \
+static t_list	*get_item(t_list *bucket, const void *key, \
 	int (*cmp)(const void *, const void *))
 {
 	while (bucket && cmp(((t_hash_pair*)(bucket->content))->key, key))
