@@ -11,7 +11,8 @@ static void walk_nodes(t_avl_tree *node, void (*del)(void *))
 		return ;
 	walk_nodes(node->left, del);
 	walk_nodes(node->right, del);
-	del(node->pair);
+	if (del)
+		del(node->pair);
 	free(node->pair);
 	free(node);
 }

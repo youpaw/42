@@ -9,7 +9,8 @@ static void		replace_item(t_list *item, t_hash_pair *pair, void (*del)(t_hash_pa
 {
 	if (!item)
 		return ;
-	del(item->content);
+	if (del)
+		del(item->content);
 	memmove(item->content, pair, item->size);
 }
 

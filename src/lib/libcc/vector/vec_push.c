@@ -13,12 +13,12 @@
 #include "cc_vec.h"
 #include "cc_mem.h"
 
-void	vec_push(t_vec *vector, void *data)
+int vec_push(t_vec *vector, void *data)
 {
 	void	*pdata;
 
 	if (!vector)
-		return ;
+		return (VEC_DNE);
 	if (vector->size >= vector->capacity)
 	{
 		pdata = vector->data;
@@ -30,4 +30,5 @@ void	vec_push(t_vec *vector, void *data)
 	memmove(vector->data + (vector->size * vector->datasize), data, vector->datasize);
 	vector->size++;
 	bzero(vector->data + (vector->size * vector->datasize), vector->datasize);
+	return (VEC_OK);
 }

@@ -12,12 +12,16 @@
 
 #include "cc_lst.h"
 
-void	lst_del_one(t_list **alst, void (*del)(void*))
+int lst_del_one(t_list **alst, void (*del)(void*))
 {
-	if (!alst || !*alst || !del)
-		return ;
-	if ((*alst)->content)
+	if (!alst)
+		return (LST_DNE);
+	if (!*alst)
+		return (LST_OK);
+	if ((*alst)->content && del)
 		del((*alst)->content);
+	free((*alst)->content);
 	free(*alst);
 	*alst = NULL;
+	return (LST_OK);
 }

@@ -12,10 +12,16 @@
 
 #include "cc_lst.h"
 
-void	lst_add(t_list **alst, t_list *new)
+int lst_add(t_list **alst, t_list *new)
 {
 	if (!alst || !new)
-		return ;
-	new->next = *alst;
-	*alst = new;
+		return (LST_DNE);
+	if (!*alst)
+		*alst = new;
+	else
+	{
+		new->next = *alst;
+		*alst = new;
+	}
+	return (LST_OK);
 }
