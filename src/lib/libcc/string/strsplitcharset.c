@@ -60,7 +60,8 @@ static void		getwords(char **arr, const char *s, char *charset)
 		}
 		i++;
 	}
-	arr[j] = strsub(s, i - len, len);
+	if (len)
+		arr[j] = strsub(s, i - len, len);
 }
 
 char			**strsplitcharset(char const *s, char *charset)
@@ -71,7 +72,7 @@ char			**strsplitcharset(char const *s, char *charset)
 	if (!s)
 		return (NULL);
 	wrdcnt = cntwords(s, charset);
-	sp = (char**)xmalloc(sizeof(char*) * wrdcnt + 1);
+	sp = (char**)xmalloc(sizeof(char*) * (wrdcnt + 1));
 	getwords(sp, s, charset);
 	sp[wrdcnt] = NULL;
 	return (sp);
