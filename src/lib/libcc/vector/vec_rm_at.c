@@ -7,18 +7,16 @@
 
 size_t	vec_rm_at(t_vec *vector, size_t index)
 {
-	size_t cnt;
-
 	if (!vector || !vector->size)
 		return (0);
 	if (index >= vector->size)
 		return (vector->size);
+	if (vector->del)
+		vec_del_one(vector, index);
 	if (index < (vector->size - 1))
-	{
-		cnt = index + 1;
-		while (cnt <= vector->size)
-			vector->data[index++] = vector->data[cnt++];
-	}
+		memmove(vector->data + (index * vector->datasize), \
+		vector->data + ((index + 1) * vector->datasize), \
+		(vector->size - index) * vector->datasize);
 	vector->size--;
 	return (vector->size);
 }

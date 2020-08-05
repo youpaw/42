@@ -3,10 +3,14 @@
 //
 
 #include "cc_vec.h"
+#include "memory/cc_mem.h"
 
-void	*vec_get_at(t_vec *vector, size_t index)
+int		vec_get_at(void *dst, t_vec *vector, size_t index)
 {
-	if (!vector || !vector->size || index >= vector->size)
-		return (NULL);
-	return (vector->data[index]);
+	if (!vector)
+		return (VEC_DNE);
+	if (!vector->size || index >= vector->size)
+		return (VEC_OOB);
+	memmove(dst, vector->data + (index * vector->datasize), vector->datasize);
+	return (VEC_OK);
 }

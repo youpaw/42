@@ -20,14 +20,16 @@ static t_state 	get_current_state(t_expand *expand)
 	int		cnt;
 	t_state	current;
 
-	current = (t_state) vec_get_last(expand->states);
-	if (current != e_unset)
+	vec_get_last(&current, expand->states);
+	if (current == e_single_quote)
 		return (current);
 	cnt = 0;
 	while (cnt < N_STATES && g_state_map[cnt] != expand->raw[expand->index])
 		cnt++;
 	if (cnt < N_STATES)
 	{
+		if (cnt == e_dollar)
+			expand->flags[e_handling_dollar] = 1;
 		vec_push(expand->states, &cnt);
 		expand->index++;
 		return (cnt);
@@ -38,13 +40,16 @@ static t_state 	get_current_state(t_expand *expand)
 static t_expand *init_expand(char *raw)
 {
 	t_expand	*expand;
+	t_state		state;
 
 	expand = xmalloc(sizeof(t_expand));
 	expand->raw = raw;
 	expand->index = 0;
 	expand->size = strlen(raw);
-	expand->states = vec_new(STATES_STACK_SIZE, sizeof(t_state));
-	vec_push(expand->states, (void *) e_unset);
+	expand->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
+	bzero(expand->flags, 2);
+	state = e_unset;
+	vec_push(expand->states, &state);
 	return (expand);
 }
 

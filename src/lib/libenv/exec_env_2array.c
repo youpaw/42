@@ -4,7 +4,6 @@
 
 #include "env.h"
 #include "memory/cc_mem.h"
-#include "vector/cc_vec.h"
 #include "string/cc_str.h"
 
 static char	*get_field(t_hash_pair *pair)
@@ -15,26 +14,45 @@ static char	*get_field(t_hash_pair *pair)
 	return (nstrjoin(3, pair->key, "=", field->val));
 }
 
+static size_t count_fields(void)
+{
+	size_t	ind;
+	size_t	cnt;
+	t_list	*tmp;
+
+	ind = 0;
+	cnt = 0;
+	while (ind < g_exec_env->size)
+	{
+		tmp = g_exec_env->buckets[ind];
+		while (tmp)
+		{
+			cnt++;
+			tmp = tmp->next;
+		}
+		ind++;
+	}
+	return (cnt);
+}
+
 char 		**exec_env_2array(void)
 {
 	size_t cnt;
-	t_vec *vec;
 	char **arr;
 	t_list *tmp;
 
-	vec = vec_new(g_exec_env->size, sizeof(char*));
+	arr = xmalloc(sizeof(char *) * (count_fields() + 1));
 	cnt = 0;
 	while (cnt < g_exec_env->size)
 	{
 		tmp = g_exec_env->buckets[cnt];
 		while (tmp)
 		{
-			vec_push(vec, get_field(tmp->content));
+			arr[cnt] = get_field(tmp->content);
 			tmp = tmp->next;
 		}
 		cnt++;
 	}
-	arr = (char **) vec->data;
-	free(vec);
+	arr[cnt] = NULL;
 	return (arr);
 }

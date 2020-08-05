@@ -16,6 +16,6 @@ t_list 			*hash_get(t_hash_table *table, const void *key)
 {
 	size_t index;
 
-	index = table->hasher(key);
+	index = table->hasher(key) % table->size;
 	return (get_item(table->buckets[index], key, table->cmp));
 }

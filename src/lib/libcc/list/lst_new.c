@@ -21,7 +21,7 @@ t_list	*lst_new(void *content, size_t size)
 	if (!content)
 	{
 		newlst->content = NULL;
-		newlst->content = 0;
+		newlst->size = 0;
 	}
 	else
 	{

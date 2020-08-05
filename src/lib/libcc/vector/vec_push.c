@@ -15,22 +15,19 @@
 
 void	vec_push(t_vec *vector, void *data)
 {
-	void	**tmp;
-	size_t	cnt;
+	void	*pdata;
 
 	if (!vector)
 		return ;
 	if (vector->size >= vector->capacity)
 	{
-		tmp = vector->data;
-		vector->data = (void **)xmalloc(vector->datasize * vector->capacity * 2 + vector->datasize);
-		cnt = -1;
-		while (++cnt < vector->size)
-				vector->data[cnt] = tmp[cnt];
-		free(tmp);
+		pdata = vector->data;
+		vector->data = xmalloc(vector->datasize * (vector->capacity * 2 + 1));
+		memmove(vector->data, pdata, vector->datasize * (vector->capacity + 1));
+		free(pdata);
 		vector->capacity *= 2;
 	}
-	vector->data[vector->size] = data;
+	memmove(vector->data + (vector->size * vector->datasize), data, vector->datasize);
 	vector->size++;
-	vector->data[vector->size] = NULL;
+	bzero(vector->data + (vector->size * vector->datasize), vector->datasize);
 }

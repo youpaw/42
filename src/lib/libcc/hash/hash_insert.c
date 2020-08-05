@@ -28,13 +28,12 @@ int				hash_insert(t_hash_table *table, t_hash_pair *pair)
 	t_list *bucket;
 	t_list *item;
 
-	if ((index = table->hasher(pair->key)) >= table->size)
-		return (1);
+	index = table->hasher(pair->key) % table->size;
 	if (!(bucket = table->buckets[index]))
-		bucket = lst_new(pair, sizeof(t_hash_pair));
+		table->buckets[index] = lst_new(pair, sizeof(t_hash_pair));
 	else if ((item = get_item(bucket, pair->key, table->cmp)))
 		replace_item(item, pair, table->del);
 	else
-		lst_add(&bucket, lst_new(pair, sizeof(t_hash_pair)));
+		lst_add(&(table->buckets[index]), lst_new(pair, sizeof(t_hash_pair)));
 	return (0);
 }

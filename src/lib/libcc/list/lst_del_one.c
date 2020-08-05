@@ -18,7 +18,6 @@ void	lst_del_one(t_list **alst, void (*del)(void*))
 		return ;
 	if ((*alst)->content)
 		del((*alst)->content);
-	free((*alst)->content);
 	free(*alst);
 	*alst = NULL;
 }

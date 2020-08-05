@@ -14,8 +14,16 @@
 
 void	vec_del(t_vec **vector)
 {
+	size_t	cnt;
+	t_vec	*tmp;
+
 	if (!vector || !*vector)
 		return ;
-	free((*vector)->data);
-	free(*vector);
+	cnt = 0;
+	tmp = *vector;
+	if (tmp->del)
+		while (cnt < tmp->size)
+			vec_del_one(tmp, cnt++);
+	free(tmp->data);
+	free(tmp);
 }
