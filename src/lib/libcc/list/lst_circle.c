@@ -12,14 +12,15 @@
 
 #include "cc_lst.h"
 
-void	lst_circle(t_list *list)
+int lst_circle(t_list *list)
 {
 	t_list *head;
 
 	if (!list)
-		return ;
+		return (LST_DNE);
 	head = list;
 	while (list->next)
 		list = list->next;
 	list->next = head;
+	return (LST_OK);
 }

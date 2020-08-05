@@ -55,10 +55,11 @@ int					avl_del_one(t_avl_obj *obj, const void *key)
 	t_avl_tree *node;
 
 	if (!(node = avl_get(obj, key)))
-		return (1);
+		return (AVL_DNE);
 	obj->tree = del_node(obj->tree, key, obj->params, obj->cmp);
-	obj->del(node->pair);
+	if (obj->del)
+		obj->del(node->pair);
 	free(node->pair);
 	free(node);
-	return (0);
+	return (AVL_OK);
 }

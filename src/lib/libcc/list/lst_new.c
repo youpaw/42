@@ -27,6 +27,7 @@ t_list	*lst_new(void *content, size_t size)
 	{
 		newlst->content = xmalloc(size);
 		newlst->content = memmove(newlst->content, content, size);
+		newlst->size = size;
 	}
 	newlst->next = NULL;
 	return (newlst);

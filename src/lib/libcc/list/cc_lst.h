@@ -12,21 +12,23 @@ typedef struct		s_list
 
 t_list				*lst_new(void *content, size_t size);
 
-void				lst_del_one(t_list **alst, void (*del)(void*));
+int					lst_del_one(t_list **alst, void (*del)(void*));
 
-void				lst_del(t_list **alst, void (*del)(void *));
+int					lst_del(t_list **alst, void (*del)(void *));
 
-void				lst_add(t_list **alst, t_list *new);
+int					lst_add(t_list **alst, t_list *new);
 
 void				lst_iter(t_list *lst, void (*f)(t_list *elem));
 
 t_list				*lst_map(t_list *lst, t_list *f(t_list *elem));
 
-void				lst_circle(t_list *list);
+int					lst_circle(t_list *list);
 
-void				lst_del_circle(t_list **list, void (*del)(void*));
+int					lst_del_circle(t_list **list, void (*del)(void*));
 
-void				lst_add_sort(t_list **list, t_list *newlist, void *params, \
+int					lst_add_sort(t_list **list, t_list *newlist, void *params, \
 		int (*cmp)(const void *, const void *, void *));
 
+# define LST_OK 0
+# define LST_DNE LST_OK + 1
 #endif //CC_LST_H

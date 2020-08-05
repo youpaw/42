@@ -12,14 +12,16 @@
 
 #include "cc_lst.h"
 
-void	lst_del_circle(t_list **list, void (*del)(void*))
+int	lst_del_circle(t_list **list, void (*del)(void*))
 {
 	t_list *check;
 	t_list *head;
 	t_list *tmp;
 
-	if (!list || !*list)
-		return ;
+	if (!list)
+		return (LST_DNE);
+	if (!*list)
+		return (LST_OK);
 	check = *list;
 	head = (*list)->next;
 	while (check != head)
@@ -29,4 +31,5 @@ void	lst_del_circle(t_list **list, void (*del)(void*))
 		lst_del_one(&tmp, del);
 	}
 	lst_del_one(&check, del);
+	return (LST_OK);
 }

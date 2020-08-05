@@ -12,18 +12,18 @@
 
 #include "cc_lst.h"
 
-void	lst_add_sort(t_list **list, t_list *newlist, void *params, \
+int lst_add_sort(t_list **list, t_list *newlist, void *params, \
 		int (*cmp)(const void *, const void *, void *))
 {
 	t_list *prev;
 	t_list *head;
 
 	if (!list || !newlist || !cmp)
-		return ;
+		return (LST_DNE);
 	if (!*list)
 	{
 		*list = newlist;
-		return ;
+		return (LST_OK);
 	}
 	prev = NULL;
 	head = *list;
@@ -37,4 +37,5 @@ void	lst_add_sort(t_list **list, t_list *newlist, void *params, \
 		*list = newlist;
 	else
 		prev->next = newlist;
+	return (LST_OK);
 }

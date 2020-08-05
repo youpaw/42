@@ -12,7 +12,7 @@ t_avl_obj 				*avl_new(int params, \
 {
 	t_avl_obj *obj;
 
-	if (!cmp || !del)
+	if (!cmp)
 		return (NULL);
 	obj = xmalloc(sizeof(t_avl_obj));
 	obj->params = params;

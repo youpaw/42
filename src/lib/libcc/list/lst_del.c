@@ -12,16 +12,17 @@
 
 #include "cc_lst.h"
 
-void	lst_del(t_list **alst, void (*del)(void *))
+int lst_del(t_list **alst, void (*del)(void *))
 {
 	t_list *tmp;
 
-	if (!alst || !*alst || !del)
-		return ;
+	if (!alst)
+		return (LST_DNE);
 	while (*alst)
 	{
 		tmp = (*alst)->next;
 		lst_del_one(alst, del);
 		*alst = tmp;
 	}
+	return (LST_OK);
 }

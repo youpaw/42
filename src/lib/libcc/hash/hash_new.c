@@ -12,7 +12,7 @@ t_hash_table 	*hash_new(size_t n_buckets, \
 	t_hash_table *table;
 	size_t cnt;
 
-	if (!hasher || !cmp || !del || !n_buckets)
+	if (!hasher || !cmp || !n_buckets)
 		return (NULL);
 	table = xmalloc(sizeof(t_hash_table));
 	table->buckets = (t_list **)xmalloc(sizeof(t_list*) * n_buckets);
