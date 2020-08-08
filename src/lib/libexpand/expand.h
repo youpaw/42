@@ -5,10 +5,9 @@
 #ifndef EXPAND_H
 #define EXPAND_H
 # define N_BRACES 3
-# define N_STATES 5
+# define N_STATES 6
 # define STATES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
-# define N_EXPAND_FLAGS 2
 #include <stddef.h>
 #include "vector/cc_vec.h"
 
@@ -18,6 +17,7 @@ enum e_state{
 	e_double_quote,
 	e_dollar,
 	e_bang,
+	e_tilda,
 	e_unset
 };
 
@@ -27,25 +27,27 @@ enum e_brace{
 	e_square_brace
 };
 
-enum e_expand_flags{
-	e_print_command,
-	e_handling_dollar
-};
-
 struct s_expand{
 	char			*raw;
 	size_t			index;
 	size_t			size;
 	t_vec			*states;
-	char 			flags[N_EXPAND_FLAGS];
+	char 			print_cmd;
 };
 
 typedef enum e_state t_state;
 typedef enum e_brace t_brace;
 typedef struct s_expand t_expand;
 
-int		expand_raw(char **raw, int (*handler)(t_state, t_expand *),
-			   int (*dollar_handler)(t_expand *));
+int 	handle_back_slash(t_expand *expand);
+int 	handle_single_quote(t_expand *expand);
+int 	handle_double_quote(t_expand *expand);
+int 	handle_dollar(t_expand *expand);
+int 	handle_bang(t_expand *expand);
+int 	handle_tilda(t_expand *expand);
+int 	handle_unset(t_expand *expand);
+
+int		expand_raw(char **raw);
 
 int		expand_input_handler(t_state current, t_expand *expand);
 int 	expand_input(char **raw);

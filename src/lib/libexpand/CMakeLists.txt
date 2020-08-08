@@ -10,9 +10,8 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 
 ADD_LIBRARY(expand STATIC
         expand_raw.c
-        expand_input.c
         get_brace.c
-        expand_input_handler.c)
+        handle_back_slash.c handle_single_quote.c handle_double_quote.c handle_dollar.c handle_bang.c handle_tilda.c handle_unset.c)
 
 target_link_libraries(expand cc)
 target_link_libraries(expand env)
