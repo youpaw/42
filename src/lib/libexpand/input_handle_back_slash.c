@@ -5,7 +5,7 @@
 #include "expand.h"
 #include "string/cc_str.h"
 
-int 	handle_back_slash(t_expand *expand)
+int 	input_handle_back_slash(t_expand *expand)
 {
 	char c;
 
@@ -17,7 +17,7 @@ int 	handle_back_slash(t_expand *expand)
 		strcpy(expand->raw + expand->index - 1, \
 		expand->raw + expand->index + 1);
 		expand->size -= 2;
-		expand->index += 2;
+		expand->index -= 2;
 	}
 	vec_rm_last(expand->states);
 	return (0);

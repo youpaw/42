@@ -4,7 +4,7 @@
 
 #include "expand.h"
 
-int 	handle_bang(t_expand *expand)
+int 	input_handle_bang(t_expand *expand)
 {
 
 }

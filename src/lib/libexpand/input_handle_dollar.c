@@ -14,12 +14,12 @@ static int handle_name_field(t_expand *expand)
 	return (0);
 }
 
-int 	handle_dollar(t_expand *expand)
+int 	input_handle_dollar(t_expand *expand)
 {
 	int		direction;
 	t_brace	brace;
 
-	if (!(direction = get_brace(expand->raw[expand->index], &brace)))
+	if ((direction = get_brace(expand->raw[expand->index], &brace)) >= 0)
 		return (handle_name_field(expand));
 	return (1); //tmp
 }

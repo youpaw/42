@@ -7,7 +7,7 @@ int main(int ac, char *av[], char *en[])
 //	return (0);
 
 	char *str = strdup("\"\\\n\"");
-	int error = expand_raw(&str);
+	int error = expand_raw(&str, e_exec);
 	fdputs(str, 1);
 	free(str);
 	exit(error);

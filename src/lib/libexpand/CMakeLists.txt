@@ -11,7 +11,7 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 ADD_LIBRARY(expand STATIC
         expand_raw.c
         get_brace.c
-        handle_back_slash.c handle_single_quote.c handle_double_quote.c handle_dollar.c handle_bang.c handle_tilda.c handle_unset.c)
+        input_handle_back_slash.c handle_single_quote.c handle_double_quote.c input_handle_dollar.c input_handle_bang.c exec_handle_tilda.c handle_unset.c exec_handle_back_slash.c exec_handle_dollar.c)
 
 target_link_libraries(expand cc)
 target_link_libraries(expand env)

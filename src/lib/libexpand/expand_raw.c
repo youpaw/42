@@ -7,7 +7,7 @@
 #include "memory/cc_mem.h"
 #include "string/cc_str.h"
 
-const char g_state_map[N_STATES] = {
+const char		g_state_map[N_STATES] = {
 		'\\',
 		'\'',
 		'"',
@@ -16,14 +16,11 @@ const char g_state_map[N_STATES] = {
 		'~'
 };
 
-int (*g_handlers[N_STATES + 1])(t_expand *) = {
-		&handle_back_slash,
-		&handle_single_quote,
-		&handle_double_quote,
-		&handle_dollar,
-		&handle_bang,
-		&handle_tilda,
-		&handle_unset
+int				(*g_handlers[N_EXPAND_CONF][N_STATES + 1])(t_expand *) = {
+		{&input_handle_back_slash, &handle_single_quote, &handle_double_quote, \
+		&input_handle_dollar, &input_handle_bang, NULL, &handle_unset},
+		{&exec_handle_back_slash, &handle_single_quote, &handle_double_quote, \
+		&exec_handle_dollar, NULL, &exec_handle_tilda, &handle_unset}
 };
 
 static t_state 	get_current_state(t_expand *expand)
@@ -39,6 +36,8 @@ static t_state 	get_current_state(t_expand *expand)
 		cnt++;
 	if (cnt < N_STATES)
 	{
+		if (cnt == e_dollar)
+			expand->flags[e_handling_dollar] = 1;
 		expand->index++;
 		vec_push(expand->states, &cnt);
 	}
@@ -55,17 +54,26 @@ static t_expand *init_expand(char *raw)
 	expand->index = 0;
 	expand->size = strlen(raw);
 	expand->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
-	expand->print_cmd = 0;
+	expand->braces = vec_new(BRACES_STACK_SIZE, sizeof(t_brace), NULL);
+	bzero(expand->flags, sizeof(char) * N_EXPAND_FLAGS);
 	state = e_unset;
 	vec_push(expand->states, &state);
 	return (expand);
 }
 
-int expand_raw(char **raw)
+static void 	del_expand(char **raw, t_expand *expand)
+{
+	*raw = expand->raw;
+	vec_del(&(expand->states));
+	vec_del(&(expand->braces));
+	free(expand);
+}
+
+int				expand_raw(char **raw, t_conf conf)
 {
 	t_expand	*expand;
 	t_state		current;
-	int error;
+	int			error;
 
 	if (!raw || !*raw || !**raw)
 		return (E_NULL_INPUT);
@@ -74,14 +82,13 @@ int expand_raw(char **raw)
 	while (expand->index < expand->size)
 	{
 		current = get_current_state(expand);
-		if ((error = (*g_handlers[current])(expand)))
-			break ;
+		if ((*g_handlers[conf][current]))
+			if ((error = (*g_handlers[conf][current])(expand)))
+				break ;
 		expand->index++;
 	}
 	if (!error && expand->states->size > 1)
 		error = E_INCOMPLETE_INPUT;
-	*raw = expand->raw;
-	vec_del(&(expand->states));
-	free(expand);
+	del_expand(raw, expand);
 	return (error);
 }
