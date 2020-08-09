@@ -1,9 +1,10 @@
 //
 // Created by Darth Butterwell on 8/8/20.
 //
+
 #include "expand.h"
 
-int 	exec_handle_tilda(t_expand *expand)
+int 	expand_dollar(t_handle *handle)
 {
 	return (0);
 }
