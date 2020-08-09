@@ -6,8 +6,8 @@ int main(int ac, char *av[], char *en[])
 //	fdputs("Hello world!", 1);
 //	return (0);
 
-	char *str = strdup("\"\\\n\"");
-	int error = expand_raw(&str, e_exec);
+	char *str = strdup("\"\\\n\"  'aa\\\nbb'   ddd \\\n  eeee");
+	int error = handle_raw(&str, e_validate);
 	fdputs(str, 1);
 	free(str);
 	exit(error);

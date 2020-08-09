@@ -4,7 +4,7 @@
 
 #include "expand.h"
 
-int 	exec_handle_back_slash(t_expand *expand)
+int 	expand_back_slash(t_handle *handle)
 {
 	return (0);
 }

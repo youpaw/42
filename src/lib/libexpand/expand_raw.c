@@ -7,88 +7,49 @@
 #include "memory/cc_mem.h"
 #include "string/cc_str.h"
 
-const char		g_state_map[N_STATES] = {
-		'\\',
-		'\'',
-		'"',
-		'$',
-		'!',
-		'~'
-};
-
-int				(*g_handlers[N_EXPAND_CONF][N_STATES + 1])(t_expand *) = {
-		{&input_handle_back_slash, &handle_single_quote, &handle_double_quote, \
-		&input_handle_dollar, &input_handle_bang, NULL, &handle_unset},
-		{&exec_handle_back_slash, &handle_single_quote, &handle_double_quote, \
-		&exec_handle_dollar, NULL, &exec_handle_tilda, &handle_unset}
-};
-
-static t_state 	get_current_state(t_expand *expand)
+static t_handle *init_expand(char *raw, t_stage stage)
 {
-	int		cnt;
-	t_state	current;
-
-	vec_get_last(&current, expand->states);
-	if (current != e_unset)
-		return (current);
-	cnt = 0;
-	while (cnt < N_STATES && g_state_map[cnt] != expand->raw[expand->index])
-		cnt++;
-	if (cnt < N_STATES)
-	{
-		if (cnt == e_dollar)
-			expand->flags[e_handling_dollar] = 1;
-		expand->index++;
-		vec_push(expand->states, &cnt);
-	}
-	return (cnt);
-}
-
-static t_expand *init_expand(char *raw)
-{
-	t_expand	*expand;
+	t_handle	*handle;
 	t_state		state;
 
-	expand = xmalloc(sizeof(t_expand));
-	expand->raw = raw;
-	expand->index = 0;
-	expand->size = strlen(raw);
-	expand->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
-	expand->braces = vec_new(BRACES_STACK_SIZE, sizeof(t_brace), NULL);
-	bzero(expand->flags, sizeof(char) * N_EXPAND_FLAGS);
+	handle = xmalloc(sizeof(t_handle));
+	handle->raw = raw;
+	handle->index = 0;
+	handle->size = strlen(raw);
+	handle->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
+	handle->stage = stage;
+	bzero(handle->flags, sizeof(char) * N_EXPAND_FLAGS);
 	state = e_unset;
-	vec_push(expand->states, &state);
-	return (expand);
+	vec_push(handle->states, &state);
+	return (handle);
 }
 
-static void 	del_expand(char **raw, t_expand *expand)
+static void 	del_expand(char **raw, t_handle *expand)
 {
 	*raw = expand->raw;
 	vec_del(&(expand->states));
-	vec_del(&(expand->braces));
 	free(expand);
 }
 
-int				expand_raw(char **raw, t_conf conf)
+int				handle_raw(char **raw, t_stage stage)
 {
-	t_expand	*expand;
+	t_handle	*handle;
 	t_state		current;
 	int			error;
 
 	if (!raw || !*raw || !**raw)
 		return (E_NULL_INPUT);
 	error = 0;
-	expand = init_expand(*raw);
-	while (expand->index < expand->size)
+	handle = init_expand(*raw, stage);
+	while (handle->index < handle->size)
 	{
-		current = get_current_state(expand);
-		if ((*g_handlers[conf][current]))
-			if ((error = (*g_handlers[conf][current])(expand)))
-				break ;
-		expand->index++;
+		current = get_current_state(handle);
+		if ((error = handle_all(handle, current)))
+			break ;
+		handle->index++;
 	}
-	if (!error && expand->states->size > 1)
+	if (!error && handle->states->size > 1)
 		error = E_INCOMPLETE_INPUT;
-	del_expand(raw, expand);
+	del_expand(raw, handle);
 	return (error);
 }

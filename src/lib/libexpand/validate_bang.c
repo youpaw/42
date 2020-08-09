@@ -4,7 +4,7 @@
 
 #include "expand.h"
 
-int 	input_handle_bang(t_expand *expand)
+int 	validate_bang(t_handle *handle)
 {
-
+	return (0);
 }
