@@ -9,7 +9,7 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(expand STATIC
-        expand_raw.c
+        handle_raw.c
         get_brace.c
         validate_back_slash.c validate_single_quote.c validate_double_quote.c validate_dollar.c validate_bang.c expand_tilda.c expand_back_slash.c expand_dollar.c get_current_state.c handle_all.c)
 

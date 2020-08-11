@@ -3,6 +3,28 @@
 //
 #include "expand.h"
 
+static int validate_brace(t_handle *handle, t_vec *braces)
+{
+	t_brace current;
+	t_brace last;
+	int 	direction;
+
+	if ((direction = get_brace(handle->raw + handle->index, &current)))
+	{
+		if (direction > 0)
+			vec_push(braces, &braces);
+		else
+		{
+			vec_get_last(&last, braces);
+			if (last == current)
+				vec_rm_last(braces);
+			else
+				return (E_BAD_SUBSTITUTION);
+		}
+	}
+	return (0);
+}
+
 static int match_brace(t_handle *handle, t_brace brace)
 {
 	int		error;
@@ -16,13 +38,14 @@ static int match_brace(t_handle *handle, t_brace brace)
 		current = get_current_state(handle);
 		if ((error = handle_all(handle, current)))
 			break ;
-		if (current == e_unset && get_brace(&(handle->raw[handle->index]), &brace))
-		{
-
-		}
+		if (current == e_unset && (error = validate_brace(handle, braces)))
+			break ;
 		handle->index++;
 	}
-	return (E_INCOMPLETE_INPUT);
+	if (!error && braces->size)
+		error = E_INCOMPLETE_INPUT;
+	vec_del(&braces);
+	return (error);
 }
 
 int 	validate_dollar(t_handle *handle)
@@ -32,7 +55,7 @@ int 	validate_dollar(t_handle *handle)
 	int		error;
 
 	error = 0;
-	if (get_brace((&handle->raw[handle->index]), &brace) >= 0)
+	if (get_brace(handle->raw + handle->index, &brace) > 0)
 	{
 		state = e_unset;
 		vec_push(handle->states, &state);

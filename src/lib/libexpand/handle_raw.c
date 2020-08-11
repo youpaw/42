@@ -24,11 +24,26 @@ static t_handle *init_expand(char *raw, t_stage stage)
 	return (handle);
 }
 
-static void 	del_expand(char **raw, t_handle *expand)
+static void 	del_expand(t_handle *handle)
 {
-	*raw = expand->raw;
-	vec_del(&(expand->states));
-	free(expand);
+	vec_del(&(handle->states));
+	free(handle);
+}
+
+static void		clear_str(t_handle *handle)
+{
+	size_t padding;
+
+	handle->index = 0;
+	padding = 0;
+	while (handle->index < handle->size)
+	{
+		if (handle->raw[handle->index])
+			handle->raw[padding++] = handle->raw[handle->index++];
+		else
+			handle->index++;
+	}
+	handle->raw[padding] = '\0';
 }
 
 int				handle_raw(char **raw, t_stage stage)
@@ -50,6 +65,8 @@ int				handle_raw(char **raw, t_stage stage)
 	}
 	if (!error && handle->states->size > 1)
 		error = E_INCOMPLETE_INPUT;
-	del_expand(raw, handle);
+	if (!error)
+		clear_str(handle);
+	del_expand(handle);
 	return (error);
 }

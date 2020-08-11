@@ -85,8 +85,9 @@ int		handle_all(t_handle *handle, t_state current);
 int		handle_raw(char **raw, t_stage stage);
 
 struct s_brace_raw{
-	char *open;
-	char *close;
+	char	*open;
+	char	*close;
+	int		len;
 };
 
 int		get_brace(char *str, t_brace *brace);
