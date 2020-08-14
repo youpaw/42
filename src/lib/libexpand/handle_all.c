@@ -15,7 +15,12 @@ int		handle_all(t_handle *handle, t_state current)
 			NULL, &expand_tilda}
 	};
 
-	if (current != e_unset && (*handlers[handle->stage][current]))
-		return ((*handlers[handle->stage][current])(handle));
+	if (current != e_unset)
+	{
+		if (*handlers[handle->stage][current])
+			return ((*handlers[handle->stage][current])(handle));
+		else
+			vec_rm_last(handle->states);
+	}
 	return (0);
 }

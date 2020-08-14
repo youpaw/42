@@ -6,5 +6,6 @@
 
 int 	validate_bang(t_handle *handle)
 {
+	vec_rm_last(handle->states);
 	return (0);
 }
