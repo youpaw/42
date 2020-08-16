@@ -10,5 +10,7 @@ file(MAKE_DIRECTORY ${READLINE_BUILD_DIRECTORY})
 
 ADD_LIBRARY(readline STATIC
         readline.c
-)
+        init.c output.c input.c)
+
+target_link_libraries(readline cc termcap)
 
