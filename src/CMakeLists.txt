@@ -38,9 +38,14 @@ include_directories(${LIBLEX_DIR})
 add_subdirectory(${LIBLEX_DIR})
 target_link_libraries(${PROJECT_NAME} lex)
 
-#add liblex to the project
+#add libcalc to the project
 set(LIBCALC_DIR "lib/libcalc")
 include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
 
+#add libcalc to the project
+set(READLINE_DIR "lib/readline")
+include_directories(${READLINE_DIR})
+add_subdirectory(${READLINE_DIR})
+target_link_libraries(${PROJECT_NAME} readline)
