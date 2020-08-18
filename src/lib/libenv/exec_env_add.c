@@ -31,6 +31,6 @@ int 		exec_env_add(const char *field)
 	val = strdup(field + name_len + 1);
 	pair.key = name;
 	pair.value = new_field(val);
-	hash_insert(g_exec_env, &pair);
+	hash_map_insert(g_exec_env, &pair);
 	return (0);
 }
