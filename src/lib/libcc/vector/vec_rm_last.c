@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cc_vec.h"
-#include "cc_mem.h"
 
 size_t	vec_rm_last(t_vec *vector)
 {

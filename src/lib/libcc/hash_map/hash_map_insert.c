@@ -2,7 +2,7 @@
 // Created by youpaw on 6/21/20.
 //
 
-#include "cc_hash.h"
+#include "cc_hash_map.h"
 #include "memory/cc_mem.h"
 
 static void		replace_item(t_list *item, t_hash_pair *pair, void (*del)(t_hash_pair *))
@@ -22,7 +22,7 @@ static t_list	*get_item(t_list *bucket, void *key, \
 	return (bucket);
 }
 
-int				hash_insert(t_hash_table *table, t_hash_pair *pair)
+int				hash_map_insert(t_hash_table *table, t_hash_pair *pair)
 {
 
 	size_t index;

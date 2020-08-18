@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cc_str.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 #include <stdlib.h>
 
 static void	init_table(const char *needle, int *table)

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cc_vec.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 
 t_vec	*vec_new(size_t capacity, size_t datasize, void (*del)(void *))
 {

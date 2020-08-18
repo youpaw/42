@@ -1,5 +1,5 @@
 #include "cc_avl.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 
 t_avl_tree				*avl_new_node(t_avl_pair *pair)
 {

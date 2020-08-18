@@ -25,6 +25,7 @@ typedef struct		s_vec
 
 t_vec				*vec_new(size_t capacity, size_t datasize, void (*del)(void *));
 int					vec_push(t_vec *vector, void *data);
+int 				vec_push_at(t_vec *vector, void *data, size_t index);
 size_t				vec_rm_last(t_vec *vector);
 size_t				vec_rm_at(t_vec *vector, size_t index);
 int					vec_get_last(void *dst, t_vec *vector);

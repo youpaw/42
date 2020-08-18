@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cc_lst.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 
 t_list	*lst_new(void *content, size_t size)
 {

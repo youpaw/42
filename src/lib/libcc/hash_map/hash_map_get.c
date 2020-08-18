@@ -2,7 +2,7 @@
 // Created by youpaw on 6/21/20.
 //
 
-#include "cc_hash.h"
+#include "cc_hash_map.h"
 
 static t_list	*get_item(t_list *bucket, const void *key, \
 	int (*cmp)(const void *, const void *))
@@ -12,7 +12,7 @@ static t_list	*get_item(t_list *bucket, const void *key, \
 	return (bucket);
 }
 
-t_list 			*hash_get(t_hash_table *table, const void *key)
+t_list 			*hash_map_get(t_hash_table *table, const void *key)
 {
 	size_t index;
 

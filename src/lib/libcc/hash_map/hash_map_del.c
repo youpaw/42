@@ -2,9 +2,9 @@
 // Created by youpaw on 6/21/20.
 //
 
-#include "cc_hash.h"
+#include "cc_hash_map.h"
 
-void 			hash_del(t_hash_table **table)
+void 			hash_map_del(t_hash_table **table)
 {
 	size_t cnt;
 
