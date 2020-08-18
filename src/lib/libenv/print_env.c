@@ -19,5 +19,5 @@ static void	print_field(const t_hash_pair *pair)
 
 void		print_env(void)
 {
-	hash_iter_pair(g_env, &print_field);
+	hash_map_iter_pair(g_env, &print_field);
 }

@@ -32,6 +32,6 @@ int 	env_add_field(t_table_type type, const char *field)
 	val = strdup(field + name_len + 1);
 	pair.key = name;
 	pair.value = new_field(type, val);
-	hash_insert(g_env, &pair);
+	hash_map_insert(g_env, &pair);
 	return (0);
 }

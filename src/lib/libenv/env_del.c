@@ -6,5 +6,5 @@
 
 void		env_del(void)
 {
-	hash_del(&g_env);
+	hash_map_del(&g_env);
 }
