@@ -43,7 +43,7 @@ void	exec_env_init(void)
 	int cnt;
 
 	cnt = 0;
-	g_exec_env = hash_new(N_MAX_EXEC_ENV, \
+	g_exec_env = hash_map_new(N_MAX_EXEC_ENV, \
     (size_t (*)(const void *)) &strhash, \
 	(int (*)(const void *, const void *)) &strcmp, \
 	&env_del_pair);

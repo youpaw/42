@@ -4,12 +4,12 @@
 
 #ifndef ENV_H
 #define ENV_H
-#define N_MAX_AV 10
+#define N_MAX_AV 254
 #define N_MAX_EXEC_ENV 256
 #define N_MAX_ENV 256
 
 #include <glob.h>
-#include "hash/cc_hash.h"
+#include "hash_map/cc_hash_map.h"
 extern int	g_exit_code;
 extern char *g_av[N_MAX_AV];
 extern t_hash_table *g_exec_env;
