@@ -6,12 +6,12 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:15:30 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc_str.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 #include <stdlib.h>
 
 static void	init_table(const char *needle, int *table)

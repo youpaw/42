@@ -1,12 +1,12 @@
 //
 // Created by youpaw on 6/24/20.
 //
+#include "cc_hash_map.h"
 
-#include "cc_hash.h"
-
-void 			hash_iter_pair(t_hash_table *table, void (*f)(const t_hash_pair *pair))
+void 			hash_map_iter(t_hash_table *table, void (*f)(void *value))
 {
 	t_list *tmp;
+	t_hash_pair *pair;
 	size_t cnt;
 
 	cnt = 0;
@@ -15,7 +15,9 @@ void 			hash_iter_pair(t_hash_table *table, void (*f)(const t_hash_pair *pair))
 		tmp = table->buckets[cnt];
 		while (tmp)
 		{
-			f(tmp->content);
+			pair = tmp->content;
+			if (pair)
+				f(pair->value);
 			tmp = tmp->next;
 		}
 		cnt++;

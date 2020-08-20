@@ -6,11 +6,11 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 02:05:13 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 #include "cc_str.h"
 
 static int		is_separator(char c, char *charset)

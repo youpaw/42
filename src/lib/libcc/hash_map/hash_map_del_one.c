@@ -2,7 +2,7 @@
 // Created by youpaw on 6/21/20.
 //
 
-#include "cc_hash.h"
+#include "cc_hash_map.h"
 
 static int 		del_item(t_list *bucket, const void *key, \
 	int (*cmp)(const void *, const void *), void (*del)(t_hash_pair *))
@@ -20,7 +20,7 @@ static int 		del_item(t_list *bucket, const void *key, \
 	return (0);
 }
 
-int 			hash_del_one(t_hash_table *table, const void *key)
+int 			hash_map_del_one(t_hash_table *table, const void *key)
 {
 	size_t index;
 

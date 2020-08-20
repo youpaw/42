@@ -6,12 +6,12 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 18:50:43 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc_vec.h"
-#include "cc_mem.h"
+#include "memory/cc_mem.h"
 
 t_vec	*vec_new(size_t capacity, size_t datasize, void (*del)(void *))
 {

@@ -4,7 +4,7 @@
 
 #include "cc_avl.h"
 
-t_avl_pair	*avl_get_val(t_avl_obj *obj, const void *key)
+void * avl_get_val(t_avl_obj *obj, const void *key)
 {
 	t_avl_pair *pair;
 

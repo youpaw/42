@@ -6,12 +6,11 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:54:40 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc_vec.h"
-#include "cc_mem.h"
 
 size_t	vec_rm_last(t_vec *vector)
 {

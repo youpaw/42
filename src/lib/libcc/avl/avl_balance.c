@@ -3,7 +3,7 @@
 //
 
 #include "cc_avl.h"
-#include "cc_math.h"
+#include "math/cc_math.h"
 
 static t_avl_tree		*right_rotate(t_avl_tree *y)
 {

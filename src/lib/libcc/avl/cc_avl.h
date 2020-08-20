@@ -45,7 +45,7 @@ t_avl_tree				*avl_insert(t_avl_obj *obj, t_avl_pair *pair);
 
 t_avl_tree				*avl_get(t_avl_obj *obj, const void *key);
 t_avl_pair 				*avl_get_pair(t_avl_obj *obj, const void *key);
-t_avl_pair 				*avl_get_val(t_avl_obj *obj, const void *key);
+void					*avl_get_val(t_avl_obj *obj, const void *key);
 
 void					avl_map_prefix(t_avl_obj *obj, void (*f)(void *));
 void					avl_map_infix(t_avl_obj *obj, void (*f)(void *));

@@ -6,11 +6,11 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 01:11:22 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc_char.h"
+#include "char/cc_char.h"
 #include <limits.h>
 
 long long	atoll(const char *str)
