@@ -13,7 +13,7 @@ size_t	vec_rm_at(t_vec *vector, size_t index)
 		return (vector->size);
 	if (vector->del)
 		vec_del_one(vector, index);
-	if (index < (vector->size - 1))
+	if (index < (vector->size)) // Зачем здесь был вект->сайз - 1?
 		memmove(vector->data + (index * vector->datasize), \
 		vector->data + ((index + 1) * vector->datasize), \
 		(vector->size - index) * vector->datasize);

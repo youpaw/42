@@ -77,5 +77,5 @@ ADD_LIBRARY(cc STATIC
 		avl/avl_new.c
 		avl/avl_get_pair.c
 		avl/avl_get_val.c
-		string/strhash.c hash/hash_iter.c hash/hash_iter_pair.c vector/vec_del_one.c)
+		string/strhash.c hash/hash_iter.c hash/hash_iter_pair.c vector/vec_del_one.c vector/vec_push_at.c)
 
