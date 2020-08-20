@@ -4,7 +4,7 @@
 
 #include <stddef.h>
 #include "cc_avl.h"
-#include "memory/cc_mem.h"
+#include "cc_mem.h"
 
 t_avl_obj 				*avl_new(int params, \
 	int (*cmp)(const void *, const void *, int), \

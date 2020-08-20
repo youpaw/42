@@ -7,7 +7,7 @@ file(MAKE_DIRECTORY ${LIBCC_BUILD_DIRECTORY})
 
 #set(LIBRARY_OUTPUT_PATH "build")
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
-include_directories(avl char file hash_map list math memory num string vector)
+include_directories(avl char file graph hash_map list math memory num string vector)
 
 ADD_LIBRARY(cc STATIC
 		avl/avl_balance.c
@@ -37,6 +37,13 @@ ADD_LIBRARY(cc STATIC
 		char/tolower.c
 		char/toupper.c
 		file/get_next_line.c
+		graph/graph_cmp.c
+		graph/graph_del.c
+		graph/graph_get_names.c
+		graph/graph_get_suffixes.c
+		graph/graph_init.c
+		graph/graph_insert.c
+		graph/graph_new.c
 		hash_map/hash_map_del.c
 		hash_map/hash_map_del_one.c
 		hash_map/hash_map_get.c

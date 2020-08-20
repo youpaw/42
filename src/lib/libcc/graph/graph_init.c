@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   graph_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 00:58:59 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Created: 2020/08/19 22:20:24 by azomega           #+#    #+#             */
+/*   Updated: 2020/08/19 22:20:26 by azomega          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "cc_graph.h"
 
-void	memdel(void **ap)
+void	graph_init(t_graph *graph)
 {
-	if (!ap || !*ap)
-		return ;
-	free(*ap);
-	*ap = NULL;
+	if (graph)
+	{
+		graph->symbol = '\0';
+		graph->index = 0;
+		graph->childs = NULL;
+	}
 }

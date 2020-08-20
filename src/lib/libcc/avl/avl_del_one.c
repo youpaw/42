@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include "cc_avl.h"
-#include "math/cc_math.h"
+#include "cc_math.h"
 
 static t_avl_tree	*insert_node(t_avl_tree *new, t_avl_tree *node, int params,\
 	int (*cmp)(const void *, const void *, int))

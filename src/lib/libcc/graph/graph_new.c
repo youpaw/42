@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   graph_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 00:58:59 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Created: 2020/08/19 19:15:01 by azomega           #+#    #+#             */
+/*   Updated: 2020/08/19 19:15:02 by azomega          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cc_graph.h"
 #include <stdlib.h>
 
-void	memdel(void **ap)
+t_graph	*graph_new(char symbol, size_t index)
 {
-	if (!ap || !*ap)
-		return ;
-	free(*ap);
-	*ap = NULL;
+	t_graph	*graph;
+
+	if (!(graph = (t_graph *)malloc(sizeof(t_graph))))
+		return (NULL);
+	graph->symbol = symbol;
+	graph->index = index;
+	graph->childs = NULL;
+	return (graph);
 }

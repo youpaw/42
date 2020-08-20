@@ -4,6 +4,7 @@
 #include "avl/cc_avl.h"
 #include "char/cc_char.h"
 #include "file/cc_file.h"
+#include "graph/cc_graph.h"
 #include "hash_map/cc_hash_map.h"
 #include "list/cc_lst.h"
 #include "math/cc_math.h"

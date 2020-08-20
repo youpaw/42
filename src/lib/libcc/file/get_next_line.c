@@ -6,13 +6,13 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 20:25:30 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
+/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc_file.h"
-#include "avl/cc_avl.h"
-#include "string/cc_str.h"
+#include "cc_avl.h"
+#include "cc_str.h"
 #include "memory/cc_mem.h"
 #include <unistd.h>
 #include <stdlib.h>

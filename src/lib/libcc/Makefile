@@ -6,132 +6,166 @@
 #    By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 15:08:51 by dbutterw          #+#    #+#              #
-#    Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr        #
+#    Updated: 2020/07/07 18:05:33 by dbutterw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = char/ft_isalnum.c   \
-      char/ft_isalpha.c   \
-      char/ft_isascii.c   \
-      char/ft_isdigit.c   \
-      char/ft_islower.c   \
-      char/ft_isprint.c   \
-      char/ft_isspace.c   \
-      char/ft_isupper.c   \
-      char/ft_iswspace.c  \
-      char/ft_putchar.c   \
-      char/ft_putchar_fd.c  \
-      char/ft_tolower.c   \
-      char/ft_toupper.c   \
-      env/ft_get_env_field.c  \
-      env/ft_get_env_fval.c   \
-      file/get_next_line.c  \
-      list/ft_lstadd.c  \
-      list/ft_lstaddsort.c  \
-      list/ft_lstcircle.c   \
-      list/ft_lstdel.c  \
-      list/ft_lstdelcircle.c  \
-      list/ft_lstdelone.c   \
-      list/ft_lstiter.c   \
-      list/ft_lstmap.c  \
-      list/ft_lstnew.c  \
-      math/ft_max.c   \
-      math/ft_min.c   \
-      math/ft_pow.c   \
-      memory/ft_bzero.c   \
-      memory/ft_memalloc.c  \
-      memory/ft_memccpy.c   \
-      memory/ft_memchr.c  \
-      memory/ft_memcmp.c  \
-      memory/ft_memcpy.c  \
-      memory/ft_memdel.c  \
-      memory/ft_memmove.c   \
-      memory/ft_memset.c  \
-      memory/ft_xmalloc.c \
-      num/ft_atoi.c   \
-      num/ft_putnbr.c   \
-      num/ft_putnbr_fd.c  \
-      num/ft_numlen.c		\
-      num/ft_numlen_base.c	\
-      regex/match.c   \
-      regex/nmatch.c  \
-      string/ft_itoabase.c  \
-      string/ft_itoa.c  \
-      string/ft_nstrjoin.c  \
-      string/ft_putendl.c   \
-      string/ft_putendl_fd.c  \
-      string/ft_putstr.c  \
-      string/ft_putstr_fd.c   \
-      string/ft_strcat.c  \
-      string/ft_strchr.c  \
-      string/ft_strclr.c  \
-      string/ft_strcmp.c  \
-      string/ft_strcpy.c  \
-      string/ft_strdel.c  \
-      string/ft_strdup.c  \
-      string/ft_strequ.c  \
-      string/ft_striter.c   \
-      string/ft_striteri.c  \
-      string/ft_strjoin.c   \
-      string/ft_strlcat.c   \
-      string/ft_strlen.c  \
-      string/ft_strmap.c  \
-      string/ft_strmapi.c   \
-      string/ft_strncat.c   \
-      string/ft_strncmp.c   \
-      string/ft_strncpy.c   \
-      string/ft_strnequ.c   \
-      string/ft_strnew.c  \
-      string/ft_strnstr.c   \
-      string/ft_strrchr.c   \
-      string/ft_strsplit.c  \
-      string/ft_strstr.c  \
-      string/ft_strsub.c  \
-      string/ft_strtrim.c   \
-      vector/ft_vector_del.c  \
-      vector/ft_vector_init.c   \
-      vector/ft_vector_push.c   \
-      vector/ft_vector_remove.c	\
-      search/ft_get_balance.c	\
-      search/ft_get_height.c	\
-      search/ft_insert_avl.c	\
-      search/ft_left_rotate.c	\
-      search/ft_new_node.c		\
-      search/ft_right_rotate.c	\
-      search/ft_del_avl.c
+SRC =   \
+		avl/avl_balance.c \
+		avl/avl_del.c \
+		avl/avl_del_one.c \
+		avl/avl_get.c \
+		avl/avl_get_height.c \
+		avl/avl_get_pair.c \
+		avl/avl_get_val.c \
+		avl/avl_insert.c \
+		avl/avl_map_infix.c \
+		avl/avl_map_postfix.c \
+		avl/avl_map_prefix.c \
+		avl/avl_new.c \
+		avl/avl_new_node.c \
+		char/fdputchar.c \
+		char/isalnum.c \
+		char/isalpha.c \
+		char/isascii.c \
+		char/isdigit.c \
+		char/islower.c \
+		char/isprint.c \
+		char/isspace.c \
+		char/isupper.c \
+		char/iswspace.c \
+		char/putchar.c \
+		char/tolower.c \
+		char/toupper.c \
+		file/get_next_line.c \
+		hash_map/hash_map_del.c \
+		hash_map/hash_map_del_one.c \
+		hash_map/hash_map_get.c \
+		hash_map/hash_map_get_pair.c \
+		hash_map/hash_map_get_val.c \
+		hash_map/hash_map_insert.c \
+		hash_map/hash_map_iter.c \
+		hash_map/hash_map_iter_pair.c \
+		hash_map/hash_map_new.c \
+		list/lst_add.c \
+		list/lst_add_sort.c \
+		list/lst_circle.c \
+		list/lst_del.c \
+		list/lst_del_circle.c \
+		list/lst_del_one.c \
+		list/lst_iter.c \
+		list/lst_map.c \
+		list/lst_new.c \
+		list/lst_find.c \
+		math/max.c \
+		math/min.c \
+		memory/bzero.c \
+		memory/memalloc.c \
+		memory/memccpy.c \
+		memory/memchr.c \
+		memory/memcmp.c \
+		memory/memcpy.c \
+		memory/memdel.c \
+		memory/memmove.c \
+		memory/memset.c \
+		memory/xmalloc.c \
+		num/atoi.c \
+		num/atoll.c \
+		num/fdputnbr.c \
+		num/numlen.c \
+		num/numlen_base.c \
+		num/putnbr.c \
+		regex/match.c \
+		regex/nmatch.c \
+		string/fdputendl.c \
+		string/fdputs.c \
+		string/itoa.c \
+		string/itoabase.c \
+		string/nstrjoin.c \
+		string/putendl.c \
+		string/puts.c \
+		string/strcat.c \
+		string/strchr.c \
+		string/strclr.c \
+		string/strcmp.c \
+		string/strcpy.c \
+		string/strdel.c \
+		string/strdup.c \
+		string/strequ.c \
+		string/strhash.c \
+		string/striter.c \
+		string/striteri.c \
+		string/strjoin.c \
+		string/strlcat.c \
+		string/strlen.c \
+		string/strmap.c \
+		string/strmapi.c \
+		string/strncat.c \
+		string/strncmp.c \
+		string/strncpy.c \
+		string/strnequ.c \
+		string/strnew.c \
+		string/strnstr.c \
+		string/strrchr.c \
+		string/strsplit.c \
+		string/strsplitcharset.c \
+		string/strstr.c \
+		string/strsub.c \
+		string/strtrim.c \
+		vector/vec_del.c \
+		vector/vec_del_one.c \
+		vector/vec_get_at.c \
+		vector/vec_get_last.c \
+		vector/vec_new.c \
+		vector/vec_push.c \
+		vector/vec_push_at.c \
+		vector/vec_rm_at.c \
+		vector/vec_rm_last.c \
+		graph/graph_insert.c \
+		graph/graph_cmp.c \
+		graph/graph_get_suffixes.c \
+		graph/graph_get_names.c \
+		graph/graph_del.c \
+		graph/graph_init.c \
+		graph/graph_new.c
 
-
-INC = -I char		\
-      -I env		\
-      -I file		\
-      -I list		\
-      -I math		\
-      -I memory		\
-      -I num		\
-      -I regex		\
-      -I string		\
-      -I vector		\
-      -I search
+INC = 	-I . \
+		-I avl			\
+		-I char			\
+		-I file			\
+		-I graph		\
+		-I hash_map		\
+		-I list			\
+		-I math			\
+		-I memory		\
+		-I num			\
+		-I regex		\
+		-I string		\
+		-I vector
 
 OBJ_DIR = ./obj
 
-CMP_DIR	:= $(OBJ_DIR)/char		\
-			$(OBJ_DIR)/env		\
-			$(OBJ_DIR)/file		\
-			$(OBJ_DIR)/list		\
-			$(OBJ_DIR)/math		\
-			$(OBJ_DIR)/memory	\
-			$(OBJ_DIR)/num		\
-			$(OBJ_DIR)/regex	\
-			$(OBJ_DIR)/string	\
-			$(OBJ_DIR)/vector	\
-			$(OBJ_DIR)/search
-
+CMP_DIR	:= \
+		$(OBJ_DIR)/avl			\
+		$(OBJ_DIR)/char			\
+		$(OBJ_DIR)/file			\
+		$(OBJ_DIR)/graph		\
+		$(OBJ_DIR)/hash_map		\
+		$(OBJ_DIR)/list			\
+		$(OBJ_DIR)/math			\
+		$(OBJ_DIR)/memory		\
+		$(OBJ_DIR)/num			\
+		$(OBJ_DIR)/regex		\
+		$(OBJ_DIR)/string		\
+		$(OBJ_DIR)/vector
 
 
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 NAME = libft.a
+
+#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g
 
 .PHONY: all clean fclean re
 
@@ -144,7 +178,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR) $(CMP_DIR)
 
 $(OBJ_DIR)/%.o: %.c $(HEAD)
-	gcc $(INC) -Wall -Wextra -Werror -c $< -o $@
+	gcc $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

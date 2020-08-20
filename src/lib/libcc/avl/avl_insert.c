@@ -1,6 +1,6 @@
 #include "cc_avl.h"
-#include "math/cc_math.h"
-#include "memory/cc_mem.h"
+#include "cc_math.h"
+#include "cc_mem.h"
 
 static t_avl_tree	*replace_node(t_avl_obj *obj, t_avl_pair *pair, \
 	t_avl_tree *node)

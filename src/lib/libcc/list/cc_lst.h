@@ -27,7 +27,10 @@ int					lst_circle(t_list *list);
 int					lst_del_circle(t_list **list, void (*del)(void*));
 
 int					lst_add_sort(t_list **list, t_list *newlist, void *params, \
-		int (*cmp)(const void *, const void *, void *));
+					int (*cmp)(const void *, const void *, void *));
+
+t_list				*lst_find(t_list *lst, int (*cmp)(const void *, const void *),
+					const void *content);
 
 # define LST_OK 0
 # define LST_DNE LST_OK + 1

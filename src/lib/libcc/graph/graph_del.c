@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   graph_del.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 00:58:59 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/01/06 14:39:22 by dbutterw         ###   ########.fr       */
+/*   Created: 2020/08/19 19:08:02 by azomega           #+#    #+#             */
+/*   Updated: 2020/08/19 19:08:06 by azomega          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "cc_graph.h"
+#include "list/cc_lst.h"
 
-void	memdel(void **ap)
+void	graph_del(t_graph *graph)
 {
-	if (!ap || !*ap)
-		return ;
-	free(*ap);
-	*ap = NULL;
+	if (graph)
+	{
+		lst_del(&(graph->childs), (void (*)(void *))graph_del);
+		graph->childs = NULL;
+	}
 }
