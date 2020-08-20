@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   symbol_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 02:35:24 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
+/*   Created: 2020/08/18 13:13:55 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/18 14:30:28 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc_str.h"
+#include "readline.h"
 
-int		strequ(char const *s1, char const *s2)
+int symbol_key_pressed(t_input *inp, char key)
 {
-	if (s1 && s2)
-		if (strcmp(s1, s2) == 0)
-			return (1);
-	if (!s1 && !s2)
+	ft_put(key);
+	if (vec_push_at(inp->line, &key, inp->cursor_position))
 		return (1);
+	inp->cursor_position++;
+	inp->len++;
 	return (0);
 }

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 02:35:24 by dbutterw          #+#    #+#             */
-/*   Updated: 2020/08/20 19:30:12 by mgena            ###   ########.fr       */
+/*   Created: 2020/08/16 16:45:08 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/16 16:46:22 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cc_str.h"
+#include "readline.h"
 
-int		strequ(char const *s1, char const *s2)
+int		ft_put(int c)
 {
-	if (s1 && s2)
-		if (strcmp(s1, s2) == 0)
-			return (1);
-	if (!s1 && !s2)
-		return (1);
-	return (0);
+	if (write(1, &c, 1) == 1)
+		return (0);
+	else
+		return (-1);
+}
+
+void 	ft_putstr(char *str)
+{
+	while (*str)
+		ft_put(*(str++));
 }
