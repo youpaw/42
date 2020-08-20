@@ -6,12 +6,12 @@
 /*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 19:47:13 by dbutterw          #+#    #+#             */
-/*   Updated: 2019/11/25 20:06:09 by dbutterw         ###   ########.fr       */
+/*   Updated: 2020/08/20 19:27:34 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cc_str.h"
-#include "char/cc_char.h"
+#include "cc_char.h"
 
 char	*strtrim(char const *s)
 {
