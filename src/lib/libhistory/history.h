@@ -24,14 +24,34 @@
 
 #ifndef HISTORY_H
 # define HISTORY_H
+# define N_COMMANDS 1000
+# define FILE_NAME ".bash_history"
+# define HOME "/Users/hlorrine/"
+#include "avl/cc_avl.h"
 
-int		h_init(const char *path);
-int		h_close();
+struct s_hist
+{
+	char 		*file_path;
+	char		*commands[N_COMMANDS];
+	t_avl_obj	*commands_avl;
+	int			cur_ind;
+	int			size;
+};
 
-int		h_get_prev(char *out);
-int		h_get_next(char *out);
-void	h_append(const char *content);
+typedef struct s_hist t_hist;
 
-int		h_save_new();
+extern t_hist *g_hist;
+
+int		hist_init(void);
+
+int 	hist_push(const char *cmd);
+
+char 	*hist_get_index(int index);
+char 	*hist_get_last(void);
+char	*hist_get_next(void);
+char	*hist_get_prev(void);
+char 	*hist_find(const char *str);
+
+void	hist_save(void);
 
 #endif 

@@ -27,10 +27,10 @@ add_subdirectory(${LIBEXPAND_DIR})
 target_link_libraries(${PROJECT_NAME} expand)
 
 #add libhistory to the project
-#set(LIBH_DIR "lib/libhistory")
-#include_directories(${LIBH_DIR})
-#add_subdirectory(${LIBH_DIR})
-#target_link_libraries(${PROJECT_NAME} history)
+set(LIBH_DIR "lib/libhistory")
+include_directories(${LIBH_DIR})
+add_subdirectory(${LIBH_DIR})
+target_link_libraries(${PROJECT_NAME} history)
 
 #add liblex to the project
 set(LIBLEX_DIR "lib/liblex")
