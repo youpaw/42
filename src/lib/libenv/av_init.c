@@ -3,7 +3,7 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 char *g_av[N_MAX_AV];
 

@@ -3,7 +3,7 @@
 //
 
 #include <glob.h>
-#include "char/cc_char.h"
+#include "cc_char.h"
 
 static int char_valid(char c)
 {

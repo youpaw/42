@@ -12,6 +12,12 @@
 
 #ifndef READLINE_H
 #define READLINE_H
+#define TEST_FOR_DIR_1 {""};
+#define TEST_FOR_DIR_2 {"fuck"};
+#define TEST_FOR_DIR_3 {"."};
+#define TEST_FOR_DIR_4 {"../C"};
+#define TEST_FOR_DIR_5 {"M"};
+#define TEST_FOR_DIR_6 {".."};
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,6 +28,7 @@
 # include <term.h>
 # include <sys/stat.h>
 # include "vector/cc_vec.h"
+# include <dirent.h>
 
 typedef struct	s_out
 {
