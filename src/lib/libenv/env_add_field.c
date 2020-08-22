@@ -4,9 +4,9 @@
 
 #include <stdlib.h>
 #include "env.h"
-#include "string/cc_str.h"
-#include "memory/cc_mem.h"
-#include "char/cc_char.h"
+#include "cc_str.h"
+#include "cc_mem.h"
+#include "cc_char.h"
 
 static t_env 	*new_field(t_table_type type, char *val)
 {
@@ -32,6 +32,6 @@ int 	env_add_field(t_table_type type, const char *field)
 	val = strdup(field + name_len + 1);
 	pair.key = name;
 	pair.value = new_field(type, val);
-	hash_insert(g_env, &pair);
+	hash_map_insert(g_env, &pair);
 	return (0);
 }

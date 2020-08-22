@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   h_dlist.h                                          :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darugula <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 13:00:51 by darugula          #+#    #+#             */
-/*   Updated: 2020/01/01 13:00:52 by darugula         ###   ########.fr       */
+/*   Created: 2020/08/16 16:45:08 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/22 17:39:07 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_DLIST_H
-# define H_DLIST_H
-# include "lists.h"
+#include "readline.h"
 
-int		h_free(void);
-t_list *h_get_head();
-t_list *h_get_last();
+int		ft_put(int c)
+{
+	if (write(1, &c, 1) == 1)
+		return (0);
+	else
+		return (-1);
+}
 
-#endif 
-
+void 	ft_putstr(char *str)
+{
+	while (*str)
+		ft_put(*(str++));
+}
