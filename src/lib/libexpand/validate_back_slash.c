@@ -3,7 +3,7 @@
 //
 
 #include "expand.h"
-#include "memory/cc_mem.h"
+#include "cc_mem.h"
 
 int 	validate_back_slash(t_handle *handle)
 {

@@ -27,10 +27,10 @@ add_subdirectory(${LIBEXPAND_DIR})
 target_link_libraries(${PROJECT_NAME} expand)
 
 #add libhistory to the project
-#set(LIBH_DIR "lib/libhistory")
-#include_directories(${LIBH_DIR})
-#add_subdirectory(${LIBH_DIR})
-#target_link_libraries(${PROJECT_NAME} history)
+set(LIBH_DIR "lib/libhistory")
+include_directories(${LIBH_DIR})
+add_subdirectory(${LIBH_DIR})
+target_link_libraries(${PROJECT_NAME} history)
 
 #add liblex to the project
 set(LIBLEX_DIR "lib/liblex")
@@ -38,3 +38,14 @@ include_directories(${LIBLEX_DIR})
 add_subdirectory(${LIBLEX_DIR})
 target_link_libraries(${PROJECT_NAME} lex)
 
+#add libcalc to the project
+set(LIBCALC_DIR "lib/libcalc")
+include_directories(${LIBCALC_DIR})
+add_subdirectory(${LIBCALC_DIR})
+target_link_libraries(${PROJECT_NAME} calc)
+
+#add libcalc to the project
+set(READLINE_DIR "lib/readline")
+include_directories(${READLINE_DIR})
+add_subdirectory(${READLINE_DIR})
+target_link_libraries(${PROJECT_NAME} readline)

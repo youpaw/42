@@ -3,9 +3,9 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
-#include "char/cc_char.h"
-#include "memory/cc_mem.h"
+#include "cc_str.h"
+#include "cc_char.h"
+#include "cc_mem.h"
 
 static t_env 	*new_field(char *val)
 {
@@ -31,6 +31,6 @@ int 		exec_env_add(const char *field)
 	val = strdup(field + name_len + 1);
 	pair.key = name;
 	pair.value = new_field(val);
-	hash_insert(g_exec_env, &pair);
+	hash_map_insert(g_exec_env, &pair);
 	return (0);
 }

@@ -7,5 +7,5 @@
 
 t_env		*env_get_field(const char *name)
 {
-	return (hash_get_val(g_env, name));
+	return (hash_map_get_val(g_env, name));
 }
