@@ -39,7 +39,7 @@ int		readline(char **line)
 	char key[4];
 	t_input input;
 
-	input = input_init();
+	input = input_init(*line);
 	while (42)
 	{
 		bzero(key, 4);
@@ -48,8 +48,7 @@ int		readline(char **line)
 		{
 //			printf("\n!!!!!!!!!!!!!!!\n%s\n!!!!!!!!!!!!!!!!\ncurs_pos: %d, len: %d",
 //				   (char*)input.line->data, input.cursor_position, input.len);
-//			ft_put('\n');
-//			ft_putstr((char*)input.line->data);
+			printf("\n%s", (char*)input.line->data);
 			return 0;
 		}
 	}

@@ -6,18 +6,13 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:20:02 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 14:48:26 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/22 22:19:28 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_H
 #define READLINE_H
-#define TEST_FOR_DIR_1 {""};
-#define TEST_FOR_DIR_2 {"fuck"};
-#define TEST_FOR_DIR_3 {"."};
-#define TEST_FOR_DIR_4 {"../C"};
-#define TEST_FOR_DIR_5 {"M"};
-#define TEST_FOR_DIR_6 {".."};
+#define TEST {"", "fuck", ".", "./", "..", "../", "./C", "4"}
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -30,6 +25,7 @@
 # include "vector/cc_vec.h"
 # include <dirent.h>
 
+#include "cc.h"
 typedef struct	s_out
 {
 	struct termios	savetty;
@@ -60,8 +56,9 @@ int			right_arrow_pressed(t_input *inp);
 int			backspace_pressed(t_input *inp);
 int			del_pressed(t_input *inp);
 int 		symbol_key_pressed(t_input *inp, char key);
-t_input		input_init(void);
+t_input 	input_init(char *line);
 int			autocomplete(t_input *inp);
+void		complete_print(t_input *input, t_list **to_print);
 
 //temp
 char *vect_to_str(t_vec *vector);
