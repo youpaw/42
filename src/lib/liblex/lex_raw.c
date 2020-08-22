@@ -2,53 +2,53 @@
 // Created by youpaw on 6/14/20.
 //
 
-#include "expand.h"
+#include "lexer.h"
 #include <stdlib.h>
 #include "cc_mem.h"
 #include "cc_str.h"
 
-static t_handle *init_expand(char *raw, t_stage stage)
+static t_lexer *init_expand(char *raw, t_stage stage)
 {
-	t_handle	*handle;
+	t_lexer	*handle;
 	t_state		state;
 
-	handle = xmalloc(sizeof(t_handle));
+	handle = xmalloc(sizeof(t_lexer));
 	handle->raw = raw;
 	handle->index = 0;
 	handle->size = strlen(raw);
 	handle->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
 	handle->stage = stage;
-	bzero(handle->flags, sizeof(char) * N_EXPAND_FLAGS);
-	state = e_unset;
+	bzero(handle->flags, sizeof(char) * N_LEX_FLAGS);
+	state = l_unset;
 	vec_push(handle->states, &state);
 	return (handle);
 }
 
-static void 	del_expand(t_handle *handle)
+static void 	del_expand(t_lexer *lexer)
 {
-	vec_del(&(handle->states));
-	free(handle);
+	vec_del(&(lexer->states));
+	free(lexer);
 }
 
-static void		clear_str(t_handle *handle)
+static void		clear_str(t_lexer *lexer)
 {
 	size_t padding;
 
-	handle->index = 0;
+	lexer->index = 0;
 	padding = 0;
-	while (handle->index < handle->size)
+	while (lexer->index < lexer->size)
 	{
-		if (handle->raw[handle->index])
-			handle->raw[padding++] = handle->raw[handle->index++];
+		if (lexer->raw[lexer->index])
+			lexer->raw[padding++] = lexer->raw[lexer->index++];
 		else
-			handle->index++;
+			lexer->index++;
 	}
-	handle->raw[padding] = '\0';
+	lexer->raw[padding] = '\0';
 }
 
-int				handle_raw(char **raw, t_stage stage)
+int				lex_raw(char **raw, t_stage stage)
 {
-	t_handle	*handle;
+	t_lexer	*handle;
 	t_state		current;
 	int			error;
 
@@ -59,7 +59,7 @@ int				handle_raw(char **raw, t_stage stage)
 	while (handle->index < handle->size)
 	{
 		current = get_current_state(handle);
-		if ((error = handle_all(handle, current)))
+		if ((error = lex_map(handle, current)))
 			break ;
 		handle->index++;
 	}

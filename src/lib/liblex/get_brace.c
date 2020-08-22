@@ -2,7 +2,7 @@
 // Created by youpaw on 6/14/20.
 //
 
-#include "expand.h"
+#include "lexer.h"
 #include "cc_str.h"
 
 const struct s_brace_raw g_brace_map[N_BRACES] = {
