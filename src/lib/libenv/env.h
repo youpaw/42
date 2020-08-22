@@ -9,7 +9,7 @@
 #define N_MAX_ENV 256
 
 #include <glob.h>
-#include "hash_map/cc_hash_map.h"
+#include "cc_hash_map.h"
 extern int	g_exit_code;
 extern char *g_av[N_MAX_AV];
 extern t_hash_table *g_exec_env;

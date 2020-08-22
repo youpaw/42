@@ -4,8 +4,8 @@
 
 #include "expand.h"
 #include <stdlib.h>
-#include "memory/cc_mem.h"
-#include "string/cc_str.h"
+#include "cc_mem.h"
+#include "cc_str.h"
 
 static t_handle *init_expand(char *raw, t_stage stage)
 {

@@ -3,7 +3,7 @@
 //
 
 #include "expand.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 const struct s_brace_raw g_brace_map[N_BRACES] = {
 		{"((", "))", 2},

@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include "env.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 void 		av_set(const char **av)
 {

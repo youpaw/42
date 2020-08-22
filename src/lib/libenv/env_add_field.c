@@ -4,9 +4,9 @@
 
 #include <stdlib.h>
 #include "env.h"
-#include "string/cc_str.h"
-#include "memory/cc_mem.h"
-#include "char/cc_char.h"
+#include "cc_str.h"
+#include "cc_mem.h"
+#include "cc_char.h"
 
 static t_env 	*new_field(t_table_type type, char *val)
 {

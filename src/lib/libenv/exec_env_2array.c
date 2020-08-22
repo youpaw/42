@@ -3,8 +3,8 @@
 //
 
 #include "env.h"
-#include "memory/cc_mem.h"
-#include "string/cc_str.h"
+#include "cc_mem.h"
+#include "cc_str.h"
 
 static char	*get_field(t_hash_pair *pair)
 {

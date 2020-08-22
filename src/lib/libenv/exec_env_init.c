@@ -3,8 +3,8 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
-#include "memory/cc_mem.h"
+#include "cc_str.h"
+#include "cc_mem.h"
 
 t_hash_table *g_exec_env;
 
