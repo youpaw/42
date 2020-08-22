@@ -3,7 +3,7 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 static void	print_field(const t_hash_pair *pair)
 {
@@ -19,5 +19,5 @@ static void	print_field(const t_hash_pair *pair)
 
 void		print_all(void)
 {
-	hash_iter_pair(g_env, &print_field);
+	hash_map_iter_pair(g_env, &print_field);
 }
