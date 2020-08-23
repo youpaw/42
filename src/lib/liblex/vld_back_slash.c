@@ -14,7 +14,9 @@ int 	vld_back_slash(t_lexer *lexer)
 	{
 		if (lexer->index == lexer->size - 1)
 			return (E_INCOMPLETE_INPUT);
-		bzero(lexer->raw + lexer->index - 1, 2);
+		memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index + 1, lexer->size - lexer->index);
+		lexer->index -= 2;
+		lexer->size -= 2;
 	}
 	vec_rm_last(lexer->states);
 	return (0);

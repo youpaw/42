@@ -26,17 +26,17 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
-#add liblex to the project
-set(LIBLEX_DIR "lib/liblex")
-include_directories(${LIBLEX_DIR})
-add_subdirectory(${LIBLEX_DIR})
-target_link_libraries(${PROJECT_NAME} lex)
-
 #add libenv to the project
 set(LIBENV_DIR "lib/libenv")
 include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
+
+#add liblex to the project
+set(LIBLEX_DIR "lib/liblex")
+include_directories(${LIBLEX_DIR})
+add_subdirectory(${LIBLEX_DIR})
+target_link_libraries(${PROJECT_NAME} lex)
 
 #add libcalc to the project
 set(LIBCALC_DIR "lib/libcalc")
