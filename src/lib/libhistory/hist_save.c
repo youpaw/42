@@ -14,7 +14,7 @@ void	hist_save(void)
 
 	//need more checks
 	//if ((file_fd = open(g_hist.file_path, O_WRONLY)) == -1)
-	if ((file_fd = open("/Users/azomega/test/has/.bash_history", O_WRONLY | O_TRUNC)) == -1)
+	if ((file_fd = open(g_hist.file_path, O_WRONLY | O_TRUNC)) == -1)
 		return ;
 	i = 0;
 	putnbr(g_hist.size);
