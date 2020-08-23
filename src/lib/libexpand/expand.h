@@ -12,7 +12,7 @@
 # define N_EXPAND_STAGES 2
 # define N_PARAM_TYPES 10
 #include <stddef.h>
-#include "vector/cc_vec.h"
+#include "cc_vec.h"
 
 enum e_state{
 	e_back_slash,

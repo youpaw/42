@@ -3,7 +3,7 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 int	g_exit_code = 0;
 t_hash_table *g_env;

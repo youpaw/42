@@ -3,7 +3,7 @@
 //
 
 #include "env.h"
-#include "string/cc_str.h"
+#include "cc_str.h"
 
 static void	print_field(const t_hash_pair *pair)
 {
