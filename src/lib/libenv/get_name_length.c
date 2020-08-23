@@ -4,6 +4,7 @@
 
 #include <glob.h>
 #include "cc_char.h"
+#include "env.h"
 
 size_t get_name_length(const char *field)
 {
