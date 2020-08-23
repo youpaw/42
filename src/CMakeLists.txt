@@ -49,3 +49,9 @@ set(LIBEXPAND_DIR "lib/libexpand")
 include_directories(${LIBEXPAND_DIR})
 add_subdirectory(${LIBEXPAND_DIR})
 target_link_libraries(${PROJECT_NAME} expand)
+
+#add builtins to the project
+set(BUILTINS_DIR "lib/builtins")
+include_directories(${BUILTINS_DIR})
+add_subdirectory(${BUILTINS_DIR})
+target_link_libraries(${PROJECT_NAME} builtins)
