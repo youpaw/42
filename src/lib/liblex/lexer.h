@@ -30,19 +30,18 @@
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 16
+# define N_TOKEN_TYPES 14
+# define N_TOKEN_OPERATORS 12
 # include <stddef.h>
 # include "cc_vec.h"
 
 enum e_token_type
 {
-	l_and,
 	l_and_if,
-	l_or,
+	l_and,
 	l_or_if,
+	l_or,
 	l_semi,
-	l_double_semi,
-	l_newline,
 	l_io_number,
 	l_less,
 	l_double_less,
@@ -127,6 +126,7 @@ int 		tok_single_quote(t_lexer *lexer);
 int 		tok_double_quote(t_lexer *lexer);
 int 		tok_dollar(t_lexer *lexer);
 int 		tok_bang(t_lexer *lexer);
+int 		tok_unset(t_lexer *lexer);
 
 int 		vld_back_slash(t_lexer *lexer);
 int 		vld_bang(t_lexer *lexer);
@@ -135,17 +135,17 @@ int 		exp_back_slash(t_lexer *lexer);
 int 		exp_single_quote(t_lexer *lexer);
 int 		exp_double_quote(t_lexer *lexer);
 int 		exp_dollar(t_lexer *lexer);
+int 		exp_unset(t_lexer *lexer);
 
 t_state		get_current_state(t_lexer *lexer);
 int			lex_map(t_lexer *tokenize, t_state current);
 t_tokens	*lex_raw(char *raw, t_stage stage);
 
 
-void 		recognize_tokens(t_tokens *tokens);
 void 		destruct_tokens(t_tokens **tokens);
 t_tokens	*lex_stream(int fd);
-t_tokens	*lex_str(const char *string);
-t_tokens	*lex_str_index(const char *string, size_t index);
+t_tokens	*lex_str(const char *string, t_stage stage);
+t_tokens	*lex_str_len(const char *string, t_stage stage, size_t len);
 
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
