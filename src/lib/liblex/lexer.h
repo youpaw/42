@@ -27,9 +27,10 @@
 # define N_STATES 5
 # define STATES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
+# define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 15
+# define N_TOKEN_TYPES 16
 # include <stddef.h>
 # include "cc_vec.h"
 
@@ -50,37 +51,23 @@ enum e_token_type
 	l_less_and,
 	l_great_and,
 	l_assignment_word,
-	l_word
+	l_word,
+	l_token
 };
 
 struct		s_token
 {
-	char 	*raw;
-	enum e_token_type type;
+	char					*raw;
+	enum e_token_type		type;
 };
 
 struct		s_tokens
 {
-	char		*raw; // здесь должен лежать в первозданном виде поток символов, который пришел на вход
-	int			error; // код ошибки, будет добавлено позже.
-	struct s_token *tokens; // массив токенов
-	size_t		size; // размер массива
+	char					*raw; // здесь должен лежать в первозданном виде поток символов, который пришел на вход
+	int						error; // код ошибки, будет добавлено позже.
+	struct s_token			**tokens; // массив токенов
+	size_t					size; // размер массива
 };
-
-typedef struct s_tokens t_tokens;
-typedef struct s_token t_token;
-typedef enum e_token_type t_token_type;
-
-t_tokens	*lex_stream(int fd);
-t_tokens	*lex_str(const char *string);;
-void 		destruct_tokens(t_tokens **tokens);
-
-// prints the array of tokens in the following format
-// 1. [ ls ] [ word ]
-
-void 		print_tokens(t_tokens *tokens);
-const char	*type_to_string(t_token_type t);
-
 
 enum e_state{
 	l_back_slash,
@@ -109,36 +96,23 @@ enum e_flag{
 };
 
 struct s_lexer{
-	char			*raw;
-	size_t			index;
-	size_t			size;
-	t_vec			*states;
-	t_vec			*tokens;
-	char 			flags[N_LEX_FLAGS];
-	enum e_stage	stage;
+	char					*raw;
+	size_t					begin;
+	size_t					index;
+	size_t					size;
+	t_vec					*states;
+	t_vec					*tokens;
+	char 					flags[N_LEX_FLAGS];
+	enum e_stage			stage;
 };
 
-typedef enum e_state t_state;
-typedef enum e_brace t_brace;
-typedef enum e_stage t_stage;
-typedef struct s_lexer t_lexer;
-/*
-**  lex_* returns t_token ptr allocated my malloc().
-*/
-
-int 	tok_single_quote(t_lexer *lexer);
-int 	tok_double_quote(t_lexer *lexer);
-int 	tok_dollar(t_lexer *lexer);
-
-int 	vld_back_slash(t_lexer *lexer);
-int 	vld_bang(t_lexer *lexer);
-
-int 	exp_back_slash(t_lexer *lexer);
-int 	exp_dollar(t_lexer *lexer);
-
-t_state	get_current_state(t_lexer *lexer);
-int		lex_map(t_lexer *tokenize, t_state current);
-int		lex_raw(char **raw, t_stage stage);
+typedef enum e_state		t_state;
+typedef enum e_brace		t_brace;
+typedef enum e_stage		t_stage;
+typedef struct s_lexer		t_lexer;
+typedef enum e_token_type	t_token_type;
+typedef struct s_token		t_token;
+typedef struct s_tokens		t_tokens;
 
 struct s_brace_raw{
 	char	*open;
@@ -146,7 +120,38 @@ struct s_brace_raw{
 	int		len;
 };
 
-int		get_brace(char *str, t_brace *brace);
+int			get_brace(char *str, t_brace *brace);
+
+int 		tok_back_slash(t_lexer *lexer);
+int 		tok_single_quote(t_lexer *lexer);
+int 		tok_double_quote(t_lexer *lexer);
+int 		tok_dollar(t_lexer *lexer);
+int 		tok_bang(t_lexer *lexer);
+
+int 		vld_back_slash(t_lexer *lexer);
+int 		vld_bang(t_lexer *lexer);
+
+int 		exp_back_slash(t_lexer *lexer);
+int 		exp_single_quote(t_lexer *lexer);
+int 		exp_double_quote(t_lexer *lexer);
+int 		exp_dollar(t_lexer *lexer);
+
+t_state		get_current_state(t_lexer *lexer);
+int			lex_map(t_lexer *tokenize, t_state current);
+t_tokens	*lex_raw(char *raw, t_stage stage);
+
+
+void 		recognize_tokens(t_tokens *tokens);
+void 		destruct_tokens(t_tokens **tokens);
+t_tokens	*lex_stream(int fd);
+t_tokens	*lex_str(const char *string);
+t_tokens	*lex_str_index(const char *string, size_t index);
+
+// prints the array of tokens in the following format
+// 1. [ ls ] [ word ]
+
+void 		print_tokens(t_tokens *tokens);
+const char	*type_to_string(t_token_type t);
 
 
 

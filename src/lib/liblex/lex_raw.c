@@ -3,70 +3,74 @@
 //
 
 #include "lexer.h"
-#include <stdlib.h>
 #include "cc_mem.h"
 #include "cc_str.h"
 
-static t_lexer *init_expand(char *raw, t_stage stage)
+int		init_lexer(t_lexer *lexer, char *raw, t_stage stage)
 {
-	t_lexer	*handle;
-	t_state		state;
+	t_state	state;
 
-	handle = xmalloc(sizeof(t_lexer));
-	handle->raw = raw;
-	handle->index = 0;
-	handle->size = strlen(raw);
-	handle->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
-	handle->stage = stage;
-	bzero(handle->flags, sizeof(char) * N_LEX_FLAGS);
+	if (!raw || !*raw)
+		return (E_NULL_INPUT);
+	lexer->raw = strdup(raw);
+	lexer->begin = 0;
+	lexer->index = 0;
+	lexer->size = strlen(raw);
+	lexer->states = vec_new(STATES_STACK_SIZE, sizeof(t_state), NULL);
+	lexer->tokens = vec_new(TOKENS_STACK_SIZE, sizeof(t_token), NULL);
+	lexer->stage = stage;
+	bzero(lexer->flags, sizeof(char) * N_LEX_FLAGS);
 	state = l_unset;
-	vec_push(handle->states, &state);
-	return (handle);
+	vec_push(lexer->states, &state);
+	return (0);
 }
 
-static void 	del_expand(t_lexer *lexer)
+static void 	del_lexer(t_lexer *lexer)
 {
 	vec_del(&(lexer->states));
-	free(lexer);
+	vec_del(&(lexer->tokens));
 }
 
-static void		clear_str(t_lexer *lexer)
+static t_tokens	*get_tokens(t_lexer *lexer, int error)
 {
-	size_t padding;
+	t_tokens	*tokens;
+	size_t		index;
 
-	lexer->index = 0;
-	padding = 0;
-	while (lexer->index < lexer->size)
+	tokens = xmalloc(sizeof(t_tokens));
+	tokens->raw = lexer->raw;
+	tokens->error = error;
+	tokens->size = lexer->tokens->size;
+	tokens->tokens = xmalloc(sizeof(t_token *) * tokens->size);
+	index = 0;
+	while (index < tokens->size)
 	{
-		if (lexer->raw[lexer->index])
-			lexer->raw[padding++] = lexer->raw[lexer->index++];
-		else
-			lexer->index++;
+		tokens->tokens[index] = xmalloc(sizeof(t_token));
+		vec_get_at(tokens->tokens[index], lexer->tokens, index);
+		index++;
 	}
-	lexer->raw[padding] = '\0';
+	return (tokens);
 }
 
-int				lex_raw(char **raw, t_stage stage)
+t_tokens 	*lex_raw(char *raw, t_stage stage)
 {
-	t_lexer	*handle;
+	t_lexer		lexer;
+	t_tokens	*tokens;
 	t_state		current;
 	int			error;
 
-	if (!raw || !*raw || !**raw)
-		return (E_NULL_INPUT);
+	if (init_lexer(&lexer, raw, stage))
+		return (NULL);
 	error = 0;
-	handle = init_expand(*raw, stage);
-	while (handle->index < handle->size)
+	while (lexer.index < lexer.size)
 	{
-		current = get_current_state(handle);
-		if ((error = lex_map(handle, current)))
+		current = get_current_state(&lexer);
+		if ((error = lex_map(&lexer, current)))
 			break ;
-		handle->index++;
+		lexer.index++;
 	}
-	if (!error && handle->states->size > 1)
+	if (!error && lexer.states->size > 1)
 		error = E_INCOMPLETE_INPUT;
-	if (!error)
-		clear_str(handle);
-	del_expand(handle);
-	return (error);
+	tokens = get_tokens(&lexer, error);
+	del_lexer(&lexer);
+	return (tokens);
 }
