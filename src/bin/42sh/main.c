@@ -1,10 +1,10 @@
-#include "cc.h"
-#include "expand.h"
-#include <stdio.h>
+#include "env.h"
+#include "builtins.h"
 
 int main(int ac, char *av[], char *en[])
 {
-	fdputs("Hello world!", 1);
-	printf("%lu", sizeof(t_list*));
+	env_init((const char **) en);
+	av_init(av[0], (const char **) (av + 1));
+	cd(ac, (const char **) av, (const char **) en);
 	return (0);
 }
