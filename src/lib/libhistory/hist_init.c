@@ -1,28 +1,33 @@
-//
-// Created by Halfhand Lorrine on 8/20/20.
-//
-
 #include <unistd.h>
 #include <fcntl.h>
 #include "history.h"
+#include "cc.h"
 
-t_hist		*g_hist;
-#include	"cc.h"
+t_hist		g_hist;
 
-
-int		hist_init(void)
+void hist_init(const char *home_dir)
 {
-	int file_fd;
+	int	file_fd;
+	char *line;
 
-	g_hist = xmalloc(sizeof(t_hist *));
-	if (access(HOME, F_OK) == -1)
-		return (1);
-	g_hist->file_path = nstrjoin(3, HOME, "/" ,FILE_NAME);
-	if ((file_fd = open(g_hist->file_path, O_RDONLY)) == -1)
-		return (1);
-
-
-
+	//if (!home_dir || access(home_dir, F_OK | R_OK | W_OK | X_OK) == -1)
+	//need more checks for file and permissions
+	if (!home_dir || access(home_dir, F_OK) == -1)
+		g_hist.file_path = NULL;
+	else
+		g_hist.file_path = strjoin(home_dir, "/.bash_history");
+	if ((file_fd = open(g_hist.file_path, O_RDONLY)) == -1)
+		return ;
+	g_hist.size = 0;
+	while (get_next_line(file_fd, &line) > 0)
+	{
+		if (strlen(line))
+			g_hist.commands[g_hist.size++] = line;
+		else
+			free(line);
+	}
+	free(line);
+	g_hist.cur_ind = g_hist.size;
 	close(file_fd);
 //	char **str;
 //
