@@ -27,7 +27,7 @@
 # define N_COMMANDS 1000
 # define FILE_NAME ".bash_history"
 # define HOME "/Users/hlorrine/"
-#include "avl/cc_avl.h"
+#include "cc_avl.h"
 
 struct s_hist
 {

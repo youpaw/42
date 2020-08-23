@@ -27,7 +27,7 @@
 # include <stdbool.h>
 # include <term.h>
 # include <sys/stat.h>
-# include "vector/cc_vec.h"
+# include "cc_vec.h"
 # include <dirent.h>
 
 typedef struct	s_out

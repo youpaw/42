@@ -5,6 +5,6 @@
 #ifndef BUILTINS_H
 #define BUILTINS_H
 
-int cd(int ac, const char **av, const char **env);
+int cd(int ac, const char **av);
 
 #endif //BUILTINS_H
