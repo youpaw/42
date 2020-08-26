@@ -14,7 +14,6 @@ t_tokens	*lex_str_len(const char *string, t_stage stage, size_t len)
 		return (NULL);
 	sub = strsub(string, 0, len);
 	tokens = lex_raw(sub, stage);
-	recognize_tokens(tokens);
 	free(sub);
 	return (tokens);
 }
