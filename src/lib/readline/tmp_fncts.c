@@ -1,6 +1,6 @@
 #include "readline.h"
 
-char *vect_to_str(t_vec *vector)
+char *vect_to_str(t_vec *vector, int size)
 {
 	char *line;
 

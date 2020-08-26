@@ -6,7 +6,7 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 16:40:10 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 22:28:54 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/22 22:29:19 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int			autocomplete(t_input *input)
 //			token = get_last_token();
 		if (token == 0) //cur token shouldn't be anithing (wrong or quote)
 			ft_put('\7');
-		else if (token == 1) //cur token end and no command could be added
-			symbol_key_pressed(input, ' ');
+//		else if (token == 1) //cur token end and no command could be added
+//			symbol_key_pressed(input, );
 		else if (token == 2) //cur token is dir
 		{
 			to_print = get_list_files(input);

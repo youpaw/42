@@ -9,6 +9,7 @@
 
 int		get_key_func(char key[4], t_input *input)
 {
+//	write(STDOUT_FILENO, key, 4);
 	if (!strcmp(key, "\33"))
 		return (0); //TODO escape character
 	else if (!strcmp(key, "\33\133\101") || !(strcmp(key, "\20")))
@@ -26,29 +27,31 @@ int		get_key_func(char key[4], t_input *input)
 	else if (!strcmp(key, "\t"))
 		return autocomplete(input);
 	else if (!strcmp(key, "\n"))
-		return (1); //enter return nozero value
+		return (1); //enter return nozero valu
 	// TODO think about error values
 	else
 	{
-		symbol_key_pressed(input, key[0]);
+		symbol_key_pressed(input, key);
 		return (0);
 	}
 }
 int		readline(char **line)
 {
-	char key[4];
+	t_letter key;
 	t_input input;
+	int i = 0;
+	char *line;
 
 	input = input_init(*line);
 	while (42)
 	{
-		bzero(key, 4);
-		read(STDIN_FILENO, key, 4);
-		if (get_key_func(key, &input))
+		key.num = getch();
+//		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
+		if (get_key_func(key.ch, &input))
 		{
 //			printf("\n!!!!!!!!!!!!!!!\n%s\n!!!!!!!!!!!!!!!!\ncurs_pos: %d, len: %d",
 //				   (char*)input.line->data, input.cursor_position, input.len);
-			printf("\n%s", (char*)input.line->data);
+			line = vect_to_str(input.line, input.len);
 			return 0;
 		}
 	}

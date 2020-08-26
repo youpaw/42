@@ -6,17 +6,18 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:54:11 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 22:17:54 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/26 18:23:23 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+#include <stdio.h>
 
 t_input input_init(char *line)
 {
 	t_input inp;
 
-	inp.line = vec_new(8, sizeof(char), NULL);
+	inp.line = vec_new(8, sizeof(char[4]), NULL);
 	if (line)
 	{
 		inp.len = strlen(line);
@@ -47,4 +48,41 @@ void	complete_print(t_input *input, t_list **to_print)
 	}
 	lst_del(to_print, NULL);
 	*to_print = NULL;
+}
+
+int			get_unicod_len(char ch)
+{
+	if (ch >= 0)
+		return (1);
+	else if (ch & -64)
+		return(2);
+	else if (ch & -32)
+		return(3);
+	else if (ch & -16)
+		return(4);
+	return 0;
+}
+
+int 	getch(void)
+{
+	static char	buf[BUFF_SIZE];
+	t_letter	res;
+	int 		len;
+
+	res.num = 0;
+	if (buf[0] == '\0')
+		read(STDIN_FILENO, buf, BUFF_SIZE);
+	if (buf[0] == '\33' && buf[1] == '\133')
+	{
+		strncpy(res.ch, buf, 4);
+		bzero(buf, BUFF_SIZE);
+	}
+	else
+	{
+		len = get_unicod_len(buf[0]);
+		strncpy(res.ch, buf, len);
+		memmove(buf, &buf[len], BUFF_SIZE - len);
+		buf[BUFF_SIZE - len + 1] = '\0';
+	}
+	return (res.num);
 }
