@@ -6,10 +6,6 @@
 
 void 		env_del_pair(t_hash_pair *pair)
 {
-	t_env *field;
-
 	free(pair->key);
-	field = pair->value;
-	free(field->val);
-	free(field);
+	free(pair->value);
 }

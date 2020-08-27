@@ -4,24 +4,13 @@
 
 #include "env.h"
 #include "cc_str.h"
-#include "cc_mem.h"
 
-t_hash_table *g_exec_env;
-
-static t_env	*cpy_field(t_env *field)
-{
-	t_env *cpy;
-
-	cpy = xmalloc(sizeof(t_env));
-	cpy->val = strdup(field->val);
-	cpy->type = field->type;
-	return (cpy);
-}
+t_hash_map *g_exec_env;
 
 static void 	cpy_pair(t_hash_pair *dst, t_hash_pair *src)
 {
 	dst->key = strdup(src->key);
-	dst->value = cpy_field(src->value);
+	dst->value = strdup(src->value);
 }
 
 static t_list	*cpy_bucket(t_list *bucket)
@@ -30,7 +19,7 @@ static t_list	*cpy_bucket(t_list *bucket)
 
 	if (bucket)
 	{
-		cpy = lst_new(bucket->content, bucket->size);
+		cpy = lst_new(bucket->content, bucket->content_size);
 		cpy_pair(cpy->content, bucket->content);
 		cpy->next = cpy_bucket(bucket->next);
 		return (cpy);
@@ -45,9 +34,9 @@ void	exec_env_init(void)
 	cnt = 0;
 	g_exec_env = hash_map_new(N_MAX_EXEC_ENV, \
     (size_t (*)(const void *)) &strhash, \
-	(int (*)(const void *, const void *)) &strcmp, \
+	(int (*)(const void *, const void *)) &env_cmp_pair, \
 	&env_del_pair);
-	while (cnt < g_env->size && cnt < g_exec_env->size)
+	while (cnt < g_env->buckets_size && cnt < g_exec_env->buckets_size)
 	{
 		g_exec_env->buckets[cnt] = cpy_bucket(g_env->buckets[cnt]);
 		cnt++;

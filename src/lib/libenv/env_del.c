@@ -7,4 +7,5 @@
 void		env_del(void)
 {
 	hash_map_del(&g_env);
+	hash_map_del(&g_inter_env);
 }

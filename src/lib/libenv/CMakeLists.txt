@@ -9,6 +9,6 @@ file(MAKE_DIRECTORY ${LIBENV_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(env STATIC
-        get_name_length.c env_init.c env_add_field.c av_init.c env_del.c env_get_field.c env_get_field_val.c av_set.c av_get.c exec_env_init.c exec_env_add.c print_env.c print_all.c env_del_pair.c exec_env_2array.c is_name_valid.c is_char_valid.c)
+        get_valid_name_length.c exec_env_init.c exec_env_2array.c env_init.c av_init.c env_del.c av_set.c av_get.c env_print_global.c env_del_pair.c env_insert_to.c env_remove_from.c env_print_full.c env_cmp_pair.c env_get_value.c exec_env_del.c env_print_pair.c)
 
 target_link_libraries(env cc)
