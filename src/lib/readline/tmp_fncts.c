@@ -2,9 +2,14 @@
 
 char *vect_to_str(t_vec *vector, int size)
 {
-	char *line;
+	char line[4];
+	int i = 0;
 
-	line = (char*)vector->data;
-	return line;
-
+	putchar('\n');
+	while (i != size)
+	{
+		vec_get_at(line, vector, i++);
+		write(STDOUT_FILENO, line, 4);
+	}
+	return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:54:11 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/26 18:23:23 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/28 13:03:35 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,18 @@ int 	getch(void)
 	static char	buf[BUFF_SIZE];
 	t_letter	res;
 	int 		len;
+	int fd;
 
 	res.num = 0;
 	if (buf[0] == '\0')
 		read(STDIN_FILENO, buf, BUFF_SIZE);
 	if (buf[0] == '\33' && buf[1] == '\133')
 	{
+//		fd = open("debug.txt", O_RDWR | O_CREAT);
 		strncpy(res.ch, buf, 4);
+//		write(fd, buf, 4);
+//		write(fd, " | ", 3);
+//		close(fd);
 		bzero(buf, BUFF_SIZE);
 	}
 	else

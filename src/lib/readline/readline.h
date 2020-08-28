@@ -54,12 +54,6 @@ typedef union	u_letter
 	int 	num;
 }				t_letter;
 
-//typedef struct	s_letter
-//{
-//	char	ch[4];
-//	int		num;
-//}				t_letter;
-
 int			readline(char **line);
 void		main_init(void);
 void		return_tty(void);

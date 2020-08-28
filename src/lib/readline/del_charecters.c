@@ -34,6 +34,8 @@ int			del_pressed(t_input *input)
 		vec_rm_at(input->line, input->cursor_position);
 		input->len--;
 	}
+	else
+		ft_put('\7');
 	return 0;
 }
 //ueeiureушгкшугкшугкuieurieur
