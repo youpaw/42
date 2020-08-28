@@ -6,7 +6,7 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 12:34:59 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 14:48:26 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/26 15:42:11 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int backspace_pressed(t_input *input)
 		left_arrow_pressed(input);
 		tputs(tgetstr("dc", NULL), 1, ft_put);
 		vec_rm_at(input->line, input->cursor_position);
+		input->len--;
 	}
+	else
+		ft_put('\7');
 	return 0;
 }
 
@@ -29,6 +32,10 @@ int			del_pressed(t_input *input)
 	{
 		tputs(tgetstr("dc", NULL), 1, ft_put);
 		vec_rm_at(input->line, input->cursor_position);
+		input->len--;
 	}
+	else
+		ft_put('\7');
 	return 0;
 }
+//ueeiureушгкшугкшугкuieurieur

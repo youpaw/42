@@ -14,12 +14,6 @@ include_directories(${LIBH_DIR})
 add_subdirectory(${LIBH_DIR})
 target_link_libraries(${PROJECT_NAME} history)
 
-#add libcalc to the project
-set(READLINE_DIR "lib/readline")
-include_directories(${READLINE_DIR})
-add_subdirectory(${READLINE_DIR})
-target_link_libraries(${PROJECT_NAME} readline)
-
 #add libcc to the project
 set(LIBCC_DIR "lib/libcc")
 include_directories(${LIBCC_DIR})
@@ -37,6 +31,12 @@ set(LIBLEX_DIR "lib/liblex")
 include_directories(${LIBLEX_DIR})
 add_subdirectory(${LIBLEX_DIR})
 target_link_libraries(${PROJECT_NAME} lex)
+
+#add readline to the project
+set(READLINE_DIR "lib/readline")
+include_directories(${READLINE_DIR})
+add_subdirectory(${READLINE_DIR})
+target_link_libraries(${PROJECT_NAME} readline)
 
 #add libcalc to the project
 set(LIBCALC_DIR "lib/libcalc")
