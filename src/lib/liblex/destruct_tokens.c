@@ -4,11 +4,6 @@
 
 #include "lexer.h"
 
-static void destruct_token(t_token *token)
-{
-	free(token->raw);
-}
-
 void 		destruct_tokens(t_tokens **tokens)
 {
 	t_tokens	*p_tokens;
@@ -18,8 +13,7 @@ void 		destruct_tokens(t_tokens **tokens)
 	p_tokens = *tokens;
 	while (index < p_tokens->size)
 	{
-		destruct_token(p_tokens->tokens[index]);
-		free(p_tokens->tokens[index]);
+		destruct_token(&p_tokens->tokens[index]);
 		index++;
 	}
 	free(p_tokens->tokens);

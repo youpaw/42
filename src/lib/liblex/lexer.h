@@ -129,9 +129,14 @@ struct s_brace_raw{
 	int		len;
 };
 
+int			is_redirection(t_token_type type);
+int 		is_delimiter(t_token_type type);
+int 		is_operator(t_token_type type);
+int			is_number(const char *str);
 
 int			get_brace(const char *str, t_brace *brace);
 t_token_type get_operator(const char *str, t_operator *op);
+t_token		*get_last_token(t_tokens *tokens);
 
 t_token_type recognize_token(t_lexer *lexer);
 t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
@@ -156,11 +161,11 @@ t_state		get_current_state(t_lexer *lexer);
 int			lex_map(t_lexer *tokenize, t_state current);
 t_tokens	*lex_raw(char *raw, t_stage stage);
 
-
+void 		destruct_token(t_token **token);
 void 		destruct_tokens(t_tokens **tokens);
 t_tokens	*lex_stream(int fd);
 t_tokens	*lex_str(const char *string, t_stage stage);
-t_tokens	*lex_str_len(const char *string, t_stage stage, size_t len);
+t_tokens	*lex_str_sub(const char *string, t_stage stage, size_t len);
 
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]

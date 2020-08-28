@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "cc_str.h"
 
-t_tokens	*lex_str_len(const char *string, t_stage stage, size_t len)
+t_tokens	*lex_str_sub(const char *string, t_stage stage, size_t len)
 {
 	t_tokens	*tokens;
 	char		*sub;
