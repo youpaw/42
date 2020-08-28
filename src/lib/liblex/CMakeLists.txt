@@ -21,7 +21,13 @@ ADD_LIBRARY(lex STATIC
 		type_to_string.c
 		vld_bang.c
 		vld_back_slash.c
-		lex_str_len.c destruct_tokens.c tok_back_slash.c tok_bang.c tok_unset.c)
+		lex_str_len.c
+		destruct_tokens.c
+		tok_back_slash.c
+		tok_bang.c
+		tok_unset.c
+		get_operator.c
+		exp_single_quote.c exp_double_quote.c exp_unset.c recognize_token.c print_tokens.c recognize_operator.c)
 
 
 target_link_libraries(lex cc)
