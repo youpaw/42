@@ -23,10 +23,10 @@
 # include <stdbool.h>
 # include <term.h>
 # include <sys/stat.h>
-# include "cc_vec.h"
 # include <dirent.h>
 #include <termcap.h>
 #include "cc.h"
+#include "lexer.h"
 
 struct termios	savetty;
 
@@ -59,8 +59,7 @@ int			autocomplete(t_input *inp);
 void		complete_print(t_input *input, t_list **to_print);
 int			getch(void);
 int			get_unicod_len(char ch);
+char		*input_to_str(t_input input);
 
-//temp
-char *vect_to_str(t_vec *vector, int size);
 
 #endif //READLINE_H

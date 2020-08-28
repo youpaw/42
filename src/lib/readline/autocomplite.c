@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "readline.h"
-#include "../libcc/cc.h"
 #include <stdio.h>
 
 /*
@@ -23,7 +22,6 @@ t_list *get_files(char *path, char *name)
 	DIR *d;
 	struct dirent *dir;
 	t_list *lst = NULL;
-	t_list *cpy;
 	size_t cur_len;
 
 	cur_len = strlen(name);
@@ -32,7 +30,6 @@ t_list *get_files(char *path, char *name)
 		;	//TODO some error when dir doesn't exist
 	while ((dir = readdir(d)))
 	{
-
 		if (strncmp(dir->d_name, name, cur_len) == 0)
 			lst_add_sort(&lst, lst_new(dir->d_name, 1024), (int (*)(const void *, const void *)) &strcmp);
 	}
@@ -50,18 +47,14 @@ t_list *get_files(char *path, char *name)
  * This function returns list of filenames, which equal to first letters fo input
  */
 
-t_list		*get_list_files(t_input *input)
+t_list		*get_list_files(t_input *input, t_token *token)
 {
 	char *fullname;
 	char *delimiter;
 	t_list *lst;
-	char test[8][5] = TEST;
 	int i = 0;
 
-//	while (i != 8)
-//	{
-		fullname = strdup(test[6]); //here will be function, which give me last token
-//		printf("Full string: %s\n", test[i++]);
+		fullname = token->raw;
 		delimiter = strrchr(fullname, '/');
 		if (delimiter)
 		{
@@ -81,24 +74,26 @@ void get_command(t_input *input)
 
 int			autocomplete(t_input *input)
 {
-	int				token = 2;
 	static t_list	*to_print;
+	t_tokens 		*tokens;
+	t_token 		*token;
 
 	if (!to_print)
 	{
-//			tokenize();
-//			token = get_last_token();
+
+		tokens = lex_str_sub(input_to_str(*input), l_tok, input->cursor_position);
+		token = get_last_token(tokens);
 		if (token == 0) //cur token shouldn't be anithing (wrong or quote)
 			ft_put('\7');
 //		else if (token == 1) //cur token end and no command could be added
 //			symbol_key_pressed(input, );
-		else if (token == 2) //cur token is dir
+		else if (token->type == l_word)
 		{
-			to_print = get_list_files(input);
+			to_print = get_list_files(input, token);
 			if (!to_print->next)
 				complete_print(input, &to_print);
 		}
-		else if (token == 3) //cur token is command
+		else if (token->type == l_command_name) //cur token is command
 			get_command(input);
 		return 1;
 	}
@@ -106,5 +101,7 @@ int			autocomplete(t_input *input)
 	{
 
 	}
+	destruct_token(&token);
+	destruct_tokens(&tokens);
 	return 1;
 }
