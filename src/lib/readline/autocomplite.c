@@ -17,6 +17,7 @@
 /*
  * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
 */
+
 t_list *get_files(char *path, char *name)
 {
 	DIR *d;

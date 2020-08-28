@@ -6,7 +6,7 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:54:11 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/28 13:03:35 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/28 14:23:31 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,25 @@ int			get_unicod_len(char ch)
 
 int 	getch(void)
 {
-	static char	buf[BUFF_SIZE];
+	static char	buf[BUFFSIZE];
 	t_letter	res;
 	int 		len;
 	int fd;
 
 	res.num = 0;
 	if (buf[0] == '\0')
-		read(STDIN_FILENO, buf, BUFF_SIZE);
+		read(STDIN_FILENO, buf, BUFFSIZE);
 	if (buf[0] == '\33' && buf[1] == '\133')
 	{
-//		fd = open("debug.txt", O_RDWR | O_CREAT);
 		strncpy(res.ch, buf, 4);
-//		write(fd, buf, 4);
-//		write(fd, " | ", 3);
-//		close(fd);
-		bzero(buf, BUFF_SIZE);
+		bzero(buf, BUFFSIZE);
 	}
 	else
 	{
 		len = get_unicod_len(buf[0]);
 		strncpy(res.ch, buf, len);
-		memmove(buf, &buf[len], BUFF_SIZE - len);
-		buf[BUFF_SIZE - len + 1] = '\0';
+		memmove(buf, &buf[len], BUFFSIZE - len);
+		buf[BUFFSIZE - len + 1] = '\0';
 	}
 	return (res.num);
 }

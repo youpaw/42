@@ -6,14 +6,14 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:20:02 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/26 19:06:22 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/28 14:20:11 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_H
 #define READLINE_H
 #define TEST {"", "fuck", ".", "./", "..", "../", "./C", "4"}
-#define BUFSIZE	1024
+#define BUFFSIZE	1024
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -28,18 +28,7 @@
 #include <termcap.h>
 #include "cc.h"
 
-typedef struct	s_out
-{
-	struct termios	savetty;
-	char			tbuf[2048];
-	char			strings[256];
-	char			*p;
-	char			*tname;
-	int				fd;
-	int 			cursor_position;
-}				t_out;
-
-t_out g_out;
+struct termios	savetty;
 
 typedef struct s_input
 {
@@ -55,8 +44,9 @@ typedef union	u_letter
 }				t_letter;
 
 int			readline(char **line);
-void		main_init(void);
-void		return_tty(void);
+void		tty_init(void);
+void		restore_tty(void);
+void		termcap_init(void);
 void 		ft_putstr(char *str);
 int			ft_put(int c);
 int			left_arrow_pressed(t_input *inp);

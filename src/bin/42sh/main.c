@@ -7,7 +7,7 @@ int main(int ac, char *av[], char *en[])
 {
 	t_letter res;
 
-	main_init();
+	tty_init();
 	char *line = NULL;
 	if (ac == 2)
 	{
@@ -16,11 +16,11 @@ int main(int ac, char *av[], char *en[])
 		res.num = getch();
 		write(STDOUT_FILENO, &res.ch, 4);
 		printf("\n\\%o, \\%o, \\%o, \\%o, %d", res.ch[0], res.ch[1], res.ch[2], res.ch[3], res.num);
-		return_tty();
+			restore_tty();
 		return (0);
 		}
 	}
 	readline(&line);
-	return_tty();
+	restore_tty();
 	return (0);
 }
