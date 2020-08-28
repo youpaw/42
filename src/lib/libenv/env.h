@@ -33,6 +33,8 @@ void		env_del(void);
 void 		env_del_pair(t_hash_pair *pair);
 
 size_t		get_name_length(const char *field);
+int			is_char_valid(char c);
+size_t is_name_valid(const char *field);
 
 t_env		*env_get_field(const char *name);
 const char 	*env_get_field_val(const char *name);

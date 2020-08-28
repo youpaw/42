@@ -34,7 +34,7 @@ t_list *get_files(char *path, char *name)
 	{
 
 		if (strncmp(dir->d_name, name, cur_len) == 0)
-			lst_add_sort(&lst, lst_new(dir->d_name, 1024), 0, (int (*)(const void *, const void *, void *)) &strcmp);
+			lst_add_sort(&lst, lst_new(dir->d_name, 1024), (int (*)(const void *, const void *)) &strcmp);
 	}
 //	cpy = lst;
 //	while (cpy)

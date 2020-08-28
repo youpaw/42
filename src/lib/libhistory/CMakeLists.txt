@@ -7,11 +7,8 @@ file(MAKE_DIRECTORY ${BUILD_DIRECTORY})
 
 
 ADD_LIBRARY(history STATIC
-        h_dlist.c
-        h_dlist2.c
-        h_file.c
-        )
+        hist_init.c
+        hist_save.c hist_print.c hist_get_by_index.c hist_get_by_prefix.c hist_get_last.c hist_get_prev.c hist_get_next.c hist_reset_cur_ind.c hist_push.c)
 
         
 target_link_libraries(history cc)
-target_link_libraries(history lists)

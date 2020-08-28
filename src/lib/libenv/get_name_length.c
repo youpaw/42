@@ -4,11 +4,7 @@
 
 #include <glob.h>
 #include "cc_char.h"
-
-static int char_valid(char c)
-{
-	return (isalnum(c) || c == '_');
-}
+#include "env.h"
 
 size_t get_name_length(const char *field)
 {
@@ -17,7 +13,7 @@ size_t get_name_length(const char *field)
 	index = 0;
 	if (isdigit(field[index]))
 		return (1);
-	while (char_valid(field[index]))
+	while (is_char_valid(field[index]))
 		index++;
 	return (index);
 }

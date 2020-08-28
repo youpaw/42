@@ -24,14 +24,31 @@
 
 #ifndef HISTORY_H
 # define HISTORY_H
+# define HIST_SIZE 1000
+# define HIST_FILE_SIZE 500
+# define HIST_FILE_NAME ".bash_history"
 
-int		h_init(const char *path);
-int		h_close();
+typedef struct	s_hist
+{
+	const char 	*file_path;
+	char		*commands[HIST_SIZE];
+	int			cur_ind;
+	int			size;
+}				t_hist;
 
-int		h_get_prev(char *out);
-int		h_get_next(char *out);
-void	h_append(const char *content);
+extern t_hist	g_hist;
 
-int		h_save_new();
+void hist_init(const char *home_dir);
+
+int 	hist_push(const char *cmd);
+char 	*hist_get_by_prefix(const char *prefix);
+char 	*hist_get_by_index(int index);
+char 	*hist_get_last(void);
+char	*hist_get_next(void);
+char	*hist_get_prev(void);
+void 	hist_reset_cur_ind(void);
+
+void	hist_save(void);
+void	hist_print(void);
 
 #endif 

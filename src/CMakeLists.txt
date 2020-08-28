@@ -8,6 +8,18 @@ set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
 add_executable(${PROJECT_NAME} bin/42sh/main.c)
 
+#add libhistory to the project
+set(LIBH_DIR "lib/libhistory")
+include_directories(${LIBH_DIR})
+add_subdirectory(${LIBH_DIR})
+target_link_libraries(${PROJECT_NAME} history)
+
+#add libcalc to the project
+set(READLINE_DIR "lib/readline")
+include_directories(${READLINE_DIR})
+add_subdirectory(${READLINE_DIR})
+target_link_libraries(${PROJECT_NAME} readline)
+
 #add libcc to the project
 set(LIBCC_DIR "lib/libcc")
 include_directories(${LIBCC_DIR})
@@ -19,18 +31,6 @@ set(LIBENV_DIR "lib/libenv")
 include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
-
-#add libexpand to the project
-set(LIBEXPAND_DIR "lib/libexpand")
-include_directories(${LIBEXPAND_DIR})
-add_subdirectory(${LIBEXPAND_DIR})
-target_link_libraries(${PROJECT_NAME} expand)
-
-#add libhistory to the project
-#set(LIBH_DIR "lib/libhistory")
-#include_directories(${LIBH_DIR})
-#add_subdirectory(${LIBH_DIR})
-#target_link_libraries(${PROJECT_NAME} history)
 
 #add liblex to the project
 set(LIBLEX_DIR "lib/liblex")
@@ -44,8 +44,8 @@ include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
 
-#add libcalc to the project
-set(READLINE_DIR "lib/readline")
-include_directories(${READLINE_DIR})
-add_subdirectory(${READLINE_DIR})
-target_link_libraries(${PROJECT_NAME} readline)
+#add libexpand to the project
+set(LIBEXPAND_DIR "lib/libexpand")
+include_directories(${LIBEXPAND_DIR})
+add_subdirectory(${LIBEXPAND_DIR})
+target_link_libraries(${PROJECT_NAME} expand)
