@@ -34,7 +34,7 @@ int 		tok_unset(t_lexer *lexer)
 	t_token_type type;
 
 	c = lexer->raw[lexer->index];
-	if (iswspace(c))
+	if (iswspace(c) || !c)
 	{
 		if (lexer->begin == lexer->index)
 			lexer->begin++;
