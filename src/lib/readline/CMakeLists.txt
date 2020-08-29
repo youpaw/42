@@ -10,7 +10,7 @@ file(MAKE_DIRECTORY ${READLINE_BUILD_DIRECTORY})
 
 ADD_LIBRARY(readline STATIC
         readline.c
-        termcap_init.c output.c input.c arrows_handle.c del_charecters.c symbol_handle.c tmp_fncts.c autocomplite.c tty_init.c tty_restore.c input_to_str.c)
+        termcap_init.c output.c input.c arrows_handle.c del_charecters.c symbol_handle.c tmp_fncts.c autocomplite.c tty_init.c tty_restore.c input_to_str.c get_displayed_symbol_length.c)
 
 target_link_libraries(readline cc termcap)
 

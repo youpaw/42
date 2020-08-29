@@ -39,9 +39,24 @@ typedef struct s_input
 
 typedef union	u_letter
 {
-	char	ch[4];
+	char	ch[5];
+	unsigned char uch[5];
 	int 	num;
+	unsigned int unum;
 }				t_letter;
+
+/*
+ * Struct to easy converting UTF-8. It uses space in memory like this:
+*				  mask        lead        beg      end       bits
+*        &(utf_t){0b00111111, 0b10000000, 0,       0,        6    }
+*/
+typedef struct {
+	char mask;
+	char lead;
+	uint32_t beg;
+	uint32_t end;
+	int bits_stored;
+}utf_t;
 
 int			readline(char **line);
 void		tty_init(void);
@@ -60,6 +75,7 @@ void		complete_print(t_input *input, t_list **to_print);
 int			getch(void);
 int			get_unicod_len(char ch);
 char		*input_to_str(t_input input);
+int			get_displayed_symbol_len(unsigned char *num);
 
 
 #endif //READLINE_H

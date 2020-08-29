@@ -54,12 +54,12 @@ int			get_unicod_len(char ch)
 {
 	if (ch >= 0)
 		return (1);
-	else if (ch & -64)
-		return(2);
-	else if (ch & -32)
-		return(3);
 	else if (ch & -16)
 		return(4);
+	else if (ch & -32)
+		return(3);
+	else if (ch & -64)
+		return(2);
 	return 0;
 }
 
@@ -68,9 +68,9 @@ int 	getch(void)
 	static char	buf[BUFFSIZE];
 	t_letter	res;
 	int 		len;
-	int fd;
 
-	res.num = 0;
+//	res.num = 0;
+	bzero(res.ch, 5);
 	if (buf[0] == '\0')
 		read(STDIN_FILENO, buf, BUFFSIZE);
 	if (buf[0] == '\33' && buf[1] == '\133')
@@ -83,7 +83,7 @@ int 	getch(void)
 		len = get_unicod_len(buf[0]);
 		strncpy(res.ch, buf, len);
 		memmove(buf, &buf[len], BUFFSIZE - len);
-		buf[BUFFSIZE - len + 1] = '\0';
+		bzero(&buf[BUFFSIZE - len], len);
 	}
 	return (res.num);
 }

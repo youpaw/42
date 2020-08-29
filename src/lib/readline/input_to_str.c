@@ -11,10 +11,11 @@ char	*input_to_str(t_input input)
 	char let[5];
 
 	i = 0;
-	bzero(let, 5);
-	string = xmalloc(input.cursor_position * 4 * sizeof(char));
+	string = xmalloc((input.cursor_position * 4 * sizeof(char) + 1));
+	bzero(string, (input.cursor_position * 4) + 1);
 	while (i != input.cursor_position)
 	{
+		bzero(let, 5);
 		vec_get_at(let, input.line, i);
 		strcat(string, let);
 		i++;
