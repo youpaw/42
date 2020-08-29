@@ -49,3 +49,9 @@ set(LIBEXPAND_DIR "lib/libexpand")
 include_directories(${LIBEXPAND_DIR})
 add_subdirectory(${LIBEXPAND_DIR})
 target_link_libraries(${PROJECT_NAME} expand)
+
+#add libalias to the project
+set(LIBALIAS_DIR "lib/libalias")
+include_directories(${LIBALIAS_DIR})
+add_subdirectory(${LIBALIAS_DIR})
+target_link_libraries(${PROJECT_NAME} alias)

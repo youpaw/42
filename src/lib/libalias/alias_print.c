@@ -1,8 +1,8 @@
 //
-// Created by Azzak Omega on 8/26/20.
+// Created by Azzak Omega on 8/29/20.
 //
 
-#include "env.h"
+#include "alias.h"
 #include "cc_str.h"
 #include "cc_lst.h"
 #include "cc_hash_map.h"
@@ -14,25 +14,26 @@ static void 	get_names(const char **names)
 	t_list *lst;
 
 	i = 0;
-	while (i < g_env->buckets_size)
+	while (i < g_aliases->buckets_size)
 	{
-		lst = g_env->buckets[i++];
+		lst = g_aliases->buckets[i++];
 		while (lst)
 		{
 			*names++ = ((t_hash_pair *)(lst->content))->key;
 			lst = lst->next;
 		}
 	}
-	i = 0;
-	while (i < g_inter_env->buckets_size)
-	{
-		lst = g_inter_env->buckets[i++];
-		while (lst)
-		{
-			*names++ = ((t_hash_pair *)(lst->content))->key;
-			lst = lst->next;
-		}
-	}
+}
+
+static void alias_print_pair(const t_hash_pair *pair)
+{
+	if (!pair)
+		return ;
+	puts("alias ");
+	puts(pair->key);
+	puts("='");
+	puts(pair->value);
+	putendl("'");
 }
 
 static void	print_by_names(const char **names)
@@ -42,18 +43,17 @@ static void	print_by_names(const char **names)
 	if (names)
 		while ((pair.key = (void *)*names++))
 		{
-			if (!(pair.value = hash_map_get_val(g_env, pair.key)))
-				pair.value = hash_map_get_val(g_inter_env, pair.key);
-			env_print_pair(&pair);
+			pair.value = hash_map_get_val(g_aliases, pair.key);
+			alias_print_pair(&pair);
 		}
 }
 
-void		env_print_full(void)
+void		alias_print(void)
 {
 	size_t		size;
 	const char 	**names;
 
-	size = hash_map_get_size(g_env) + hash_map_get_size(g_inter_env);
+	size = hash_map_get_size(g_aliases);
 	if (size)
 	{
 		names = (const char **)xmalloc(sizeof(char *) * (size + 1));

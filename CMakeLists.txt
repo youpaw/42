@@ -10,6 +10,7 @@ set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
 set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
 
+
 add_subdirectory(src)
 
 enable_testing()

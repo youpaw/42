@@ -61,7 +61,7 @@ t_tokens 	*lex_raw(char *raw, t_stage stage)
 	if (init_lexer(&lexer, raw, stage))
 		return (NULL);
 	error = 0;
-	while (lexer.index < lexer.size)
+	while (lexer.index <= lexer.size)
 	{
 		current = get_current_state(&lexer);
 		if ((error = lex_map(&lexer, current)))
