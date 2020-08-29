@@ -11,14 +11,14 @@ t_token_type recognize_token(t_lexer *lexer)
 
 	if (!lexer->tokens->size)
 	{
-		if (is_name_valid(lexer->raw + lexer->begin))
+		if (get_valid_name_length(lexer->raw + lexer->begin))
 			return (l_assignment_word);
 		return (l_command_name);
 	}
 	vec_get_last(&token, lexer->tokens);
 	if (token.type == l_assignment_word || is_delimiter(token.type))
 	{
-		if (is_name_valid(lexer->raw + lexer->begin))
+		if (get_valid_name_length(lexer->raw + lexer->begin))
 			return (l_assignment_word);
 		return (l_command_name);
 	}
