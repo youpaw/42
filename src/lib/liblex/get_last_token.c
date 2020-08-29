@@ -28,6 +28,12 @@ t_token		*get_last_token(t_tokens *tokens)
 		token->raw = strdup("");
 		token->type = l_command_name;
 	}
+	else if (is_operator(last_token->type) || \
+	last_token->type == l_io_number || last_token->type == l_assignment_word)
+	{
+		token->raw = strdup("");
+		token->type = l_word;
+	}
 	else
 	{
 		token->raw = strdup(last_token->raw);
