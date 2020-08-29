@@ -5,6 +5,7 @@
 
 #include "env.h"
 #include "cc_lst.h"
+#include "alias.h"
 
 void print_list(t_list *lst)
 {
@@ -16,6 +17,25 @@ void del_str(void *item)
 	return ;
 	free(item);
 }
+int main(int ac, char *av[], char *en[])
+{
+	alias_init();
+	alias_add("ls=ls -a");
+	alias_add("ls 1=ls -2a");
+	alias_add("ls		2=ls -2a");
+	alias_add("ls		2=ls -2a");
+	alias_add("ls22=ls -a");
+	alias_add("abd=lsgaw");
+	alias_add("ab=");
+	putendl(alias_get_value("ls22"));
+	alias_remove("ls22");
+	//putendl(alias_get_value("ls22"));
+	alias_print();
+	alias_del();
+
+	return (0);
+}
+
 /*
 int main(int ac, char *av[], char *en[])
 {
@@ -27,7 +47,7 @@ int main(int ac, char *av[], char *en[])
 	return (0);
 }
 */
-
+/*
 int main(int ac, char *av[], char *en[])
 {
 	char **exec_str;
@@ -54,7 +74,7 @@ int main(int ac, char *av[], char *en[])
 	return (0);
 }
 
-
+*/
 /*
 int main(int ac, char *av[], char *en[])
 {
