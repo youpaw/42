@@ -7,6 +7,7 @@
 #define N_MAX_AV 254
 #define N_MAX_EXEC_ENV 256
 #define N_MAX_ENV 256
+#define N_MAX_ALIAS 256
 
 //#include <glob.h>
 #include "cc_hash_map.h"
@@ -70,5 +71,6 @@ size_t			arr2_get_size(const char **m);
 void			arr2_print(const char **args, const char *st, const char *en);
 void			arr2_quick_sort(void **items, int left, int right,
 				int (*cmp)(const void *l, const void *r));
+
 
 #endif //ENV_H
