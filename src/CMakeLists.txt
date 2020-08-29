@@ -26,6 +26,12 @@ include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
 
+#add libexpand to the project
+set(LIBEXPAND_DIR "lib/libexpand")
+include_directories(${LIBEXPAND_DIR})
+add_subdirectory(${LIBEXPAND_DIR})
+target_link_libraries(${PROJECT_NAME} expand)
+
 #add liblex to the project
 set(LIBLEX_DIR "lib/liblex")
 include_directories(${LIBLEX_DIR})
@@ -43,12 +49,6 @@ set(LIBCALC_DIR "lib/libcalc")
 include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
-
-#add libexpand to the project
-set(LIBEXPAND_DIR "lib/libexpand")
-include_directories(${LIBEXPAND_DIR})
-add_subdirectory(${LIBEXPAND_DIR})
-target_link_libraries(${PROJECT_NAME} expand)
 
 #add libalias to the project
 set(LIBALIAS_DIR "lib/libalias")
