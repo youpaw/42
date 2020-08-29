@@ -7,13 +7,12 @@
 int		lex_map(t_lexer *tokenize, t_state current)
 {
 	static int	(*handlers[N_LEX_STAGES][N_STATES + 1])(t_lexer *) = {
-			{NULL},
-			{&vld_back_slash, &tok_single_quote, \
-            &tok_double_quote, &tok_dollar, \
-            &vld_bang, NULL},
-			{&exp_back_slash, &tok_single_quote, \
-            &tok_double_quote, &exp_dollar, \
-			NULL, NULL}
+			{&tok_back_slash, &tok_single_quote, &tok_double_quote, \
+			&tok_dollar, &tok_bang, &tok_unset},
+			{&vld_back_slash, &tok_single_quote, &tok_double_quote, \
+			&tok_dollar, &vld_bang, &tok_unset},
+			{&exp_back_slash, &exp_single_quote, &exp_double_quote, \
+			&exp_dollar, NULL, &exp_unset}
 	};
 
 	if (*handlers[tokenize->stage][current])

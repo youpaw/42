@@ -36,9 +36,8 @@ static int match_brace(t_lexer *lexer, t_brace brace)
 	while (lexer->index < lexer->size && braces->size)
 	{
 		current = get_current_state(lexer);
-		if ((error = lex_map(lexer, current)))
-			break ;
-		if (current == l_unset && (error = validate_brace(lexer, braces)))
+		if ((current != l_unset && (error = lex_map(lexer, current))) || \
+		(current == l_unset && (error = validate_brace(lexer, braces))))
 			break ;
 		lexer->index++;
 	}
