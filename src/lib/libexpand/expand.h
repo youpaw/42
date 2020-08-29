@@ -5,7 +5,6 @@
 #ifndef EXPAND_H
 #define EXPAND_H
 # define N_PARAM_TYPES 10
-#include "lexer.h"
 
 //enum e_param_type
 //{
