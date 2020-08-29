@@ -7,7 +7,6 @@
 #define N_MAX_AV 254
 #define N_MAX_EXEC_ENV 256
 #define N_MAX_ENV 256
-#define N_MAX_ALIAS 256
 
 //#include <glob.h>
 #include "cc_hash_map.h"

@@ -4,6 +4,7 @@
 
 #ifndef ALIAS_H
 #define ALIAS_H
+#define N_MAX_ALIAS 256
 
 #include "cc_hash_map.h"
 
