@@ -14,10 +14,16 @@
 
 int backspace_pressed(t_input *input)
 {
+	unsigned char ch[5];
+	int len;
 	if (input->cursor_position)
 	{
+		bzero(ch, 5);
+		vec_get_at(ch, input->line, input->cursor_position - 1);
+		len = get_displayed_symbol_len(ch);
 		left_arrow_pressed(input);
-		tputs(tgetstr("dc", NULL), 1, ft_put);
+		while (len-- != 0)
+			tputs(tgetstr("dc", NULL), 1, ft_put);
 		vec_rm_at(input->line, input->cursor_position);
 		input->len--;
 	}
@@ -28,9 +34,16 @@ int backspace_pressed(t_input *input)
 
 int			del_pressed(t_input *input)
 {
+	unsigned char ch[5];
+	int len;
+
 	if (input->cursor_position != input->len)
 	{
-		tputs(tgetstr("dc", NULL), 1, ft_put);
+		bzero(ch, 5);
+		vec_get_at(ch, input->line, input->cursor_position);
+		len = get_displayed_symbol_len(ch);
+		while (len-- != 0)
+			tputs(tgetstr("dc", NULL), 1, ft_put);
 		vec_rm_at(input->line, input->cursor_position);
 		input->len--;
 	}
@@ -38,4 +51,3 @@ int			del_pressed(t_input *input)
 		ft_put('\7');
 	return 0;
 }
-//ueeiureушгкшугкшугкuieurieur

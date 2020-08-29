@@ -11,12 +11,21 @@
 /* ************************************************************************** */
 
 #include "readline.h"
+#include <stdio.h>
 
 int left_arrow_pressed(t_input *input)
 {
+	unsigned char ch[5];
+	int len;
 	if (input->cursor_position)
 	{
-		tputs(tgetstr("le", NULL), 1, ft_put);
+		bzero(ch, 5);
+		vec_get_at(ch, input->line, input->cursor_position - 1);
+		len = get_displayed_symbol_len(ch);
+		while (len-- != 0)
+		{
+			tputs(tgetstr("le", NULL), 1, putchar);
+		}
 		input->cursor_position--;
 	}
 	else
@@ -26,9 +35,16 @@ int left_arrow_pressed(t_input *input)
 
 int right_arrow_pressed(t_input *input)
 {
+	unsigned char ch[5];
+	int len;
+
 	if (input->cursor_position != input->len)
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_put);
+		bzero(ch, 5);
+		vec_get_at(ch, input->line, input->cursor_position);
+		len = get_displayed_symbol_len(ch);
+		while (len-- != 0)
+			tputs(tgetstr("nd", NULL), len, ft_put);
 		input->cursor_position++;
 	}
 	else
