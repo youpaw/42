@@ -14,21 +14,23 @@ static char	*get_field(t_hash_pair *pair)
 char 		**exec_env_2array(void)
 {
 	size_t cnt;
+	size_t i_arr;
 	char **arr;
 	t_list *tmp;
 
 	arr = xmalloc(sizeof(char *) * (hash_map_get_size(g_exec_env) + 1));
 	cnt = 0;
+	i_arr = 0;
 	while (cnt < g_exec_env->buckets_size)
 	{
 		tmp = g_exec_env->buckets[cnt];
 		while (tmp)
 		{
-			arr[cnt] = get_field(tmp->content);
+			arr[i_arr++] = get_field(tmp->content);
 			tmp = tmp->next;
 		}
 		cnt++;
 	}
-	arr[cnt] = NULL;
+	arr[i_arr] = NULL;
 	return (arr);
 }

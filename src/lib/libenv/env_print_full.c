@@ -8,7 +8,7 @@
 #include "cc_hash_map.h"
 #include "cc_mem.h"
 
-static size_t 	get_names(const char **names)
+static void 	get_names(const char **names)
 {
 	size_t i;
 	t_list *lst;
@@ -39,26 +39,29 @@ static void	print_by_names(const char **names)
 {
 	t_hash_pair pair;
 
-	if (!names)
-		return ;
-	while ((pair.key = (void *)*names++))
-	{
-		if (!(pair.value = hash_map_get_val(g_env, pair.key)))
-			pair.value = hash_map_get_val(g_inter_env, pair.key);
-		env_print_pair(&pair);
-	}
+	if (names)
+		while ((pair.key = (void *)*names++))
+		{
+			if (!(pair.value = hash_map_get_val(g_env, pair.key)))
+				pair.value = hash_map_get_val(g_inter_env, pair.key);
+			env_print_pair(&pair);
+		}
 }
 
 void		env_print_full(void)
 {
 	size_t		size;
-	char 	**names;
+	const char 	**names;
 
 	size = hash_map_get_size(g_env) + hash_map_get_size(g_inter_env);
-	names = (char **)xmalloc(size + 1);
-	names[size] = NULL;
-	get_names(names);
-	//sort names
-	print_by_names(names);
-	free(names);
+	if (size)
+	{
+		names = (const char **)xmalloc(sizeof(char *) * (size + 1));
+		names[size] = NULL;
+		get_names(names);
+		arr2_quick_sort((void **)names, 0, size - 1,
+						(int (*)(const void *, const void *))strcmp);
+		print_by_names(names);
+		free(names);
+	}
 }
