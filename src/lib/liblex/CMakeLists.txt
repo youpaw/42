@@ -27,7 +27,7 @@ ADD_LIBRARY(lex STATIC
 		tok_bang.c
 		tok_unset.c
 		get_operator.c
-		exp_single_quote.c exp_double_quote.c exp_unset.c recognize_token.c print_tokens.c recognize_operator.c get_last_token.c is_operator.c is_delimiter.c is_redirection.c is_number.c destruct_token.c)
+		exp_single_quote.c exp_double_quote.c exp_unset.c recognize_token.c print_tokens.c recognize_operator.c get_last_token.c is_operator.c is_delimiter.c is_redirection.c is_number.c destruct_token.c match_brace.c match_bang.c)
 
 
 target_link_libraries(lex cc)

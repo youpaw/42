@@ -141,6 +141,9 @@ t_token		*get_last_token(t_tokens *tokens);
 t_token_type recognize_token(t_lexer *lexer);
 t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 
+int			match_brace(t_lexer *lexer, t_brace brace);
+int 		match_bang(t_lexer *lexer);
+
 int 		tok_back_slash(t_lexer *lexer);
 int 		tok_single_quote(t_lexer *lexer);
 int 		tok_double_quote(t_lexer *lexer);
