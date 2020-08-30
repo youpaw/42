@@ -57,5 +57,6 @@ int 		match_bang(t_lexer *lexer)
 	if (lexer->index >= lexer->size)
 		return (1);
 	if (match_prev(lexer) && match_num(lexer))
-		return (match_word(lexer));
+		match_word(lexer);
+	return (0);
 }
