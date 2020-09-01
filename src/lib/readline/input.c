@@ -37,10 +37,11 @@ void	complete_print(t_input *input, t_list **to_print)
 {
 	char *line;
 
+	g_input_changed_flg = 1;
 	line = (*to_print)->content;
 	while (*line)
 	{
-		ft_put(*line);
+		ft_put(line);
 		vec_push(input->line, line);
 		input->len++;
 		input->cursor_position++;

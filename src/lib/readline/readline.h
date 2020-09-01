@@ -58,6 +58,8 @@ typedef struct {
 	int bits_stored;
 }utf_t;
 
+int 		g_input_changed_flg;
+
 int			readline(char **line);
 void		tty_init(void);
 void		restore_tty(void);
@@ -76,6 +78,8 @@ int			getch(void);
 int			get_unicod_len(char ch);
 char		*input_to_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
+t_list		*get_list_files(t_input *input, t_token *token);
+void		choose_token(t_input *input, t_list *lst);
 
 
 #endif //READLINE_H

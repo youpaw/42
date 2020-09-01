@@ -40,8 +40,6 @@ int		readline(char **line)
 {
 	t_letter key;
 	t_input input;
-	int i = 0;
-	char *res;
 
 	input = input_init(*line);
 	while (42)
@@ -50,9 +48,8 @@ int		readline(char **line)
 //		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
 		if (get_key_func(key.ch, &input))
 		{
-			res = input_to_str(input);
-			printf("\n%s", res);
-			free(res);
+			*line = input_to_str(input);
+//			printf("\n%s", *line);
 			return 0;
 		}
 	}

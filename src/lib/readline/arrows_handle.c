@@ -19,6 +19,7 @@ int left_arrow_pressed(t_input *input)
 	int len;
 	if (input->cursor_position)
 	{
+		g_input_changed_flg = 1;
 		bzero(ch, 5);
 		vec_get_at(ch, input->line, input->cursor_position - 1);
 		len = get_displayed_symbol_len(ch);
@@ -40,6 +41,7 @@ int right_arrow_pressed(t_input *input)
 
 	if (input->cursor_position != input->len)
 	{
+		g_input_changed_flg = 1;
 		bzero(ch, 5);
 		vec_get_at(ch, input->line, input->cursor_position);
 		len = get_displayed_symbol_len(ch);
