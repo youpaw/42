@@ -3,89 +3,95 @@
 //
 
 #include "stdlib.h"
-#include "cc_char.h"
 #include "cc_str.h"
 #include "env.h"
+#include "expand.h"
+#include "cc_char.h"
 
-static size_t get_parameter_len(const char *str)
+static char *get_parameter_name(const char *str)
 {
-	const char *head = str;
+	const char *head;
 
+	head = str;
 	while (isdigit(*str))
 		str++;
 	if (str > head)
-		return (str -head);
+		return (strsub(head, 0, (str - head)));
 	while (isalnum(*str) || *str == '_')
 		str++;
-	return (str - head);
+	if (str > head)
+		return (strsub(head, 0, (str - head)));
+	return (NULL);
 }
 
-static size_t get_operator_len(const char *str)
+static t_param_type get_operator_type(const char *str)
 {
 	if (!*str)
+		return (e_default);
+	if (!strncmp(str, ":-", 2))
+		return (e_param_or_word);
+	if (!strncmp(str, ":=", 2))
+		return (e_assign_param);
+	if (!strncmp(str, ":?", 2))
+		return (e_param_or_error);
+	if (!strncmp(str, ":+", 2))
+		return (e_null_or_word);
+	if (!strncmp(str, "##", 2))
+		return (e_rm_longest_prefix);
+	if (!strncmp(str, "#", 1))
+		return (e_rm_shortest_prefix);
+	if (!strncmp(str, "%%", 2))
+		return (e_rm_longest_suffix);
+	if (!strncmp(str, "%", 1))
+		return (e_rm_shortest_suffix);
+	return (e_parse_error);
+}
+
+static size_t get_operator_len(t_param_type t)
+{
+	if (t == e_get_length)
 		return (0);
-	if (*str == ':' && (str[1] == '+' || str[1] == '-'
-			|| str[1] == '?' || str[1] == '='))
-		return (2);
+	if (t == e_rm_shortest_suffix || t == e_rm_shortest_prefix)
+		return (1);
+	return (2);
+}
+static t_param_type get_params(const char *str, char **value, char **word)
+{
+	char 			*name;
+	int 			is_get_len;
+	t_param_type 	type;
+
+	is_get_len = 0;
 	if (*str == '#')
+		is_get_len = 1;
+	str += is_get_len;
+	if (!(name = get_parameter_name(str)))
+		return (e_parse_error);
+	str += strlen(name);
+	if ((type = get_operator_type(str)) == e_default && is_get_len)
+		type = e_get_length;
+	if (type == e_parse_error)
 	{
-		if (str[1] == '#')
-			return (2);
-		return (1);
+		free(name);
+		return (e_parse_error);
 	}
-	if (*str == '%')
-	{
-		if (str[1] == '%')
-			return (2);
-		return (1);
-	}
-	return (3);
-}
-
-static char *perform_expansion(const char *param, const char *oper,
-							   const char *word)
-{
-	puts("p: ");
-	putendl(param);
-	puts("o: ");
-	putendl(oper);
-	puts("w: ");
-	putendl(word);
-	return (strnew(0));
-}
-
-static int replace(char **str, size_t par_len, size_t op_len)
-{
-	char	*param;
-	char 	*oper;
-	char 	*word;
-
-	param = strsub(*str, 0, par_len);
-	if (!op_len)
-	{
-		free(*str);
-		*str = strdup(env_get_value(param));
-		free(param);
-		return (0);
-	}
-	oper = strsub(*str, par_len, op_len);
-	word = strsub(*str, par_len + op_len,
-			   strlen(*str) - par_len - op_len);
-	free(*str);
-	*str = perform_expansion(param, oper, word);
-	free(param);
-	free(oper);
-	free(word);
-	return (0);
+	str += get_operator_len(type);
+	*value = name;
+	*word = strdup(str);
+	return (type);
 }
 
 int 	expand_parameter(char **str)
 {
-	size_t	parameter_len;
-	size_t 	operator_len;
+	t_param_type	type;
+	char 			*value;
+	char 			*word;
 
-	if ((parameter_len = get_parameter_len(*str)))
-		if ((operator_len = get_operator_len(*str + parameter_len)) <= 2)
-			return (replace(str, parameter_len, operator_len));
-	return (1);
+	if ((type = get_params(*str, &value, &word)) == e_parse_error)
+		return (1);
+	free(*str);
+	*str = expand_by_type(type, value, word);
+	free(value);
+	free(word);
+	return (0);
 }

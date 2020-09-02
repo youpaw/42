@@ -6,21 +6,20 @@
 #define EXPAND_H
 # define N_PARAM_TYPES 10
 
-//enum e_param_type
-//{
-//	e_default,
-//	e_use_default,
-//	e_assign_default,
-//	e_display_error,
-//	e_use_alternate,
-//	e_get_length,
-//	e_rm_shortest_prefix,
-//	e_rm_longest_prefix,
-//	e_rm_shortest_suffix,
-//	e_rm_longest_suffix
-//};
-//
-//typedef enum e_param_type t_param_type;
+typedef enum	e_param_type
+{
+	e_parse_error,
+	e_default,
+	e_param_or_word,
+	e_assign_param,
+	e_param_or_error,
+	e_null_or_word,
+	e_get_length,
+	e_rm_shortest_prefix,
+	e_rm_longest_prefix,
+	e_rm_shortest_suffix,
+	e_rm_longest_suffix
+}				t_param_type;
 
 
 /*
@@ -31,6 +30,10 @@
 int 	expand_tilda(char **str);
 int 	expand_bang(char **str);
 int 	expand_parameter(char **str);
+char	*expand_by_type(t_param_type type, const char *value, const char *word);
+const char 	*get_env_or_av_value(const char *name);
+char	*expand_suffix(const char *name, const char *pattern);
+char	*expand_prefix(const char *name, const char *pattern);
 
 # define	E_EXPAND 30
 
