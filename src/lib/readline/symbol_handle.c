@@ -14,6 +14,7 @@
 
 int symbol_key_pressed(t_input *inp, char key[4])
 {
+	g_input_changed_flg = 1;
 	write(STDOUT_FILENO, key, 4);
 	if (vec_push_at(inp->line, key, inp->cursor_position))
 		return (1);
