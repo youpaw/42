@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
 set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
-add_executable(${PROJECT_NAME} bin/42sh/main.c)
+add_executable(${PROJECT_NAME} bin/42sh/main.c bin/42sh/main.h bin/42sh/main_init.c bin/42sh/main_manager.c)
 
 #add libhistory to the project
 set(LIBH_DIR "lib/libhistory")
