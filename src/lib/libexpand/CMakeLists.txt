@@ -9,7 +9,7 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(expand STATIC
-        expand_dollar.c)
+        expand_tilda.c expand_parameter.c expand_bang.c)
 
 target_link_libraries(expand cc)
 target_link_libraries(expand env)
