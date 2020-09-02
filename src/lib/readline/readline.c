@@ -48,6 +48,7 @@ int		readline(char **line)
 //		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
 		if (get_key_func(key.ch, &input))
 		{
+			free(*line);
 			*line = input_to_str(input);
 //			printf("\n%s", *line);
 			return 0;

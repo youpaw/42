@@ -96,7 +96,7 @@ static void show_table(t_list *lst)
 		puts(table.table[i++]);
 		putchar('\n');
 	}
-	restore_tty();
+	tty_restore();
 	exit(0);
 
 }

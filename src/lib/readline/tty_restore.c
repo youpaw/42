@@ -9,7 +9,7 @@
  * saved to global variable, and quit from insert mode.
  */
 
-void		restore_tty(void)
+void		tty_restore(void)
 {
 	tcsetattr(0, TCSAFLUSH, &(savetty));
 	tputs(tgetstr("ei", NULL), 1, ft_put);

@@ -62,7 +62,7 @@ int 		g_input_changed_flg;
 
 int			readline(char **line);
 void		tty_init(void);
-void		restore_tty(void);
+void		tty_restore(void);
 void		termcap_init(void);
 void 		ft_putstr(char *str);
 int			ft_put(int c);
