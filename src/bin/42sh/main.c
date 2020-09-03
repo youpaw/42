@@ -2,7 +2,21 @@
 #include "expand.h"
 #include <stdio.h>
 #include "readline.h"
+#include "history.h"
+#include "expand.h"
 
+int main(int ac, char *av[], char *en[])
+{
+	char *str;
+
+	hist_init("/Users/azomega");
+	hist_print();
+	str = strdup("un");
+	expand_bang(&str);
+	putendl(str);
+	return (0);
+}
+/*
 int main(int ac, char *av[], char *en[])
 {
 	t_letter res;
@@ -20,3 +34,4 @@ int main(int ac, char *av[], char *en[])
 	restore_tty();
 	return (0);
 }
+*/

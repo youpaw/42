@@ -5,7 +5,6 @@
 #ifndef EXPAND_H
 #define EXPAND_H
 # define N_PARAM_TYPES 10
-#include "lexer.h"
 
 //enum e_param_type
 //{
@@ -24,6 +23,14 @@
 //typedef enum e_param_type t_param_type;
 
 
+/*
+** funcs return error code or 0 (free str and replace with
+**	malloced string)
+*/
+
+int 	expand_tilda(char **str);
+int 	expand_bang(char **str);
+int 	expand_parameter(char **str);
 
 # define	E_EXPAND 30
 
