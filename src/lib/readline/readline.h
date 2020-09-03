@@ -33,7 +33,8 @@ struct termios	savetty;
 typedef struct s_input
 {
 	t_vec	*line;
-	int 	cursor_position;
+	int 	cursor_x_position;
+	int 	cursor_y_position;
 	int		len;
 }				t_input;
 
@@ -76,7 +77,7 @@ int			autocomplete(t_input *inp);
 void		complete_print(t_input *input, t_list **to_print);
 int			getch(void);
 int			get_unicod_len(char ch);
-char		*input_to_str(t_input input);
+char *input_to_str(t_vec *input, int len);
 int			get_displayed_symbol_len(unsigned char *num);
 t_list		*get_list_files(t_input *input, t_token *token);
 void		choose_token(t_input *input, t_list *lst);

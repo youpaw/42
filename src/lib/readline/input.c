@@ -21,13 +21,13 @@ t_input input_init(char *line)
 	if (line)
 	{
 		inp.len = strlen(line);
-		inp.cursor_position = inp.len;
+		inp.cursor_x_position = inp.len;
 		while (*line)
 			vec_push(inp.line, line++);
 	}
 	else
 	{
-		inp.cursor_position = 0;
+		inp.cursor_x_position = 0;
 		inp.len = 0;
 	}
 	return (inp);
@@ -41,13 +41,13 @@ void	complete_print(t_input *input, t_list **to_print)
 	line = (*to_print)->content;
 	while (*line)
 	{
-		ft_put(line);
+		ft_put(*line);
 		vec_push(input->line, line);
 		input->len++;
-		input->cursor_position++;
+		input->cursor_x_position++;
 		line++;
 	}
-	lst_del(to_print, NULL);
+	lst_del_circle(to_print, NULL);
 	*to_print = NULL;
 }
 
@@ -70,7 +70,6 @@ int 	getch(void)
 	t_letter	res;
 	int 		len;
 
-//	res.num = 0;
 	bzero(res.ch, 5);
 	if (buf[0] == '\0')
 		read(STDIN_FILENO, buf, BUFFSIZE);

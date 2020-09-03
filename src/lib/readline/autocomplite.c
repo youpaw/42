@@ -36,7 +36,7 @@ int			autocomplete(t_input *input)
 	if (!to_print)
 	{
 		g_input_changed_flg = 0;
-		tokens = lex_str_sub(input_to_str(*input), l_tok, input->cursor_position);
+		tokens = lex_str_sub(input_to_str(input->line, input->cursor_x_position), l_tok, input->cursor_x_position);
 		token = get_last_token(tokens);
 		if (token->type == l_word) //file
 		{

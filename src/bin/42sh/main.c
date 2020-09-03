@@ -12,19 +12,11 @@ int main(int ac, char *av[], char *en[])
 	tty_init();
 	if (ac == 2)
 	{
-		if (strcmp(av[1], "-c") == 0)
-		{
-
-		res.num = getch();
-		write(STDOUT_FILENO, &res.ch, 4);
-		len = get_displayed_symbol_len(res.ch);
-		printf("\n\\%x, \\%x, \\%x, \\%x, unum: %u len: %d\n", res.uch[0], res.uch[1], res.uch[2], res.uch[3], res.unum, len);
-
-		restore_tty();
-		return (0);
-		}
+		;
 	}
 	readline(&line);
+	puts("\n");
+	puts(line);
 	restore_tty();
 	return (0);
 }

@@ -20,12 +20,10 @@ t_list *get_file_list(struct dirent *dir)
 {
 	char filename[1027];
 	t_list *file;
-	char *cpy;
 	if (DT_DIR == dir->d_type)
 	{
 		strcpy(filename, dir->d_name);
 		check_cr(filename);
-		cpy = filename;
 		strcat(filename, "/");
 		file = lst_new(filename, 1025);
 	}
@@ -58,6 +56,7 @@ t_list *get_files(char *path, char *name)
 			lst_add_sort(&lst, get_file_list(dir), (int (*)(const void *, const void *)) &strcmp);
 		}
 	}
+	lst_circle(lst);
 	return (lst);
 }
 
