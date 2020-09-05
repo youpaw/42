@@ -22,7 +22,7 @@ void	complete_print(t_input *input, t_list **to_print)
 	while (*line)
 	{
 		putchar(*line);
-		vec_push(input->line, line);
+		vec_push(input->line[input->cursor_y_position], line);
 		input->len++;
 		input->cursor_x_position++;
 		line++;

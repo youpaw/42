@@ -12,8 +12,6 @@
 
 #ifndef READLINE_H
 #define READLINE_H
-#define TEST {"", "fuck", ".", "./", "..", "../", "./C", "4"}
-#define BUFFSIZE	1024
 #define N_KEY_HANDLERS 8
 
 # include <termios.h>
@@ -25,7 +23,7 @@ struct termios		g_tty_backup;
 
 typedef struct		s_input
 {
-	t_vec			*line;
+	t_vec			**line;
 	int				cursor_x_position;
 	int				cursor_y_position;
 	size_t 			len;

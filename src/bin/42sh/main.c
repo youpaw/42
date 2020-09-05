@@ -1,9 +1,7 @@
 #include "cc.h"
-#include "expand.h"
 #include <stdio.h>
 #include "readline.h"
 #include "history.h"
-#include "expand.h"
 
 //int main(int ac, char *av[], char *en[])
 //{
@@ -27,11 +25,17 @@ int main(int ac, char *av[], char *en[])
 	hist_init("/Users/azomega");
 	if (ac == 2)
 	{
-		;
+		res.num = getch();
+		len = get_displayed_symbol_len(res.uch);
+		write(1, res.ch, 4);
+		printf("  %d\n", len);
 	}
-	readline(&line);
-	puts("\n");
-	puts(line);
+	else
+	{
+		readline(&line);
+		puts("\n");
+		puts(line);
+	}
 	tty_restore();
 	return (0);
 }
