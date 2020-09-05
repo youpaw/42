@@ -14,12 +14,7 @@ size_t get_valid_name_length(const char *name)
 {
 	size_t index;
 
-	index = 0;
-	if (isdigit(name[index]))
-		return (0);
-	while (is_char_valid(name[index]))
-		index++;
-	if (name[index] != '=')
-		return (0);
-	return (index);
+	if ((index = get_valid_name_length_no_check(name)) && name[index] == '=')
+		return (index);
+	return (0);
 }
