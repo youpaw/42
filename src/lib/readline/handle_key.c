@@ -54,7 +54,12 @@ int			handle_key(char *key, t_input *input)
 	{
 		if (!strcmp(hanlders[index].primary_key, key) || \
 		!strcmp(hanlders[index].secondary_key, key))
-			return (hanlders[index].handler(input));
+		{
+			if (hanlders[index].handler)
+				return (hanlders[index].handler(input));
+			else
+				return (1);
+		}
 		index++;
 	}
 	if (!strncmp("\33\133", key, 2))

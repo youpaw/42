@@ -17,7 +17,7 @@ int handle_symbol_key(t_input *inp, char *key)
 {
 	g_input_changed_flg = 1;
 	write(STDOUT_FILENO, key, 4);
-	if (vec_push_at(inp->line, key, inp->cursor_x_position))
+	if (vec_push_at(inp->line[inp->cursor_y_position], key, inp->cursor_x_position))
 		return (1);
 	inp->cursor_x_position++;
 	inp->len++;

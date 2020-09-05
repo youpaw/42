@@ -18,11 +18,13 @@ int			readline(char **line)
 //		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
 		if (handle_key(key.ch, &input))
 		{
-			if (vec_push_at(input.line, "\n", input.cursor_x_position))
-				return (1);
+//			if (vec_push_at(input.line[input.cursor_y_position], "\n", input.cursor_x_position))
+//			{
+//				return (1);
+//			}
 			input.cursor_x_position++;
 			input.len++;
-			*line = input_to_str(input.line, input.len);
+			*line = input_to_str(input.line[input.cursor_y_position], input.len);
 //			printf("\n%s", *line);
 			return 0;
 		}

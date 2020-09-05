@@ -24,7 +24,7 @@ int handle_right_arrow(t_input *inp)
 	{
 		g_input_changed_flg = 1;
 		bzero(ch, 5);
-		vec_get_at(ch, inp->line, inp->cursor_x_position);
+		vec_get_at(ch, inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		len = get_displayed_symbol_len(ch);
 		while (len-- != 0)
 			tputs(tgetstr("nd", NULL), len, &putchar);

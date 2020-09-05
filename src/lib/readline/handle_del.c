@@ -23,11 +23,11 @@ int			handle_del(t_input *inp)
 	if (inp->cursor_x_position != inp->len)
 	{
 		bzero(ch, 5);
-		vec_get_at(ch, inp->line, inp->cursor_x_position);
+		vec_get_at(ch, inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		len = get_displayed_symbol_len(ch);
 		while (len-- != 0)
 			tputs(tgetstr("dc", NULL), 1, &putchar);
-		vec_rm_at(inp->line, inp->cursor_x_position);
+		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
 	}
 	else
