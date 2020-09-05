@@ -2,7 +2,13 @@
 // Created by Maxon Gena on 9/1/20.
 //
 
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <termcap.h>
 #include "readline.h"
+#include "cc_str.h"
+#include "cc_char.h"
+#include "cc_mem.h"
 
 static unsigned int	max_lst_data_len(t_list *lst)
 {
@@ -85,8 +91,9 @@ static void show_table(t_list *lst)
 	table.cell_size = max_lst_data_len(lst) + 1;
 	table.colum_count = ws.ws_col / table.cell_size;
 	table.line_count = lst_get_size(lst) / table.colum_count;
+	if (table.line_count > ws.ws_row)
+		return ;
 	table.table = (char**)xmalloc(sizeof(char*) * table.line_count);
-//	printf("%d\n\n", table.colum_count);
 	while (i != table.line_count)
 		table.table[i++] = xmalloc(sizeof(char) * table.colum_count * table.cell_size);
 	fill_table(&table, lst);
@@ -96,9 +103,6 @@ static void show_table(t_list *lst)
 		puts(table.table[i++]);
 		putchar('\n');
 	}
-	restore_tty();
-	exit(0);
-
 }
 
 void	choose_token(t_input *input, t_list *lst)
@@ -106,12 +110,11 @@ void	choose_token(t_input *input, t_list *lst)
 	tputs(tgetstr("sc", NULL), 1, putchar);
 	tputs(tgetstr("do", NULL), 1, putchar);
 	show_table(lst);
-//	while (lst)
-//	{
-//		puts(lst->content);
-//		lst = lst->next;
-//		puts("\n");
-//	}
 	tputs(tgetstr("rc", NULL), 1, putchar);
+	while (lst)
+	{
+		puts(lst->content);
+		lst = lst->next;
+	}
 	lst_del(&lst, NULL);
 }

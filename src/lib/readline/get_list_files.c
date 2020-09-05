@@ -2,10 +2,11 @@
 // Created by Maxon Gena on 9/1/20.
 //
 
-#include <stdio.h>
 #include "readline.h"
+#include <dirent.h>
+#include "cc_str.h"
 
-void check_cr(char filename[1027])
+static void check_cr(char filename[1027])
 {
 	char *cr;
 
@@ -16,16 +17,14 @@ void check_cr(char filename[1027])
 
 }
 
-t_list *get_file_list(struct dirent *dir)
+static t_list *get_file_from_name(struct dirent *dir)
 {
 	char filename[1027];
 	t_list *file;
-	char *cpy;
 	if (DT_DIR == dir->d_type)
 	{
 		strcpy(filename, dir->d_name);
 		check_cr(filename);
-		cpy = filename;
 		strcat(filename, "/");
 		file = lst_new(filename, 1025);
 	}
@@ -37,7 +36,11 @@ t_list *get_file_list(struct dirent *dir)
 
 }
 
-t_list *get_files(char *path, char *name)
+/*
+ * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
+*/
+
+static t_list *scan_dir(char *path, char *name)
 {
 	DIR *d;
 	struct dirent *dir;
@@ -55,9 +58,10 @@ t_list *get_files(char *path, char *name)
 		{
 			if (!dot_flg && (!strcmp(".", dir->d_name) || !strcmp("..", dir->d_name)))
 				continue;
-			lst_add_sort(&lst, get_file_list(dir), (int (*)(const void *, const void *)) &strcmp);
+			lst_add_sort(&lst, get_file_from_name(dir), (int (*)(const void *, const void *)) &strcmp);
 		}
 	}
+	lst_circle(lst);
 	return (lst);
 }
 
@@ -75,21 +79,12 @@ t_list		*get_list_files(t_input *input, t_token *token)
 	if (delimiter)
 	{
 		if (!(delimiter + 1))
-			return get_files(fullname, "");
+			return scan_dir(fullname, "");
 		if (delimiter == fullname)
-			return get_files("/", fullname + 1);
+			return scan_dir("/", fullname + 1);
 		*delimiter = '\0';
-		return get_files(fullname, delimiter + 1);
+		return scan_dir(fullname, delimiter + 1);
 	}
 	else
-		return get_files("./", fullname);
-}
-
-void set_word(t_input *input, t_token *token)
-{
-	t_list *files;
-	int list_len;
-
-	files = get_list_files(input, token);
-	list_len = lst_get_size(files);
+		return scan_dir("./", fullname);
 }

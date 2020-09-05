@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 16:45:08 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 17:39:07 by mgena            ###   ########.fr       */
+/*   Created: 2020/08/16 16:54:11 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/28 14:23:31 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+#include <stdio.h>
 
-int		ft_put(int c)
+void	complete_print(t_input *input, t_list **to_print)
 {
-	if (write(1, &c, 1) == 1)
-		return (0);
-	else
-		return (-1);
-}
+	char *line;
 
-void 	ft_putstr(char *str)
-{
-	while (*str)
-		ft_put(*(str++));
+	g_input_changed_flg = 1;
+	line = (*to_print)->content;
+	while (*line)
+	{
+		putchar(*line);
+		vec_push(input->line, line);
+		input->len++;
+		input->cursor_x_position++;
+		line++;
+	}
+	lst_del_circle(to_print, NULL);
+	*to_print = NULL;
 }

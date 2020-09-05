@@ -14,36 +14,30 @@
 #define READLINE_H
 #define TEST {"", "fuck", ".", "./", "..", "../", "./C", "4"}
 #define BUFFSIZE	1024
+#define N_KEY_HANDLERS 8
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include <termios.h>
-# include <sys/ioctl.h>
-# include <stdbool.h>
-# include <term.h>
-# include <sys/stat.h>
-# include <dirent.h>
-#include <termcap.h>
-#include "cc.h"
-#include "lexer.h"
+# include "cc_vec.h"
+# include "cc_lst.h"
+# include "lexer.h"
 
-struct termios	savetty;
+struct termios		g_tty_backup;
 
-typedef struct s_input
+typedef struct		s_input
 {
-	t_vec	*line;
-	int 	cursor_position;
-	int		len;
-}				t_input;
+	t_vec			*line;
+	int				cursor_x_position;
+	int				cursor_y_position;
+	size_t 			len;
+}					t_input;
 
-typedef union	u_letter
+typedef union		u_letter
 {
-	char	ch[5];
-	unsigned char uch[5];
-	int 	num;
-	unsigned int unum;
-}				t_letter;
+	char			ch[5];
+	unsigned char	uch[5];
+	int				num;
+	unsigned int	unum;
+}					t_letter;
 
 /*
  * Struct to easy converting UTF-8. It uses space in memory like this:
@@ -51,32 +45,39 @@ typedef union	u_letter
 *        &(utf_t){0b00111111, 0b10000000, 0,       0,        6    }
 */
 typedef struct {
-	char mask;
-	char lead;
-	uint32_t beg;
-	uint32_t end;
-	int bits_stored;
-}utf_t;
+	char			mask;
+	char			lead;
+	uint32_t		beg;
+	uint32_t		end;
+	int				bits_stored;
+}					utf_t;
+
+typedef struct		s_key_handler{
+	char			primary_key[5];
+	char			secondary_key[5];
+	int				(*handler)(t_input *);
+}					t_key_handler;
 
 int 		g_input_changed_flg;
 
-int			readline(char **line);
 void		tty_init(void);
-void		restore_tty(void);
+void		tty_restore(void);
 void		termcap_init(void);
-void 		ft_putstr(char *str);
-int			ft_put(int c);
-int			left_arrow_pressed(t_input *inp);
-int			right_arrow_pressed(t_input *inp);
-int			backspace_pressed(t_input *inp);
-int			del_pressed(t_input *inp);
-int 		symbol_key_pressed(t_input *inp, char key[4]);
+
+int			handle_left_arrow(t_input *inp);
+int			handle_right_arrow(t_input *inp);
+int			handle_backspace(t_input *inp);
+int			handle_del(t_input *inp);
+int			handle_tab(t_input *inp);
+int 		handle_symbol_key(t_input *inp, char *key);
+
+int			handle_key(char *key, t_input *input);
+
 t_input 	input_init(char *line);
-int			autocomplete(t_input *inp);
+int			readline(char **line);
+
 void		complete_print(t_input *input, t_list **to_print);
-int			getch(void);
-int			get_unicod_len(char ch);
-char		*input_to_str(t_input input);
+char		*input_to_str(t_vec *input, int len);
 int			get_displayed_symbol_len(unsigned char *num);
 t_list		*get_list_files(t_input *input, t_token *token);
 void		choose_token(t_input *input, t_list *lst);
