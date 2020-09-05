@@ -3,6 +3,8 @@
 //
 
 #include "readline.h"
+#include "cc_mem.h"
+#include "cc_str.h"
 
 char *input_to_str(t_vec *input, int len)
 {
@@ -21,5 +23,4 @@ char *input_to_str(t_vec *input, int len)
 		i++;
 	}
 	return (string);
-
 }

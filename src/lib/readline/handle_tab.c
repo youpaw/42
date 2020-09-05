@@ -13,16 +13,7 @@
 #include "readline.h"
 #include <stdio.h>
 
-/*
- * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
-*/
-
-void get_command(t_input *input)
-{
-	;
-}
-
-int			autocomplete(t_input *input)
+int			handle_tab(t_input *inp)
 {
 	static t_list	*to_print;
 	t_tokens 		*tokens;
@@ -36,25 +27,23 @@ int			autocomplete(t_input *input)
 	if (!to_print)
 	{
 		g_input_changed_flg = 0;
-		tokens = lex_str_sub(input_to_str(input->line, input->cursor_x_position), l_tok, input->cursor_x_position);
+		tokens = lex_str_sub(input_to_str(inp->line, inp->cursor_x_position), l_tok, inp->cursor_x_position);
 		token = get_last_token(tokens);
 		if (token->type == l_word) //file
 		{
-			to_print = get_list_files(input, token);
+			to_print = get_list_files(inp, token);
 			if (!to_print->next)
-				complete_print(input, &to_print);
+				complete_print(inp, &to_print);
 			else
-				ft_put('\7');
+				putchar('\7');
 		}
-		else if (token->type == l_command_name) //cur token is command
-			get_command(input);
 	destruct_token(&token);
 	destruct_tokens(&tokens);
 		return 0;
 	}
 	else
 	{
-		choose_token(input, to_print);
+		choose_token(inp, to_print);
 		g_input_changed_flg = 0;
 	}
 	return 1;

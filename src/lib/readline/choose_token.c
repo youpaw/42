@@ -2,7 +2,13 @@
 // Created by Maxon Gena on 9/1/20.
 //
 
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <termcap.h>
 #include "readline.h"
+#include "cc_str.h"
+#include "cc_char.h"
+#include "cc_mem.h"
 
 static unsigned int	max_lst_data_len(t_list *lst)
 {

@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "readline.h"
+#include "unistd.h"
 
-int symbol_key_pressed(t_input *inp, char key[4])
+int handle_symbol_key(t_input *inp, char *key)
 {
 	g_input_changed_flg = 1;
 	write(STDOUT_FILENO, key, 4);
