@@ -48,8 +48,8 @@ t_input 	input_init(char *line)
 {
 	t_input inp;
 
-	if (line)
-		fill_input(line);
+	if (!*line)
+		inp = fill_input(line);
 	else
 	{
 		inp.line = xmalloc(sizeof(t_vec*) * 2);

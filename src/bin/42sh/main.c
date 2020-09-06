@@ -19,10 +19,11 @@ int main(int ac, char *av[], char *en[])
 {
 	t_letter res;
 	int len;
-	char *line = NULL;
+	char *line = "asd";
 
 	tty_init();
 	hist_init("/Users/azomega");
+	signal_init();
 	if (ac == 2)
 	{
 		res.num = getch();
