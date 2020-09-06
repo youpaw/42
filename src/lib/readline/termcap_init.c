@@ -1,6 +1,7 @@
 //   Createdby Maxon Gena on 08/16/20
 
 #include "readline.h"
+#include <termcap.h>
 
 void	termcap_init(void)
 {

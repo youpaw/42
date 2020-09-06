@@ -33,6 +33,8 @@ void		env_del(void);
 const char	*env_get_value(const char *key);
 void		env_print_global(void);
 void		env_print_full(void);
+int 		env_update(const char *field);
+int 		env_export(const char *field);
 
 
 /*
@@ -50,6 +52,7 @@ char 		**exec_env_2array(void);
  */
 
 size_t		get_valid_name_length(const char *field);
+size_t		get_valid_name_length_no_check(const char *name);
 void		env_print_pair(const t_hash_pair *pair);
 void 		env_del_pair(t_hash_pair *pair);
 int 		env_cmp_pair(const t_hash_pair *lhs, const t_hash_pair *rhs);
