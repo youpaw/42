@@ -38,7 +38,6 @@ static t_param_type get_len_operator_params(const char *str, char **name,
 {
 	if (!(*name = get_parameter_name(str)) || strcmp(str, *name) != 0)
 		return (e_er_bad_subst);
-	*word = strnew(0);
 	return (e_get_length);
 }
 static t_param_type get_params(const char *str, char **value, char **word)
@@ -68,11 +67,15 @@ int 	expand_parameter(char **str)
 	char 			*value;
 	char 			*word;
 
+	value = NULL;
+	word = NULL;
 	if ((type = get_params(*str, &value, &word)) < 2)
 		return (1);
 	free(*str);
 	*str = expand_by_type(type, value, word);
-	free(value);
-	free(word);
+	if (value)
+		free(value);
+	if (word)
+		free(word);
 	return (0);
 }
