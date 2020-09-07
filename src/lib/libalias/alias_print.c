@@ -7,6 +7,7 @@
 #include "cc_lst.h"
 #include "cc_hash_map.h"
 #include "cc_mem.h"
+#include "cc_arr2.h"
 
 static void 	get_names(const char **names)
 {

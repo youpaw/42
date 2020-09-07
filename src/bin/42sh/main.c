@@ -1,42 +1,14 @@
-#include "cc.h"
-#include <stdio.h>
-#include "readline.h"
-#include "history.h"
-
-//int main(int ac, char *av[], char *en[])
-//{
-//	char *str;
 //
-//	 hist_init("/Users/azomega");
-//	hist_print();
-//	str = strdup("un");
-//	expand_bang(&str);
-//	putendl(str);
-//	return (0);
-//}
+// Created by Darth Butterwell on 9/6/20.
+//
 
-int main(int ac, char *av[], char *en[])
+#include "main.h"
+
+int main(int ac, const char *av[], const char *env[])
 {
-	t_letter res;
-	int len;
-	char *line = "asd";
+	int error;
 
-	tty_init();
-	hist_init("/Users/azomega");
-	signal_init();
-	if (ac == 2)
-	{
-		res.num = getch();
-		len = get_displayed_symbol_len(res.uch);
-		write(1, res.ch, 4);
-		printf("  %d\n", len);
-	}
-	else
-	{
-		readline(&line);
-		puts("\n");
-		puts(line);
-	}
-	tty_restore();
-	return (0);
+	if (!(error = main_init(av[0], av + 1, env)))
+		error = main_manager();
+	return (error);
 }

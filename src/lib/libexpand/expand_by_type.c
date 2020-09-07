@@ -23,12 +23,15 @@ static char	*param_or_word(const char *name, const char *word)
 static char	*assign_param(const char *name, const char *word)
 {
 	char 	*value;
+	char 	*field;
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
 	if (value)
 		return (strdup(value));
-	// env insert word for name
+	field = nstrjoin(3, name, "=", word);
+	env_update(field);
+	free(field);
 	return (strdup(word));
 }
 
@@ -44,7 +47,7 @@ static char	*param_or_error(const char *name, const char *word)
 		fdputendl(word, 2);
 	else
 		fdputendl("bash: : parameter null or not set", 2);
-	return (strnew(0));
+	return (NULL);
 }
 
 static char	*empty_or_word(const char *name, const char *word)
