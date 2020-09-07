@@ -81,4 +81,7 @@ t_list		*get_list_files(t_input *input, t_token *token);
 void		choose_token(t_input *input, t_list *lst);
 
 
+void		signal_init(void);
+void		signal_handler(int sig);
+
 #endif //READLINE_H
