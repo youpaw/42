@@ -6,12 +6,14 @@
 
 int get_token_attr(t_ast *node, t_tokens *tokens, t_token_type type)
 {
-	t_token token;
+	t_token *token;
 
+	if (tokens->index >= tokens->size)
+		return (0);
 	token = tokens->tokens[tokens->index];
-	if (token.type == type)
+	if (token->type == type)
 	{
-		node->attr = token;
+		node->token = token;
 		tokens->index++;
 		return (1);
 	}

@@ -10,7 +10,7 @@ t_ast * 			node_simple_cmd(t_tokens *tokens)
 
 	node = new_ast_node(p_simple_cmd);
 	node->left = node_cmd_prefix(tokens);
-	if (!get_token_attr(node, tokens, l_word))
+	if (!get_token_attr(node, tokens, l_command_name))
 	{
 		del_ast_node(&node);
 		return (NULL);

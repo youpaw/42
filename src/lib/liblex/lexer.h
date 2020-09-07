@@ -75,6 +75,7 @@ struct		s_tokens
 	int						error; // код ошибки, будет добавлено позже.
 	struct s_token			**tokens; // массив токенов
 	size_t					size; // размер массива
+	size_t					index;
 };
 
 enum e_state{

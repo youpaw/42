@@ -25,3 +25,5 @@ ADD_LIBRARY(parser STATIC
         del_ast_node.c)
 
 target_link_libraries(parser cc)
+target_link_libraries(parser lex)
+

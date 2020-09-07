@@ -6,12 +6,12 @@
 
 static int 			get_pipe_seq_attr(t_ast *node, t_tokens *tokens)
 {
-	t_token token;
+	t_token *token;
 
 	token = tokens->tokens[tokens->index];
-	if (str_equals(token.raw, "|"))
+	if (!strcmp(token->raw, "|"))
 	{
-		node->attr = token;
+		node->token = token;
 		tokens->index++;
 		return (1);
 	}

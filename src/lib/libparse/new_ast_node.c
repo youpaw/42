@@ -13,6 +13,6 @@ t_ast				*new_ast_node(t_node_type type)
 	node->left = NULL;
 	node->right = NULL;
 	node->type = type;
-	node->attr.type = l_undefined;
+	node->token = NULL;
 	return (node);
 }

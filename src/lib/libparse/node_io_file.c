@@ -7,12 +7,12 @@
 
 int 		get_io_file_attr(t_ast *node, t_tokens *tokens, const char *attr)
 {
-	t_token token;
+	t_token *token;
 
 	token = tokens->tokens[tokens->index];
-	if (str_equals(token.raw, attr))
+	if (!strcmp(token->raw, attr))
 	{
-		node->attr = token;
+		node->token = token;
 		tokens->index++;
 		return (1);
 	}
@@ -28,9 +28,7 @@ t_ast *				node_io_file(t_tokens *tokens)
 	|| get_token_attr(node, tokens, l_less_and)
 	|| get_io_file_attr(node, tokens, ">")
 	|| get_token_attr(node, tokens, l_great_and)
-	|| get_token_attr(node, tokens, l_double_great)
-	|| get_token_attr(node, tokens, l_less_great)
-	|| get_token_attr(node, tokens, l_clobber))
+	|| get_token_attr(node, tokens, l_double_great))
 	{
 		if ((node->left = node_filename(tokens)))
 			return (node);
