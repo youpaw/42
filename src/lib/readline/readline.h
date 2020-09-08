@@ -12,7 +12,8 @@
 
 #ifndef READLINE_H
 #define READLINE_H
-#define N_KEY_HANDLERS 8
+#define N_ORD_KEY_HANDLERS 7
+#define N_ESC_KEY_HANDLERS 7
 
 # include <termios.h>
 # include "cc_vec.h"
@@ -27,6 +28,7 @@ typedef struct		s_input
 	int				cursor_x_position;
 	int				cursor_y_position;
 	size_t 			len;
+	int				*line_len;
 }					t_input;
 
 typedef union		u_letter
@@ -52,7 +54,7 @@ typedef struct {
 
 typedef struct		s_key_handler{
 	char			primary_key[5];
-	char			secondary_key[5];
+//	char			secondary_key[5];
 	int				(*handler)(t_input *);
 }					t_key_handler;
 
@@ -64,10 +66,13 @@ void		termcap_init(void);
 
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
+int			handle_shift_up(t_input *inp);
+int			handle_shift_down(t_input *inp);
 int			handle_backspace(t_input *inp);
 int			handle_del(t_input *inp);
 int			handle_tab(t_input *inp);
 int 		handle_symbol_key(t_input *inp, char *key);
+int			handle_escape_sequence(t_input *input);
 
 int			handle_key(char *key, t_input *input);
 

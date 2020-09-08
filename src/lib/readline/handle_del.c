@@ -20,7 +20,7 @@ int			handle_del(t_input *inp)
 	unsigned char ch[5];
 	int len;
 
-	if (inp->cursor_x_position != inp->len)
+	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{
 		bzero(ch, 5);
 		vec_get_at(ch, inp->line[inp->cursor_y_position], inp->cursor_x_position);
@@ -29,6 +29,7 @@ int			handle_del(t_input *inp)
 			tputs(tgetstr("dc", NULL), 1, &putchar);
 		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
+		inp->line_len[inp->cursor_y_position]--;
 	}
 	else
 		putchar('\7');

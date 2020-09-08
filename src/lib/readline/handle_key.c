@@ -37,23 +37,21 @@
 
 int			handle_key(char *key, t_input *input)
 {
-	static const t_key_handler hanlders[N_KEY_HANDLERS] = {
-			{"\33\133\103", "\6", &handle_right_arrow},
-			{"\33\133\104", "\2", &handle_left_arrow},
-			{"\33\133\63\176", "", &handle_del},
-			{"\177", "", &handle_backspace},
-			{"\t", "", &handle_tab},
-			{"\n", "", NULL},
-			{"\33\133\101", "\20", NULL},
-			{"\33\133\102", "\16", NULL}
+	static const t_key_handler hanlders[N_ORD_KEY_HANDLERS] = {
+			{"\6", &handle_right_arrow},
+			{"\2", &handle_left_arrow},
+			{"\177",&handle_backspace},
+			{"\t", &handle_tab},
+			{"\n", NULL},
+			{"\20", NULL}, //down
+			{"\16", NULL} //up
 	};
 	int index;
 
 	index = 0;
-	while (index < N_KEY_HANDLERS)
+	while (index < N_ORD_KEY_HANDLERS)
 	{
-		if (!strcmp(hanlders[index].primary_key, key) || \
-		!strcmp(hanlders[index].secondary_key, key))
+		if (!strcmp(hanlders[index].primary_key, key))
 		{
 			if (hanlders[index].handler)
 				return (hanlders[index].handler(input));
@@ -62,7 +60,7 @@ int			handle_key(char *key, t_input *input)
 		}
 		index++;
 	}
-	if (!strncmp("\33\133", key, 2))
-		return (0);
+	if (!strcmp("\33\133", key))
+		return handle_escape_sequence(input);
 	return (handle_symbol_key(input, key));
 }
