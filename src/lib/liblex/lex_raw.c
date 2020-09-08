@@ -41,6 +41,7 @@ static t_tokens	*get_tokens(t_lexer *lexer, int error)
 	tokens->error = error;
 	tokens->size = lexer->tokens->size;
 	tokens->tokens = xmalloc(sizeof(t_token *) * tokens->size);
+	tokens->index = 0;
 	index = 0;
 	while (index < tokens->size)
 	{
@@ -70,6 +71,8 @@ t_tokens 	*lex_raw(char *raw, t_stage stage)
 	}
 	if (!error && lexer.states->size > 1)
 		error = E_INCOMPLETE_INPUT;
+	if (!error && lexer.flags[e_print_command])
+		putendl(lexer.raw);
 	tokens = get_tokens(&lexer, error);
 	del_lexer(&lexer);
 	return (tokens);

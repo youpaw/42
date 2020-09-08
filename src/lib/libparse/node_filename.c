@@ -9,7 +9,7 @@ t_ast * 			node_filename(t_tokens *tokens)
 	t_ast *node;
 
 	node = new_ast_node(p_filename);
-	if (get_token_attr(node, tokens, l_word))
+	if (get_node_token(node, tokens, l_word))
 		return (node);
 	del_ast_node(&node);
 	return (NULL);

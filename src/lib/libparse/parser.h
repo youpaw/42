@@ -52,7 +52,7 @@ enum e_node_type
 struct		s_ast
 {
 	enum e_node_type	type;
-	struct s_token		*token;
+	struct s_token		* token;
 	struct s_ast		*left;
 	struct s_ast		*right;
 };
@@ -73,8 +73,6 @@ t_ast * 			node_simple_cmd(t_tokens *tokens);
 t_ast * 			node_command(t_tokens *tokens);
 t_ast * 			node_pipe_seq(t_tokens *tokens);
 // '|' никуда добавлять не нужно, attr всегда null
-t_ast * 			node_pipeline(t_tokens *tokens);
-// AND_IF OR_IF это атрибуты, в него кладется указатель на лексемы l_and_if, l_or_if
 t_ast * 			node_and_or(t_tokens *tokens);
 t_ast * 			node_list(t_tokens *tokens);
 // separator_op это атрибут, в него нода separator_op кладет указатель на лексему (асинхронное выполнение команды)
@@ -83,7 +81,7 @@ t_ast *				node_complete_cmd(t_tokens *tokens);
 
 void 				del_ast_node(t_ast **node);
 t_ast				*new_ast_node(t_node_type type);
-int 				get_token_attr(t_ast *node, t_tokens *tokens, t_token_type type);
+int 				get_node_token(t_ast *node, t_tokens *tokens, int n_types, ...);
 t_ast				*parse(t_tokens *tokens);
 
 #endif //PARSER_H

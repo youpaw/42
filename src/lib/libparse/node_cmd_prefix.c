@@ -14,7 +14,7 @@ t_ast * 			node_cmd_prefix(t_tokens *tokens)
 		node->right = node_cmd_prefix(tokens);
 		return (node);
 	}
-	if (get_token_attr(node, tokens, l_assignment_word))
+	if (get_node_token(node, tokens, l_assignment_word))
 	{
 		node->right = node_cmd_prefix(tokens);
 		return (node);

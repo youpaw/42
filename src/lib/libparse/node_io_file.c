@@ -25,10 +25,10 @@ t_ast *				node_io_file(t_tokens *tokens)
 
 	node = new_ast_node(p_io_file);
 	if (get_io_file_attr(node, tokens, "<")
-	|| get_token_attr(node, tokens, l_less_and)
-	|| get_io_file_attr(node, tokens, ">")
-	|| get_token_attr(node, tokens, l_great_and)
-	|| get_token_attr(node, tokens, l_double_great))
+		|| get_node_token(node, tokens, l_less_and)
+		|| get_io_file_attr(node, tokens, ">")
+		|| get_node_token(node, tokens, l_great_and)
+		|| get_node_token(node, tokens, l_double_great))
 	{
 		if ((node->left = node_filename(tokens)))
 			return (node);

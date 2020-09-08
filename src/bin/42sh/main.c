@@ -22,10 +22,11 @@ int main(int ac, const char *av[], const char *env[])
 	t_ast *ast;
 	char *str;
 
-	str = strdup("ls");
+	str = strdup("ls 123>smw");
 	tokens = lex_str(str, l_vld);
 	puts("\n");
 	print_tokens(tokens);
-	ast = parse(tokens);
-	puts("\n");
+	destruct_tokens(&tokens);
+//	ast = parse(tokens);
+//	puts("\n");
 }
