@@ -8,7 +8,13 @@
 
 static char	*get_field(t_hash_pair *pair)
 {
-	return (nstrjoin(3, pair->key, "=", pair->value));
+	const char *arr[4];
+
+	arr[0] = pair->key;
+	arr[1] = "=";
+	arr[2] = pair->value;
+	arr[3] = NULL;
+	return (strnjoin(arr));
 }
 
 char 		**exec_env_2array(void)

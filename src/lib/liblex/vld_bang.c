@@ -6,6 +6,26 @@
 #include "cc_str.h"
 #include "expand.h"
 
+static char *str_join_expanded(t_lexer *lexer, size_t index, const char *expand)
+{
+	char *raw;
+	const char *arr[4];
+
+	if (index - 1)
+	{
+		arr[0] = lexer->raw;
+		arr[1] = expand;
+		arr[2] = lexer->raw + lexer->index;
+		arr[3] = NULL;
+		lexer->raw[index - 1] = '\0';
+		raw = strnjoin(arr);
+	}
+	else
+		raw = strjoin(expand, lexer->raw + lexer->index);
+	lexer->index = index - 2;
+	return (raw);
+}
+
 int 	vld_bang(t_lexer *lexer)
 {
 	char *expand;
@@ -21,14 +41,7 @@ int 	vld_bang(t_lexer *lexer)
 		free(expand);
 		return (2);
 	}
-	if (index - 1)
-	{
-		lexer->raw[index - 1] = '\0';
-		raw = nstrjoin(3, lexer->raw, expand, lexer->raw + lexer->index);
-	}
-	else
-		raw = strjoin(expand, lexer->raw + lexer->index);
-	lexer->index = index - 2;
+	raw = str_join_expanded(lexer, index, expand);
 	free(expand);
 	free(lexer->raw);
 	lexer->raw = raw;
