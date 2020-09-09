@@ -4,19 +4,26 @@
 
 #include "env.h"
 #include "cc_str.h"
+#include "cc_hash_map.h"
 
 int	g_exit_code = 0;
-t_hash_table *g_env;
+t_hash_map *g_env;
+t_hash_map *g_inter_env;
+
+static void init_env_from_str(t_hash_map *map, const char **env)
+{
+	char		**key_value;
+
+	if (map && env)
+		while (*env)
+			env_insert_to(map, *env++);
+}
 
 void	env_init(const char **env)
 {
-	int cnt;
-
-	cnt = 0;
-	g_env = hash_map_new(N_MAX_ENV, \
-    (size_t (*)(const void *)) &strhash, \
-	(int (*)(const void *, const void *)) &strcmp, \
-	&env_del_pair);
-	while (env[cnt])
-		env_add_field(e_env, env[cnt++]);
+	g_env = hash_map_new(N_MAX_ENV, (size_t (*)(const void *)) &strhash, \
+		(int (*)(const void *, const void *)) &env_cmp_pair, &env_del_pair);
+	init_env_from_str(g_env, env);
+	g_inter_env = hash_map_new(N_MAX_ENV, (size_t (*)(const void *)) &strhash, \
+		(int (*)(const void *, const void *)) &env_cmp_pair, &env_del_pair);
 }

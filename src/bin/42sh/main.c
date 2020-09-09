@@ -1,10 +1,14 @@
-#include "env.h"
-#include "builtins.h"
+//
+// Created by Darth Butterwell on 9/6/20.
+//
 
-int main(int ac, char *av[], char *en[])
+#include "main.h"
+
+int main(int ac, const char *av[], const char *env[])
 {
-	env_init((const char **) en);
-	av_init(av[0], (const char **) (av + 1));
-	cd(ac, (const char **) av, (const char **) en);
-	return (0);
+	int error;
+
+	if (!(error = main_init(av[0], av + 1, env)))
+		error = main_manager();
+	return (error);
 }

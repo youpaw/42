@@ -6,64 +6,82 @@
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:20:02 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 14:48:26 by mgena            ###   ########.fr       */
+/*   Updated: 2020/08/28 14:20:11 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_H
 #define READLINE_H
-#define TEST_FOR_DIR_1 {""};
-#define TEST_FOR_DIR_2 {"fuck"};
-#define TEST_FOR_DIR_3 {"."};
-#define TEST_FOR_DIR_4 {"../C"};
-#define TEST_FOR_DIR_5 {"M"};
-#define TEST_FOR_DIR_6 {".."};
+#define N_KEY_HANDLERS 8
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include <termios.h>
-# include <sys/ioctl.h>
-# include <stdbool.h>
-# include <term.h>
-# include <sys/stat.h>
 # include "cc_vec.h"
-# include <dirent.h>
+# include "cc_lst.h"
+# include "lexer.h"
 
-typedef struct	s_out
+struct termios		g_tty_backup;
+
+typedef struct		s_input
 {
-	struct termios	savetty;
-	char			tbuf[2048];
-	char			strings[256];
-	char			*p;
-	char			*tname;
-	int				fd;
-	int 			cursor_position;
-}				t_out;
+	t_vec			**line;
+	int				cursor_x_position;
+	int				cursor_y_position;
+	size_t 			len;
+}					t_input;
 
-t_out g_out;
-
-typedef struct s_input
+typedef union		u_letter
 {
-	t_vec	*line;
-	int 	cursor_position;
-	int		len;
-}				t_input;
+	char			ch[5];
+	unsigned char	uch[5];
+	int				num;
+	unsigned int	unum;
+}					t_letter;
 
+/*
+ * Struct to easy converting UTF-8. It uses space in memory like this:
+*				  mask        lead        beg      end       bits
+*        &(utf_t){0b00111111, 0b10000000, 0,       0,        6    }
+*/
+typedef struct {
+	char			mask;
+	char			lead;
+	uint32_t		beg;
+	uint32_t		end;
+	int				bits_stored;
+}					utf_t;
+
+typedef struct		s_key_handler{
+	char			primary_key[5];
+	char			secondary_key[5];
+	int				(*handler)(t_input *);
+}					t_key_handler;
+
+int 		g_input_changed_flg;
+
+void		tty_init(void);
+void		tty_restore(void);
+void		termcap_init(void);
+
+int			handle_left_arrow(t_input *inp);
+int			handle_right_arrow(t_input *inp);
+int			handle_backspace(t_input *inp);
+int			handle_del(t_input *inp);
+int			handle_tab(t_input *inp);
+int 		handle_symbol_key(t_input *inp, char *key);
+
+int			handle_key(char *key, t_input *input);
+
+t_input 	input_init(char *line);
 int			readline(char **line);
-void		main_init(void);
-void		return_tty(void);
-void 		ft_putstr(char *str);
-int			ft_put(int c);
-int			left_arrow_pressed(t_input *inp);
-int			right_arrow_pressed(t_input *inp);
-int			backspace_pressed(t_input *inp);
-int			del_pressed(t_input *inp);
-int 		symbol_key_pressed(t_input *inp, char key);
-t_input		input_init(void);
-int			autocomplete(t_input *inp);
 
-//temp
-char *vect_to_str(t_vec *vector);
+void		complete_print(t_input *input, t_list **to_print);
+char		*input_to_str(t_vec *input, int len);
+int			get_displayed_symbol_len(unsigned char *num);
+t_list		*get_list_files(t_input *input, t_token *token);
+void		choose_token(t_input *input, t_list *lst);
+
+
+void		signal_init(void);
+void		signal_handler(int sig);
 
 #endif //READLINE_H

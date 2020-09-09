@@ -3,53 +3,29 @@
 //
 
 #include "readline.h"
-#include <string.h>
-#include <stdio.h>
+#include "cc_char.h"
 
 
-int		get_key_func(char key[4], t_input *input)
+int			readline(char **line)
 {
-	if (!strcmp(key, "\33"))
-		return (0); //TODO escape character
-	else if (!strcmp(key, "\33\133\101") || !(strcmp(key, "\20")))
-		return (0); //TODO arrow up
-	else if (!strcmp(key, "\33\133\102") || !(strcmp(key, "\16")))
-		return (0); //TODO arrow down
-	else if (!strcmp(key, "\33\133\103") || !(strcmp(key, "\6")))
-		return right_arrow_pressed(input);
-	else if (!strcmp(key, "\33\133\104") || !(strcmp(key, "\2")))
-		return left_arrow_pressed(input);
-	else if (!strcmp(key, "\177"))
-		return backspace_pressed(input);
-	else if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
-		return del_pressed(input);
-	else if (!strcmp(key, "\t"))
-		return autocomplete(input);
-	else if (!strcmp(key, "\n"))
-		return (1); //enter return nozero value
-	// TODO think about error values
-	else
-	{
-		symbol_key_pressed(input, key[0]);
-		return (0);
-	}
-}
-int		readline(char **line)
-{
-	char key[4];
+	t_letter key;
 	t_input input;
 
-	input = input_init();
+	input = input_init(*line);
 	while (42)
 	{
-		bzero(key, 4);
-		read(STDIN_FILENO, key, 4);
-		if (get_key_func(key, &input))
+		key.num = getch();
+//		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
+		if (handle_key(key.ch, &input))
 		{
-//			printf("\n!!!!!!!!!!!!!!!\n%s\n!!!!!!!!!!!!!!!!\ncurs_pos: %d, len: %d",
-//				   (char*)input.line->data, input.cursor_position, input.len);
-//			ft_put('\n');
-//			ft_putstr((char*)input.line->data);
+//			if (vec_push_at(input.line[input.cursor_y_position], "\n", input.cursor_x_position))
+//			{
+//				return (1);
+//			}
+			input.cursor_x_position++;
+			input.len++;
+			*line = input_to_str(input.line[input.cursor_y_position], input.len);
+//			printf("\n%s", *line);
 			return 0;
 		}
 	}

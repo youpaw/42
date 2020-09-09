@@ -8,51 +8,35 @@
 
 static char	*get_field(t_hash_pair *pair)
 {
-	t_env *field;
+	const char *arr[4];
 
-	field = pair->value;
-	return (nstrjoin(3, pair->key, "=", field->val));
-}
-
-static size_t count_fields(void)
-{
-	size_t	ind;
-	size_t	cnt;
-	t_list	*tmp;
-
-	ind = 0;
-	cnt = 0;
-	while (ind < g_exec_env->size)
-	{
-		tmp = g_exec_env->buckets[ind];
-		while (tmp)
-		{
-			cnt++;
-			tmp = tmp->next;
-		}
-		ind++;
-	}
-	return (cnt);
+	arr[0] = pair->key;
+	arr[1] = "=";
+	arr[2] = pair->value;
+	arr[3] = NULL;
+	return (strnjoin(arr));
 }
 
 char 		**exec_env_2array(void)
 {
 	size_t cnt;
+	size_t i_arr;
 	char **arr;
 	t_list *tmp;
 
-	arr = xmalloc(sizeof(char *) * (count_fields() + 1));
+	arr = xmalloc(sizeof(char *) * (hash_map_get_size(g_exec_env) + 1));
 	cnt = 0;
-	while (cnt < g_exec_env->size)
+	i_arr = 0;
+	while (cnt < g_exec_env->buckets_size)
 	{
 		tmp = g_exec_env->buckets[cnt];
 		while (tmp)
 		{
-			arr[cnt] = get_field(tmp->content);
+			arr[i_arr++] = get_field(tmp->content);
 			tmp = tmp->next;
 		}
 		cnt++;
 	}
-	arr[cnt] = NULL;
+	arr[i_arr] = NULL;
 	return (arr);
 }
