@@ -7,7 +7,7 @@
 #include "cc_lst.h"
 #include "cc_hash_map.h"
 #include "cc_mem.h"
-#include "cc_arr2.h"
+#include "cc_sort.h"
 
 static void 	get_names(const char **names)
 {
@@ -60,8 +60,8 @@ void		alias_print(void)
 		names = (const char **)xmalloc(sizeof(char *) * (size + 1));
 		names[size] = NULL;
 		get_names(names);
-		arr2_quick_sort((void **)names, 0, size - 1,
-						(int (*)(const void *, const void *))strcmp);
+		quick_sort((void **) names, 0, size - 1,
+				   (int (*)(const void *, const void *)) strcmp);
 		print_by_names(names);
 		free(names);
 	}

@@ -20,6 +20,12 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
+#add liberror to the project
+set(LIBERROR_DIR "lib/liberror")
+include_directories(${LIBERROR_DIR})
+add_subdirectory(${LIBERROR_DIR})
+target_link_libraries(${PROJECT_NAME} error)
+
 #add libenv to the project
 set(LIBENV_DIR "lib/libenv")
 include_directories(${LIBENV_DIR})
