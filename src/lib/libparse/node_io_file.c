@@ -33,6 +33,6 @@ t_ast *				node_io_file(t_tokens *tokens)
 		if ((node->left = node_filename(tokens)))
 			return (node);
 	}
-	del_ast_node(&node);
+	del_ast(&node);
 	return (NULL);
 }

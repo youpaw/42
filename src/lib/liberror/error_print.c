@@ -20,7 +20,7 @@ const char 	*g_error_msg[] = {
 	"%: %: syntax error: operand expected (error token is \"%\")"
 };
 
-void 	error_print(t_error er_code, const char **args)
+void 	error_print(t_error_code er_code, const char **args)
 {
 	fdputs("42sh: ", 2);
 	while (*args)

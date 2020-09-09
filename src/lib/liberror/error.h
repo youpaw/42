@@ -16,7 +16,7 @@
 
 extern const char	*g_error_msg[];
 
-typedef enum	e_error
+typedef enum	e_error_code
 {
 /*
 **	Standard errors
@@ -37,9 +37,9 @@ typedef enum	e_error
 */
 	EF_SYN_UNEXPTOK,						/* syntax error near unexpected token `%'*/
 	EF_SYN_OPEXPEC					/* %: %: syntax error: operand expected (error token is \"%\") */
-}				t_error;
+}				t_error_code;
 
-void 	error_print(t_error er_code, const char **args);
-void 	error_print_formatted(t_error er_code, const char **args);
+void 	error_print(t_error_code er_code, const char **args);
+void 	error_print_formatted(t_error_code er_code, const char **args);
 
 #endif

@@ -21,7 +21,7 @@ ADD_LIBRARY(parser STATIC
         node_and_or.c
         new_ast_node.c
         get_node_token.c
-        del_ast_node.c)
+        del_ast.c parse_error.c)
 
 target_link_libraries(parser cc)
 target_link_libraries(parser lex)

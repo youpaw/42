@@ -4,23 +4,16 @@
 #include "parser.h"
 #include "cc.h"
 
-static int 			get_pipe_seq_attr(t_ast *node, t_tokens *tokens)
+static void init_token_types(t_token_type types[1])
 {
-	t_token *token;
-
-	token = tokens->tokens[tokens->index];
-	if (!strcmp(token->raw, "|"))
-	{
-		node->token = token;
-		tokens->index++;
-		return (1);
-	}
-	return (0);
+	types[0] = l_or;
 }
 
 t_ast * 			node_pipe_seq(t_tokens *tokens)
 {
-	t_ast *node;
+	t_token_type	types[1];
+	t_ast			*node;
+	int				error;
 
 	node = new_ast_node(p_pipe_seq);
 	if ((node->left = node_command(tokens)))
@@ -33,6 +26,6 @@ t_ast * 			node_pipe_seq(t_tokens *tokens)
 		else
 			return (node);
 	}
-	del_ast_node(&node);
+	del_ast(&node);
 	return (NULL);
 }

@@ -11,6 +11,6 @@ t_ast *node_command(t_tokens *tokens)
 	node = new_ast_node(p_command);
 	if ((node->left = node_simple_cmd(tokens)))
 		return (node);
-	del_ast_node(&node);
+	del_ast(&node);
 	return (NULL);
 }

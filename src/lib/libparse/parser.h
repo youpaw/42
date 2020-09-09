@@ -32,15 +32,16 @@
 #ifndef PARSER_H
 # define PARSER_H
 #include "lexer.h"
+#include "error.h"
+#define N_NODE_TYPES 10
+#define N_MAX_TOKEN_TYPES 6
 
 enum e_node_type
 {
 	p_cmpl_cmd,
 	p_list,
 	p_and_or,
-	p_pipeline,
 	p_pipe_seq,
-	p_command,
 	p_simple_cmd,
 	p_cmd_pref,
 	p_cmd_suff,
@@ -79,9 +80,10 @@ t_ast * 			node_list(t_tokens *tokens);
 t_ast *				node_complete_cmd(t_tokens *tokens);
 //Только нода слева лист, да тупо, но из-за того что урезана грамматика, потом возможно допилим
 
-void 				del_ast_node(t_ast **node);
+void 				del_ast(t_ast **node);
 t_ast				*new_ast_node(t_node_type type);
-int 				get_node_token(t_ast *node, t_tokens *tokens, int n_types, ...);
+int 				get_node_token(t_ast *node, t_tokens *tokens, int n_types, const t_token_type types[]);
 t_ast				*parse(t_tokens *tokens);
+void 				print_parse_error(t_tokens *tokens);
 
 #endif //PARSER_H

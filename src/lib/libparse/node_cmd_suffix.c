@@ -19,6 +19,6 @@ t_ast * 			node_cmd_suffix(t_tokens *tokens)
 		node->right = node_cmd_prefix(tokens);
 		return (node);
 	}
-	del_ast_node(&node);
+	del_ast(&node);
 	return (NULL);
 }

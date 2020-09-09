@@ -12,13 +12,11 @@ and_or           :                pipe_sequence
 pipe_sequence    :                   simple_command
                  | pipe_sequence '|' simple_command
                  ;
-simple_command   : cmd_prefix cmd_word cmd_suffix
-                 | cmd_prefix cmd_word
+simple_command   : cmd_prefix CMD_NAME cmd_suffix
+                 | cmd_prefix CMD_NAME
                  | cmd_prefix
-                 | cmd_name cmd_suffix
-                 | cmd_name
-                 ;
-cmd_name         : COMMAND_NAME
+                 | CMD_NAME cmd_suffix
+                 | CMD_NAME
                  ;
 cmd_prefix       :            io_redirect
                  | cmd_prefix io_redirect

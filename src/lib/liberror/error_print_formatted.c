@@ -6,7 +6,7 @@
 #include "cc_str.h"
 #include "error.h"
 
-void 	error_print_formatted(t_error er_code, const char **args)
+void 	error_print_formatted(t_error_code er_code, const char **args)
 {
 	const char	*format;
 

@@ -11,6 +11,6 @@ t_ast * 			node_filename(t_tokens *tokens)
 	node = new_ast_node(p_filename);
 	if (get_node_token(node, tokens, l_word))
 		return (node);
-	del_ast_node(&node);
+	del_ast(&node);
 	return (NULL);
 }
