@@ -22,14 +22,19 @@ static char	*param_or_word(const char *name, const char *word)
 
 static char	*assign_param(const char *name, const char *word)
 {
-	char 	*value;
-	char 	*field;
+	char 		*value;
+	char 		*field;
+	const char 	*arr[4];
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
 	if (value)
 		return (strdup(value));
-	field = nstrjoin(3, name, "=", word);
+	arr[0] = name;
+	arr[1] = "=";
+	arr[2] = word;
+	arr[3] = NULL;
+	field = strnjoin(arr);
 	env_update(field);
 	free(field);
 	return (strdup(word));
