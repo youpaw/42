@@ -3,7 +3,6 @@
 //
 #include "error.h"
 #include "cc_str.h"
-#include <stdarg.h>
 
 const char 	*g_error_msg[] = {
 	"No such file or directory",
@@ -21,17 +20,13 @@ const char 	*g_error_msg[] = {
 	"%: %: syntax error: operand expected (error token is \"%\")"
 };
 
-void 	error_print(t_error er_code, int n, ...)
+void 	error_print(t_error er_code, const char **args)
 {
-	va_list		argptr;
-
-	va_start(argptr, n);
 	fdputs("42sh: ", 2);
-	while (n--)
+	while (*args)
 	{
-		fdputs(va_arg(argptr, char *), 2);
+		fdputs(*args++, 2);
 		fdputs(": ", 2);
 	}
 	fdputendl(g_error_msg[er_code], 2);
-	va_end(argptr);
 }

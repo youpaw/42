@@ -35,11 +35,11 @@ typedef enum	e_error
 /*
 **	Formatted errors start from here
 */
-	EF_SYNTAX,						/* syntax error near unexpected token `%'*/
+	EF_SYN_UNEXPTOK,						/* syntax error near unexpected token `%'*/
 	EF_SYN_OPEXPEC					/* %: %: syntax error: operand expected (error token is \"%\") */
 }				t_error;
 
-void 	error_print(t_error er_code, int n, ...);
-void 	error_print_formatted(t_error er_code, ...);
+void 	error_print(t_error er_code, const char **args);
+void 	error_print_formatted(t_error er_code, const char **args);
 
 #endif
