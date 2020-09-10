@@ -6,27 +6,66 @@
 #include "builtins.h"
 #include "stdio.h"
 #include "cc.h"
+#include "env.h"
+# define N_PATHS 3
 
-char P_FLAG = '0';
+char I_AV = 0;
+char FLAG = '0';
 
-static int check_ac(const char *av)
+enum					e_paths
+{
+	home,
+	pwd,
+	oldpwd,
+};
+
+typedef enum e_paths	t_paths;
+
+//static void 		get_chdir(char *newpwd, char *pwd, char *oldpwd)
+//{
+//
+//}
+
+static void			init_chdir(const char *av)
+{
+	char 	*(paths[N_PATHS]);
+
+	paths[home] = env_get_value("HOME=");
+	paths[pwd] = getcwd(paths[pwd], 0);
+	paths[oldpwd] = env_get_value("OLDPWD=");
+
+
+	free(paths[pwd]);
+}
+
+static int			check_av(const char *av)
 {
 	struct stat s;
 
 	if (!*av || !lstat(av, &s))
 	{
 		putendl("bash: test: command not found");
-		return (0);
+		return (1);
 	}
 	if (!S_ISDIR(s.st_mode) && !S_ISLNK(s.st_mode))
 	{
 		putendl("bash: cd: p: Not a directory");
-		return (0);
+		return (1);
 	}
-
+	if (!S_ISLNK(s.st_mode) && access(av, R_OK) != 0)
+	{
+		putendl("bash: cd: p: Not a directory");
+		return (1);
+	}
+	if (access(av, X_OK) != 0)
+	{
+		putendl("cd: permission denied:");
+		return (1);
+	}
+	return (0);
 }
 
-static  int			check_P_flag(const char *av)
+static  int			check_flags(const char *av)
 {
 	int cnt;
 
@@ -34,27 +73,28 @@ static  int			check_P_flag(const char *av)
 	while(av[cnt])
 	{
 		if (av[cnt] != 'P' && av[cnt] != 'L')
-			return (1);
-		cnt++;
-	}
-	if (av[1] == 'P')
-		P_FLAG = '1';
-}
-
-int cd(int ac, const char **av)
-{
-//	int i = -1;
-//	while (++i < ac)
-//		printf(av[i]);
-
-	if (ac >= 3 && av[2][0] == '-' && av[2][1])
-	{
-		if (!(check_P_flag(av[2])))
 		{
 			putendl("cd: usage: cd [-L|-P] [dir]");
-			return (0);
+			return (1);
 		}
+		cnt++;
 	}
-		return (0);
+	FLAG = av[1] == 'P' ? 'P' : 'L';
+	return (0);
+}
+
+int					cd(int ac, const char **av)
+{
+	if (ac >= 3 && av[2][0] == '-' && av[2][1])
+	{
+		if (check_flags(av[2]))
+			I_AV = FLAG != '0' ? 3 : 2;
+		else
+			return (1);
+	}
+	if (I_AV == 0 && !check_av(av[I_AV]))
+		return (1);
+	init_chdir(av[I_AV]);
+	return (0);
 }
 
