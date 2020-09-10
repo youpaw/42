@@ -11,7 +11,6 @@ ADD_LIBRARY(parser STATIC
         node_complete_cmd.c
         node_list.c
         node_pipe_seq.c
-        node_command.c
         node_simple_cmd.c
         node_cmd_prefix.c
         node_cmd_suffix.c
@@ -21,7 +20,7 @@ ADD_LIBRARY(parser STATIC
         node_and_or.c
         new_ast_node.c
         get_node_token.c
-        del_ast.c parse_error.c)
+        del_ast.c print_parse_error.c)
 
 target_link_libraries(parser cc)
 target_link_libraries(parser lex)

@@ -37,6 +37,8 @@ io_file          : '<'       filename
                  | GREATAND  filename
                  | DGREAT    filename
                  ;
+filename         : WORD
+                 ;
 separator_op     : '&'
                  | ';'
                  ;

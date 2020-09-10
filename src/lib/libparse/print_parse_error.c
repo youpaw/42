@@ -6,7 +6,7 @@
 #include "lexer.h"
 #include "env.h"
 
-void 				print_parse_error(t_tokens *tokens)
+void 	print_parse_error(t_tokens *tokens)
 {
 	const char *args[1];
 

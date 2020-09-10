@@ -4,11 +4,11 @@
 
 #include "parser.h"
 
-t_ast	*node_complete_cmd(t_tokens *tokens)
+int			node_complete_cmd(t_tokens *tokens, t_ast **root)
 {
-	t_ast *node;
+	int 	error;
 
-	node = new_ast_node(p_cmpl_cmd);
-	node->left = node_list(tokens);
-	return (node);
+	*root = new_ast_node(p_cmpl_cmd);
+	error = node_list(tokens, &(*root)->left);
+	return (error);
 }

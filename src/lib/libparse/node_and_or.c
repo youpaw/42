@@ -4,29 +4,17 @@
 
 #include "parser.h"
 
-static void init_token_types(t_token_type types[2])
+int			node_and_or(t_tokens *tokens, t_ast **root)
 {
-	types[0] = l_and_if;
-	types[1] = l_or_if;
-}
+	int		error;
 
-t_ast *node_and_or(t_tokens *tokens)
-{
-	t_token_type types[2];
-	t_ast *node;
-	int error;
-
-	node = new_ast_node(p_and_or);
-	if ((node->right = node_pipe_seq(tokens)))
+	*root = new_ast_node(p_and_or);
+	if (!(error = node_pipe_seq(tokens, &(*root)->left)))
 	{
-		init_token_types(types);
-		error = get_node_token(node, tokens, 2, types);
-		if (!error)
-			node->right = node_and_or(tokens);
-		if (error <= 0)
-			return (node);
-		print_parse_error(tokens);
+		if ((error = get_node_token(*root, tokens)) > 0)
+			print_parse_error(tokens);
+		else if (error < 0 || !node_and_or(tokens, &(*root)->right))
+			return (0);
 	}
-	del_ast(&node);
-	return (NULL);
+	return (error);
 }

@@ -4,24 +4,27 @@
 
 #include "parser.h"
 
-static void init_token_types(t_token_type types[1])
+int			node_simple_cmd(t_tokens *tokens, t_ast **root)
 {
-	types[0] = l_command_name;
-}
+	int		error;
 
-t_ast * 			node_simple_cmd(t_tokens *tokens)
-{
-	t_ast *node;
-	t_token_type types[1];
-
-	node = new_ast_node(p_simple_cmd);
-	node->left = node_cmd_prefix(tokens);
-	init_token_types(types);
-	if (!get_node_token(node, tokens, 1, types))
+	*root = new_ast_node(p_simple_cmd);
+	if ((node_cmd_prefix(tokens, &(*root)->left)) < 0 ||\
+		(error = get_node_token(*root, tokens)) < 0)
 	{
+		del_ast(root);
+		return (-1);
+	}
+	if (error)
+	{
+		print_parse_error(tokens);
+		return (1);
+	}
+	if (nod)
+	{
+		print_parse_error(tokens);
 		del_ast(&node);
 		return (NULL);
 	}
-	node->right = node_cmd_suffix(tokens);
 	return (node);
 }

@@ -46,8 +46,8 @@ enum e_node_type
 	p_cmd_pref,
 	p_cmd_suff,
 	p_io_redirect,
-	p_filename,
-	p_io_file
+	p_io_file,
+	p_filename
 };
 
 struct		s_ast
@@ -61,28 +61,20 @@ struct		s_ast
 typedef struct s_ast t_ast;
 typedef enum e_node_type t_node_type;
 
-t_ast *				node_io_file(t_tokens *tokens);
-// все операнды в аттрибут
-t_ast * 			node_filename(t_tokens *tokens);
-// WORD кладется в атрибут
-t_ast * 			node_io_redirect(t_tokens *tokens);
-// IO_NUMBER аттрибут, в него кладется указатель на лексему типа l_IO_number
-t_ast * 			node_cmd_suffix(t_tokens *tokens);
-t_ast * 			node_cmd_prefix(t_tokens *tokens);
-t_ast * 			node_simple_cmd(t_tokens *tokens);
-// WORD указатель на лексему кладется в attr
-t_ast * 			node_command(t_tokens *tokens);
-t_ast * 			node_pipe_seq(t_tokens *tokens);
-// '|' никуда добавлять не нужно, attr всегда null
-t_ast * 			node_and_or(t_tokens *tokens);
-t_ast * 			node_list(t_tokens *tokens);
-// separator_op это атрибут, в него нода separator_op кладет указатель на лексему (асинхронное выполнение команды)
-t_ast *				node_complete_cmd(t_tokens *tokens);
-//Только нода слева лист, да тупо, но из-за того что урезана грамматика, потом возможно допилим
+int					node_filename(t_tokens *tokens, t_ast **root);
+int					node_io_file(t_tokens *tokens, t_ast **root);
+int					node_io_redirect(t_tokens *tokens, t_ast **root);
+int					node_cmd_suffix(t_tokens *tokens, t_ast **root);
+int					node_cmd_prefix(t_tokens *tokens, t_ast **root);
+int					node_simple_cmd(t_tokens *tokens, t_ast **root);
+int					node_pipe_seq(t_tokens *tokens, t_ast **root);
+int					node_and_or(t_tokens *tokens, t_ast **root);
+int					node_list(t_tokens *tokens, t_ast **root);
+int					node_complete_cmd(t_tokens *tokens, t_ast **root);
 
 void 				del_ast(t_ast **node);
 t_ast				*new_ast_node(t_node_type type);
-int 				get_node_token(t_ast *node, t_tokens *tokens, int n_types, const t_token_type types[]);
+int 				get_node_token(t_ast *node, t_tokens *tokens);
 t_ast				*parse(t_tokens *tokens);
 void 				print_parse_error(t_tokens *tokens);
 
