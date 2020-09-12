@@ -61,16 +61,16 @@ struct		s_ast
 typedef struct s_ast t_ast;
 typedef enum e_node_type t_node_type;
 
-int					node_filename(t_tokens *tokens, t_ast **root);
-int					node_io_file(t_tokens *tokens, t_ast **root);
-int					node_io_redirect(t_tokens *tokens, t_ast **root);
-int					node_cmd_suffix(t_tokens *tokens, t_ast **root);
-int					node_cmd_prefix(t_tokens *tokens, t_ast **root);
-int					node_simple_cmd(t_tokens *tokens, t_ast **root);
-int					node_pipe_seq(t_tokens *tokens, t_ast **root);
-int					node_and_or(t_tokens *tokens, t_ast **root);
-int					node_list(t_tokens *tokens, t_ast **root);
-int					node_complete_cmd(t_tokens *tokens, t_ast **root);
+t_ast 				*node_filename(t_tokens *tokens);
+t_ast 				*node_io_file(t_tokens *tokens);
+t_ast 				*node_io_redirect(t_tokens *tokens);
+t_ast 				*node_cmd_suffix(t_tokens *tokens);
+t_ast 				*node_cmd_prefix(t_tokens *tokens);
+t_ast 				*node_simple_cmd(t_tokens *tokens);
+t_ast 				*node_pipe_seq(t_tokens *tokens);
+t_ast 				*node_and_or(t_tokens *tokens);
+t_ast 				*node_list(t_tokens *tokens);
+t_ast 				*node_complete_cmd(t_tokens *tokens);
 
 void 				del_ast(t_ast **node);
 t_ast				*new_ast_node(t_node_type type);

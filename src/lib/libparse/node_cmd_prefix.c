@@ -4,7 +4,7 @@
 
 #include "parser.h"
 
-t_ast * 			node_cmd_prefix(t_tokens *tokens)
+t_ast		*node_cmd_prefix(t_tokens *tokens)
 {
 	t_ast *node;
 
@@ -12,13 +12,14 @@ t_ast * 			node_cmd_prefix(t_tokens *tokens)
 	if ((node->left = node_io_redirect(tokens)))
 	{
 		node->right = node_cmd_prefix(tokens);
-		return (node);
+		tokens->error = 0;
 	}
-	if (get_node_token(node, tokens, l_assignment_word))
+	else if (!(tokens->error = get_node_token(node, tokens)))
 	{
 		node->right = node_cmd_prefix(tokens);
-		return (node);
+		tokens->error = 0;
 	}
-	del_ast(&node);
-	return (NULL);
+	if (tokens->error)
+		del_ast(&node);
+	return (node);
 }

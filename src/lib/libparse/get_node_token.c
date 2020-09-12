@@ -10,16 +10,17 @@ int get_node_token(t_ast *node, t_tokens *tokens)
 			{-1}, {l_and, l_semi, -1}, {l_and_if, l_or_if, -1}, {l_or, -1},
 			{l_command_name, -1}, {l_assignment_word, -1}, {l_word, -1},
 			{l_io_number, -1},
-			{l_less, l_less_and, l_great, l_great_and, l_double_great -1}, {-1}
+			{l_less, l_less_and, l_great, l_great_and, l_double_great -1},
+			{l_word, -1}
 	};
 	t_token *token;
 	int 	index;
 
 	if (tokens->index >= tokens->size)
-		return (-1);
+		return (E_NULL_INPUT);
 	token = tokens->tokens[tokens->index];
 	index = 0;
-	while (token_type_map[node->type][index] >= 0)
+	while ((int)token_type_map[node->type][index] >= 0)
 	{
 		if (token->type == token_type_map[node->type][index])
 		{
@@ -29,5 +30,5 @@ int get_node_token(t_ast *node, t_tokens *tokens)
 		}
 		index++;
 	}
-	return (1);
+	return (EF_SYN_UNEXPTOK);
 }

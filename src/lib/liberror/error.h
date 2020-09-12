@@ -18,6 +18,7 @@ extern const char	*g_error_msg[];
 
 typedef enum	e_error_code
 {
+	E_OK,
 /*
 **	Standard errors
 */

@@ -26,7 +26,6 @@ int main(int ac, const char *av[], const char *env[])
 	tokens = lex_str(str, l_vld);
 	puts("\n");
 	print_tokens(tokens);
-	destruct_tokens(&tokens);
-//	ast = parse(tokens);
-//	puts("\n");
+	ast = parse(tokens);
+	puts("\n");
 }

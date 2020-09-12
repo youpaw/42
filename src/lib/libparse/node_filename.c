@@ -4,13 +4,12 @@
 
 #include "parser.h"
 
-t_ast * 			node_filename(t_tokens *tokens)
+t_ast 		*node_filename(t_tokens *tokens)
 {
 	t_ast *node;
 
 	node = new_ast_node(p_filename);
-	if (get_node_token(node, tokens, l_word))
-		return (node);
-	del_ast(&node);
-	return (NULL);
+	if ((tokens->error = get_node_token(node, tokens)))
+		del_ast(&node);
+	return (node);
 }

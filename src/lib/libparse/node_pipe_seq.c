@@ -3,17 +3,25 @@
 //
 #include "parser.h"
 
-int			node_pipe_seq(t_tokens *tokens, t_ast **root)
+t_ast *node_pipe_seq(t_tokens *tokens)
 {
-	int		error;
+	t_ast *node;
 
-	*root = new_ast_node(p_pipe_seq);
-	if (!(error = node_simple_cmd(tokens, &(*root)->left)))
+	node = new_ast_node(p_pipe_seq);
+	if ((node->left = node_simple_cmd(tokens)))
 	{
-		if ((error = get_node_token(*root, tokens)) > 0)
-			print_parse_error(tokens);
-		else if (error < 0 || !node_pipe_seq(tokens, &(*root)->right))
-			return (0);
+		tokens->error = get_node_token(node, tokens);
+		if (!tokens->error)
+		{
+			if (tokens->index < tokens->size)
+				node->right = node_pipe_seq(tokens);
+			else
+				tokens->error = E_NULL_INPUT;
+		}
+		else if (tokens->error == E_NULL_INPUT)
+			tokens->error = 0;
 	}
-	return (error);
+	if (tokens->error)
+		del_ast(&node);
+	return (node);
 }

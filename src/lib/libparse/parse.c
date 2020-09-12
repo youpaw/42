@@ -8,11 +8,9 @@
 t_ast				*parse(t_tokens *tokens)
 {
 	t_ast	*ast;
-	int 	error;
 
-	tokens->index = 0;
-	error = node_complete_cmd(tokens, &ast);
-	if (tokens->index < tokens->size)
-		fdputs("Parser error", 2);
+	ast = node_complete_cmd(tokens);
+	if (tokens->error)
+		print_parse_error(tokens);
 	return (ast);
 }

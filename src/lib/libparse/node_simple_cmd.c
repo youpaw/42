@@ -4,27 +4,21 @@
 
 #include "parser.h"
 
-int			node_simple_cmd(t_tokens *tokens, t_ast **root)
+t_ast *node_simple_cmd(t_tokens *tokens)
 {
-	int		error;
+	t_ast *node;
 
-	*root = new_ast_node(p_simple_cmd);
-	if ((node_cmd_prefix(tokens, &(*root)->left)) < 0 ||\
-		(error = get_node_token(*root, tokens)) < 0)
+	node = new_ast_node(p_simple_cmd);
+	node->left = node_cmd_prefix(tokens);
+	tokens->error = get_node_token(node, tokens);
+	if (!tokens->error)
 	{
-		del_ast(root);
-		return (-1);
+		node->right = node_cmd_suffix(tokens);
+		tokens->error = 0;
 	}
-	if (error)
-	{
-		print_parse_error(tokens);
-		return (1);
-	}
-	if (nod)
-	{
-		print_parse_error(tokens);
+	else if (node->left)
+		tokens->error = 0;
+	if (tokens->error)
 		del_ast(&node);
-		return (NULL);
-	}
 	return (node);
 }
