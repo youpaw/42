@@ -32,6 +32,12 @@ include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
 
+#add libhash to the project
+set(LIBHASH_DIR "lib/libhash")
+include_directories(${LIBHASH_DIR})
+add_subdirectory(${LIBHASH_DIR})
+target_link_libraries(${PROJECT_NAME} hash)
+
 #add libexpand to the project
 set(LIBEXPAND_DIR "lib/libexpand")
 include_directories(${LIBEXPAND_DIR})
