@@ -21,5 +21,5 @@ int 	tok_double_quote(t_lexer *lexer)
 		vec_rm_last(lexer->states);
 	if (state != l_unset)
 		vec_push(lexer->states, &state);
-	return (0);
+	return (E_OK);
 }

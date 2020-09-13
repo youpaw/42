@@ -6,5 +6,5 @@
 
 int 	exp_back_slash(t_lexer *lexer)
 {
-	return (0);
+	return (E_OK);
 }

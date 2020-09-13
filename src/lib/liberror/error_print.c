@@ -1,32 +1,45 @@
 //
 // Created by Azzak Omega on 9/8/20.
 //
-#include "error.h"
+
+#include "cc_char.h"
 #include "cc_str.h"
+#include "error.h"
 
 const char 	*g_error_msg[] = {
-	"No such file or directory",
-	"Input/output error",
-	"Bad file descriptor",
-	"Cannot allocate memory",
-	"Permission denied",
-	"File exists",
-	"Not a directory",
-	"Is a directory",
-	"Invalid argument",
-	"File too large",
-	"Broken pipe",
-	"syntax error near unexpected token `%'",
-	"%: %: syntax error: operand expected (error token is \"%\")"
+		NULL,
+		"No such file or directory",
+		"Input/output error",
+		"Bad file descriptor",
+		"Cannot allocate memory",
+		"Permission denied",
+		"File exists",
+		"Not a directory",
+		"Is a directory",
+		"Invalid argument",
+		"File too large",
+		"Broken pipe",
+		NULL,
+		NULL,
+		"%: bad substitution",
+		"!%: event not found",
+		"syntax error near unexpected token `%'",
+		"%: %: syntax error: operand expected (error token is \"%\")"
 };
 
-void 	error_print(t_error er_code, const char **args)
+void 	error_print(t_error_code er_code, const char **args)
 {
+	const char	*format;
+
+	format = g_error_msg[er_code];
 	fdputs("42sh: ", 2);
-	while (*args)
+	while (*format)
 	{
-		fdputs(*args++, 2);
-		fdputs(": ", 2);
+		if (*format != '%')
+			fdputchar(*format, 2);
+		else
+			fdputs(*args++, 2);
+		format++;
 	}
-	fdputendl(g_error_msg[er_code], 2);
+	fdputchar('\n', 2);
 }

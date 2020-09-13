@@ -8,7 +8,7 @@ int 	tok_single_quote(t_lexer *lexer)
 	while (lexer->raw[lexer->index] != '\'' && lexer->index < lexer->size)
 		lexer->index++;
 	if (lexer->index == lexer->size)
-		return (E_INCOMPLETE_INPUT);
+		return (E_INCINP);
 	vec_rm_last(lexer->states);
-	return (0);
+	return (E_OK);
 }

@@ -7,6 +7,6 @@ file(MAKE_DIRECTORY ${BUILD_DIRECTORY})
 
 
 ADD_LIBRARY(error STATIC
-            error_print.c error.h error_print_formatted.c)
+        error.h error_print.c)
 
 target_link_libraries(error cc)

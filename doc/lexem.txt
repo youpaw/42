@@ -1,0 +1,44 @@
+%start  complete_command
+%%
+complete_command : list
+                 ;
+list             : slist separator_op and_or
+                 |                   and_or
+                 ;
+and_or           :                pipe_sequence
+                 | and_or AND_IF  pipe_sequence
+                 | and_or OR_IF   pipe_sequence
+                 ;
+pipe_sequence    :                   simple_command
+                 | pipe_sequence '|' simple_command
+                 ;
+simple_command   : cmd_prefix CMD_NAME cmd_suffix
+                 | cmd_prefix CMD_NAME
+                 | cmd_prefix
+                 | CMD_NAME cmd_suffix
+                 | CMD_NAME
+                 ;
+cmd_prefix       :            io_redirect
+                 | cmd_prefix io_redirect
+                 |            ASSIGNMENT_WORD
+                 | cmd_prefix ASSIGNMENT_WORD
+                 ;
+cmd_suffix       :            io_redirect
+                 | cmd_suffix io_redirect
+                 |            WORD
+                 | cmd_suffix WORD
+                 ;
+io_redirect      :           io_file
+                 | IO_NUMBER io_file
+                 ;
+io_file          : '<'       filename
+                 | LESSAND   filename
+                 | '>'       filename
+                 | GREATAND  filename
+                 | DGREAT    filename
+                 ;
+filename         : WORD
+                 ;
+separator_op     : '&'
+                 | ';'
+                 ;

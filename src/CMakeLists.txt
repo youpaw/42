@@ -62,6 +62,12 @@ include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
 
+#add libparse to the project
+set(LIBPARSE_DIR "lib/libparse")
+include_directories(${LIBPARSE_DIR})
+add_subdirectory(${LIBPARSE_DIR})
+target_link_libraries(${PROJECT_NAME} parser)
+
 #add libalias to the project
 set(LIBALIAS_DIR "lib/libalias")
 include_directories(${LIBALIAS_DIR})

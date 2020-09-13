@@ -15,12 +15,12 @@ int 	main_manager(void)
 	while (42)
 	{
 		readline(&str);
-		tokens = lex_str(str, l_vld);
+		tokens = validate_str(str);
 		puts("\n");
 		puts(str);
 		puts("\n");
 		print_tokens(tokens);
-		if (tokens->error != E_INCOMPLETE_INPUT)
+		if (tokens->error != E_NOINP)
 		{
 			free(str);
 			str = strdup("");
