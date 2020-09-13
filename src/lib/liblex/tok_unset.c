@@ -47,5 +47,5 @@ int 		tok_unset(t_lexer *lexer)
 		lexer->begin = lexer->index;
 		delimit_operator(lexer, type, op.size);
 	}
-	return (0);
+	return (E_OK);
 }

@@ -26,6 +26,15 @@ static char *str_join_expanded(t_lexer *lexer, size_t index, const char *expand)
 	return (raw);
 }
 
+static void handle_error(t_lexer *lexer, const char *str)
+{
+	const char *args[2];
+
+	args[0] = str;
+	args[1] = NULL;
+	error_print(E_NOEVENT, args);
+}
+
 int 	vld_bang(t_lexer *lexer)
 {
 	char *expand;
@@ -34,17 +43,21 @@ int 	vld_bang(t_lexer *lexer)
 
 	index = lexer->index;
 	if (match_bang(lexer))
-		return (1);
+	{
+		lexer->index--;
+		return (E_OK);
+	}
 	expand = strsub(lexer->raw + index, 0, lexer->index - index);
 	if (expand_bang(&expand))
 	{
 		free(expand);
-		return (2);
+		return (E_NOEVENT);
 	}
 	raw = str_join_expanded(lexer, index, expand);
 	free(expand);
 	free(lexer->raw);
 	lexer->raw = raw;
+	lexer->flags[l_print_command] = 1;
 	vec_rm_last(lexer->states);
-	return (0);
+	return (E_OK);
 }

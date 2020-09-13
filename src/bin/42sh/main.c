@@ -23,7 +23,7 @@ int main(int ac, const char *av[], const char *env[])
 	char *str;
 
 	str = strdup("ls 123>smw");
-	tokens = lex_str(str, l_vld);
+	tokens = tokenize_str(str);
 	puts("\n");
 	print_tokens(tokens);
 	ast = parse(tokens);

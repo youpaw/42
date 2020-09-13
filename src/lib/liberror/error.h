@@ -14,8 +14,6 @@
 # define ERROR_H
 //# define ERROR_COUNT 11
 
-extern const char	*g_error_msg[];
-
 typedef enum	e_error_code
 {
 	E_OK,
@@ -33,14 +31,14 @@ typedef enum	e_error_code
 	E_INVAL,                        /* Invalid argument */
 	E_FBIG,                         /* File too large */
 	E_PIPE,                         /* Broken pipe */
-/*
-**	Formatted errors start from here
-*/
-	EF_SYN_UNEXPTOK,						/* syntax error near unexpected token `%'*/
-	EF_SYN_OPEXPEC					/* %: %: syntax error: operand expected (error token is \"%\") */
+	E_NOINP,						/* Empty input */
+	E_INCINP,						/* Incomplete input */
+	E_BADSUBS,						/* Bad substitution */
+	E_NOEVENT,						/* Event not found */
+	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/
+	E_OPEXPEC					/* %: %: syntax error: operand expected (error token is \"%\") */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);
-void 	error_print_formatted(t_error_code er_code, const char **args);
 
 #endif

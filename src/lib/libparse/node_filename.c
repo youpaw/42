@@ -9,7 +9,7 @@ t_ast 		*node_filename(t_tokens *tokens)
 	t_ast *node;
 
 	node = new_ast_node(p_filename);
-	if ((tokens->error = get_node_token(node, tokens)))
+	if (get_node_token(node, tokens))
 		del_ast(&node);
 	return (node);
 }

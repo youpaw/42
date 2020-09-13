@@ -27,7 +27,10 @@ int			handle_tab(t_input *inp)
 	if (!to_print)
 	{
 		g_input_changed_flg = 0;
-		tokens = lex_str_sub(input_to_str(inp->line[inp->cursor_y_position], inp->cursor_x_position), l_tok, inp->cursor_x_position);
+		tokens = tokenize_str_sub(
+				input_to_str(inp->line[inp->cursor_y_position],
+							 inp->cursor_x_position),
+				inp->cursor_x_position);
 		token = get_last_token(tokens);
 		if (token->type == l_word) //file
 		{

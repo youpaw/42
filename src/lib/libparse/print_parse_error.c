@@ -10,7 +10,7 @@ void 	print_parse_error(t_tokens *tokens)
 {
 	const char *args[1];
 
-	g_exit_code = EF_SYN_UNEXPTOK;
+	g_exit_code = E_UNEXPTOK;
 	args[0] = tokens->tokens[tokens->index]->raw;
-	error_print_formatted(EF_SYN_UNEXPTOK, args);
+	error_print(E_UNEXPTOK, args);
 }

@@ -17,7 +17,7 @@ int get_node_token(t_ast *node, t_tokens *tokens)
 	int 	index;
 
 	if (tokens->index >= tokens->size)
-		return (E_NULL_INPUT);
+		return (-1);
 	token = tokens->tokens[tokens->index];
 	index = 0;
 	while ((int)token_type_map[node->type][index] >= 0)
@@ -30,5 +30,5 @@ int get_node_token(t_ast *node, t_tokens *tokens)
 		}
 		index++;
 	}
-	return (EF_SYN_UNEXPTOK);
+	return (1);
 }

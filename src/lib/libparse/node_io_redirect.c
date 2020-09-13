@@ -10,8 +10,7 @@ t_ast		*node_io_redirect(t_tokens *tokens)
 
 	node = new_ast_node(p_io_redirect);
 	get_node_token(node, tokens);
-	node->left = node_io_file(tokens);
-	if (tokens->error)
+	if (!(node->left = node_io_file(tokens)))
 		del_ast(&node);
 	return (node);
 }

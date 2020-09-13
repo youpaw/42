@@ -11,13 +11,10 @@ t_ast 		*node_list(t_tokens *tokens)
 	node = new_ast_node(p_list);
 	if ((node->left = node_and_or(tokens)))
 	{
-		tokens->error = get_node_token(node, tokens);
-		if (!tokens->error && tokens->index < tokens->size)
+		if (!get_node_token(node, tokens) && tokens->index < tokens->size)
 			node->right = node_list(tokens);
-		else if (tokens->error == E_NULL_INPUT)
-			tokens->error = 0;
 	}
-	if (tokens->error)
+	else
 		del_ast(&node);
 	return (node);
 }

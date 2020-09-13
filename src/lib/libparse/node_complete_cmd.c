@@ -9,8 +9,7 @@ t_ast	*node_complete_cmd(t_tokens *tokens)
 	t_ast *node;
 
 	node = new_ast_node(p_cmpl_cmd);
-	node->left = node_list(tokens);
-	if (tokens->error)
+	if (!(node->left = node_list(tokens)))
 		del_ast(&node);
 	return (node);
 }
