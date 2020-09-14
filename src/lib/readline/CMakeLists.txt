@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.8)
+
+# CMake instructions to compile readline as static lib
+
+set(READLINE_BUILD_DIRECTORY "build")
+file(MAKE_DIRECTORY ${READLINE_BUILD_DIRECTORY})
+
+#set(LIBRARY_OUTPUT_PATH "build")
+#set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
+
+ADD_LIBRARY(readline STATIC
+        readline.c
+        termcap_init.c complete_print.c handle_right_arrow.c handle_del.c handle_symdol_key.c handle_tab.c tty_init.c tty_restore.c input_to_str.c get_displayed_symbol_length.c get_list_files.c choose_token.c input_init.c handle_key.c handle_left_arrow.c handle_backspace.c signal_init.c signal_handler.c)
+
+target_link_libraries(readline cc termcap)
+
