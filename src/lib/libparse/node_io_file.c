@@ -3,7 +3,6 @@
 //
 
 #include "parser.h"
-#include "cc.h"
 
 t_ast 		*node_io_file(t_tokens *tokens)
 {

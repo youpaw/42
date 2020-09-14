@@ -22,7 +22,7 @@ int main(int ac, const char *av[], const char *env[])
 	t_ast *ast;
 	char *str;
 
-	str = strdup("ls 123>smw");
+	str = strdup("ls 123>smw;echo|cat");
 	tokens = tokenize_str(str);
 	puts("\n");
 	print_tokens(tokens);

@@ -2,7 +2,7 @@
 %%
 complete_command : list
                  ;
-list             : slist separator_op and_or
+list             : list separator_op and_or
                  |                   and_or
                  ;
 and_or           :                pipe_sequence
@@ -42,3 +42,4 @@ filename         : WORD
 separator_op     : '&'
                  | ';'
                  ;
+TODO add heredoc and bang handling
