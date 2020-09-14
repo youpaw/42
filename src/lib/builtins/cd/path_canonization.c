@@ -16,7 +16,7 @@ static int 	tokenizer(char *path, char ***tokens)
 		if (!(getcwd(pwd, 0)))
 			return (1);
 		full_path = strjoin(pwd, path);
-		tokens = strsplit(full_path);
+		*tokens = strsplit(full_path);
 		free(full_path);
 		free(pwd);
 	}
@@ -28,6 +28,11 @@ static int 	tokenizer(char *path, char ***tokens)
 void 	path_canonization(char *path)
 {
 	char **tokens;
+	int len;
 
+	len = 0;
 	if (!tokenizer(path, &tokens))
 		return ;
+	while (tokens[len])
+		len++;
+}

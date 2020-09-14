@@ -30,9 +30,9 @@ static void			init_chdir(const char *av)
 {
 	char 	*(paths[N_PATHS]);
 
-	paths[home] = env_get_value("HOME=");
+	paths[home] = env_get_value("HOME");
 	paths[pwd] = getcwd(paths[pwd], 0);
-	paths[oldpwd] = env_get_value("OLDPWD=");
+	paths[oldpwd] = env_get_value("OLDPWD");
 
 
 	free(paths[pwd]);
