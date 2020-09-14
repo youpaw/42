@@ -5,6 +5,8 @@
 #ifndef BUILTINS_H
 #define BUILTINS_H
 
-int cd(int ac, const char **av);
+int		cd(int ac, const char **av);
+void	set(void);
+int 	unset(const char **args);
 
 #endif //BUILTINS_H
