@@ -3,9 +3,7 @@
 //
 
 #include "exec.h"
-#include <stdlib.h>
 #include <zconf.h>
-#include <wait.h>
 
 int					exec_pipe_seq(t_ast *ast)
 {
