@@ -9,6 +9,6 @@ file(MAKE_DIRECTORY ${BUILTINS_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(builtins STATIC
-        cd.c)
+        cd/cd.c)
 
 target_link_libraries(builtins cc env)
