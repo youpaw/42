@@ -146,6 +146,7 @@ t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 int			match_brace(t_lexer *lexer, t_brace brace);
 int 		match_bang(t_lexer *lexer);
 
+//!TODO tok_back_slash should work like vld_back_slash + tokenizer fix
 int 		tok_back_slash(t_lexer *lexer);
 int 		tok_single_quote(t_lexer *lexer);
 int 		tok_double_quote(t_lexer *lexer);
@@ -174,6 +175,7 @@ t_tokens	*expand_token(t_token *token);
 t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
 
+//!TODO validate_str -> validate_tokens after tokenezetion (no need to tokenize 2 times)
 t_tokens	*validate_str(const char *string);
 t_tokens	*tokenize_str(const char *string);
 t_tokens	*tokenize_str_sub(const char *string, size_t len);
