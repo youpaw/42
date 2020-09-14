@@ -32,6 +32,7 @@ int 	main_init(const char *name, const char *av[], const char *en[])
 {
 	const char	*home_dir;
 
+	g_exit_code = 0;
 	av_init(name, av);
 	env_init(en);
 	change_shlvl();

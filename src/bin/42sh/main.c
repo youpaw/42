@@ -3,7 +3,9 @@
 //
 
 #include "main.h"
-#include "builtins.h"
+#include "cc.h"
+#include "lexer.h"
+#include "parser.h"
 
 //int main(int ac, const char *av[], const char *env[])
 //{
@@ -16,6 +18,14 @@
 
 int main(int ac, const char *av[], const char *env[])
 {
-	cd(ac, av);
-	return (0);
+	t_tokens *tokens;
+	t_ast *ast;
+	char *str;
+
+	str = strdup("ls 123>smw;echo|cat");
+	tokens = tokenize_str(str);
+	puts("\n");
+	print_tokens(tokens);
+	ast = parse(tokens);
+	puts("\n");
 }

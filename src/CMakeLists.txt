@@ -32,6 +32,12 @@ include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
 
+#add libhash to the project
+set(LIBHASH_DIR "lib/libhash")
+include_directories(${LIBHASH_DIR})
+add_subdirectory(${LIBHASH_DIR})
+target_link_libraries(${PROJECT_NAME} hash)
+
 #add libexpand to the project
 set(LIBEXPAND_DIR "lib/libexpand")
 include_directories(${LIBEXPAND_DIR})
@@ -55,6 +61,12 @@ set(LIBCALC_DIR "lib/libcalc")
 include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
+
+#add libparse to the project
+set(LIBPARSE_DIR "lib/libparse")
+include_directories(${LIBPARSE_DIR})
+add_subdirectory(${LIBPARSE_DIR})
+target_link_libraries(${PROJECT_NAME} parser)
 
 #add libalias to the project
 set(LIBALIAS_DIR "lib/libalias")

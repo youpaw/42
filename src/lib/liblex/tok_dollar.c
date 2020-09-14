@@ -8,7 +8,7 @@ int 	tok_dollar(t_lexer *lexer)
 	t_brace	brace;
 	int		error;
 
-	error = 0;
+	error = E_OK;
 	if (get_brace(lexer->raw + lexer->index, &brace) > 0)
 		error = match_brace(lexer, brace);
 	lexer->index--;

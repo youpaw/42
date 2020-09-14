@@ -6,5 +6,5 @@
 
 int 	exp_dollar(t_lexer *lexer)
 {
-	return (0);
+	return (E_OK);
 }

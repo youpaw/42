@@ -7,5 +7,5 @@
 int 		tok_back_slash(t_lexer *lexer)
 {
 	vec_rm_last(lexer->states);
-	return (0);
+	return (E_OK);
 }
