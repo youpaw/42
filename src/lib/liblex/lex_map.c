@@ -4,7 +4,7 @@
 
 #include "lexer.h"
 
-int		lex_map(t_lexer *tokenize, t_state current)
+int		lex_map(t_lexer *lexer, t_state current)
 {
 	static int	(*handlers[N_LEX_STAGES][N_STATES + 1])(t_lexer *) = {
 			{&tok_back_slash, &tok_single_quote, &tok_double_quote, \
@@ -15,9 +15,9 @@ int		lex_map(t_lexer *tokenize, t_state current)
 			&exp_dollar, NULL, &exp_unset}
 	};
 
-	if (*handlers[tokenize->stage][current])
-		return ((*handlers[tokenize->stage][current])(tokenize));
+	if (*handlers[lexer->stage][current])
+		return ((*handlers[lexer->stage][current])(lexer));
 	else
-		vec_rm_last(tokenize->states);
+		vec_rm_last(lexer->states);
 	return (0);
 }

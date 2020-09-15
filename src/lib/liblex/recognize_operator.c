@@ -12,6 +12,10 @@ t_token_type recognize_operator(t_lexer *lexer, t_token_type type)
 		return (type);
 	vec_get_last(&token, lexer->tokens);
 	if (is_number(token.raw))
-		return (l_io_number);
+	{
+		vec_rm_last(lexer->tokens);
+		token.type = l_io_number;
+		vec_push(lexer->tokens, &token);
+	}
 	return (type);
 }

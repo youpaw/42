@@ -36,6 +36,7 @@
 # define N_TOKEN_REDIRECTIONS 4
 # include <stddef.h>
 # include "cc_vec.h"
+# include "error.h"
 
 enum e_token_type
 {
@@ -71,10 +72,11 @@ struct		s_token
 
 struct		s_tokens
 {
-	char					*raw; // здесь должен лежать в первозданном виде поток символов, который пришел на вход
-	int						error; // код ошибки, будет добавлено позже.
+	char 					*raw;
+	enum e_error_code		error; // код ошибки, будет добавлено позже.
 	struct s_token			**tokens; // массив токенов
 	size_t					size; // размер массива
+	size_t					index;
 };
 
 enum e_state{
@@ -100,16 +102,16 @@ enum e_stage{
 };
 
 enum e_flag{
-	e_print_command
+	l_print_command
 };
 
 struct s_lexer{
 	char					*raw;
-	size_t					begin;
 	size_t					index;
 	size_t					size;
 	t_vec					*states;
 	t_vec					*tokens;
+	size_t					begin;
 	char 					flags[N_LEX_FLAGS];
 	enum e_stage			stage;
 };
@@ -144,6 +146,7 @@ t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 int			match_brace(t_lexer *lexer, t_brace brace);
 int 		match_bang(t_lexer *lexer);
 
+//!TODO tok_back_slash should work like vld_back_slash + tokenizer fix
 int 		tok_back_slash(t_lexer *lexer);
 int 		tok_single_quote(t_lexer *lexer);
 int 		tok_double_quote(t_lexer *lexer);
@@ -161,14 +164,21 @@ int 		exp_dollar(t_lexer *lexer);
 int 		exp_unset(t_lexer *lexer);
 
 t_state		get_current_state(t_lexer *lexer);
-int			lex_map(t_lexer *tokenize, t_state current);
-t_tokens	*lex_raw(char *raw, t_stage stage);
+int			lex_map(t_lexer *lexer, t_state current);
+void 		lex_del(t_lexer *lexer);
+int			lex_err(t_lexer *lexer, int error);
+int			lex_raw(t_lexer *lexer, const char *raw, t_stage stage);
 
 void 		destruct_token(t_token **token);
+t_tokens	*expand_token(t_token *token);
+
+t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
-t_tokens	*lex_stream(int fd);
-t_tokens	*lex_str(const char *string, t_stage stage);
-t_tokens	*lex_str_sub(const char *string, t_stage stage, size_t len);
+
+//!TODO validate_str -> validate_tokens after tokenezetion (no need to tokenize 2 times)
+t_tokens	*validate_str(const char *string);
+t_tokens	*tokenize_str(const char *string);
+t_tokens	*tokenize_str_sub(const char *string, size_t len);
 
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
@@ -176,10 +186,4 @@ t_tokens	*lex_str_sub(const char *string, t_stage stage, size_t len);
 void 		print_tokens(t_tokens *tokens);
 const char	*type_to_string(t_token_type t);
 
-
-
-# define	E_LEXER 10
-# define	E_NULL_INPUT E_LEXER + 1
-# define	E_INCOMPLETE_INPUT E_NULL_INPUT + 1
-# define	E_BAD_SUBSTITUTION E_INCOMPLETE_INPUT + 1
 #endif

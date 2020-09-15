@@ -20,11 +20,23 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
+#add liberror to the project
+set(LIBERROR_DIR "lib/liberror")
+include_directories(${LIBERROR_DIR})
+add_subdirectory(${LIBERROR_DIR})
+target_link_libraries(${PROJECT_NAME} error)
+
 #add libenv to the project
 set(LIBENV_DIR "lib/libenv")
 include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
+
+#add libhash to the project
+set(LIBHASH_DIR "lib/libhash")
+include_directories(${LIBHASH_DIR})
+add_subdirectory(${LIBHASH_DIR})
+target_link_libraries(${PROJECT_NAME} hash)
 
 #add libexpand to the project
 set(LIBEXPAND_DIR "lib/libexpand")
@@ -50,8 +62,20 @@ include_directories(${LIBCALC_DIR})
 add_subdirectory(${LIBCALC_DIR})
 target_link_libraries(${PROJECT_NAME} calc)
 
+#add libparse to the project
+set(LIBPARSE_DIR "lib/libparse")
+include_directories(${LIBPARSE_DIR})
+add_subdirectory(${LIBPARSE_DIR})
+target_link_libraries(${PROJECT_NAME} parser)
+
 #add libalias to the project
 set(LIBALIAS_DIR "lib/libalias")
 include_directories(${LIBALIAS_DIR})
 add_subdirectory(${LIBALIAS_DIR})
 target_link_libraries(${PROJECT_NAME} alias)
+
+#add builtins to the project
+set(BUILTINS_DIR "lib/builtins")
+include_directories(${BUILTINS_DIR})
+add_subdirectory(${BUILTINS_DIR})
+target_link_libraries(${PROJECT_NAME} builtins)

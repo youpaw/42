@@ -16,15 +16,13 @@ static int validate_brace(t_lexer *lexer, t_vec *braces)
 			vec_push(braces, &braces);
 		else
 		{
-			if (vec_get_last(&last, braces) || last != current)
-				return (E_BAD_SUBSTITUTION);
-			else
+			if (!vec_get_last(&last, braces) && last == current)
 				vec_rm_last(braces);
 		}
 		if (current == l_double_round_brace)
 			lexer->index++;
 	}
-	return (0);
+	return (E_OK);
 }
 
 int match_brace(t_lexer *lexer, t_brace brace)
@@ -47,7 +45,7 @@ int match_brace(t_lexer *lexer, t_brace brace)
 		lexer->index++;
 	}
 	if (!error && braces->size)
-		error = E_INCOMPLETE_INPUT;
+		error = E_INCINP;
 	else
 		vec_rm_last(lexer->states);
 	vec_del(&braces);

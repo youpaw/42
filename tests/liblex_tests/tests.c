@@ -7,7 +7,7 @@
 
 void	test_error(const char *str, int e)
 {
-	t_tokens *tokens = lex_str(str);
+	t_tokens *tokens = tokenize_str(str);
 
 	assert_int_equals(0, tokens->size);
 	assert_int_equals(e, tokens->error);
@@ -20,7 +20,7 @@ void	test_error(const char *str, int e)
 
 void	test(const char *str, const char *expected, int size)
 {
-	t_tokens *tokens = lex_str(str);
+	t_tokens *tokens = tokenize_str(str);
 
 	assert_int_equals(E_OK, tokens->error);
 	assert_int_equals(size, tokens->size);
