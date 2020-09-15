@@ -6,18 +6,23 @@
 #include "cc_str.h"
 #include "cc_char.h"
 #include <unistd.h>
+#include <termcap.h>
+#include <sys/ioctl.h>
 
 void	common_redraw(t_input *input)
 {
 	int		cur_y_pos;
 	int		cur_x_pos;
 	char	buf[1024];
+	struct winsize ws;
 	int i;
 
 	cur_y_pos = input->cursor_y_position;
 	cur_x_pos = input->cursor_x_position;
+
 	i = 0;
 
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	while (input->line[cur_y_pos])
 	{
 		while (cur_x_pos != input->line_len[cur_y_pos])
@@ -31,8 +36,13 @@ void	common_redraw(t_input *input)
 			}
 			cur_x_pos++;
 		}
-		cur_y_pos++;
-	}
-	if (i)
 		write(STDIN_FILENO, buf, i);
+		i = 0;
+		if (input->line[cur_y_pos + 1])
+		tputs(tgetstr("do", NULL), 1, &putchar);
+		tputs(tgetstr("cr", NULL), 1, &putchar);
+
+		cur_y_pos++;
+		cur_x_pos = 0;
+	}
 }

@@ -14,7 +14,7 @@ int main(int ac, const char *av[], const char *env[])
 {
 	t_letter res;
 	int len;
-	char *line = "it's not original text zlkdrghlkrdhg lzdrhglzhdrgio zodirgolzhirglo lzilrdhgoizhrdgoi\nBut I think about it for a few secondsliu`sehlfiuh`esif`sieufhli`esuhfil`suehfihusef\nso its my original textl`ehsfl`efhsilefsiluh`esif `uisehfil`uhesf  `uilsehfil`uhesf lu`iehsfliu`ehsfiu\n";
+	char *line = "it's not original text zlkdrghlkrdhg lzdrhglzhdrgio zodirgolzhirglo lzilrdhgoizhrdgoi\nBut I think about it for a few secondsliu`sehlfiuh`esif`sieufhli`esuhfil`suehfihusef\nso its my original text\n";
 	int error;
 	struct winsize ws;
 

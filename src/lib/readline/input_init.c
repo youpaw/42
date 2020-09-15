@@ -25,6 +25,10 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 		str += letter_len;
 		line_len++;
 	}
+//	letter[0] = '\n';
+//	letter[1] = '\0';
+//	vec_push(*vec_ptr, letter);
+//	line_len++;
 	return line_len;
 }
 
