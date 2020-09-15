@@ -22,10 +22,11 @@ int			readline(char **line)
 //			{
 //				return (1);
 //			}
-			input.cursor_x_position++;
-			input.len++;
-			*line = input_to_str(input.line[input.cursor_y_position], input.len);
+//			input.cursor_x_position++;
+//			input.len++;
+//			*line = input_to_str(input.line[input.cursor_y_position], input.len);
 //			printf("\n%s", *line);
+			printf("\n\n\n\n%d |%d|  ", input.cursor_x_position, input.line_len[input.cursor_y_position]);
 			return 0;
 		}
 	}

@@ -8,6 +8,7 @@
 #include "cc_char.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/ioctl.h>
 
 int main(int ac, const char *av[], const char *env[])
 {
@@ -15,6 +16,7 @@ int main(int ac, const char *av[], const char *env[])
 	int len;
 	char *line = "it's not original text zlkdrghlkrdhg lzdrhglzhdrgio zodirgolzhirglo lzilrdhgoizhrdgoi\nBut I think about it for a few secondsliu`sehlfiuh`esif`sieufhli`esuhfil`suehfihusef\nso its my original textl`ehsfl`efhsilefsiluh`esif `uisehfil`uhesf  `uilsehfil`uhesf lu`iehsfliu`ehsfiu\n";
 	int error;
+	struct winsize ws;
 
 	tty_init();
 	hist_init("/Users/azomega");
@@ -22,12 +24,20 @@ int main(int ac, const char *av[], const char *env[])
 	if (ac == 2)
 	{
 
-		res.num = getch();
-		printf("%o %o \n", res.ch[0], res.ch[1]);
-		res.num = getch();
-		printf("%o %o %o %o %o\n", res.ch[0], res.ch[1], res.ch[2], res.ch[3], res.ch[4]);
-		read(1, res.ch, 5);
-		printf("%o %o %o %o %o\n", res.ch[0], res.ch[1], res.ch[2], res.ch[3], res.ch[4]);
+		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+		printf("%d, %d\n", ws.ws_col, ws.ws_row);
+		len = 0;
+		while (len != ws.ws_col + 1)
+		{
+			printf("%d", len % 10);
+			len++;
+		}
+//		res.num = getch();
+//		printf("%o %o \n", res.ch[0], res.ch[1]);
+//		res.num = getch();
+//		printf("%o %o %o %o %o\n", res.ch[0], res.ch[1], res.ch[2], res.ch[3], res.ch[4]);
+//		read(1, res.ch, 5);
+//		printf("%o %o %o %o %o\n", res.ch[0], res.ch[1], res.ch[2], res.ch[3], res.ch[4]);
 	}
 	else
 	{

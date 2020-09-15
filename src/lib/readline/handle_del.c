@@ -30,6 +30,7 @@ int			handle_del(t_input *inp)
 		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
 		inp->line_len[inp->cursor_y_position]--;
+		check_input(inp);
 	}
 	else
 		putchar('\7');

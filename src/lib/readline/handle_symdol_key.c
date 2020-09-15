@@ -12,6 +12,10 @@
 
 #include "readline.h"
 #include "unistd.h"
+#include <termcap.h>
+#include "cc_char.h"
+#include <sys/ioctl.h>
+
 
 int handle_symbol_key(t_input *inp, char *key)
 {
@@ -22,5 +26,7 @@ int handle_symbol_key(t_input *inp, char *key)
 	inp->cursor_x_position++;
 	inp->line_len[inp->cursor_y_position]++;
 	inp->len++;
+	check_input(inp);
 	return (0);
 }
+

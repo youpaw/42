@@ -80,6 +80,9 @@ t_input 	input_init(char *line);
 int			readline(char **line);
 
 void		complete_print(t_input *input, t_list **to_print);
+void		redraw_input(t_input *input);
+void check_input(t_input *inp);
+
 char		*input_to_str(t_vec *input, int len);
 int			get_displayed_symbol_len(unsigned char *num);
 t_list		*get_list_files(t_input *input, t_token *token);
