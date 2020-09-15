@@ -80,8 +80,9 @@ t_input 	input_init(char *line);
 int			readline(char **line);
 
 void		complete_print(t_input *input, t_list **to_print);
-void		redraw_input(t_input *input);
-void check_input(t_input *inp);
+void		common_redraw(t_input *input);
+void		redraw_input_adding(t_input *inp);
+void		redraw_input_del(t_input *inp);
 
 char		*input_to_str(t_vec *input, int len);
 int			get_displayed_symbol_len(unsigned char *num);

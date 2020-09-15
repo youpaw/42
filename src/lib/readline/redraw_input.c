@@ -7,7 +7,7 @@
 #include "cc_char.h"
 #include <unistd.h>
 
-void	redraw_input(t_input *input)
+void	common_redraw(t_input *input)
 {
 	int		cur_y_pos;
 	int		cur_x_pos;
