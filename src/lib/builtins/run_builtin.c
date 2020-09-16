@@ -9,10 +9,10 @@
 static	int get_builtin(const char *name)
 {
 	int		i;
-	static const char *builtins_names[5] = {
+	static const char *builtins_names[N_BUILTINS] = {
 			"exit", "set", "unset", "cd", "export"};
 	i = 0;
-	while (i < 5)
+	while (i < N_BUILTINS)
 	{
 		if (!strcmp(name, builtins_names[i]))
 			return (i);
@@ -24,7 +24,7 @@ static	int get_builtin(const char *name)
 int 	run_builtin(const char **av)
 {
 	int 	i;
-	static int (*builtins_funcs[5])(const char **) = {
+	static int (*builtins_funcs[N_BUILTINS])(const char **) = {
 			sh_exit, set, unset, cd, export};
 
 	if ((i = get_builtin(av[0])) == -1)

@@ -13,7 +13,7 @@ static void		tokens_join(char **tokens, int len)
 	cnt = 0;
 	i = 0;
 	new_path = xmalloc(PATH_LEN + 1);
-	bzero(new_path, PATH_LEN)
+	bzero(new_path, PATH_LEN);
 	while (cnt < len)
 	{
 		new_path[i] ='/';
