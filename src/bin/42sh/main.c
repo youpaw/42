@@ -14,7 +14,7 @@ int main(int ac, const char *av[], const char *env[])
 {
 	t_letter res;
 	int len;
-	char *line = "it's not original text zlkdrghlkrdhg lzdrhglzhdrgio zodirgolzhirglo lzilrdhgoizhrdgoi\nBut I think about it for a few secondsliu`sehlfiuh`esif`sieufhli`esuhfil`suehfihusef\nso its my original text\n";
+	char *line = "it's not original text\nBut I think about it for a few seconds\nso its my original text\n";
 	int error;
 	struct winsize ws;
 
@@ -43,7 +43,7 @@ int main(int ac, const char *av[], const char *env[])
 	{
 		puts(line);
 		readline(&line);
-		puts("\n");
+		puts("\n\n\n\n");
 		puts(line);
 	}
 	tty_restore();

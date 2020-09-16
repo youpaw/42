@@ -14,6 +14,7 @@ int			readline(char **line)
 	t_letter key;
 	t_input input;
 
+	tty_init();
 	input = input_init(*line);
 	while (42)
 	{
@@ -27,11 +28,8 @@ int			readline(char **line)
 //			}
 //			input.cursor_x_position++;
 //			input.len++;
-//			*line = input_to_str(input.line[input.cursor_y_position], input.len);
-			struct winsize ws;
-			ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-//			printf("\n%s", *line);
-			printf("\n\n\n\ncxp: %d |wscol: %d| |lin_l: %d| ", input.cursor_x_position / ws.ws_col, ws.ws_col, input.line_len[input.cursor_y_position] / ws.ws_col);
+			*line = input_to_str(input);
+			tty_restore();
 			return 0;
 		}
 	}

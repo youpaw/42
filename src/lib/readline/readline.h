@@ -84,7 +84,7 @@ void		common_redraw(t_input *input);
 void		redraw_input_adding(t_input *inp);
 void		redraw_input_del(t_input *inp);
 
-char		*input_to_str(t_vec *input, int len);
+char		*input_to_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
 t_list		*get_list_files(t_input *input, t_token *token);
 void		choose_token(t_input *input, t_list *lst);
