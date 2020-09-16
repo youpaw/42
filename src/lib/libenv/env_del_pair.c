@@ -7,5 +7,6 @@
 void 		env_del_pair(t_hash_pair *pair)
 {
 	free(pair->key);
-	free(pair->value);
+	if (pair->value)
+		free(pair->value);
 }
