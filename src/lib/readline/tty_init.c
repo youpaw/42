@@ -20,6 +20,7 @@ void		tty_init(void)
 
 	termcap_init();
 	tputs(tgetstr("im", NULL), 1, &putchar);
+//	tputs(tgetstr("bw", NULL), 1, &putchar);
 	if (!(isatty(0)))
 	{
 		//TODO "stdin not terminal" error handle

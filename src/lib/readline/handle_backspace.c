@@ -22,6 +22,8 @@ int handle_backspace(t_input *inp)
 			tputs(tgetstr("dc", NULL), 1, &putchar);
 		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
+		inp->line_len[inp->cursor_y_position]--;
+		redraw_input_del(inp);
 	}
 	else
 		putchar('\7');
