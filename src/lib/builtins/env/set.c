@@ -4,7 +4,8 @@
 #include "env.h"
 #include "cc_str.h"
 
-void	set(void)
+int 	set(const char **args)
 {
 	env_print_full();
+	return (0);
 }

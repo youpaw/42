@@ -30,15 +30,12 @@ static void change_shlvl(void)
 
 int 	main_init(const char *name, const char *av[], const char *en[])
 {
-	const char	*home_dir;
-
 	g_exit_code = 0;
 	av_init(name, av);
 	env_init(en);
 	change_shlvl();
 	alias_init();
-	home_dir = env_get_value("HOME");
-	hist_init(home_dir);
+	hist_init(env_get_value("HOME"));
 	termcap_init();
 	tty_init();
 	return (0);
