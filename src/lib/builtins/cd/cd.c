@@ -2,22 +2,8 @@
 // Created by Darth Butterwell on 8/23/20.
 //
 
-#include <sys/stat.h>
-#include "builtins.h"
-#include "stdio.h"
-#include "cc.h"
-#include "env.h"
-# define N_PATHS 3
+#include "cd.h"
 
-char I_AV = 0;
-char FLAG = '0';
-
-enum					e_paths
-{
-	home,
-	pwd,
-	oldpwd,
-};
 
 typedef enum e_paths	t_paths;
 
@@ -30,9 +16,9 @@ static void			init_chdir(const char *av)
 {
 	char 	*(paths[N_PATHS]);
 
-	paths[home] = env_get_value("HOME=");
+	paths[home] = env_get_value("HOME");
 	paths[pwd] = getcwd(paths[pwd], 0);
-	paths[oldpwd] = env_get_value("OLDPWD=");
+	paths[oldpwd] = env_get_value("OLDPWD");
 
 
 	free(paths[pwd]);
@@ -83,9 +69,9 @@ static  int			check_flags(const char *av)
 	return (0);
 }
 
-int					cd(int ac, const char **av)
+int					cd(const char **av)
 {
-	if (ac >= 3 && av[2][0] == '-' && av[2][1])
+	if (av[2][0] == '-' && av[2][1]) //if ac>=3
 	{
 		if (check_flags(av[2]))
 			I_AV = FLAG != '0' ? 3 : 2;

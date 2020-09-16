@@ -3,9 +3,10 @@
 //
 
 #ifndef BUILTINS_H
-#define BUILTINS_H
+# define BUILTINS_H
+# define N_BUILTINS 5
 
-int		cd(int ac, const char **av);
+int		cd(const char **av);
 int 	set(const char **args);
 int 	unset(const char **args);
 int 	sh_exit(const char **av);
