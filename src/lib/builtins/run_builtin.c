@@ -28,7 +28,7 @@ int 	run_builtin(const char **av)
 			sh_exit, set, unset, cd, export};
 
 	if ((i = get_builtin(av[0])) == -1)
-		return (0);
+		return (1);
 	g_exit_code = builtins_funcs[i](av);
-	return (1);
+	return (0);
 }
