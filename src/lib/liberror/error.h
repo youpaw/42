@@ -36,7 +36,10 @@ typedef enum	e_error_code
 	E_BADSUBS,						/* Bad substitution */
 	E_NOEVENT,						/* Event not found */
 	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/
-	E_OPEXPEC					/* %: %: syntax error: operand expected (error token is \"%\") */
+	E_OPEXPEC,						/* %: %: syntax error: operand expected (error token is \"%\") */
+	E_INVIDENT,						/* %: `%': not a valid identifier*/
+	E_NUMARGREQ,					/* %: %: numeric argument required*/
+	E_TOOMANYARGS					/* %: too many arguments*/
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

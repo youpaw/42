@@ -4,6 +4,8 @@
 
 #include "exec.h"
 #include "cc_mem.h"
+#include "builtins.h"
+#include <unistd.h>
 
 static char **get_args(t_ast *ast)
 {
@@ -29,5 +31,6 @@ void	exec_simple_cmd(t_ast *ast)
 	char **args;
 
 	args = get_args(ast);
-
+	run_builtin((const char **) args);
+	free(args);
 }

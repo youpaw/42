@@ -11,4 +11,4 @@ ADD_LIBRARY(exec STATIC
         exec_complete_cmd.c
         exec_list.c exec_and_or.c exec_pipeline.c exec_pipe_seq.c exec_simple_cmd.c)
 
-target_link_libraries(exec cc)
+target_link_libraries(exec cc env parser builtins)

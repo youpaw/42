@@ -9,7 +9,6 @@
 void	exec_pipe_seq(t_ast *ast)
 {
 	int pl[2];
-	int status;
 
 	pipe(pl);
 	while (ast)
@@ -25,7 +24,6 @@ void	exec_pipe_seq(t_ast *ast)
 		close(pl[1]);
 		ast = ast->right;
 	}
-	waitpid(NULL, &status, 0);
-	g_exit_code = WEXITSTATUS(status);
+	wait(NULL);
 	dup2(STDIN_FILENO, pl[0]);
 }
