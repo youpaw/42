@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-int 	exec(t_ast *ast)
+void	exec(t_ast *ast)
 {
-	return (exec_complete_cmd(ast));
+	exec_complete_cmd(ast);
 }

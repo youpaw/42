@@ -5,16 +5,16 @@
 #include "exec.h"
 #include "cc.h"
 
-int	exec_and_or(t_ast *ast)
+void	exec_and_or(t_ast *ast)
 {
-	int code;
+	t_ast *next;
 
-	code = exec_pipeline(ast->left);
-	if (ast->right)
+	exec_pipe_seq(ast->left);
+	while ((next = ast->right))
 	{
-		if ((!strcmp(ast->attr.raw, "&&") && !code) || \
-		(!strcmp(ast->attr.raw, "||") && code))
-			code = exec_and_or(ast->right);
+		if ((ast->token->type == l_and_if && !g_exit_code) || \
+			(ast->token->type == l_or_if && g_exit_code))
+			exec_pipe_seq(next->left);
+		ast = next;
 	}
-	return (code);
 }

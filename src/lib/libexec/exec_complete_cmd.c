@@ -3,7 +3,7 @@
 //
 #include "exec.h"
 
-int					exec_complete_cmd(t_ast *ast)
+void	exec_complete_cmd(t_ast *ast)
 {
-	return (exec_list(ast->left));
+	exec_list(ast->left);
 }

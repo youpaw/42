@@ -3,11 +3,19 @@
 //
 
 #include "exec.h"
+#include <unistd.h>
 
-int	exec_list(t_ast *ast)
+void	exec_list(t_ast *ast)
 {
-	int code;
+	int pid;
 
-	
-	return (code);
+	if (!(pid = fork()))
+	{
+		exec_and_or(ast->left);
+		exit(g_exit_code);
+	}
+	if (ast->token->type != l_and)
+		waitpid(pid, NULL, 0);
+	if (ast->right)
+		exec_list(ast->right);
 }
