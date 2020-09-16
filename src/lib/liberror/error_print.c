@@ -25,7 +25,9 @@ const char 	*g_error_msg[] = {
 		"!%: event not found",
 		"syntax error near unexpected token `%'",
 		"%: %: syntax error: operand expected (error token is \"%\")",
-		"%: `%': not a valid identifier"
+		"%: `%': not a valid identifier",
+		"%: %: numeric argument required",
+		"%: too many arguments"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
