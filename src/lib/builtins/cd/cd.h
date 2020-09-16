@@ -12,10 +12,7 @@
 #include "env.h"
 
 # define N_PATHS 3
-# define PATH_LEN 256
-
-char I_AV = 0;
-char FLAG = '0';
+# define MAX_PATH 256
 
 enum					e_paths
 {
@@ -24,7 +21,9 @@ enum					e_paths
 	oldpwd,
 };
 
+typedef enum e_paths	t_paths;
+
 int					cd(const char **av);
-void 				path_canonization(char *path);
+char				*path_canonization(char *path);
 
 #endif //CD_H
