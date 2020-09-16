@@ -7,7 +7,7 @@
 
 void	env_print_pair(const t_hash_pair *pair)
 {
-	if (!pair)
+	if (!pair || !pair->value)
 		return ;
 	puts(pair->key);
 	puts("=");

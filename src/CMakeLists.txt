@@ -79,3 +79,9 @@ set(BUILTINS_DIR "lib/builtins")
 include_directories(${BUILTINS_DIR})
 add_subdirectory(${BUILTINS_DIR})
 target_link_libraries(${PROJECT_NAME} builtins)
+
+#add libexec to the project
+set(LIBEXEC_DIR "lib/libexec")
+include_directories(${LIBEXEC_DIR})
+add_subdirectory(${LIBEXEC_DIR})
+target_link_libraries(${PROJECT_NAME} exec)
