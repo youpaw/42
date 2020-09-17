@@ -12,8 +12,12 @@
 
 #ifndef READLINE_H
 #define READLINE_H
+
 #define N_ORD_KEY_HANDLERS 7
 #define N_ESC_KEY_HANDLERS 7
+#define INP_CH_FLAG 0
+#define INP_BUILT_TABLE 1
+#define INP_MAKING_CHOICE 2
 
 # include <termios.h>
 # include "cc_vec.h"
@@ -54,11 +58,10 @@ typedef struct {
 
 typedef struct		s_key_handler{
 	char			primary_key[5];
-//	char			secondary_key[5];
 	int				(*handler)(t_input *);
 }					t_key_handler;
 
-int 		g_input_changed_flg;
+int 		g_input_state_flag;
 
 void		tty_init(void);
 void		tty_restore(void);
@@ -86,7 +89,9 @@ void		redraw_input_del(t_input *inp);
 
 char		*input_to_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
-t_list		*get_list_files(t_input *input, t_token *token);
+void 		handle_file_token(t_input *input, t_token *token);
+void handle_choice_tab(t_input *input, t_list **options);
+void	try_to_print_same_part(t_list *files, char *part);
 void		choose_token(t_input *input, t_list *lst);
 
 

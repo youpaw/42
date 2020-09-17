@@ -69,7 +69,7 @@ static t_list *scan_dir(char *path, char *name)
  * This function returns list of filenames, which equal to first letters fo input
  */
 
-t_list		*get_list_files(t_input *input, t_token *token)
+t_list *get_list_files(t_token *token)
 {
 	char *fullname;
 	char *delimiter;
@@ -87,4 +87,12 @@ t_list		*get_list_files(t_input *input, t_token *token)
 	}
 	else
 		return scan_dir("./", fullname);
+}
+
+void 	handle_file_token(t_input *input, t_token *token)
+{
+	t_list *files;
+
+	files  = get_list_files(token);
+	try_to_print_same_part(files, token->raw);
 }
