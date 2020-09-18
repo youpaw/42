@@ -91,7 +91,7 @@ char		*input_to_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
 void 		handle_file_token(t_input *input, t_token *token);
 void handle_choice_tab(t_input *input, t_list **options);
-void	try_to_print_same_part(t_list *files, char *part);
+char *find_same_part(t_list *files, char *token);
 void		choose_token(t_input *input, t_list *lst);
 
 

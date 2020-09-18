@@ -3,8 +3,34 @@
 //
 
 #include "readline.h"
+#include "cc_str.h"
 
-void	try_to_print_same_part(t_list *files, char *part)
+char *find_same_part(t_list *files, char *token)
 {
-	;
+	t_list *cur;
+	unsigned int i;
+	char same[1024];
+	unsigned int len;
+
+	len = strlen(token);
+	i = 0;
+	cur = files->next;
+	while (((char*)cur->content)[i + len] == ((char*)files->content)[i + len])
+	{
+		same[i] = ((char*)files->content)[i + len];
+		i++;
+	}
+	cur = cur->next;
+	while (cur != files && *same)
+	{
+		i = 0;
+		while (same[i] == ((char*)cur->content)[i + len])
+			i++;
+		same[i] = 0;
+		cur = cur->next;
+	}
+	if (!*same)
+		return (NULL);
+	else
+		return (strdup(same));
 }
