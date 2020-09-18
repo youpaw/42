@@ -28,7 +28,8 @@ const char 	*g_error_msg[] = {
 		"%: `%': not a valid identifier",
 		"%: %: numeric argument required",
 		"%: too many arguments",
-		"%: %: invalid option"
+		"%: %: invalid option",
+  		"%: %: not found"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
