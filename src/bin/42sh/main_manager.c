@@ -21,6 +21,7 @@ int 	main_manager(void)
 		tokens = validate_str(str);
 		if (tokens && !tokens->error)
 		{
+			print_tokens(tokens);
 			if ((ast = parse(tokens)))
 				exec(ast);
 		}

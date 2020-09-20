@@ -18,7 +18,7 @@ ADD_LIBRARY(lex STATIC
 		lex_map.c
 		lex_raw.c
 		tok_single_quote.c
-		type_to_string.c
+        token_type_to_string.c
 		vld_bang.c
 		vld_back_slash.c
 		tokenize_str_sub.c
