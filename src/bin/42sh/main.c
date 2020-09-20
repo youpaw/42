@@ -3,8 +3,6 @@
 //
 
 #include "main.h"
-#include "cc_str.h"
-#include "cc_vec.h"
 
 int main(int ac, const char *av[], const char *env[])
 {

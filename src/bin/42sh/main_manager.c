@@ -21,16 +21,15 @@ int 	main_manager(void)
 		tokens = validate_str(str);
 		if (tokens && !tokens->error)
 		{
-			print_tokens(tokens);
 			if ((ast = parse(tokens)))
 				exec(ast);
 		}
-		else if (!tokens || tokens->error != E_INCINP)
+		if (!tokens || tokens->error != E_INCINP)
 		{
 			free(str);
-			destruct_tokens(&tokens);
-			del_ast(&ast);
 			str = strdup("");
 		}
+		del_ast(&ast);
+		destruct_tokens(&tokens);
 	}
 }
