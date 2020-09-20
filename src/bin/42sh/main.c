@@ -12,4 +12,3 @@ int main(int ac, const char *av[], const char *env[])
 		error = main_manager();
 	return (error);
 }
-

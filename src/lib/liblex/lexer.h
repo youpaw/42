@@ -175,7 +175,6 @@ t_tokens	*expand_token(t_token *token);
 t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
 
-//!TODO validate_str -> validate_tokens after tokenezetion (no need to tokenize 2 times)
 t_tokens	*validate_str(const char *string);
 t_tokens	*tokenize_str(const char *string);
 t_tokens	*tokenize_str_sub(const char *string, size_t len);
@@ -184,6 +183,6 @@ t_tokens	*tokenize_str_sub(const char *string, size_t len);
 // 1. [ ls ] [ word ]
 
 void 		print_tokens(t_tokens *tokens);
-const char	*type_to_string(t_token_type t);
+const char	*token_type_to_string(t_token_type t);
 
 #endif
