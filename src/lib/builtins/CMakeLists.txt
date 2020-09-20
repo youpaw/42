@@ -9,6 +9,6 @@ file(MAKE_DIRECTORY ${BUILTINS_BUILD_DIRECTORY})
 #set(CMAKE_CACHEFILE_DIR ${LIBCC_BUILD_DIRECTORY})
 
 ADD_LIBRARY(builtins STATIC
-        cd/cd.c cd/path_canonization.c env/set.c env/unset.c env/export.c sh_exit/sh_exit.c run_builtin.c)
+        cd/cd.c cd/path_canonization.c env/set.c env/unset.c env/export.c sh_exit/sh_exit.c run_builtin.c env/print_exported_env.c hash/hash.c)
 
 target_link_libraries(builtins cc env error)
