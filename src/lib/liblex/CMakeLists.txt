@@ -20,8 +20,7 @@ ADD_LIBRARY(lex STATIC
 		tok_single_quote.c
         token_type_to_string.c
 		vld_bang.c
-		vld_back_slash.c
-		tokenize_str_sub.c
+        tokenize_str_sub.c
 		destruct_tokens.c
 		tok_back_slash.c
 		tok_bang.c

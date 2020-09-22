@@ -53,8 +53,7 @@ void	exec_simple_cmd(t_ast *ast)
 		if (path)
 		{
 			exec_env = exec_env_2array();
-			if (!fork())
-				execve(path, (char *const *) args, (char *const *) exec_env);
+			execve(path, (char *const *) args, (char *const *) exec_env);
 			strarr_del(exec_env);
 			free(exec_env);
 		}

@@ -50,6 +50,7 @@ int 	vld_bang(t_lexer *lexer)
 	expand = strsub(lexer->raw + index, 0, lexer->index - index);
 	if (expand_bang(&expand))
 	{
+		handle_error(lexer, expand);
 		free(expand);
 		return (E_NOEVENT);
 	}

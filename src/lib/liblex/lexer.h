@@ -154,7 +154,6 @@ int 		tok_dollar(t_lexer *lexer);
 int 		tok_bang(t_lexer *lexer);
 int 		tok_unset(t_lexer *lexer);
 
-int 		vld_back_slash(t_lexer *lexer);
 int 		vld_bang(t_lexer *lexer);
 
 int 		exp_back_slash(t_lexer *lexer);
