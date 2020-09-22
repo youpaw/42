@@ -30,6 +30,4 @@ ADD_LIBRARY(lex STATIC
 		exp_single_quote.c exp_double_quote.c exp_unset.c recognize_token.c print_tokens.c recognize_operator.c get_last_token.c is_operator.c is_delimiter.c is_redirection.c is_number.c destruct_token.c match_brace.c match_bang.c get_tokens.c lex_del.c lex_err.c validate_str.c)
 
 
-target_link_libraries(lex cc)
-target_link_libraries(lex expand)
-target_link_libraries(lex env)
+target_link_libraries(lex cc expand env)
