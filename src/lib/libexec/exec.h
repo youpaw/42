@@ -16,7 +16,7 @@ void	exec_cmd_suffix(t_ast *ast);
 void	exec_cmd_prefix(t_ast *ast);
 void	exec_simple_cmd(t_ast *ast);
 void	exec_command(t_ast *ast);
-void	exec_pipe_seq(t_ast *ast, int *prev_pl);
+void	exec_pipe_seq(t_ast *ast);
 void	exec_pipeline(t_ast *ast);
 void	exec_and_or(t_ast *ast);
 void	exec_list(t_ast *ast);
