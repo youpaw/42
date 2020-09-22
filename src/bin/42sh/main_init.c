@@ -8,6 +8,7 @@
 #include "history.h"
 #include "cc_num.h"
 #include "cc_str.h"
+#include "hash.h"
 
 static void change_shlvl(void)
 {
@@ -33,10 +34,10 @@ int 	main_init(const char *name, const char *av[], const char *en[])
 	g_exit_code = 0;
 	av_init(name, av);
 	env_init(en);
+	hash_init();
 	change_shlvl();
 	alias_init();
 	hist_init(env_get_value("HOME"));
 	termcap_init();
-	tty_init();
 	return (0);
 }

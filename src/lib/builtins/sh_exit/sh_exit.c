@@ -30,4 +30,5 @@ int 	sh_exit(const char **args)
 		exit(atoi(args[1]));
 	else
 		error_print(E_TOOMANYARGS, args);
+	return (0);
 }

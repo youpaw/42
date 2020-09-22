@@ -3,29 +3,12 @@
 //
 
 #include "main.h"
-#include "cc.h"
-#include "lexer.h"
-#include "parser.h"
-
-//int main(int ac, const char *av[], const char *env[])
-//{
-//	int error;
-//
-//	if (!(error = main_init(av[0], av + 1, env)))
-//		error = main_manager();
-//	return (error);
-//}
 
 int main(int ac, const char *av[], const char *env[])
 {
-	t_tokens *tokens;
-	t_ast *ast;
-	char *str;
+	int error;
 
-	str = strdup("ls 123>smw;echo|cat");
-	tokens = tokenize_str(str);
-	puts("\n");
-	print_tokens(tokens);
-	ast = parse(tokens);
-	puts("\n");
+	if (!(error = main_init(av[0], av + 1, env)))
+		error = main_manager();
+	return (error);
 }

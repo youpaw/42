@@ -78,4 +78,6 @@ int 				get_node_token(t_ast *node, t_tokens *tokens);
 t_ast				*parse(t_tokens *tokens);
 void 				print_parse_error(t_tokens *tokens);
 
+const char			*node_type_to_string(t_node_type type);
+
 #endif //PARSER_H

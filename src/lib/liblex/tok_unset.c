@@ -43,7 +43,8 @@ int 		tok_unset(t_lexer *lexer)
 	}
 	else if ((type = get_operator(lexer->raw + lexer->index, &op)) != l_token)
 	{
-		delimit_token(lexer);
+		if (lexer->begin < lexer->index)
+			delimit_token(lexer);
 		lexer->begin = lexer->index;
 		delimit_operator(lexer, type, op.size);
 	}

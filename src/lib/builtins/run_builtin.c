@@ -10,7 +10,7 @@ static	int get_builtin(const char *name)
 {
 	int		i;
 	static const char *builtins_names[N_BUILTINS] = {
-			"exit", "set", "unset", "cd", "export"};
+			"exit", "set", "unset", "cd", "export", "hash"};
 	i = 0;
 	while (i < N_BUILTINS)
 	{
@@ -25,10 +25,10 @@ int 	run_builtin(const char **av)
 {
 	int 	i;
 	static int (*builtins_funcs[N_BUILTINS])(const char **) = {
-			sh_exit, set, unset, cd, export};
+			sh_exit, set, unset, cd, export, hash};
 
 	if ((i = get_builtin(av[0])) == -1)
-		return (0);
+		return (1);
 	g_exit_code = builtins_funcs[i](av);
-	return (1);
+	return (0);
 }
