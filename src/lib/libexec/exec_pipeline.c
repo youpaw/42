@@ -6,5 +6,5 @@
 
 void	exec_pipeline(t_ast *ast)
 {
-	exec_pipe_seq(ast->left, NULL);
+	exec_pipe_seq(ast->left);
 }

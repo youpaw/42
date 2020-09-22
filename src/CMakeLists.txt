@@ -8,12 +8,6 @@ set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
 add_executable(${PROJECT_NAME} bin/42sh/main.c bin/42sh/main.h bin/42sh/main_init.c bin/42sh/main_manager.c bin/42sh/main.c)
 
-#add libhistory to the project
-set(LIBH_DIR "lib/libhistory")
-include_directories(${LIBH_DIR})
-add_subdirectory(${LIBH_DIR})
-target_link_libraries(${PROJECT_NAME} history)
-
 #add libcc to the project
 set(LIBCC_DIR "lib/libcc")
 include_directories(${LIBCC_DIR})
@@ -26,11 +20,29 @@ include_directories(${LIBERROR_DIR})
 add_subdirectory(${LIBERROR_DIR})
 target_link_libraries(${PROJECT_NAME} error)
 
+#add libcalc to the project
+set(LIBCALC_DIR "lib/libcalc")
+include_directories(${LIBCALC_DIR})
+add_subdirectory(${LIBCALC_DIR})
+target_link_libraries(${PROJECT_NAME} calc)
+
+#add libalias to the project
+set(LIBALIAS_DIR "lib/libalias")
+include_directories(${LIBALIAS_DIR})
+add_subdirectory(${LIBALIAS_DIR})
+target_link_libraries(${PROJECT_NAME} alias)
+
 #add libenv to the project
 set(LIBENV_DIR "lib/libenv")
 include_directories(${LIBENV_DIR})
 add_subdirectory(${LIBENV_DIR})
 target_link_libraries(${PROJECT_NAME} env)
+
+#add libhistory to the project
+set(LIBH_DIR "lib/libhistory")
+include_directories(${LIBH_DIR})
+add_subdirectory(${LIBH_DIR})
+target_link_libraries(${PROJECT_NAME} history)
 
 #add libhash to the project
 set(LIBHASH_DIR "lib/libhash")
@@ -56,23 +68,11 @@ include_directories(${READLINE_DIR})
 add_subdirectory(${READLINE_DIR})
 target_link_libraries(${PROJECT_NAME} readline)
 
-#add libcalc to the project
-set(LIBCALC_DIR "lib/libcalc")
-include_directories(${LIBCALC_DIR})
-add_subdirectory(${LIBCALC_DIR})
-target_link_libraries(${PROJECT_NAME} calc)
-
 #add libparse to the project
 set(LIBPARSE_DIR "lib/libparse")
 include_directories(${LIBPARSE_DIR})
 add_subdirectory(${LIBPARSE_DIR})
 target_link_libraries(${PROJECT_NAME} parser)
-
-#add libalias to the project
-set(LIBALIAS_DIR "lib/libalias")
-include_directories(${LIBALIAS_DIR})
-add_subdirectory(${LIBALIAS_DIR})
-target_link_libraries(${PROJECT_NAME} alias)
 
 #add builtins to the project
 set(BUILTINS_DIR "lib/builtins")
