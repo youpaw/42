@@ -16,6 +16,7 @@
 #define N_ESC_KEY_HANDLERS 7
 
 # include <termios.h>
+#include <stdint.h>
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"

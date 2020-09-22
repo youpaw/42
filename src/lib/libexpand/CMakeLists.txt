@@ -11,5 +11,4 @@ file(MAKE_DIRECTORY ${LIBEXPAND_BUILD_DIRECTORY})
 ADD_LIBRARY(expand STATIC
         expand_tilda.c expand_parameter.c expand_bang.c expand_by_type.c get_env_or_av_value.c expand_prefix.c expand_suffix.c get_operator_type.c)
 
-target_link_libraries(expand cc)
-target_link_libraries(expand env)
+target_link_libraries(expand cc env history)

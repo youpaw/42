@@ -22,6 +22,5 @@ ADD_LIBRARY(parser STATIC
         get_node_token.c
         del_ast.c print_parse_error.c node_type_to_string.c)
 
-target_link_libraries(parser cc)
-target_link_libraries(parser lex)
+target_link_libraries(parser cc lex)
 
