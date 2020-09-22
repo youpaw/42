@@ -14,6 +14,12 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
+#add libjob to the project
+set(LIBJOB_DIR "lib/libjob")
+include_directories(${LIBJOB_DIR})
+add_subdirectory(${LIBJOB_DIR})
+target_link_libraries(${PROJECT_NAME} jobs)
+
 #add liberror to the project
 set(LIBERROR_DIR "lib/liberror")
 include_directories(${LIBERROR_DIR})
@@ -80,8 +86,10 @@ include_directories(${BUILTINS_DIR})
 add_subdirectory(${BUILTINS_DIR})
 target_link_libraries(${PROJECT_NAME} builtins)
 
+
 #add libexec to the project
 set(LIBEXEC_DIR "lib/libexec")
 include_directories(${LIBEXEC_DIR})
 add_subdirectory(${LIBEXEC_DIR})
 target_link_libraries(${PROJECT_NAME} exec)
+
