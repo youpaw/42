@@ -30,7 +30,7 @@
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 15
+# define N_TOKEN_TYPES 16
 # define N_TOKEN_OPERATORS 11
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 4
@@ -51,6 +51,7 @@ enum e_token_type
 	l_less,
 	l_great,
 	l_semi,
+	l_bang,
 	l_io_number,
 	l_assignment_word,
 	l_command_name,
@@ -84,7 +85,7 @@ enum e_state{
 	l_single_quote,
 	l_double_quote,
 	l_dollar,
-	l_bang,
+	l_history,
 	l_unset
 };
 

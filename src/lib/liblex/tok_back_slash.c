@@ -18,8 +18,6 @@ int 		tok_back_slash(t_lexer *lexer)
 		lexer->index -= 2;
 		lexer->size -= 2;
 	}
-	else if (lexer->begin == lexer->index - 2)
-		lexer->begin++;
 	vec_rm_last(lexer->states);
 	return (E_OK);
 }

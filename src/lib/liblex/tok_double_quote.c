@@ -12,7 +12,7 @@ int 	tok_double_quote(t_lexer *lexer)
 	state = l_unset;
 	c = lexer->raw[lexer->index];
 	if (c == '!')
-		state = l_bang;
+		state = l_history;
 	else if (c == '$')
 		state = l_dollar;
 	else if (c == '\\')
