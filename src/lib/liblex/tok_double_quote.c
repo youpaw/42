@@ -6,20 +6,23 @@
 
 int 	tok_double_quote(t_lexer *lexer)
 {
-	t_state state;
+	t_slice slice;
 	char c;
 
-	state = l_unset;
+	slice.state = l_unset;
 	c = lexer->raw[lexer->index];
 	if (c == '!')
-		state = l_history;
+		slice.state = l_history;
 	else if (c == '$')
-		state = l_dollar;
+		slice.state = l_dollar;
 	else if (c == '\\')
-		state = l_back_slash;
+		slice.state = l_back_slash;
 	else if (c == '\"')
-		vec_rm_last(lexer->states);
-	if (state != l_unset)
-		vec_push(lexer->states, &state);
+		vec_rm_last(lexer->slices);
+	if (slice.state != l_unset)
+	{
+		slice.index = lexer->index;
+		vec_push(lexer->slices, &slice);
+	}
 	return (E_OK);
 }

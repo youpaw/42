@@ -7,28 +7,31 @@
 
 int 		exp_double_quote(t_lexer *lexer)
 {
-	t_state state;
+	t_slice slice;
 	char c;
 
-	memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index, lexer->size - lexer->index + 1);
-	lexer->index--;
-	lexer->size--;
-	state = l_unset;
+	slice.state = l_unset;
 	c = lexer->raw[lexer->index];
 	if (c == '!')
-		state = l_history;
+		slice.state = l_history;
 	else if (c == '$')
-		state = l_dollar;
+		slice.state = l_dollar;
 	else if (c == '\\')
-		state = l_back_slash;
+		slice.state = l_back_slash;
 	else if (c == '\"')
 	{
-		memmove(lexer->raw + lexer->index, lexer->raw + lexer->index + 1, lexer->size - lexer->index + 1);
-		lexer->index--;
-		lexer->size--;
-		vec_rm_last(lexer->states);
+		vec_get_last(&slice, lexer->slices);
+		memmove(lexer->raw + slice.index, lexer->raw + slice.index + 1,  lexer->index - slice.index - 1);
+		memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index + 1, lexer->size - lexer->index);
+		lexer->index -= 2;
+		lexer->size -= 2;
+		vec_rm_last(lexer->slices);
+		slice.state = l_unset;
 	}
-	if (state != l_unset)
-		vec_push(lexer->states, &state);
+	if (slice.state != l_unset)
+	{
+		slice.index = lexer->index;
+		vec_push(lexer->slices, &slice);
+	}
 	return (E_OK);
 }

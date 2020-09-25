@@ -25,7 +25,7 @@
 # define LEXER_H
 # define N_BRACES 4
 # define N_STATES 5
-# define STATES_STACK_SIZE 5
+# define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
@@ -106,11 +106,16 @@ enum e_flag{
 	l_print_command
 };
 
+struct s_slice{
+	enum e_state	state;
+	size_t			index;
+};
+
 struct s_lexer{
 	char					*raw;
 	size_t					index;
 	size_t					size;
-	t_vec					*states;
+	t_vec					*slices;
 	t_vec					*tokens;
 	size_t					begin;
 	char 					flags[N_LEX_FLAGS];
@@ -118,6 +123,7 @@ struct s_lexer{
 };
 
 typedef enum e_state		t_state;
+typedef struct s_slice		t_slice;
 typedef enum e_brace		t_brace;
 typedef enum e_stage		t_stage;
 typedef struct s_lexer		t_lexer;
@@ -146,6 +152,9 @@ t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 
 int			match_brace(t_lexer *lexer, t_brace brace);
 int 		match_bang(t_lexer *lexer);
+int 		match_tilda(t_lexer *lexer);
+
+void		strjoin_expanded(t_lexer *lexer, size_t index, const char *expand, int pad);
 
 //!TODO tok_back_slash should work like vld_back_slash + tokenizer fix
 int 		tok_back_slash(t_lexer *lexer);
@@ -170,7 +179,7 @@ int			lex_err(t_lexer *lexer, int error);
 int			lex_raw(t_lexer *lexer, const char *raw, t_stage stage);
 
 void 		destruct_token(t_token **token);
-t_tokens	*expand_token(t_token *token);
+int			expand_token(t_token *token);
 
 t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);

@@ -6,48 +6,42 @@
 #include "expand.h"
 #include "cc_str.h"
 
-static void	join_expansion(t_lexer *lexer, const char *sub, size_t index)
+static int handle_expand(t_brace brace, char **str)
 {
-	const char	*arr[4];
-	char		*raw;
+	int error;
 
-	lexer->raw[index - 2] = '\0';
-	arr[0] = lexer->raw;
-	arr[1] = sub;
-	arr[2] = lexer->raw + lexer->index;
-	arr[3] = NULL;
-	raw = strnjoin(arr);
-	free(lexer->raw);
-	lexer->raw = raw;
-	lexer->index = index + strlen(sub) - 3;
+	error = 0;
+	if (brace == l_figure_brace)
+		error = expand_parameter(str);
+	return (error);
 }
 
-static int expand_handler(t_lexer *lexer)
+static void handle_error(const char *str)
+{
+	const char *args[2];
+
+	args[0] = str;
+	args[1] = NULL;
+	error_print(E_BADSUBS, args);
+}
+
+int 	exp_dollar(t_lexer *lexer)
 {
 	t_brace	brace;
 	size_t	index;
 	char	*sub;
 	int		error;
 
-	error = 0;
 	index = lexer->index + 1;
 	get_brace(lexer->raw + lexer->index, &brace);
 	match_brace(lexer, brace);
 	sub = strsub(lexer->raw, index, lexer->index - index - 1);
-	if (brace == l_figure_brace)
-		error = expand_parameter(&sub);
+	error = handle_expand(brace, &sub);
 	if (!error)
-		join_expansion(lexer, sub, index);
+		strjoin_expanded(lexer, index, sub, 2);
+	else
+		handle_error(sub);
 	free(sub);
-	return (error);
-}
-
-int 	exp_dollar(t_lexer *lexer)
-{
-
-	int		error;
-
-	error = expand_handler(lexer);
-	vec_rm_last(lexer->states);
+	vec_rm_last(lexer->slices);
 	return (error);
 }

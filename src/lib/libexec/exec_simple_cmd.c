@@ -10,35 +10,40 @@
 #include "env.h"
 #include <unistd.h>
 
-static int	is_path(const char *path)
+static char **get_args(t_ast *ast)
 {
-	if (*path == '/' || !strncmp(path, "./", 2) || !strncmp(path, "../", 3))
-		return (1);
-	return (0);
-}
+	char		**args;
+	t_ast		*cpy;
+	int			cnt;
 
-static const char **get_args(t_ast *ast)
-{
-	const char **args;
-	t_vec *args_vec;
-
-	args_vec = vec_new(10, sizeof(char *), NULL);
-	vec_push(args_vec, &ast->token->raw);
-	ast = ast->right;
+	cnt = 0;
+	cpy = ast;
 	while (ast)
 	{
-		if (ast->token->type == l_word)
-			vec_push(args_vec, &ast->token->raw);
+		if (ast->token->type == l_word || ast->token->type == l_command_name)
+		{
+			if ((g_exit_code = expand_token(ast->token)))
+				exit(g_exit_code);
+			cnt++;
+		}
 		ast = ast->right;
 	}
-	args = (const char **) args_vec->data;
-	free(args_vec);
+	args = xmalloc(sizeof(char *) * (cnt + 1));
+	cnt = 0;
+	args[cnt] = cpy->token->raw;
+	while (cpy)
+	{
+		if (cpy->token->type == l_word || cpy->token->type == l_command_name)
+			args[cnt++] = cpy->token->raw;
+		cpy = cpy->right;
+	}
+	args[cnt] = NULL;
 	return (args);
 }
 
 void	exec_simple_cmd(t_ast *ast)
 {
-	const char	**args;
+	char		**args;
 	const char	*path;
 	char		**exec_env;
 
