@@ -11,7 +11,7 @@ int								lex_err(t_lexer *lexer, int error)
 	int							index;
 	t_token						last_token;
 
-	if (!error && lexer->states->size > 1)
+	if (!error && lexer->slices->size > 1)
 		error = E_INCINP;
 	if (!error && lexer->tokens->size && \
 	vec_get_last(&last_token, lexer->tokens))
