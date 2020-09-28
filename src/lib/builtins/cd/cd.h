@@ -10,9 +10,12 @@
 #include "stdio.h"
 #include "cc.h"
 #include "env.h"
+#include "optparse.h"
+#include "error.h"
 
 # define N_PATHS 3
 # define MAX_PATH 256
+
 
 enum					e_paths
 {
@@ -23,7 +26,9 @@ enum					e_paths
 
 typedef enum e_paths	t_paths;
 
-int					cd(const char **av);
-char				*path_canonization(char *path);
+char				*path_canonization(const char *path);
+int					path_validation(char **av, char *path, char *cn_path, int path_i);
+
+
 
 #endif //CD_H
