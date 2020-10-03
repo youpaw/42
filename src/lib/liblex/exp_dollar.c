@@ -13,16 +13,9 @@ static int handle_expand(t_brace brace, char **str)
 	error = 0;
 	if (brace == l_figure_brace)
 		error = expand_parameter(str);
+	else if (brace == l_double_round_brace)
+		error = expand_calc(str);
 	return (error);
-}
-
-static void handle_error(const char *str)
-{
-	const char *args[2];
-
-	args[0] = str;
-	args[1] = NULL;
-	error_print(E_BADSUBS, args);
 }
 
 int 	exp_dollar(t_lexer *lexer)
@@ -39,8 +32,6 @@ int 	exp_dollar(t_lexer *lexer)
 	error = handle_expand(brace, &sub);
 	if (!error)
 		strjoin_expanded(lexer, index, sub, 2);
-	else
-		handle_error(sub);
 	free(sub);
 	vec_rm_last(lexer->slices);
 	return (error);
