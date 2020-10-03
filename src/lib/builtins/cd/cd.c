@@ -76,7 +76,7 @@ static void			init_chdir(const char *cn_path, const char *path,\
 	getcwd(pwd, MAX_PATH);
 }
 
-int					cd(const char **av, char **env)
+int cd(const char **av)
 {
 	int				path_i;
 	char			*cn_path;
