@@ -28,6 +28,7 @@ typedef enum	e_param_type
 **	malloced string)
 */
 
+int 			expand_calc(char **str);
 int 			expand_tilda(char **str);
 int 			expand_bang(char **str);
 int 			expand_parameter(char **str);
