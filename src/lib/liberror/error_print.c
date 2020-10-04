@@ -29,7 +29,9 @@ const char 	*g_error_msg[] = {
 		"%: %: numeric argument required",
 		"%: too many arguments",
 		"%: %: invalid option",
-  		"%: %: not found"
+  		"%: %: not found",
+		"HOME not set",
+		"OLDPWD not set"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
