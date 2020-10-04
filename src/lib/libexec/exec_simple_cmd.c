@@ -48,6 +48,7 @@ void	exec_simple_cmd(t_ast *ast)
 	char		**exec_env;
 
 	args = get_args(ast);
+	strarr_print(args, NULL, NULL);
 	if (run_builtin((const char **) args))
 	{
 		if (is_path(args[0]))
@@ -58,7 +59,8 @@ void	exec_simple_cmd(t_ast *ast)
 		if (path)
 		{
 			exec_env = exec_env_2array();
-			execve(path, (char *const *) args, (char *const *) exec_env);
+			if (!fork())
+				execve(path, (char *const *) args, (char *const *) exec_env);
 			strarr_del(exec_env);
 			free(exec_env);
 		}

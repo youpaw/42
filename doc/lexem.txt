@@ -51,4 +51,3 @@ here_end         : WORD
 separator_op     : '&'
                  | ';'
                  ;
-TODO add heredoc and bang handling
