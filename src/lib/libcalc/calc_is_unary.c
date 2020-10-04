@@ -6,7 +6,7 @@
 
 int 	calc_is_unary(t_calc_type type)
 {
-	if (type > 1 && type < N_OPERATORS)
+	if (type < 2)
 		return (1);
 	return (0);
 }

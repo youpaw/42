@@ -34,7 +34,7 @@ int 	calc_get_operator(t_calc *calc)
 
 	cnt = 0;
 	while ((op = operator_map(cnt)) && \
-	!strncmp(calc->raw + calc->index, token.raw, strlen(token.raw)))
+	strncmp(calc->raw + calc->index, op, strlen(op)))
 		cnt++;
 	if (calc_is_unary(cnt) && calc->state == c_st_number)
 			cnt = cnt == c_negative ? c_subtraction : c_addition;

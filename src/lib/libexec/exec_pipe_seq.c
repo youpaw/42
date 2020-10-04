@@ -29,7 +29,12 @@ static void create_pipe_seq(t_ast *node, int *prev_pl)
 void	exec_pipe_seq(t_ast *ast)
 {
 	int pid;
-	if (!(pid = fork()))
-		create_pipe_seq(ast, NULL);
-	waitpid(pid, NULL, 0);
+	if (ast->right)
+	{
+		if (!(pid = fork()))
+			create_pipe_seq(ast, NULL);
+		waitpid(pid, NULL, 0);
+	}
+	else
+		exec_simple_cmd(ast->left);
 }
