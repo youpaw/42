@@ -7,15 +7,18 @@ static void	print_id(const char *str, int num)
 {
 	puts(str);
 	putnbr(num);
-	puts("\n");
+	puts(" ");
 }
 
-void	print_process_stats(void)
+void	print_process_stats(const char *str)
 {
 	//print_id("PPID=", getppid());
 	//print_id("PID=", getpid());
 	//print_id("PGID=", getpgid(getpid()));
+	putendl(str);
 	print_id("PPID=", getppid());
 	print_id("PID=", getpid());
-	print_id("PGID=", getpgid(0));
+	print_id("PGID=", getpgrp());
+	print_id("term=", tcgetpgrp(STDIN_FILENO));
+	puts("\n");
 }

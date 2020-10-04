@@ -5,14 +5,15 @@
 #include "cc_str.h"
 #include "cc_num.h"
 
-void	print_job(t_job job)
+static void	print_job(const t_job *job)
 {
+	puts("[");
+	putnbr(job->id);
+	puts("] ");
 	puts("PID: ");
-	putnbr(job.job_pid);
+	putnbr(job->pid);
 	puts(" GPID: ");
-	putnbr(job.group_pid);
-	puts(" status: ");
-	putnbr(job.status);
+	putnbr(job->gpid);
 	puts("\n");
 }
 
@@ -28,7 +29,7 @@ void	print_jobs(void)
 		while (i < g_jobs.data->size)
 		{
 			vec_get_at(&job, g_jobs.data, i);
-			print_job(job);
+			print_job(&job);
 			i++;
 		}
 }

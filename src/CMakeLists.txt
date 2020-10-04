@@ -14,17 +14,17 @@ include_directories(${LIBCC_DIR})
 add_subdirectory(${LIBCC_DIR})
 target_link_libraries(${PROJECT_NAME} cc)
 
-#add libjob to the project
-set(LIBJOB_DIR "lib/libjob")
-include_directories(${LIBJOB_DIR})
-add_subdirectory(${LIBJOB_DIR})
-target_link_libraries(${PROJECT_NAME} jobs)
-
 #add liberror to the project
 set(LIBERROR_DIR "lib/liberror")
 include_directories(${LIBERROR_DIR})
 add_subdirectory(${LIBERROR_DIR})
 target_link_libraries(${PROJECT_NAME} error)
+
+#add libjob to the project
+set(LIBJOB_DIR "lib/libjob")
+include_directories(${LIBJOB_DIR})
+add_subdirectory(${LIBJOB_DIR})
+target_link_libraries(${PROJECT_NAME} jobs)
 
 #add libcalc to the project
 set(LIBCALC_DIR "lib/libcalc")

@@ -17,12 +17,12 @@ extern t_jobs	g_jobs;
 
 typedef struct	s_job
 {
-	size_t		job_pid;
-	size_t		group_pid;
-	int 		status;
+	size_t		id;
+	size_t		pid;
+	size_t		gpid;
 }				t_job;
 
-void	print_process_stats(void);
+void	print_process_stats(const char *str);
 void	jobs_init(void);
 void	print_jobs(void);
 void	jobs_add(size_t pid, size_t gpid);
