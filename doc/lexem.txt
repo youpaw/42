@@ -5,10 +5,12 @@ complete_command : list
 list             : list separator_op and_or
                  |                   and_or
                  ;
-and_or           :                pipe_sequence
-                 | and_or AND_IF  pipe_sequence
-                 | and_or OR_IF   pipe_sequence
+and_or           :                pipeline
+                 | and_or AND_IF  pipeline
+                 | and_or OR_IF   pipeline
                  ;
+pipeline         :      pipe_sequence
+                 | Bang pipe_sequence
 pipe_sequence    :                   simple_command
                  | pipe_sequence '|' simple_command
                  ;
@@ -30,6 +32,8 @@ cmd_suffix       :            io_redirect
                  ;
 io_redirect      :           io_file
                  | IO_NUMBER io_file
+                 |           io_here
+                 | IO_NUMBER io_here
                  ;
 io_file          : '<'       filename
                  | LESSAND   filename
@@ -38,6 +42,11 @@ io_file          : '<'       filename
                  | DGREAT    filename
                  ;
 filename         : WORD
+                 ;
+io_here          : DLESS     here_end
+                 | DLESSDASH here_end
+                 ;
+here_end         : WORD
                  ;
 separator_op     : '&'
                  | ';'

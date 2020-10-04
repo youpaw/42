@@ -28,26 +28,27 @@ static int validate_brace(t_lexer *lexer, t_vec *braces)
 int match_brace(t_lexer *lexer, t_brace brace)
 {
 	int		error;
-	t_state current;
+	t_slice current;
 	t_vec	*braces;
 
 	braces = vec_new(BRACES_STACK_SIZE, sizeof(t_brace), NULL);
 	vec_push(braces, &brace);
 	lexer->index += brace == l_double_round_brace ? 2 : 1;
-	current = l_unset;
-	vec_push(lexer->states, &current);
+	current.state = l_unset;
+	current.index = lexer->index;
+	vec_push(lexer->slices, &current);
 	while (lexer->index < lexer->size && braces->size)
 	{
-		current = get_current_state(lexer);
-		if ((current != l_unset && (error = lex_map(lexer, current))) || \
-		(current == l_unset && (error = validate_brace(lexer, braces))))
+		current.state = get_current_state(lexer);
+		if ((current.state != l_unset && (error = lex_map(lexer, current.state))) || \
+		(current.state == l_unset && (error = validate_brace(lexer, braces))))
 			break ;
 		lexer->index++;
 	}
 	if (!error && braces->size)
 		error = E_INCINP;
 	else
-		vec_rm_last(lexer->states);
+		vec_rm_last(lexer->slices);
 	vec_del(&braces);
 	return (error);
 }

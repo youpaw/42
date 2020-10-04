@@ -40,7 +40,7 @@ static int	match_word(t_lexer *lexer)
 	t_brace brace;
 	t_state current;
 
-	vec_get_last(&current, lexer->states);
+	vec_get_last(&current, lexer->slices);
 	while (lexer->index < lexer->size)
 	{
 		c = lexer->raw[lexer->index];
