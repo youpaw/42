@@ -8,7 +8,7 @@ file(MAKE_DIRECTORY ${BUILD_DIRECTORY})
 
 ADD_LIBRARY(jobs STATIC
             print_process_stats.c
-        print_jobs.c jobs_init.c jobs_add.c)
+        print_jobs.c jobs_init.c jobs_add.c signal_handlers.c)
 
         
 target_link_libraries(jobs cc)

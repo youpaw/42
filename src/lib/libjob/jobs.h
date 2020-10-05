@@ -27,4 +27,13 @@ void	jobs_init(void);
 void	print_jobs(void);
 void	jobs_add(size_t pid, size_t gpid);
 
+/*
+** Signals section
+*/
+
+void	set_dfl_handlers(void);
+void	set_main_handlers(void);
+void	set_fork_handlers(void);
+
+
 #endif //JOBS_H
