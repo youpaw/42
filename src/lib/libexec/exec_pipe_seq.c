@@ -26,7 +26,7 @@ static void create_pipe_seq(t_ast *node, int *prev_pl)
 	exec_simple_cmd(node->left);
 }
 
-void	exec_pipe_seq(t_ast *ast)
+void exec_pipe_seq(t_ast *ast)
 {
 	int pid;
 	if (ast->right)

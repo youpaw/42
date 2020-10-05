@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-void	exec_pipeline(t_ast *ast)
+void exec_pipeline(t_ast *ast)
 {
 	exec_pipe_seq(ast->left);
 }
