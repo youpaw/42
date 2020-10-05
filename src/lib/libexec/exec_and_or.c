@@ -4,11 +4,11 @@
 
 #include "exec.h"
 
-void	exec_and_or(t_ast *ast)
+void exec_and_or(t_ast *ast)
 {
 	t_ast *next;
 
-	exec_pipe_seq(ast->left);
+	exec_pipeline(ast->left);
 	while ((next = ast->right))
 	{
 		if ((ast->token->type == l_and_if && !g_exit_code) || \
