@@ -8,6 +8,6 @@ int 		tok_bang(t_lexer *lexer)
 {
 	match_bang(lexer);
 	lexer->index--;
-	vec_rm_last(lexer->states);
+	vec_rm_last(lexer->slices);
 	return (E_OK);
 }

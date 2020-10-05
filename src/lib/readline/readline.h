@@ -20,6 +20,7 @@
 #define INP_MAKING_CHOICE 2
 
 # include <termios.h>
+#include <stdint.h>
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"

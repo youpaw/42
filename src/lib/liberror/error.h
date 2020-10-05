@@ -12,7 +12,7 @@
 
 #ifndef ERROR_H
 # define ERROR_H
-//# define ERROR_COUNT 11
+//# define ERROR_COUNT 13
 
 typedef enum	e_error_code
 {
@@ -39,7 +39,11 @@ typedef enum	e_error_code
 	E_OPEXPEC,						/* %: %: syntax error: operand expected (error token is \"%\") */
 	E_INVIDENT,						/* %: `%': not a valid identifier*/
 	E_NUMARGREQ,					/* %: %: numeric argument required*/
-	E_TOOMANYARGS					/* %: too many arguments*/
+	E_TOOMANYARGS,					/* %: too many arguments*/
+	E_INVALOPT,						/* %: %: invalid option*/
+	E_NOTFOUND,						/* %: %: not found*/
+	E_HOMENOTSET,					/* HOME not set */
+	E_OLDPWDNOTSET,					/* OLDPWD not set */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

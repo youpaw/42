@@ -17,9 +17,9 @@ typedef struct	s_hash_bin_pair
 }				t_hash_bin_pair;
 
 void		hash_init();
-void		hash_print(void);
+int			hash_print(void);
 int 		hash_insert(const char *bin, const char *path);
-const char *hash_get_path(const char *bin);
+const char	*hash_get_path(const char *bin);
 void 		hash_del(void);
 
 /*

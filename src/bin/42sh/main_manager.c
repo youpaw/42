@@ -3,28 +3,33 @@
 //
 
 #include "readline.h"
-#include "lexer.h"
+#include "exec.h"
 #include "cc_str.h"
 
 int 	main_manager(void)
 {
 	t_tokens *tokens;
+	t_ast	*ast;
 	char *str;
 
+	ast = NULL;
+	tokens = NULL;
 	str = strdup("");
 	while (42)
 	{
 		readline(&str);
 		tokens = validate_str(str);
-		puts("\n");
-		puts(str);
-		puts("\n");
-		print_tokens(tokens);
-		if (tokens->error != E_NOINP)
+		if (tokens && !tokens->error)
+		{
+			if ((ast = parse(tokens)))
+				exec(ast);
+		}
+		if (!tokens || tokens->error != E_INCINP)
 		{
 			free(str);
 			str = strdup("");
 		}
+		del_ast(&ast);
 		destruct_tokens(&tokens);
 	}
 }

@@ -10,12 +10,15 @@
 #include "stdio.h"
 #include "cc.h"
 #include "env.h"
+#include "optparse.h"
+#include "error.h"
 
 # define N_PATHS 3
-# define PATH_LEN 256
+# define MAX_PATH 256
 
-char I_AV = 0;
-char FLAG = '0';
+#define CD_L_FLAG 00000001
+#define CD_P_FLAG 00000010
+
 
 enum					e_paths
 {
@@ -24,7 +27,10 @@ enum					e_paths
 	oldpwd,
 };
 
-int					cd(const char **av);
-void 				path_canonization(char *path);
+typedef enum e_paths	t_paths;
+
+char				*path_canonization(const char *path);
+int					path_validation(char **av, char *path, char *cn_path, int path_i);
+int					check_opt(const char **av, unsigned char flags);
 
 #endif //CD_H

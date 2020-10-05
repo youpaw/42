@@ -16,6 +16,7 @@ t_tokens	*get_tokens(t_lexer *lexer, int error)
 	tokens->size = lexer->tokens->size;
 	tokens->tokens = xmalloc(sizeof(t_token *) * tokens->size);
 	tokens->index = 0;
+	tokens->error = error;
 	index = 0;
 	while (index < tokens->size)
 	{

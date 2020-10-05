@@ -25,12 +25,12 @@
 # define LEXER_H
 # define N_BRACES 4
 # define N_STATES 5
-# define STATES_STACK_SIZE 5
+# define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 15
+# define N_TOKEN_TYPES 16
 # define N_TOKEN_OPERATORS 11
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 4
@@ -51,6 +51,7 @@ enum e_token_type
 	l_less,
 	l_great,
 	l_semi,
+	l_bang,
 	l_io_number,
 	l_assignment_word,
 	l_command_name,
@@ -84,7 +85,7 @@ enum e_state{
 	l_single_quote,
 	l_double_quote,
 	l_dollar,
-	l_bang,
+	l_history,
 	l_unset
 };
 
@@ -105,11 +106,16 @@ enum e_flag{
 	l_print_command
 };
 
+struct s_slice{
+	enum e_state	state;
+	size_t			index;
+};
+
 struct s_lexer{
 	char					*raw;
 	size_t					index;
 	size_t					size;
-	t_vec					*states;
+	t_vec					*slices;
 	t_vec					*tokens;
 	size_t					begin;
 	char 					flags[N_LEX_FLAGS];
@@ -117,6 +123,7 @@ struct s_lexer{
 };
 
 typedef enum e_state		t_state;
+typedef struct s_slice		t_slice;
 typedef enum e_brace		t_brace;
 typedef enum e_stage		t_stage;
 typedef struct s_lexer		t_lexer;
@@ -145,6 +152,9 @@ t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 
 int			match_brace(t_lexer *lexer, t_brace brace);
 int 		match_bang(t_lexer *lexer);
+int 		match_tilda(t_lexer *lexer);
+
+void		strjoin_expanded(t_lexer *lexer, size_t index, const char *expand, int pad);
 
 //!TODO tok_back_slash should work like vld_back_slash + tokenizer fix
 int 		tok_back_slash(t_lexer *lexer);
@@ -154,7 +164,6 @@ int 		tok_dollar(t_lexer *lexer);
 int 		tok_bang(t_lexer *lexer);
 int 		tok_unset(t_lexer *lexer);
 
-int 		vld_back_slash(t_lexer *lexer);
 int 		vld_bang(t_lexer *lexer);
 
 int 		exp_back_slash(t_lexer *lexer);
@@ -170,12 +179,11 @@ int			lex_err(t_lexer *lexer, int error);
 int			lex_raw(t_lexer *lexer, const char *raw, t_stage stage);
 
 void 		destruct_token(t_token **token);
-t_tokens	*expand_token(t_token *token);
+int			expand_token(t_token *token);
 
 t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
 
-//!TODO validate_str -> validate_tokens after tokenezetion (no need to tokenize 2 times)
 t_tokens	*validate_str(const char *string);
 t_tokens	*tokenize_str(const char *string);
 t_tokens	*tokenize_str_sub(const char *string, size_t len);
@@ -184,6 +192,6 @@ t_tokens	*tokenize_str_sub(const char *string, size_t len);
 // 1. [ ls ] [ word ]
 
 void 		print_tokens(t_tokens *tokens);
-const char	*type_to_string(t_token_type t);
+const char	*token_type_to_string(t_token_type t);
 
 #endif

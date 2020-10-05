@@ -9,6 +9,8 @@ t_token_type recognize_token(t_lexer *lexer)
 {
 	t_token token;
 
+	if (lexer->raw[lexer->begin] == '!')
+		return (l_bang);
 	if (!lexer->tokens->size)
 	{
 		if (get_valid_name_length(lexer->raw + lexer->begin))

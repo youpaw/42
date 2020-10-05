@@ -3,27 +3,38 @@
 //
 
 #include "exec.h"
-#include <stddef.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
-void	exec_pipe_seq(t_ast *ast)
+static void create_pipe_seq(t_ast *node, int *prev_pl)
 {
 	int pl[2];
 
-	pipe(pl);
-	while (ast)
+	if (node->right)
 	{
+		pipe(pl);
 		if (!fork())
-		{
-			if (ast->right)
-				dup2(pl[1], 1);
-			exec_simple_cmd(ast->left);
-			exit(g_exit_code);
-		}
-		dup2(pl[0], 0);
-		close(pl[1]);
-		ast = ast->right;
+			create_pipe_seq(node->right, pl);
+		close(pl[0]);
+		dup2(pl[1], STDOUT_FILENO);
 	}
-	wait(NULL);
-	dup2(STDIN_FILENO, pl[0]);
+	if (prev_pl)
+	{
+		close(prev_pl[1]);
+		dup2(prev_pl[0], STDIN_FILENO);
+	}
+	exec_simple_cmd(node->left);
+}
+
+void	exec_pipe_seq(t_ast *ast)
+{
+	int pid;
+	if (ast->right)
+	{
+		if (!(pid = fork()))
+			create_pipe_seq(ast, NULL);
+		waitpid(pid, NULL, 0);
+	}
+	else
+		exec_simple_cmd(ast->left);
 }

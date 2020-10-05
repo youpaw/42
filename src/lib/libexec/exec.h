@@ -9,6 +9,8 @@
 # include "env.h"
 # include <stddef.h>
 
+int 	is_path(const char *str);
+
 void	exec_io_file(t_ast *ast);
 void	exec_filename(t_ast *ast);
 void	exec_io_redirect(t_ast *ast);

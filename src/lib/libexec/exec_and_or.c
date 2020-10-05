@@ -3,7 +3,6 @@
 //
 
 #include "exec.h"
-#include "cc.h"
 
 void	exec_and_or(t_ast *ast)
 {
@@ -14,7 +13,7 @@ void	exec_and_or(t_ast *ast)
 	{
 		if ((ast->token->type == l_and_if && !g_exit_code) || \
 			(ast->token->type == l_or_if && g_exit_code))
-			exec_pipe_seq(next->left);
+			exec_and_or(ast->right);
 		ast = next;
 	}
 }

@@ -15,4 +15,3 @@ int main(int ac, const char *av[], const char *env[])
 	readline(&line);
 	return (error);
 }
-

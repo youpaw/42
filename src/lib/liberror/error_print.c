@@ -27,7 +27,11 @@ const char 	*g_error_msg[] = {
 		"%: %: syntax error: operand expected (error token is \"%\")",
 		"%: `%': not a valid identifier",
 		"%: %: numeric argument required",
-		"%: too many arguments"
+		"%: too many arguments",
+		"%: %: invalid option",
+  		"%: %: not found",
+		"HOME not set",
+		"OLDPWD not set"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
