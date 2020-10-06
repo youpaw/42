@@ -9,6 +9,7 @@
 #include "cc_str.h"
 #include "env.h"
 #include <unistd.h>
+#include "jobs.h"
 
 static void run_bin(const char **args)
 {
@@ -50,6 +51,7 @@ void	exec_simple_cmd(t_ast *ast)
 	int 	fd_backup[3];
 
 	fd_arr = NULL;
+	print_process_stats("simple cmd:");
 	if (stdio_backup(fd_backup))
 		return ;
 	if (expand_ast(ast) || prepare_redirect(ast, &fd_arr))

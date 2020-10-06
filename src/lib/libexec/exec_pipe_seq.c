@@ -5,11 +5,13 @@
 #include "exec.h"
 #include <unistd.h>
 #include <sys/wait.h>
+#include "jobs.h"
 
 static void create_pipe_seq(t_ast *node, int *prev_pl)
 {
 	int pl[2];
 
+	print_process_stats("into pipe:");
 	if (node->right)
 	{
 		pipe(pl);

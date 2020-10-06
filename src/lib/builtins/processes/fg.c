@@ -3,6 +3,6 @@
 
 int 	fg(const char **av)
 {
-	jobs_add(25, 14);
+	add_job_to_list(25, 14);
 	return (0);
 }
