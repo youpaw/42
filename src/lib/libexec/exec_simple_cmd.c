@@ -8,8 +8,8 @@
 #include "hash.h"
 #include "cc_str.h"
 #include "env.h"
-#include <unistd.h>
 #include "jobs.h"
+#include <wait.h>
 
 static void run_bin(const char **args)
 {
@@ -30,11 +30,9 @@ static void run_bin(const char **args)
 			exit(0);
 		}
 		else
-		{
-			wait(pid);
-			strarr_del(exec_env);
-			free(exec_env);
-		}
+			waitpid(pid, NULL, 0);
+		strarr_del(exec_env);
+		free(exec_env);
 	}
 }
 
