@@ -14,7 +14,10 @@ static void create_pipe_seq(t_ast *node, int *prev_pl)
 	{
 		pipe(pl);
 		if (!fork())
+		{
 			create_pipe_seq(node->right, pl);
+			exit(0);
+		}
 		close(pl[0]);
 		dup2(pl[1], STDOUT_FILENO);
 	}
@@ -26,13 +29,16 @@ static void create_pipe_seq(t_ast *node, int *prev_pl)
 	exec_simple_cmd(node->left);
 }
 
-void	exec_pipe_seq(t_ast *ast)
+void exec_pipe_seq(t_ast *ast)
 {
 	int pid;
 	if (ast->right)
 	{
 		if (!(pid = fork()))
+		{
 			create_pipe_seq(ast, NULL);
+			exit(0);
+		}
 		waitpid(pid, NULL, 0);
 	}
 	else
