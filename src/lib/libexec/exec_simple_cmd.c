@@ -9,7 +9,7 @@
 #include "cc_str.h"
 #include "env.h"
 #include "jobs.h"
-#include <wait.h>
+#include <sys/wait.h>
 
 static void run_bin(const char **args)
 {
