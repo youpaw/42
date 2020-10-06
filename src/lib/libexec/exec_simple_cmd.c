@@ -23,7 +23,10 @@ static void run_bin(const char **args)
 	{
 		exec_env = exec_env_2array();
 		if (!fork())
+		{
 			execve(path, (char *const *) args, (char *const *) exec_env);
+			exit(0);
+		}
 		strarr_del(exec_env);
 		free(exec_env);
 	}
