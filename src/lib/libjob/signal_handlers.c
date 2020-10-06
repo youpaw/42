@@ -35,7 +35,6 @@ static void	set_handlers(void (*sig_handler)(int arg),
 	signal (SIGTTIN, sig_handler);
 	signal (SIGTTOU, sig_handler);
 	signal (SIGCHLD, sig_handler);
-	signal (SIGINFO, sig_handler);
 	signal (SIGINT, sigint_handler);
 }
 

@@ -15,6 +15,7 @@ static void run_bin(const char **args)
 {
 	char		**exec_env;
 	const char	*path;
+	pid_t		pid;
 
 	if (is_path(args[0]))
 		path = args[0];
@@ -23,13 +24,17 @@ static void run_bin(const char **args)
 	if (path)
 	{
 		exec_env = exec_env_2array();
-		if (!fork())
+		if (!(pid = fork()))
 		{
 			execve(path, (char *const *) args, (char *const *) exec_env);
 			exit(0);
 		}
-		strarr_del(exec_env);
-		free(exec_env);
+		else
+		{
+			wait(pid);
+			strarr_del(exec_env);
+			free(exec_env);
+		}
 	}
 }
 
