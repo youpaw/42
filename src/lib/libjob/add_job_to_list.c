@@ -9,20 +9,20 @@
 static void	print_add_msg(const t_job *job)
 {
 	puts("[");
-	putnbr(g_jobs.index);
+	putnbr(g_jobs.last_job_index);
 	puts("] ");
 	putnbr(job->pid);
 	puts("\n");
 }
 
-void		jobs_add(size_t pid, size_t gpid)
+void		add_job_to_list(size_t pid, size_t gpid)
 {
 	t_job	new_job;
 
 	if (!g_jobs.data->size)
-		g_jobs.index = 0;
-	g_jobs.index++;
-	new_job.id = g_jobs.index;
+		g_jobs.last_job_index = 0;
+	g_jobs.last_job_index++;
+	new_job.id = g_jobs.last_job_index;
 	new_job.pid = pid;
 	new_job.gpid = gpid;
 	vec_push(g_jobs.data, &new_job);

@@ -5,6 +5,7 @@
 #include "cc_num.h"
 #include "cc_str.h"
 #include "signal.h"
+#include "jobs.h"
 
 static void print_msg(const char *msg, int arg)
 {
@@ -12,6 +13,8 @@ static void print_msg(const char *msg, int arg)
 	putnbr(arg);
 	puts(" in: ");
 	putendl(msg);
+	if (arg == 20)
+		check_jobs();
 }
 
 static void	main_sig_handler(int arg)
