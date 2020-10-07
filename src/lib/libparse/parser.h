@@ -33,7 +33,7 @@
 # define PARSER_H
 #include "lexer.h"
 #include "error.h"
-#define N_NODE_TYPES 10
+#define N_NODE_TYPES 11
 #define N_MAX_TOKEN_TYPES 6
 
 enum e_node_type
@@ -41,6 +41,7 @@ enum e_node_type
 	p_cmpl_cmd,
 	p_list,
 	p_and_or,
+	p_pipeline,
 	p_pipe_seq,
 	p_simple_cmd,
 	p_cmd_pref,
@@ -68,6 +69,7 @@ t_ast 				*node_cmd_suffix(t_tokens *tokens);
 t_ast 				*node_cmd_prefix(t_tokens *tokens);
 t_ast 				*node_simple_cmd(t_tokens *tokens);
 t_ast 				*node_pipe_seq(t_tokens *tokens);
+t_ast				*node_pipeline(t_tokens *tokens);
 t_ast 				*node_and_or(t_tokens *tokens);
 t_ast 				*node_list(t_tokens *tokens);
 t_ast 				*node_complete_cmd(t_tokens *tokens);

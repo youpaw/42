@@ -10,7 +10,10 @@ void	exec_list(t_ast *ast)
 	if (ast->token && ast->token->type == l_and)
 	{
 		if (!fork())
+		{
 			exec_and_or(ast->left);
+			exit(0);
+		}
 	}
 	else
 		exec_and_or(ast->left);
