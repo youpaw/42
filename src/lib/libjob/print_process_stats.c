@@ -1,4 +1,3 @@
-#include <sys/types.h>
 #include <unistd.h>
 #include "cc_str.h"
 #include "cc_num.h"
@@ -19,7 +18,6 @@ void	print_process_stats(const char *str)
 	print_id("PID=", getpid());
 	print_id("PGID=", getpgrp());
 	print_id("term=", tcgetpgrp(STDIN_FILENO));
-	print_id("is_root=", is_root_process());
 	puts("\n");
 	puts("\033[0m"); // Reset color
 }

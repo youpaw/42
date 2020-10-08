@@ -5,6 +5,7 @@
 #include "exec.h"
 #include <unistd.h>
 #include "jobs.h"
+#include "cc_str.h"
 
 void	exec_list(t_ast *ast)
 {
@@ -19,7 +20,8 @@ void	exec_list(t_ast *ast)
 		}
 		else
 		{
-			add_job_to_list(pid, 0);
+			//add_job_to_list(pid, 0);
+			putendl("background job");
 		}
 	}
 	else

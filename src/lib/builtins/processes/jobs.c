@@ -3,6 +3,7 @@
 
 int 	jobs(const char **av)
 {
-	print_jobs();
+	//print_jobs();
+	putendl("jobs builtin");
 	return (0);
 }

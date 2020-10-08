@@ -4,6 +4,7 @@
 
 int 	bg(const char **av)
 {
+	/*
 	size_t		index;
 
 	index = g_jobs.last_job_index;
@@ -16,5 +17,7 @@ int 	bg(const char **av)
 		putnbr(index);
 		putendl(" job successfully removed");
 	}
+	 */
+	putendl("bg builtin");
 	return (0);
 }

@@ -10,6 +10,7 @@
 #include "env.h"
 #include "jobs.h"
 #include <sys/wait.h>
+#include <unistd.h>
 
 static void run_bin(const char **args)
 {
@@ -26,6 +27,7 @@ static void run_bin(const char **args)
 		exec_env = exec_env_2array();
 		if (!(pid = fork()))
 		{
+			print_process_stats("simple cmd:");
 			execve(path, (char *const *) args, (char *const *) exec_env);
 			exit(0);
 		}
@@ -54,7 +56,6 @@ void	exec_simple_cmd(t_ast *ast)
 	int 	fd_backup[3];
 
 	fd_arr = NULL;
-	print_process_stats("simple cmd:");
 	if (stdio_backup(fd_backup))
 		return ;
 	if (expand_ast(ast) || prepare_redirect(ast, &fd_arr))

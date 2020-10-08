@@ -11,7 +11,7 @@ int main(int ac, const char *av[], const char *env[])
 	if (!(error = main_init(av[0], av + 1, env)))
 	{
 		print_process_stats("Init:");
-		set_main_handlers();
+		set_dfl_handlers();
 		error = main_manager();
 	}
 	return (error);

@@ -40,6 +40,7 @@ int 	main_init(const char *name, const char *av[], const char *en[])
 	alias_init();
 	hist_init(env_get_value("HOME"));
 	termcap_init();
-	jobs_init();
+	//jobs_init();
+	init_shell();
 	return (0);
 }

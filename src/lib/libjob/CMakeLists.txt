@@ -8,7 +8,7 @@ file(MAKE_DIRECTORY ${BUILD_DIRECTORY})
 
 ADD_LIBRARY(jobs STATIC
             print_process_stats.c
-        print_jobs.c jobs_init.c add_job_to_list.c signal_handlers.c is_root_process.c remove_job_by_index.c check_jobs.c remove_job_by_pid.c)
+        all_funcs.c init_shell.c put_job_in_foreground.c put_job_in_background.c mark_process_status.c update_status.c wait_for_job.c format_job_info.c do_job_notification.c mark_job_as_running.c continue_job.c signal_handlers.c)
 
         
 target_link_libraries(jobs cc)
