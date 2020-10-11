@@ -4,7 +4,8 @@
 
 #include "exec.h"
 
-void	exec(t_ast *ast)
+void exec(t_ast *ast, t_tokens *tokens)
 {
-	exec_complete_cmd(ast);
+	tokens->index = 0;
+	exec_complete_cmd(ast, NULL);
 }

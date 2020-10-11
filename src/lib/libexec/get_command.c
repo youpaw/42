@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-char 	*get_command(t_ast *ast)
+char *get_command(t_tokens *tokens, int async)
 {
 	t_vec *vec;
 
