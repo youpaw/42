@@ -12,13 +12,13 @@
 
 int		mark_process_status (pid_t pid, int status)
 {
-	job *j;
-	process *p;
+	t_job *j;
+	t_process *p;
 
 	if (pid > 0)
 	{
 		/* Update the record for the process.  */
-		for (j = first_job; j; j = j->next)
+		for (j = g_first_job; j; j = j->next)
 			for (p = j->first_process; p; p = p->next)
 				if (p->pid == pid)
 				{

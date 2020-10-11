@@ -4,16 +4,15 @@
 
 #include "exec.h"
 
-void exec_and_or(t_ast *ast)
+void exec_and_or(t_ast *ast, t_job *job)
 {
-	t_ast *next;
-
-	exec_pipeline(ast->left);
-	while ((next = ast->right))
+	exec_pipeline(ast->left, job);
+	while (ast->right)
 	{
-		if ((ast->token->type == l_and_if && !g_exit_code) || \
-			(ast->token->type == l_or_if && g_exit_code))
-			exec_and_or(ast->right);
-		ast = next;
+		job->next = job_new();
+		job = job->next;
+		job->sequence = ast->token;
+		ast = ast->right;
+		exec_pipeline(ast->left, job);
 	}
 }

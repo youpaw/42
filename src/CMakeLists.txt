@@ -20,12 +20,6 @@ include_directories(${LIBERROR_DIR})
 add_subdirectory(${LIBERROR_DIR})
 target_link_libraries(${PROJECT_NAME} error)
 
-#add libjob to the project
-set(LIBJOB_DIR "lib/libjob")
-include_directories(${LIBJOB_DIR})
-add_subdirectory(${LIBJOB_DIR})
-target_link_libraries(${PROJECT_NAME} jobs)
-
 #add libcalc to the project
 set(LIBCALC_DIR "lib/libcalc")
 include_directories(${LIBCALC_DIR})
@@ -79,6 +73,12 @@ set(LIBPARSE_DIR "lib/libparse")
 include_directories(${LIBPARSE_DIR})
 add_subdirectory(${LIBPARSE_DIR})
 target_link_libraries(${PROJECT_NAME} parser)
+
+#add libjob to the project
+set(LIBJOB_DIR "lib/libjob")
+include_directories(${LIBJOB_DIR})
+add_subdirectory(${LIBJOB_DIR})
+target_link_libraries(${PROJECT_NAME} jobs)
 
 #add builtins to the project
 set(BUILTINS_DIR "lib/builtins")

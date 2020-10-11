@@ -5,7 +5,7 @@
 #include "jobs.h"
 #include <stdlib.h>
 
-static void	free_job(job *j)
+static void	free_job(t_job *j)
 {
 	free(j->command);
 }
@@ -15,13 +15,13 @@ static void	free_job(job *j)
 
 void	do_job_notification(void)
 {
-	job *j, *jlast, *jnext;
+	t_job *j, *jlast, *jnext;
 
 	/* Update status information for child processes.  */
 	update_status();
 
 	jlast = NULL;
-	for (j = first_job; j; j = jnext)
+	for (j = g_first_job; j; j = jnext)
 	{
 		jnext = j->next;
 
@@ -32,7 +32,7 @@ void	do_job_notification(void)
 			if (jlast)
 				jlast->next = jnext;
 			else
-				first_job = jnext;
+				g_first_job = jnext;
 			free_job(j);
 		}
 

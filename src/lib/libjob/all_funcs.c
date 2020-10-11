@@ -9,20 +9,20 @@
 #include "cc_str.h"
 
 /* Find the active job with the indicated pgid.  */
-job	*find_job (pid_t pgid)
+t_job	*find_job (pid_t pgid)
 {
-	job *j;
+	t_job *j;
 
-	for (j = first_job; j; j = j->next)
+	for (j = g_first_job; j; j = j->next)
 		if (j->pgid == pgid)
 			return j;
 	return NULL;
 }
 
 /* Return true if all processes in the job have stopped or completed.  */
-int	job_is_stopped (job *j)
+int	job_is_stopped (t_job *j)
 {
-	process *p;
+	t_process *p;
 
 	for (p = j->first_process; p; p = p->next)
 		if (!p->completed && !p->stopped)
@@ -31,9 +31,9 @@ int	job_is_stopped (job *j)
 }
 
 /* Return true if all processes in the job have completed.  */
-int	job_is_completed (job *j)
+int	job_is_completed (t_job *j)
 {
-	process *p;
+	t_process *p;
 
 	for (p = j->first_process; p; p = p->next)
 		if (!p->completed)
@@ -41,13 +41,13 @@ int	job_is_completed (job *j)
 	return 1;
 }
 
-void	launch_process (process *p, pid_t pgid,
-				int infile, int outfile, int errfile,
-				int foreground)
+void	launch_process (t_process *p, pid_t pgid,
+						int infile, int outfile, int errfile,
+						int foreground)
 {
 	pid_t pid;
 
-	if (shell_is_interactive)
+	if (g_is_interactive)
 	{
 		/* Put the process into the process group and give the process group
 		   the terminal, if appropriate.
@@ -58,7 +58,7 @@ void	launch_process (process *p, pid_t pgid,
 			pgid = pid;
 		setpgid(pid, pgid);
 		if (foreground)
-			tcsetpgrp (shell_terminal, pgid);
+			tcsetpgrp (g_terminal, pgid);
 
 		/* Set the handling for job control signals back to the default.  */
 		signal (SIGINT, SIG_DFL);
@@ -92,9 +92,9 @@ void	launch_process (process *p, pid_t pgid,
 	exit(1);
 }
 
-void	launch_job(job *j, int foreground)
+void	launch_job(t_job *j, int foreground)
 {
-	process *p;
+	t_process *p;
 	pid_t pid;
 	int mypipe[2], infile, outfile;
 
@@ -130,7 +130,7 @@ void	launch_job(job *j, int foreground)
 		{
 			/* This is the parent process.  */
 			p->pid = pid;
-			if (shell_is_interactive)
+			if (g_is_interactive)
 			{
 				if (!j->pgid)
 					j->pgid = pid;
@@ -146,7 +146,7 @@ void	launch_job(job *j, int foreground)
 		infile = mypipe[0];
 	}
 	format_job_info(j, "launched");
-	if (!shell_is_interactive)
+	if (!g_is_interactive)
 		wait_for_job(j);
 	else if (foreground)
 		put_job_in_foreground(j, 0);

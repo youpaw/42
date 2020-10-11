@@ -6,7 +6,7 @@
 
 /* Continue the job J.  */
 
-void	continue_job(job *j, int foreground)
+void	continue_job(t_job *j, int foreground)
 {
 	mark_job_as_running(j);
 	if (foreground)

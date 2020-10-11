@@ -10,25 +10,25 @@
 #include <stdlib.h>
 #include "jobs.h"
 
-pid_t			shell_pgid;
-struct termios	shell_tmodes;
-int				shell_terminal;
-int				shell_is_interactive;
-job				*first_job = NULL;
+pid_t			g_pgid;
+struct termios	g_tmodes;
+int				g_terminal;
+int				g_is_interactive;
+t_job				*g_first_job = NULL;
 
 /* Make sure the shell is running interactively as the foreground job
    before proceeding. */
 
-void	init_shell(void)
+void	jobs_init(void)
 {
 	/* See if we are running interactively.  */
-	shell_terminal = STDIN_FILENO;
-	shell_is_interactive = isatty(shell_terminal);
-	if (shell_is_interactive)
+	g_terminal = STDIN_FILENO;
+	g_is_interactive = isatty(g_terminal);
+	if (g_is_interactive)
 	{
 		/* Loop until we are in the foreground.  */
-		while (tcgetpgrp(shell_terminal) != (shell_pgid = getpgrp()))
-			kill (-shell_pgid, SIGTTIN);
+		while (tcgetpgrp(g_terminal) != (g_pgid = getpgrp()))
+			kill (-g_pgid, SIGTTIN);
 
 		/* Ignore interactive and job-control signals.  */
 		signal (SIGINT, SIG_IGN);
@@ -39,17 +39,17 @@ void	init_shell(void)
 		signal (SIGCHLD, SIG_IGN);
 
 		/* Put ourselves in our own process group.  */
-		shell_pgid = getpid();
-		if (setpgid(shell_pgid, shell_pgid) < 0)
+		g_pgid = getpid();
+		if (setpgid(g_pgid, g_pgid) < 0)
 		{
 			fdputendl("Couldn't put the shell in its own process group", STDERR_FILENO);
 			exit(1);
 		}
 
 		/* Grab control of the terminal.  */
-		tcsetpgrp (shell_terminal, shell_pgid);
+		tcsetpgrp (g_terminal, g_pgid);
 
 		/* Save default terminal attributes for shell.  */
-		tcgetattr (shell_terminal, &shell_tmodes);
+		tcgetattr (g_terminal, &g_tmodes);
 	}
 }

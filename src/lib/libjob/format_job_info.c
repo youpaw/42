@@ -6,7 +6,7 @@
 
 /* Format information about job status for the user to look at.  */
 
-void	format_job_info(job *j, const char *status)
+void	format_job_info(t_job *j, const char *status)
 {
 	fprintf (stderr, "%ld (%s): %s\n", (long)j->pgid, status, j->command);
 }

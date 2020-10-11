@@ -3,29 +3,17 @@
 //
 
 #include "exec.h"
-#include <unistd.h>
 #include "jobs.h"
-#include "cc_str.h"
 
 void	exec_list(t_ast *ast)
 {
-	pid_t	pid;
+	t_job *job;
 
 	if (ast->token && ast->token->type == l_and)
-	{
-		if (!(pid = fork()))
-		{
-			exec_and_or(ast->left);
-			exit(0);
-		}
-		else
-		{
-			//add_job_to_list(pid, 0);
-			putendl("background job");
-		}
-	}
+		job = job_new();
 	else
-		exec_and_or(ast->left);
+		job = job_new();
+	exec_and_or(ast->left, job);
 	if (ast->right)
 		exec_list(ast->right);
 }

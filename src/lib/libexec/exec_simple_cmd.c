@@ -49,7 +49,7 @@ static void close_redirect_fds(int *fd_arr)
 		close(fd_arr[index++]);
 }
 
-void	exec_simple_cmd(t_ast *ast)
+void exec_simple_cmd(t_ast *ast, t_job *job)
 {
 	char	**args;
 	int 	*fd_arr;
