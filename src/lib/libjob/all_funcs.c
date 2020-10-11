@@ -41,9 +41,7 @@ int	job_is_completed (t_job *j)
 	return 1;
 }
 
-void	launch_process (t_process *p, pid_t pgid,
-						int infile, int outfile, int errfile,
-						int foreground)
+void	launch_process (t_process *p, pid_t pgid, int foreground)
 {
 	pid_t pid;
 
@@ -70,20 +68,20 @@ void	launch_process (t_process *p, pid_t pgid,
 	}
 
 	/* Set the standard input/output channels of the new process.  */
-	if (infile != STDIN_FILENO)
+	if (p->stdin != STDIN_FILENO)
 	{
-		dup2 (infile, STDIN_FILENO);
-		close (infile);
+		dup2 (p->stdin, STDIN_FILENO);
+		close (p->stdin);
 	}
-	if (outfile != STDOUT_FILENO)
+	if (p->stdout != STDOUT_FILENO)
 	{
-		dup2 (outfile, STDOUT_FILENO);
-		close (outfile);
+		dup2 (p->stdout, STDOUT_FILENO);
+		close (p->stdout);
 	}
-	if (errfile != STDERR_FILENO)
+	if (p->stderr != STDERR_FILENO)
 	{
-		dup2 (errfile, STDERR_FILENO);
-		close (errfile);
+		dup2 (p->stderr, STDERR_FILENO);
+		close (p->stderr);
 	}
 
 	/* Exec the new process.  Make sure we exit.  */
@@ -92,34 +90,39 @@ void	launch_process (t_process *p, pid_t pgid,
 	exit(1);
 }
 
-void	launch_job(t_job *j, int foreground)
+void	launch_job(t_job *job, int foreground)
 {
-	t_process *p;
+	t_process *process;
 	pid_t pid;
-	int mypipe[2], infile, outfile;
+	int pfd[2];
+	int infile;
+	int outfile;
 
-	infile = j->stdin;
-	for (p = j->first_process; p; p = p->next)
+	infile = STDIN_FILENO;
+	for (process = job->first_process; process; process = process->next)
 	{
 		/* Set up pipes, if necessary.  */
-		if (p->next)
+		if (process->next)
 		{
-			if (pipe(mypipe) < 0)
+			if (pipe(pfd) < 0)
 			{
 				fdputendl("pipe error", 2);
 				exit(1);
 			}
-			outfile = mypipe[1];
+			outfile = pfd[1];
 		}
 		else
-			outfile = j->stdout;
+			outfile = STDOUT_FILENO;
 
 		/* Fork the child processes.  */
+		if (process->stdin == STDIN_FILENO)
+			process->stdin = infile;
+		if (process->stdout == STDOUT_FILENO)
+			process->stdout = outfile;
 		pid = fork ();
 		if (pid == 0)
 			/* This is the child process.  */
-			launch_process (p, j->pgid, infile,
-							outfile, j->stderr, foreground);
+			launch_process (process, job->pgid, foreground);
 		else if (pid < 0)
 		{
 			/* The fork failed.  */
@@ -129,27 +132,27 @@ void	launch_job(t_job *j, int foreground)
 		else
 		{
 			/* This is the parent process.  */
-			p->pid = pid;
+			process->pid = pid;
 			if (g_is_interactive)
 			{
-				if (!j->pgid)
-					j->pgid = pid;
-				setpgid (pid, j->pgid);
+				if (!job->pgid)
+					job->pgid = pid;
+				setpgid (pid, job->pgid);
 			}
 		}
 
 		/* Clean up after pipes.  */
-		if (infile != j->stdin)
+		if (infile != STDIN_FILENO)
 			close (infile);
-		if (outfile != j->stdout)
+		if (outfile != STDOUT_FILENO)
 			close (outfile);
-		infile = mypipe[0];
+		infile = pfd[0];
 	}
-	format_job_info(j, "launched");
+	format_job_info(job, "launched");
 	if (!g_is_interactive)
-		wait_for_job(j);
+		wait_for_job(job);
 	else if (foreground)
-		put_job_in_foreground(j, 0);
+		put_job_in_foreground(job, 0);
 	else
-		put_job_in_background(j, 0);
+		put_job_in_background(job, 0);
 }

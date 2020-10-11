@@ -3,11 +3,13 @@
 //
 
 #include "exec.h"
-#include <unistd.h>
-#include <sys/wait.h>
-#include "jobs.h"
 
-void exec_pipe_seq(t_ast *ast, t_job *job)
+void exec_pipe_seq(t_ast *ast, t_process *process)
 {
-
+	exec_simple_cmd(ast->left, process);
+	if (ast->right)
+	{
+		process->next = process_new();
+		exec_pipe_seq(ast->right, process->next);
+	}
 }

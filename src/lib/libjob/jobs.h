@@ -18,6 +18,7 @@ typedef struct s_process
 {
 	struct s_process *next;       /* next process in pipeline */
 	char **argv;                /* for exec */
+	char **env;
 	pid_t pid;                  /* process ID */
 	char completed;             /* true if process has completed */
 	char stopped;               /* true if process has stopped */

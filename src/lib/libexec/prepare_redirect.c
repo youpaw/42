@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-int 	prepare_redirect(t_ast *ast, int **fd_arr)
+int 	prepare_redirect(t_ast *ast, t_process *process)
 {
 	return (0);
 }
