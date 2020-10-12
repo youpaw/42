@@ -22,7 +22,7 @@ int 	main_manager(void)
 		if (tokens && !tokens->error)
 		{
 			if ((ast = parse(tokens)))
-				exec(ast, NULL);
+				exec(ast);
 		}
 		if (!tokens || tokens->error != E_INCINP)
 		{

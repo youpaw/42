@@ -55,6 +55,9 @@ int	job_is_completed (t_job *j);
 
 void	jobs_init(void);
 t_job	*job_new(void);
+void	launch_job(t_job *job, int foreground);
+void	launch_process (t_process *p, pid_t pgid, int foreground);
+
 t_process	*process_new(void);
 void	print_process_stats(const char *str);
 void	put_job_in_foreground (t_job *j, int cont);

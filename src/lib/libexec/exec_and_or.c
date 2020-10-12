@@ -4,9 +4,11 @@
 
 #include "exec.h"
 
-void exec_and_or(t_ast *ast, t_job *job)
+void exec_and_or(t_ast *ast, t_job *job, char foreground)
 {
 	exec_pipeline(ast->left, job);
+	job->command = get_command(ast);
+	launch_job(job, 1);
 	while (ast->right)
 	{
 		job->next = job_new();

@@ -8,7 +8,6 @@ t_ast				*parse(t_tokens *tokens)
 {
 	t_ast	*ast;
 
-	tokens->index = 0;
 	ast = node_complete_cmd(tokens);
 	if (tokens->index < tokens->size)
 	{

@@ -3,7 +3,7 @@
 //
 #include "exec.h"
 
-void exec_complete_cmd(t_ast *ast, t_tokens *tokens)
+void exec_complete_cmd(t_ast *ast)
 {
-	exec_list(ast->left, tokens);
+	exec_list(ast->left);
 }
