@@ -25,12 +25,14 @@ void	launch_process (t_process *p, pid_t pgid, int foreground)
 			tcsetpgrp (g_terminal, pgid);
 
 		/* Set the handling for job control signals back to the default.  */
+		/*
 		signal (SIGINT, SIG_DFL);
 		signal (SIGQUIT, SIG_DFL);
 		signal (SIGTSTP, SIG_DFL);
 		signal (SIGTTIN, SIG_DFL);
 		signal (SIGTTOU, SIG_DFL);
 		signal (SIGCHLD, SIG_DFL);
+		 */
 	}
 
 	/* Set the standard input/output channels of the new process.  */

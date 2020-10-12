@@ -18,6 +18,8 @@ void	print_process_stats(const char *str)
 	print_id("PID=", getpid());
 	print_id("PGID=", getpgrp());
 	print_id("term=", tcgetpgrp(STDIN_FILENO));
+	//print_id("g_pgid=", g_pgid);
+	//print_id("g_terminal=", g_terminal);
 	puts("\n");
 	puts("\033[0m"); // Reset color
 }

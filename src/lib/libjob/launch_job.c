@@ -37,8 +37,10 @@ void	launch_job(t_job *job, int foreground)
 			process->stdout = outfile;
 		pid = fork ();
 		if (pid == 0)
+		{
 			/* This is the child process.  */
-			launch_process (process, job->pgid, foreground);
+			launch_process(process, job->pgid, foreground);
+		}
 		else if (pid < 0)
 		{
 			/* The fork failed.  */
@@ -48,6 +50,8 @@ void	launch_job(t_job *job, int foreground)
 		else
 		{
 			/* This is the parent process.  */
+			set_print_main_handlers();
+			//set_print_child_handlers();
 			process->pid = pid;
 			if (g_is_interactive)
 			{

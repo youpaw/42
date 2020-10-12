@@ -5,6 +5,7 @@
 #include "readline.h"
 #include "exec.h"
 #include "cc_str.h"
+#include <unistd.h>
 
 int 	main_manager(void)
 {
@@ -14,13 +15,11 @@ int 	main_manager(void)
 
 	ast = NULL;
 	tokens = NULL;
-	str = strdup("");
+	str = strnew(512);
 	while (42)
 	{
-		print_process_stats("readline");
-		set_ignore_handlers();
-		readline(&str);
-		set_print_main_handlers();
+		//readline(&str);
+		read(0, str, 512);
 		tokens = validate_str(str);
 		if (tokens && !tokens->error)
 		{
@@ -30,7 +29,8 @@ int 	main_manager(void)
 		if (!tokens || tokens->error != E_INCINP)
 		{
 			free(str);
-			str = strdup("");
+			str = strnew(512);
+			//str = strdup("");
 		}
 		del_ast(&ast);
 		destruct_tokens(&tokens);

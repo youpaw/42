@@ -72,5 +72,7 @@ void	mark_job_as_running(t_job *j);
 
 void	set_dfl_handlers(void);
 void	set_ignore_handlers(void);
+void	set_print_child_handlers(void);
+void	set_print_main_handlers(void);
 
 #endif

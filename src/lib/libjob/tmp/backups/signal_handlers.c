@@ -1,21 +1,12 @@
 //
-// Created by Azzak Omega on 10/8/20.
+// Created by Azzak Omega on 10/5/20.
 //
 
-#include <signal.h>
-#include "cc_str.h"
 #include "cc_num.h"
-
-static void	set_handlers(void (*sig_handler)(int arg),
-							void(*sigint_handler)(int arg))
-{
-	signal (SIGQUIT, sig_handler);
-	signal (SIGTSTP, sig_handler);
-	signal (SIGTTIN, sig_handler);
-	signal (SIGTTOU, sig_handler);
-	signal (SIGCHLD, sig_handler);
-	signal (SIGINT, sigint_handler);
-}
+#include "cc_str.h"
+#include "signal.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 static void print_msg(const char *msg, int arg)
 {
@@ -30,24 +21,21 @@ static void	main_sig_handler(int arg)
 	print_msg("main", arg);
 }
 
-static void	child_sig_handler(int arg)
+void	fork_sig_handler(int arg)
 {
-	print_msg("child", arg);
+	print_msg("fork", arg);
 }
 
-void	set_print_main_handlers(void)
+static void	set_handlers(void (*sig_handler)(int arg),
+				  void(*sigint_handler)(int arg))
 {
-	set_handlers(main_sig_handler, main_sig_handler);
-}
-
-void	set_print_child_handlers(void)
-{
-	set_handlers(child_sig_handler, child_sig_handler);
-}
-
-void	set_ignore_handlers(void)
-{
-	set_handlers(SIG_IGN, SIG_IGN);
+	signal (SIGQUIT, sig_handler);
+	signal (SIGTSTP, sig_handler);
+	signal (SIGTTIN, sig_handler);
+	signal (SIGTTOU, sig_handler);
+	signal (SIGCHLD, sig_handler);
+	signal (SIGINFO, sig_handler);
+	signal (SIGINT, sigint_handler);
 }
 
 void	set_dfl_handlers(void)
@@ -55,6 +43,36 @@ void	set_dfl_handlers(void)
 	set_handlers(SIG_DFL, SIG_DFL);
 }
 
+void	set_main_handlers(void)
+{
+	set_handlers(main_sig_handler, SIG_DFL);
+}
+
+void	set_fork_handlers(void)
+{
+	set_handlers(fork_sig_handler, fork_sig_handler);
+}
+
+
+
+/* Make your shell its process group leader */
+void	make_proc_leader(void)
+{
+	if (setpgid (getpid(), getpid()) < 0) {
+		fdputendl("Make proc leader failed!!!", 2);
+		exit (1);
+	}
+}
+
+
+/* transfer controlling terminal */
+void	get_term_control(void)
+{
+	if( tcsetpgrp (STDIN_FILENO, getpgrp()) < 0) {
+		fdputendl("Get term control failed!!!", 2);
+		exit(1);
+	}
+}
 //#define SIGHUP  1       /* hangup */
 //#define SIGINT  2       /* interrupt */
 //#define SIGQUIT 3       /* quit */

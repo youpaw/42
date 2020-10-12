@@ -1,21 +1,11 @@
 //
-// Created by Azzak Omega on 10/8/20.
+// Created by Azzak Omega on 10/5/20.
 //
 
-#include <signal.h>
-#include "cc_str.h"
 #include "cc_num.h"
-
-static void	set_handlers(void (*sig_handler)(int arg),
-							void(*sigint_handler)(int arg))
-{
-	signal (SIGQUIT, sig_handler);
-	signal (SIGTSTP, sig_handler);
-	signal (SIGTTIN, sig_handler);
-	signal (SIGTTOU, sig_handler);
-	signal (SIGCHLD, sig_handler);
-	signal (SIGINT, sigint_handler);
-}
+#include "cc_str.h"
+#include <signal.h>
+#include "jobs.h"
 
 static void print_msg(const char *msg, int arg)
 {
@@ -25,34 +15,56 @@ static void print_msg(const char *msg, int arg)
 	putendl(msg);
 }
 
+static void print_and_check(const char *msg, int arg)
+{
+	print_msg(msg, arg);
+	check_jobs();
+}
+
 static void	main_sig_handler(int arg)
 {
-	print_msg("main", arg);
+	print_and_check("main", arg);
 }
 
-static void	child_sig_handler(int arg)
+
+static void	background_sig_handler(int arg)
 {
-	print_msg("child", arg);
+	print_msg("background", arg);
 }
 
-void	set_print_main_handlers(void)
+static void	set_handlers(void (*sig_handler)(int arg),
+				  void(*sigint_handler)(int arg))
 {
-	set_handlers(main_sig_handler, main_sig_handler);
-}
-
-void	set_print_child_handlers(void)
-{
-	set_handlers(child_sig_handler, child_sig_handler);
+	signal (SIGQUIT, sig_handler);
+	signal (SIGTSTP, sig_handler);
+	signal (SIGTTIN, sig_handler);
+	signal (SIGTTOU, sig_handler);
+	signal (SIGCHLD, sig_handler);
+	signal (SIGINT, sigint_handler);
 }
 
 void	set_ignore_handlers(void)
 {
 	set_handlers(SIG_IGN, SIG_IGN);
 }
-
 void	set_dfl_handlers(void)
 {
 	set_handlers(SIG_DFL, SIG_DFL);
+}
+
+void	set_main_handlers(void)
+{
+	set_handlers(main_sig_handler, main_sig_handler);
+}
+
+void	set_background_signals(void)
+{
+	set_handlers(background_sig_handler, SIG_DFL);
+}
+
+void	stop_handler(int sig)
+{
+
 }
 
 //#define SIGHUP  1       /* hangup */
