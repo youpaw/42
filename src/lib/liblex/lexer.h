@@ -24,7 +24,7 @@
 #ifndef LEXER_H
 # define LEXER_H
 # define N_BRACES 4
-# define N_STATES 5
+# define N_STATES 6
 # define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
 # define TOKENS_STACK_SIZE 15
@@ -86,6 +86,7 @@ enum e_state{
 	l_double_quote,
 	l_dollar,
 	l_history,
+	l_heredoc,
 	l_unset
 };
 
@@ -156,8 +157,6 @@ int 		match_tilda(t_lexer *lexer);
 
 void		strjoin_expanded(t_lexer *lexer, size_t index, const char *expand, int pad);
 
-//!TODO tok_back_slash should work like vld_back_slash + tokenizer fix
-int 		tok_back_slash(t_lexer *lexer);
 int 		tok_single_quote(t_lexer *lexer);
 int 		tok_double_quote(t_lexer *lexer);
 int 		tok_dollar(t_lexer *lexer);
@@ -165,6 +164,8 @@ int 		tok_bang(t_lexer *lexer);
 int 		tok_unset(t_lexer *lexer);
 
 int 		vld_bang(t_lexer *lexer);
+int 		vld_heredoc(t_lexer *lexer);
+int 		vld_back_slash(t_lexer *lexer);
 
 int 		exp_back_slash(t_lexer *lexer);
 int 		exp_single_quote(t_lexer *lexer);

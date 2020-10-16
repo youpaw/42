@@ -19,10 +19,17 @@ static void delimit_token(t_lexer *lexer)
 static void delimit_operator(t_lexer *lexer, t_token_type type, int token_size)
 {
 	t_token token;
+	t_slice slice;
 
 	token.raw = strsub(lexer->raw, lexer->begin, token_size);
 	token.type = recognize_operator(lexer, type);
 	vec_push(lexer->tokens, &token);
+	if (type == l_double_less)
+	{
+		slice.index = lexer->index;
+		slice.state = l_heredoc;
+		vec_push(lexer->slices, &slice);
+	}
 	lexer->index += token_size - 1;
 	lexer->begin = lexer->index + 1;
 }
