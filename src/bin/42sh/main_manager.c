@@ -5,6 +5,7 @@
 #include "readline.h"
 #include "exec.h"
 #include "cc_str.h"
+#include "builtins.h"
 
 int 	main_manager(void)
 {
@@ -18,6 +19,7 @@ int 	main_manager(void)
 	while (42)
 	{
 		print_process_stats("readline");
+		jobs(NULL);
 		set_ignore_handlers();
 		readline(&str);
 		set_print_main_handlers();
@@ -34,5 +36,6 @@ int 	main_manager(void)
 		}
 		del_ast(&ast);
 		destruct_tokens(&tokens);
+		do_job_notification();
 	}
 }

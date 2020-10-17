@@ -55,6 +55,9 @@ int	job_is_completed (t_job *j);
 
 void	jobs_init(void);
 t_job	*job_new(void);
+int		push_job(t_job *job);
+int		del_job_by_pid(size_t pid);
+void	del_process(t_process *p);
 void	launch_job(t_job *job, int foreground);
 void	launch_process (t_process *p, pid_t pgid, int foreground);
 
@@ -74,5 +77,13 @@ void	set_dfl_handlers(void);
 void	set_ignore_handlers(void);
 void	set_print_child_handlers(void);
 void	set_print_main_handlers(void);
+
+/*
+** Job builtins
+*/
+
+int		jobs(const char **av);
+int		fg(const char **av);
+int		bg(const char **av);
 
 #endif

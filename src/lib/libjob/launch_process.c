@@ -4,12 +4,23 @@
 
 #include "jobs.h"
 #include "cc_str.h"
+#include "hash.h"
+#include "env.h"
+#include "builtins.h"
 #include <signal.h>
 #include <unistd.h>
+
+static int	is_path(const char *str)
+{
+	if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
+		return (1);
+	return (0);
+}
 
 void	launch_process (t_process *p, pid_t pgid, int foreground)
 {
 	pid_t pid;
+	const char	*path;
 
 	if (g_is_interactive)
 	{
@@ -53,7 +64,15 @@ void	launch_process (t_process *p, pid_t pgid, int foreground)
 	}
 
 	/* Exec the new process.  Make sure we exit.  */
-	execvp(p->argv[0], p->argv);
-	fdputendl("execvp error", 2);
+
+	if (!run_builtin((const char **)p->argv))
+		exit(g_exit_code);
+	if (is_path(p->argv[0]))
+		path = p->argv[0];
+	else
+		path = hash_get_path(p->argv[0]);
+	if (path)
+		execve(path, p->argv, p->env);
+	fdputendl("Command not found", 2);
 	exit(1);
 }

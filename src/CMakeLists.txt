@@ -74,17 +74,17 @@ include_directories(${LIBPARSE_DIR})
 add_subdirectory(${LIBPARSE_DIR})
 target_link_libraries(${PROJECT_NAME} parser)
 
-#add libjob to the project
-set(LIBJOB_DIR "lib/libjob")
-include_directories(${LIBJOB_DIR})
-add_subdirectory(${LIBJOB_DIR})
-target_link_libraries(${PROJECT_NAME} jobs)
-
 #add builtins to the project
 set(BUILTINS_DIR "lib/builtins")
 include_directories(${BUILTINS_DIR})
 add_subdirectory(${BUILTINS_DIR})
 target_link_libraries(${PROJECT_NAME} builtins)
+
+#add libjob to the project
+set(LIBJOB_DIR "lib/libjob")
+include_directories(${LIBJOB_DIR})
+add_subdirectory(${LIBJOB_DIR})
+target_link_libraries(${PROJECT_NAME} jobs)
 
 
 #add libexec to the project

@@ -4,6 +4,7 @@
 
 #include "exec.h"
 #include "cc_str.h"
+#include "builtins.h"
 
 void exec_and_or(t_ast *ast, t_job *job, char foreground)
 {

@@ -8,6 +8,8 @@
 static void	free_job(t_job *j)
 {
 	free(j->command);
+	del_process(j->first_process);
+	//free(j->first_process);
 }
 
 /* Notify the user about stopped or terminated jobs.
@@ -34,6 +36,8 @@ void	do_job_notification(void)
 			else
 				g_first_job = jnext;
 			free_job(j);
+			//free(j);
+
 		}
 
 			/* Notify the user about stopped jobs,

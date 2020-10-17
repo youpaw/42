@@ -5,6 +5,7 @@
 #include "jobs.h"
 #include "cc_str.h"
 #include <unistd.h>
+#include "cc_num.h"
 
 void	launch_job(t_job *job, int foreground)
 {
