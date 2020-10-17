@@ -30,8 +30,8 @@
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 16
-# define N_TOKEN_OPERATORS 11
+# define N_TOKEN_TYPES 17
+# define N_TOKEN_OPERATORS 12
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 4
 # include <stddef.h>
@@ -51,6 +51,7 @@ enum e_token_type
 	l_less,
 	l_great,
 	l_semi,
+	l_newline,
 	l_bang,
 	l_io_number,
 	l_assignment_word,

@@ -3,7 +3,6 @@
 //
 
 #include "lexer.h"
-#include "cc_char.h"
 #include "cc_str.h"
 
 static void delimit_token(t_lexer *lexer)
@@ -41,7 +40,7 @@ int 		tok_unset(t_lexer *lexer)
 	t_token_type type;
 
 	c = lexer->raw[lexer->index];
-	if (iswspace(c) || !c)
+	if (c == ' ' || c == '\t' || !c)
 	{
 		if (lexer->begin == lexer->index)
 			lexer->begin++;
