@@ -1,6 +1,6 @@
 %start  complete_command
 %%
-complete_command : list
+complete_command : list linebreak
                  ;
 list             : list separator_op and_or
                  |                   and_or
@@ -41,13 +41,19 @@ io_file          : '<'       filename
                  | GREATAND  filename
                  | DGREAT    filename
                  ;
-filename         : WORD
-                 ;
 io_here          : DLESS     here_end
                  | DLESSDASH here_end
+                 ;
+filename         : WORD
                  ;
 here_end         : WORD
                  ;
 separator_op     : '&'
                  | ';'
+                 ;
+newline_list     :              NEWLINE
+                 | newline_list NEWLINE
+                 ;
+linebreak        : newline_list
+                 | /* empty */
                  ;
