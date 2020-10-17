@@ -29,7 +29,5 @@ int			check_opt(const char **av, unsigned char flags)
 			flags = CD_P_FLAG;
 	}
 	free(opt.options);
-	putchar(flags);
-	putchar('\n');
 	return (skip_args);
 }

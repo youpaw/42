@@ -8,14 +8,14 @@
 
 const char 	*g_error_msg[] = {
 		NULL,
-		"No such file or directory",
+		"%: `%': No such file or directory",
 		"Input/output error",
 		"Bad file descriptor",
 		"Cannot allocate memory",
 		"Permission denied",
 		"File exists",
-		"Not a directory",
-		"Is a directory",
+		"%: `%': Not a directory",
+		"%: `%': Is a directory",
 		"Invalid argument",
 		"File too large",
 		"Broken pipe",

@@ -51,7 +51,6 @@ static void tokens_handler(char **tokens, int len)
 	prev_e = 0;
 	while (curr_e < len)
 	{
-//		putendl(tokens[curr_e]);
 		if (strcmp(tokens[curr_e], "..") == 0)
 		{
 			tokens[curr_e] = NULL;
@@ -108,6 +107,11 @@ char	*path_canonization(const char *path)
 	while (tokens[len])
 		len++;
 	tokens_handler(tokens, len);
+	if (!tokens || !(*tokens))
+	{
+		new_path = strdup(path);
+		return (new_path);
+	}
 	tokens_join(tokens, len);
 	new_path = tokens_join(tokens, len);
 	while (cnt < len)
@@ -115,6 +119,6 @@ char	*path_canonization(const char *path)
 		free(tokens[cnt]);
 		cnt++;
 	}
-	free(*tokens);
+	free(tokens);
 	return (new_path);
 }
