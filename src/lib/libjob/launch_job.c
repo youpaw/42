@@ -6,6 +6,7 @@
 #include "cc_str.h"
 #include <unistd.h>
 #include "cc_num.h"
+#include "builtins.h"
 
 void	launch_job(t_job *job, int foreground)
 {
@@ -15,7 +16,14 @@ void	launch_job(t_job *job, int foreground)
 	int infile;
 	int outfile;
 
+	if (!job->first_process->next && foreground &&
+		!run_builtin((const char **) job->first_process->argv))
+	{
+		job->first_process->completed = 1;
+		return ;
+	}
 	infile = STDIN_FILENO;
+
 	for (process = job->first_process; process; process = process->next)
 	{
 		/* Set up pipes, if necessary.  */
