@@ -57,6 +57,7 @@ t_input 	input_init(char *line)
 {
 	t_input inp;
 
+	strcpy(g_prompt, PROMPT_TEXT);
 	if (*line)
 		inp = fill_input(line);
 	else
