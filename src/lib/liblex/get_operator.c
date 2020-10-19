@@ -18,7 +18,8 @@ t_token_type get_operator(const char *str, t_operator *op)
 			{"|", 1},
 			{"<", 1},
 			{">", 1},
-			{";", 1}
+			{";", 1},
+			{"\n", 1}
 	};
 	int index;
 
