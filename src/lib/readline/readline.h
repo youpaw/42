@@ -14,7 +14,7 @@
 #define READLINE_H
 
 #define N_ORD_KEY_HANDLERS 7
-#define N_ESC_KEY_HANDLERS 7
+#define N_ESC_KEY_HANDLERS 9
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
@@ -76,6 +76,8 @@ int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
 int			handle_shift_up(t_input *inp);
 int			handle_shift_down(t_input *inp);
+int			handle_shift_right(t_input *inp);
+int			handle_shift_left(t_input *inp);
 int			handle_backspace(t_input *inp);
 int			handle_del(t_input *inp);
 int			handle_tab(t_input *inp);
