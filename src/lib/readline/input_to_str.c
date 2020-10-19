@@ -15,7 +15,7 @@ char *input_to_str(t_input input)
 	while (input.line[input.cursor_y_position])
 		input.cursor_y_position++;
 	string = strnew((input.len * 4) + 1 + input.cursor_y_position);
-	input.cursor_x_position = 0;
+	input.cursor_x_position = input.indent;
 	input.cursor_y_position = 0;
 	pos = 0;
 	while (input.line[input.cursor_y_position])

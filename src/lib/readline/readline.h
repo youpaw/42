@@ -18,6 +18,8 @@
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
+#define PROMPT_TEXT "42sh $>"
+#define PROMPT_LEN 7
 
 # include <termios.h>
 #include <stdint.h>
@@ -26,6 +28,7 @@
 # include "lexer.h"
 
 struct termios		g_tty_backup;
+char g_prompt[PROMPT_LEN + 1];
 
 typedef struct		s_input
 {
@@ -34,6 +37,7 @@ typedef struct		s_input
 	int				cursor_y_position;
 	size_t 			len;
 	int				*line_len;
+	int 			indent;
 }					t_input;
 
 typedef union		u_letter
@@ -98,5 +102,7 @@ void		choose_token(t_input *input, t_list *lst);
 
 void		signal_init(void);
 void		signal_handler(int sig);
+
+void 	print_prompt(t_input *inp);
 
 #endif //READLINE_H

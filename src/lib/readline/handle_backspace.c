@@ -11,7 +11,8 @@ int handle_backspace(t_input *inp)
 {
 	unsigned char ch[5];
 	int len;
-	if (inp->cursor_x_position)
+	if (inp->cursor_x_position - inp->indent)
+//	if (inp->cursor_x_position)
 	{
 		g_input_state_flag = INP_CH_FLAG;
 		bzero(ch, 5);
