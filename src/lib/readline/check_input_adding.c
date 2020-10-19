@@ -18,9 +18,12 @@ void redraw_input_adding(t_input *inp)
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 		tputs(tgetstr("sc", NULL), 1, &putchar);
 		tputs(tgetstr("ce", NULL), 1, &putchar);
-		tputs(tgetstr("do", NULL), 1, &putchar);
-		tputs(tgetstr("cr", NULL), 1, &putchar);
-		tputs(tgetstr("cd", NULL), 1, &putchar);
+//		if (inp->line[inp->cursor_y_position + 1])
+//		{
+//			tputs(tgetstr("do", NULL), 1, &putchar);
+//			tputs(tgetstr("cr", NULL), 1, &putchar);
+//			tputs(tgetstr("cd", NULL), 1, &putchar);
+//		}
 		tputs(tgetstr("rc", NULL), 1, &putchar);
 		tputs(tgetstr("ei", NULL), 1, &putchar);
 		if (!((inp->cursor_x_position) % (ws).ws_col) && inp->cursor_x_position)
