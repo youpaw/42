@@ -29,6 +29,7 @@ int			readline(char **line)
 //			input.cursor_x_position++;
 //			input.len++;
 			*line = input_to_str(input);
+			printf("\n%d\n%s\n", input.line_len[input.cursor_y_position], *line);
 			tty_restore();
 			return 0;
 		}

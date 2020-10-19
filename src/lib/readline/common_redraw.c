@@ -39,8 +39,10 @@ void	common_redraw(t_input *input)
 		write(STDIN_FILENO, buf, i);
 		i = 0;
 		if (input->line[cur_y_pos + 1])
-		tputs(tgetstr("do", NULL), 1, &putchar);
-		tputs(tgetstr("cr", NULL), 1, &putchar);
+		{
+			tputs(tgetstr("do", NULL), 1, &putchar);
+			tputs(tgetstr("cr", NULL), 1, &putchar);
+		}
 
 		cur_y_pos++;
 		cur_x_pos = 0;
