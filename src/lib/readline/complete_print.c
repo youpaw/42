@@ -17,7 +17,7 @@ void	complete_print(t_input *input, t_list **to_print)
 {
 	char *line;
 
-	g_input_changed_flg = 1;
+	g_input_state_flag = 1;
 	line = (*to_print)->content;
 	while (*line)
 	{

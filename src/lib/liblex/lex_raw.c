@@ -30,7 +30,7 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 
 	if ((error = init_lexer(lexer, raw, stage)))
 		return (error);
-	while (lexer->index <= lexer->size)
+	while (lexer->index < lexer->size)
 	{
 		current = get_current_state(lexer);
 		if ((error = lex_map(lexer, current)) != E_OK)

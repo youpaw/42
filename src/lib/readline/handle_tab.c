@@ -15,38 +15,22 @@
 
 int			handle_tab(t_input *inp)
 {
-	static t_list	*to_print;
+	static t_list	*options;
 	t_tokens 		*tokens;
 	t_token 		*token;
 
-	if (g_input_changed_flg)
+	if (g_input_state_flag == INP_MAKING_CHOICE)
+		handle_choice_tab(inp, &options);
+	else
 	{
-		lst_del(&to_print, NULL);
-		to_print = NULL;
-	}
-	if (!to_print)
-	{
-		g_input_changed_flg = 0;
 		tokens = tokenize_str_sub(
 				input_to_str(*inp),
 				inp->cursor_x_position);
 		token = get_last_token(tokens);
 		if (token->type == l_word) //file
-		{
-			to_print = get_list_files(inp, token);
-			if (!to_print->next)
-				complete_print(inp, &to_print);
-			else
-				putchar('\7');
-		}
-	destruct_token(&token);
-	destruct_tokens(&tokens);
-		return 0;
+			handle_file_token(inp, token);
+		destruct_token(&token);
+		destruct_tokens(&tokens);
 	}
-	else
-	{
-		choose_token(inp, to_print);
-		g_input_changed_flg = 0;
-	}
-	return 1;
+	return 0;
 }
