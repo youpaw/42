@@ -17,7 +17,8 @@ void	launch_job(t_job *job, int foreground)
 	int outfile;
 
 	if (!job->first_process->next && foreground &&
-		!run_builtin((const char **) job->first_process->argv))
+			(!run_builtin((const char **)job->first_process->argv)) ||
+			!run_job_builtin((const char **)job->first_process->argv, foreground))
 	{
 		job->first_process->completed = 1;
 		return ;

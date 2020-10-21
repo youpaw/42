@@ -1,9 +1,9 @@
 //
-// Created by Azzak Omega on 10/17/20.
+// Created by Azzak Omega on 10/21/20.
 //
 
-#include "cc_str.h"
 #include "jobs.h"
+#include "cc_str.h"
 #include <stdio.h>
 
 static void print_process(t_process *p)
@@ -40,29 +40,3 @@ int 	jobs(const char **av)
 	return (0);
 }
 
-int 	bg(const char **av)
-{
-	/*
-	size_t		index;
-
-	index = g_jobs.last_job_index;
-	if (av[1])
-		index = atoi(av[1]);
-	if (remove_job_by_index(index))
-		putendl("no such job to remove");
-	else
-	{
-		putnbr(index);
-		putendl(" job successfully removed");
-	}
-	 */
-	putendl("bg builtin");
-	return (0);
-}
-
-int 	fg(const char **av)
-{
-	//add_job_to_list(25, 14);
-	putendl("fg builtin");
-	return (0);
-}

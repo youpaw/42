@@ -7,6 +7,7 @@
 #include <termios.h>
 #include <stddef.h>
 #include "lexer.h"
+#define N_JOB_BUILTINS 4
 
 extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
@@ -82,6 +83,8 @@ void	set_print_main_handlers(void);
 ** Job builtins
 */
 
+int 	run_job_builtin(const char **av, int is_foreground);
+int 	sh_exit(const char **av);
 int		jobs(const char **av);
 int		fg(const char **av);
 int		bg(const char **av);

@@ -18,8 +18,8 @@
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
-#define PROMPT_TEXT "42sh $>"
-#define PROMPT_LEN 7
+#define PROMPT_TEXT "42sh $> "
+#define PROMPT_LEN 8
 
 # include <termios.h>
 #include <stdint.h>
