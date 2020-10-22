@@ -4,13 +4,15 @@
 
 #include "cc_str.h"
 #include "jobs.h"
+#include "error.h"
 
-static int	put_job_in_fg(int pgid)
+static int	put_job_in_fg(int index)
 {
 	t_job	*job;
 
-	if (!(job = find_job(pgid)))
+	if (!(job = find_job_by_index(index)))
 		return (1);
+	queue_move_back(index);
 	put_job_in_foreground(job, 1);
 	return (0);
 }
@@ -18,19 +20,28 @@ static int	put_job_in_fg(int pgid)
 
 int 	fg(const char **av)
 {
-	int	pgid;
+	int			index;
+	const char	*error_args[3];
+
+	error_args[0] = "fg";
+	error_args[2] = NULL;
 	putendl("fg builtin");
-	if (av[1])
+	index = -1;
+	if (!av[1])
+		index = queue_get_current();
+	else
 	{
-		pgid = atoi(av[1]);
-		// need some checks because of atoi
-		if (put_job_in_fg(pgid))
-		{
-			fdputs("fg: ", 2);
-			fdputs(av[1], 2);
-			fdputendl(": no such job", 2);
-		}
+		if (av[1][0] == '+')
+			index = queue_get_current();
+		else if (av[1][0] == '-')
+			index = queue_get_last();
+		else if (is_number(av[1]))
+			index = atoi(av[1]);
 	}
-	//strarr_print(av, "|", "|\n");
+	if (put_job_in_fg(index))
+	{
+		error_args[1] = av[1] ? av[1] : "current";
+		error_print(E_NOSUCHJOB, error_args);
+	}
 	return (0);
 }

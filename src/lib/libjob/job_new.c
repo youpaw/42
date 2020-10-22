@@ -17,5 +17,7 @@ t_job *job_new(void)
 	job->pgid = 0;
 	job->notified = 0;
 	job->sequence = NULL;
+	job->index = get_new_job_index();
+	queue_push_back(job->index);
 	return (job);
 }

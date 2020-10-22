@@ -9,6 +9,7 @@ static void	free_job(t_job *j)
 {
 	free(j->command);
 	del_process(j->first_process);
+	queue_remove(j->index);
 	//free(j->first_process);
 }
 

@@ -15,6 +15,7 @@ struct termios	g_tmodes;
 int				g_terminal;
 int				g_is_interactive;
 t_job				*g_first_job = NULL;
+t_vec				*g_job_queue = NULL;
 
 /* Make sure the shell is running interactively as the foreground job
    before proceeding. */
@@ -26,6 +27,7 @@ void	jobs_init(void)
 	g_is_interactive = isatty(g_terminal);
 	if (g_is_interactive)
 	{
+		g_job_queue = vec_new(10, sizeof(int), NULL);
 		/* Loop until we are in the foreground.  */
 		while (tcgetpgrp(g_terminal) != (g_pgid = getpgrp()))
 			kill (-g_pgid, SIGTTIN);

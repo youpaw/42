@@ -31,7 +31,8 @@ const char 	*g_error_msg[] = {
 		"%: %: invalid option",
   		"%: %: not found",
 		"HOME not set",
-		"OLDPWD not set"
+		"OLDPWD not set",
+  		"%: %: no such job",
 };
 
 void 	error_print(t_error_code er_code, const char **args)

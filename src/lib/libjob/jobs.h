@@ -36,17 +36,23 @@ typedef struct s_job
 	char *command;              /* command line, used for messages */
 	t_process *first_process;     /* list of processes in this job */
 	pid_t pgid;                 /* process group ID */
+	int		index;				/* job index in list */
 	char notified;              /* true if user told about stopped job */
 	struct termios tmodes;      /* saved terminal modes */
 	t_token 		*sequence;
 } t_job;
 
+
 /* The active jobs are linked into a list.  This is its head.   */
-extern	t_job *g_first_job;
+extern	t_job	*g_first_job;
+extern	t_vec	*g_job_queue;
+
+
 
 
 /* Find the active job with the indicated pgid.  */
 t_job	*find_job (pid_t pgid);
+t_job	*find_job_by_index(int index);
 
 /* Return true if all processes in the job have stopped or completed.  */
 int	job_is_stopped (t_job *j);
@@ -88,5 +94,18 @@ int 	sh_exit(const char **av);
 int		jobs(const char **av);
 int		fg(const char **av);
 int		bg(const char **av);
+
+/*
+** Job queue
+*/
+
+int		get_new_job_index(void);
+
+void	queue_print(void);
+void	queue_push_back(int index);
+void	queue_remove(int index);
+void	queue_move_back(int index);
+int 	queue_get_current(void);
+int 	queue_get_last(void);
 
 #endif
