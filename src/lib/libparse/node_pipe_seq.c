@@ -11,7 +11,8 @@ t_ast *node_pipe_seq(t_tokens *tokens)
 	if ((node->left = node_simple_cmd(tokens)))
 	{
 		if (!get_node_token(node, tokens))
-			node->right = node_pipe_seq(tokens);
+			if (!(node->right = node_pipe_seq(tokens)))
+				del_ast(&node);
 	}
 	else
 		del_ast(&node);
