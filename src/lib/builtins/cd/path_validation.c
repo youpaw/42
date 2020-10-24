@@ -19,12 +19,40 @@
 //	return (0);
 //}
 
-static int 			valid_dir(char *path, char *er_arr[3], char *cn_path)
+static int 			len_check(char *path, char *er_arr[3])
+{
+	int cnt;
+	int file_len;
+
+	er_arr[1] = path;
+	file_len = 0;
+	cnt = 0;
+	if (strlen(path) >= MAX_PATH)
+	{
+		error_print(E_NAMETOOLONG, (const char **)er_arr);
+		return (0);
+	}
+	while (path[cnt])
+	{
+		if (file_len >= MAX_FILE)
+		{
+			error_print(E_NAMETOOLONG, (const char **)er_arr);
+			return (0);
+		}
+		else if (path[cnt] == '/')
+			file_len = 0;
+		file_len++;
+		cnt++;
+	}
+	return (1);
+}
+
+static int 			valid_dir(char *path, char *er_arr[3])
 {
 	struct	stat s;
 
 	er_arr[1] = path;
-	if (!*path || lstat(path, &s))
+	if (!*path || stat(path, &s))
 	{
 		error_print(E_NOENT, (const char **)er_arr);
 		return (0);
@@ -34,11 +62,11 @@ static int 			valid_dir(char *path, char *er_arr[3], char *cn_path)
 		error_print(E_NOTDIR, (const char **)er_arr);
 		return (0);
 	}
-	if (!S_ISLNK(s.st_mode) && access(path, R_OK) != 0)
-	{
-		error_print(E_NOTDIR, (const char **)er_arr);
-		return (0);
-	}
+//	if (!S_ISLNK(s.st_mode) && access(path, R_OK) != 0)
+//	{
+//		error_print(E_NOTDIR, (const char **)er_arr);
+//		return (0);
+//	}
 	if (access(path, X_OK) != 0)
 	{
 		error_print(E_ACCES, (const char **)er_arr);
@@ -53,11 +81,11 @@ static int 		envv_set(char *path, char *er_arr[3])
 
 	env_paths[home] = env_get_value("HOME");
 	env_paths[oldpwd] = env_get_value("OLDPWD");
-	if (env_paths[home] == NULL)
-	{
-		error_print(E_HOMENOTSET, (const char **) er_arr);
-		return (0);
-	}
+//	if (env_paths[home] == NULL)
+//	{
+//		error_print(E_HOMENOTSET, (const char **) er_arr);
+//		return (0);
+//	}
 	if (strcmp(path, "-") == 0 && env_paths[oldpwd] == NULL)
 	{
 		error_print(E_OLDPWDNOTSET, (const char **)er_arr);
@@ -66,7 +94,7 @@ static int 		envv_set(char *path, char *er_arr[3])
 	return (1);
 }
 
-int path_validation(char **av, char *path, int path_i, char *cn_path)
+int path_validation(char **av, char *path)
 {
 	char	*er_arr[3];
 
@@ -75,6 +103,8 @@ int path_validation(char **av, char *path, int path_i, char *cn_path)
 	er_arr[2] = NULL;
 	if (!path || !(*path))
 		return (0);
+	if (!len_check(path, er_arr))
+		return (1);
 //	if (av[path_i + 1] != NULL)
 //	{
 //		error_print(E_TOOMANYARGS, (const char **)er_arr);
@@ -85,7 +115,7 @@ int path_validation(char **av, char *path, int path_i, char *cn_path)
 //	if (chdir_test(path, cn_path, er_arr))
 //		return (1);
 
-	if (!valid_dir(path, er_arr, cn_path))
+	if (strcmp(path, "-") && !valid_dir(path, er_arr))
 		return (1);
 	return (0);
 }

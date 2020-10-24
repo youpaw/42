@@ -14,7 +14,8 @@
 #include "error.h"
 
 # define N_PATHS 3
-# define MAX_PATH 256
+# define MAX_PATH 1024
+# define MAX_FILE 256
 
 #define CD_L_FLAG 00000001
 #define CD_P_FLAG 00000010
@@ -30,7 +31,7 @@ enum					e_paths
 typedef enum e_paths	t_paths;
 
 char				*path_canonization(const char *path);
-int path_validation(char **av, char *path, int path_i, char *cn_path);
+int path_validation(char **av, char *path);
 int					check_opt(const char **av, unsigned char *flags);
 
 #endif //CD_H

@@ -18,7 +18,7 @@ static int 	token_cpy(char *new_path, const char *token, int curr_i)
 	return (curr_i);
 }
 
-static char		*tokens_join(char **tokens, int len)
+static char		*tokens_join(char ***tokens, int len)
 {
 	char	*new_path;
 	int 	cnt;
@@ -29,16 +29,20 @@ static char		*tokens_join(char **tokens, int len)
 	new_path = memalloc(MAX_PATH + 1);
 	while (cnt < len && curr_i < MAX_PATH)
 	{
-		while (tokens[cnt] == NULL && cnt < len)
+		while ((*tokens)[cnt] == NULL && cnt < len)
 			cnt++;
 		if (cnt == len)
 			break ;
 		new_path[curr_i] ='/';
 		curr_i++;
-		curr_i = token_cpy(new_path, tokens[cnt], curr_i);
+		curr_i = token_cpy(new_path, (*tokens)[cnt], curr_i);
 		cnt++;
 	}
 	new_path[curr_i] = '\0';
+	cnt = -1;
+	while (++cnt < len)
+		free((*tokens)[cnt]);
+	free(*tokens);
 	return(new_path);
 }
 
@@ -74,8 +78,7 @@ static int 	tokenizer(char *path, char ***tokens)
 	pwd = memalloc(MAX_PATH + 1);
 	if (strcmp(path, "-") == 0)
 	{
-		if (!(oldpwd = env_get_value("OLDPWD")))
-			return (1);
+		oldpwd = env_get_value("OLDPWD");
 		*tokens = strsplitcharset(oldpwd, "/");
 	}
 	else if (path[0] != '/')
@@ -97,27 +100,25 @@ char	*path_canonization(const char *path)
 {
 	char **tokens;
 	char *new_path;
+	char *oldpwd;
 	int len;
-	int cnt;
 
-	cnt = 0;
 	len = 0;
+	new_path = NULL;
 	if (!path || !*path || tokenizer(path, &tokens))
-		return (NULL);
+		return (new_path);
 	while (tokens[len])
 		len++;
 	tokens_handler(tokens, len);
 	if (!tokens || !(*tokens))
 	{
-		new_path = strdup(path);
+		oldpwd = env_get_value("OLDPWD");
+		if (strcmp(path, "-") == 0)
+			new_path = strdup(oldpwd);
+		else
+			new_path = strdup(path);
 		return (new_path);
 	}
-	new_path = tokens_join(tokens, len);
-	while (cnt < len)
-	{
-		free(tokens[cnt]);
-		cnt++;
-	}
-	free(tokens);
+	new_path = tokens_join(&tokens, len);
 	return (new_path);
 }
