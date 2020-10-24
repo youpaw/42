@@ -102,7 +102,7 @@ char	*path_canonization(const char *path)
 
 	cnt = 0;
 	len = 0;
-	if (tokenizer(path, &tokens))
+	if (!path || !*path || tokenizer(path, &tokens))
 		return (NULL);
 	while (tokens[len])
 		len++;
@@ -112,7 +112,6 @@ char	*path_canonization(const char *path)
 		new_path = strdup(path);
 		return (new_path);
 	}
-	tokens_join(tokens, len);
 	new_path = tokens_join(tokens, len);
 	while (cnt < len)
 	{

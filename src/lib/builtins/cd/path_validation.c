@@ -53,8 +53,7 @@ static int 		envv_set(char *path, char *er_arr[3])
 
 	env_paths[home] = env_get_value("HOME");
 	env_paths[oldpwd] = env_get_value("OLDPWD");
-	//затычка, path = NULL
-	if ((!(*path) || path == NULL) && env_paths[home] == NULL)
+	if (env_paths[home] == NULL)
 	{
 		error_print(E_HOMENOTSET, (const char **) er_arr);
 		return (0);
@@ -74,6 +73,8 @@ int path_validation(char **av, char *path, int path_i, char *cn_path)
 	er_arr[0] = av[0];
 	er_arr[1] = NULL;
 	er_arr[2] = NULL;
+	if (!path || !(*path))
+		return (0);
 //	if (av[path_i + 1] != NULL)
 //	{
 //		error_print(E_TOOMANYARGS, (const char **)er_arr);

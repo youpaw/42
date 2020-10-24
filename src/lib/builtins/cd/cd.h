@@ -31,6 +31,6 @@ typedef enum e_paths	t_paths;
 
 char				*path_canonization(const char *path);
 int path_validation(char **av, char *path, int path_i, char *cn_path);
-int					check_opt(const char **av, unsigned char flags);
+int					check_opt(const char **av, unsigned char *flags);
 
 #endif //CD_H
