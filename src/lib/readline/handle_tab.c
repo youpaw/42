@@ -11,27 +11,19 @@
 /* ************************************************************************** */
 
 #include "readline.h"
-#include <stdio.h>
-#include "cc.h"
 
 int			handle_tab(t_input *inp)
 {
 	static t_list	*options;
-	t_tokens 		*tokens;
-	t_token 		token;
+	t_predict_token *token;
 
 	if (g_input_state_flag == INP_MAKING_CHOICE)
 		handle_choice_tab(inp, &options);
 	else
 	{
-		tokens = tokenize_str_sub(
-				input_to_str(*inp),
-				inp->cursor_x_position);
-		token.raw = strdup("../CM");
+		token = get_predict_token(input_to_str(*inp), inp->cursor_x_position);
 		//		if (token->type == l_word) //file
-			handle_file_token(inp, &token);
-//		destruct_token(&token);
-//		destruct_tokens(&tokens);
+//			handle_file_token(inp, &token);
 	}
 	return 0;
 }
