@@ -6,8 +6,8 @@
 
 void 		lex_del(t_lexer *lexer)
 {
-	if (lexer->states)
-		vec_del(&lexer->states);
+	if (lexer->slices)
+		vec_del(&lexer->slices);
 	if (lexer->tokens)
 		vec_del(&lexer->tokens);
 	if (lexer->raw)

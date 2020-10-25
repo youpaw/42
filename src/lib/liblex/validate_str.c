@@ -13,9 +13,7 @@ t_tokens	*validate_str(const char *string)
 
 	if (!string || !*string)
 		return (NULL);
-	error = lex_err(&lexer, lex_raw(&lexer, string, l_tok));
-	if (!error)
-		error = lex_err(&lexer, lex_raw(&lexer, string, l_vld));
+	error = lex_err(&lexer, lex_raw(&lexer, string, l_vld));
 	if (error == E_NOEVENT)
 	{
 		lex_del(&lexer);

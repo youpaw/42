@@ -56,13 +56,11 @@ static const char * get_default_homedir()
 
 int 	expand_tilda(char **str)
 {
-	if (**str != '~')
-		return (1);
-	if (!strcmp(*str, "~") || !strncmp(*str, "~/", 2))
+	if (!strcmp(*str, "~"))
 		return (replace(str, get_default_homedir()));
-	else if (!strcmp(*str, "~+") || !strncmp(*str, "~+/", 3))
+	else if (!strcmp(*str, "~+"))
 		return (replace(str, env_get_value("PWD")));
-	else if (!strcmp(*str, "~-") || !strncmp(*str, "~-/", 3))
+	else if (!strcmp(*str, "~-"))
 		return (replace(str, env_get_value("OLDPWD")));
 	else
 		return (replace(str, get_user_homedir(*str)));

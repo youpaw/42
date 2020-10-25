@@ -44,6 +44,7 @@ typedef enum	e_error_code
 	E_NOTFOUND,						/* %: %: not found*/
 	E_HOMENOTSET,					/* HOME not set */
 	E_OLDPWDNOTSET,					/* OLDPWD not set */
+	E_NAMETOOLONG,					/* File name too long */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

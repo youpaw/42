@@ -11,7 +11,7 @@ void 		print_tokens(t_tokens *tokens)
 	size_t index;
 
 	index = 0;
-	puts("tokens:\n");
+	puts("\ntokens:\n");
 	while (index < tokens->size)
 	{
 		putnbr(index + 1);

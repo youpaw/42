@@ -10,54 +10,62 @@
 #include "env.h"
 #include <unistd.h>
 
-static int	is_path(const char *path)
+static void run_bin(const char **args)
 {
-	if (*path == '/' || !strncmp(path, "./", 2) || !strncmp(path, "../", 3))
-		return (1);
-	return (0);
+	char		**exec_env;
+	const char	*path;
+
+	if (is_path(args[0]))
+		path = args[0];
+	else
+		path = hash_get_path(args[0]);
+	if (path)
+	{
+		exec_env = exec_env_2array();
+		if (!fork())
+		{
+			execve(path, (char *const *) args, (char *const *) exec_env);
+			exit(0);
+		}
+		strarr_del(exec_env);
+		free(exec_env);
+	}
 }
 
-static const char **get_args(t_ast *ast)
+static void close_redirect_fds(int *fd_arr)
 {
-	const char **args;
-	t_vec *args_vec;
+	int index;
 
-	args_vec = vec_new(10, sizeof(char *), NULL);
-	vec_push(args_vec, &ast->token->raw);
-	ast = ast->right;
-	while (ast)
-	{
-		if (ast->token->type == l_word)
-			vec_push(args_vec, &ast->token->raw);
-		ast = ast->right;
-	}
-	args = (const char **) args_vec->data;
-	free(args_vec);
-	return (args);
+	if (!fd_arr)
+		return ;
+	index = 0;
+	while (fd_arr[index] >= 0)
+		close(fd_arr[index++]);
 }
 
 void	exec_simple_cmd(t_ast *ast)
 {
-	const char	**args;
-	const char	*path;
-	char		**exec_env;
+	char	**args;
+	int 	*fd_arr;
+	int 	fd_backup[3];
 
+	fd_arr = NULL;
+	if (stdio_backup(fd_backup))
+		return ;
+	if (expand_ast(ast) || prepare_redirect(ast, &fd_arr))
+	{
+		close_fds(fd_backup, 3);
+		return ;
+	}
 	args = get_args(ast);
 	if (run_builtin((const char **) args))
 	{
-		if (is_path(args[0]))
-			path = args[0];
-		else
-			path = hash_get_path(args[0]);
-		exec_env_init();
-		if (path)
-		{
-			exec_env = exec_env_2array();
-			execve(path, (char *const *) args, (char *const *) exec_env);
-			strarr_del(exec_env);
-			free(exec_env);
-		}
+		prepare_exec_env(ast->left);
+		run_bin((const char **) args);
 		exec_env_del();
 	}
+	stdio_reset(fd_backup);
+	close_fds(fd_backup, 3);
+	close_redirect_fds(fd_arr);
 	free(args);
 }

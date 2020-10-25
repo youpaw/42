@@ -18,6 +18,6 @@ int		lex_map(t_lexer *lexer, t_state current)
 	if (*handlers[lexer->stage][current])
 		return ((*handlers[lexer->stage][current])(lexer));
 	else
-		vec_rm_last(lexer->states);
+		vec_rm_last(lexer->slices);
 	return (0);
 }
