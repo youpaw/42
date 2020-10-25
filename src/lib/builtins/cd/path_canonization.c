@@ -69,11 +69,11 @@ static void tokens_handler(char **tokens, int len)
 	}
 }
 
-static int 	tokenizer(char *path, char ***tokens)
+static int 	tokenizer(const char *path, char ***tokens)
 {
 	char *full_path;
 	char *pwd;
-	char *oldpwd;
+	const char *oldpwd;
 
 	pwd = memalloc(MAX_PATH + 1);
 	if (strcmp(path, "-") == 0)
@@ -100,7 +100,7 @@ char	*path_canonization(const char *path)
 {
 	char **tokens;
 	char *new_path;
-	char *oldpwd;
+	const char *oldpwd;
 	int len;
 
 	len = 0;
