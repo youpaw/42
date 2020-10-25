@@ -33,11 +33,7 @@ static void 		run_chdir(const char *newpwd, const char *oldpwd,\
 const char *path, unsigned char flags)
 {
 	char pwd[MAX_PATH];
-	char *er_arr[3];
 
-	er_arr[0] = "cd";
-	er_arr[1] = path;
-	er_arr[2] = NULL;
 	getcwd(pwd, MAX_PATH);
 	if (chdir(newpwd) == 0)
 	{
@@ -46,7 +42,7 @@ const char *path, unsigned char flags)
 			flags & CD_P_FLAG ? putendl(pwd) : putendl(newpwd);
 	}
 	else
-		error_print(E_NOENT, (const char **)er_arr);
+		cd_error_print(E_NOENT, path);
 }
 
 static void			init_chdir(const char *cn_path, const char *path,\
@@ -54,10 +50,7 @@ unsigned char flags)
 {
 	char pwd[MAX_PATH];
 	const char *home;
-	char *er_arr[2];
 
-	er_arr[0] = "cd";
-	er_arr[1] = NULL;
 	home = env_get_value("HOME");
 	getcwd(pwd, MAX_PATH);
 	if (path == NULL)
@@ -65,7 +58,7 @@ unsigned char flags)
 		if (home)
 			run_chdir(home, pwd, path, flags);
 		else
-			error_print(E_HOMENOTSET, (const char **) er_arr);
+			cd_error_print(E_HOMENOTSET, NULL);
 	}
 	else
 		run_chdir(cn_path, pwd, path, flags);
@@ -85,9 +78,9 @@ int cd(const char **av)
 	}
 	if ((path_i = check_opt(av, &flags)) < 1 || !(*av[path_i]))
 		return (1);
-	if (path_validation(av, av[path_i]))
-		return (1);
 	cn_path = path_canonization(av[path_i]);
+	if (path_validation(cn_path))
+		return (1);
 	init_chdir(cn_path, av[path_i], flags);
 	free(cn_path);
 	return (0);

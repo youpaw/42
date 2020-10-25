@@ -28,10 +28,9 @@ enum					e_paths
 	oldpwd,
 };
 
-typedef enum e_paths	t_paths;
-
 char				*path_canonization(const char *path);
-int path_validation(char **av, char *path);
+int					path_validation(const char *cn_path);
 int					check_opt(const char **av, unsigned char *flags);
+void				cd_error_print(t_error_code er_code, const char *arg);
 
 #endif //CD_H
