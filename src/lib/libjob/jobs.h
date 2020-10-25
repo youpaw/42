@@ -33,13 +33,13 @@ typedef struct s_process
 /* A job is a pipeline of processes.  */
 typedef struct s_job
 {
-	struct s_job *next;           /* next active job */
-	char *command;              /* command line, used for messages */
-	t_process *first_process;     /* list of processes in this job */
-	pid_t pgid;                 /* process group ID */
-	int		index;				/* job index in list */
-	char notified;              /* true if user told about stopped job */
-	struct termios tmodes;      /* saved terminal modes */
+	struct s_job 	*next;           /* next active job */
+	char 			*command;              /* command line, used for messages */
+	t_process 		*first_process;     /* list of processes in this job */
+	pid_t 			pgid;                 /* process group ID */
+	int				index;				/* job index in list */
+	char			notified;              /* true if user told about stopped job */
+	struct termios	tmodes;      /* saved terminal modes */
 	t_token 		*sequence;
 } t_job;
 
@@ -54,6 +54,7 @@ extern	t_vec	*g_job_queue;
 /* Find the active job with the indicated pgid.  */
 t_job	*find_job (pid_t pgid);
 t_job	*find_job_by_index(int index);
+int		get_job_status(t_job *job);
 
 /* Return true if all processes in the job have stopped or completed.  */
 int	job_is_stopped (t_job *j);
