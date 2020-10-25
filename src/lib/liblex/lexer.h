@@ -34,6 +34,7 @@
 # define N_TOKEN_OPERATORS 12
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 4
+# define N_INC_INP_TYPES 3
 # include <stddef.h>
 # include "cc_vec.h"
 # include "error.h"
