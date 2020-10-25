@@ -12,7 +12,7 @@ t_job *job_new(void)
 
 	job = xmalloc(sizeof(t_job));
 	job->next = NULL;
-	job->command = strdup("aaa");
+	job->command = NULL;
 	job->first_process = NULL;
 	job->pgid = 0;
 	job->notified = 0;

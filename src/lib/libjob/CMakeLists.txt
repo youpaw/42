@@ -12,4 +12,4 @@ ADD_LIBRARY(jobs STATIC
         job_builtins/sh_exit.c job_builtins/jobs.c job_builtins/fg.c job_builtins/bg.c run_job_builtin.c job_queue/queue_move_back.c job_queue/queue_push_back.c job_queue/queue_remove.c job_queue/queue_get_current.c job_queue/queue_get_last.c job_queue/queue_print.c get_new_job_index.c find_job_by_index.c)
 
         
-target_link_libraries(jobs cc lex builtins)
+target_link_libraries(jobs cc lex builtins parser)

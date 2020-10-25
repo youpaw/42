@@ -8,7 +8,7 @@
 #include "cc_num.h"
 #include "builtins.h"
 
-void	launch_job(t_job *job, int foreground)
+void	launch_job(t_job *job, int is_foreground)
 {
 	t_process *process;
 	pid_t pid;
@@ -16,9 +16,9 @@ void	launch_job(t_job *job, int foreground)
 	int infile;
 	int outfile;
 
-	if (!job->first_process->next && foreground &&
-			(!run_builtin((const char **)job->first_process->argv)) ||
-			!run_job_builtin((const char **)job->first_process->argv, foreground))
+	if (!job->first_process->next && is_foreground &&
+		(!run_builtin((const char **)job->first_process->argv)) ||
+			!run_job_builtin((const char **)job->first_process->argv, is_foreground))
 	{
 		job->first_process->completed = 1;
 		return ;
@@ -49,7 +49,7 @@ void	launch_job(t_job *job, int foreground)
 		if (pid == 0)
 		{
 			/* This is the child process.  */
-			launch_process(process, job->pgid, foreground);
+			launch_process(process, job->pgid, is_foreground);
 		}
 		else if (pid < 0)
 		{
@@ -81,7 +81,7 @@ void	launch_job(t_job *job, int foreground)
 	format_job_info(job, "launched");
 	if (!g_is_interactive)
 		wait_for_job(job);
-	else if (foreground)
+	else if (is_foreground)
 		put_job_in_foreground(job, 0);
 	else
 		put_job_in_background(job, 0);

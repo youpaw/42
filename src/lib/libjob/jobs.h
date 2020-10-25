@@ -7,6 +7,7 @@
 #include <termios.h>
 #include <stddef.h>
 #include "lexer.h"
+#include "parser.h"
 #define N_JOB_BUILTINS 4
 
 extern pid_t			g_pgid;
@@ -65,7 +66,7 @@ t_job	*job_new(void);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
 void	del_process(t_process *p);
-void	launch_job(t_job *job, int foreground);
+void	launch_job(t_job *job, int is_foreground);
 void	launch_process (t_process *p, pid_t pgid, int foreground);
 
 t_process	*process_new(void);

@@ -22,15 +22,14 @@ void	do_job_notification(void)
 
 	/* Update status information for child processes.  */
 	update_status();
-
 	jlast = NULL;
 	for (j = g_first_job; j; j = jnext)
 	{
 		jnext = j->next;
-
 		/* If all processes have completed, tell the user the job has
 		   completed and delete it from the list of active jobs.  */
-		if (job_is_completed (j)) {
+		if (job_is_completed(j))
+		{
 			format_job_info(j, "completed");
 			if (jlast)
 				jlast->next = jnext;
@@ -38,17 +37,15 @@ void	do_job_notification(void)
 				g_first_job = jnext;
 			free_job(j);
 			//free(j);
-
 		}
-
 			/* Notify the user about stopped jobs,
 			   marking them so that we won’t do this more than once.  */
-		else if (job_is_stopped (j) && !j->notified) {
+		else if (job_is_stopped(j) && !j->notified)
+		{
 			format_job_info(j, "stopped");
 			j->notified = 1;
 			jlast = j;
 		}
-
 			/* Don’t say anything about jobs that are still running.  */
 		else
 			jlast = j;

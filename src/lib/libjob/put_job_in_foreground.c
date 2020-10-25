@@ -28,6 +28,7 @@ void	put_job_in_foreground (t_job *j, int cont)
 
 	/* Wait for it to report.  */
 	wait_for_job(j);
+
 	//putendl("job wait ended");
 
 	/* Put the shell back in the foreground.  */

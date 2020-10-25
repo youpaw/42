@@ -14,7 +14,7 @@ void	update_status(void)
 	pid_t pid;
 
 	do
-		pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
-	while (!mark_process_status (pid, status));
+		pid = waitpid(WAIT_ANY, &status, WUNTRACED|WNOHANG);
+	while (!mark_process_status(pid, status));
 }
 
