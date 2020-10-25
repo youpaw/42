@@ -97,6 +97,7 @@ int		jobs(const char **av);
 int		fg(const char **av);
 int		bg(const char **av);
 
+void	remove_job(int job_index);
 /*
 ** Job queue
 */

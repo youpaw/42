@@ -17,8 +17,8 @@ void	launch_job(t_job *job, int is_foreground)
 	int outfile;
 
 	if (!job->first_process->next && is_foreground &&
-		(!run_builtin((const char **)job->first_process->argv)) ||
-			!run_job_builtin((const char **)job->first_process->argv, is_foreground))
+			((!run_builtin((const char **)job->first_process->argv)) || \
+			!run_job_builtin((const char **)job->first_process->argv, is_foreground)))
 	{
 		job->first_process->completed = 1;
 		return ;
@@ -78,7 +78,8 @@ void	launch_job(t_job *job, int is_foreground)
 			close (outfile);
 		infile = pfd[0];
 	}
-	format_job_info(job, "launched");
+	if (!is_foreground)
+		format_job_info(job, "launched");
 	if (!g_is_interactive)
 		wait_for_job(job);
 	else if (is_foreground)

@@ -35,7 +35,7 @@ int 	main_manager(void)
 	while (42)
 	{
 		//print_process_stats("readline");
-		jobs(NULL);
+		//jobs(NULL);
 		set_ignore_handlers();
 		readline(&str);
 		putendl("");

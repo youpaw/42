@@ -38,6 +38,7 @@ static void	child_sig_handler(int arg)
 void	set_print_main_handlers(void)
 {
 	set_handlers(main_sig_handler, main_sig_handler);
+	signal(SIGCHLD, SIG_DFL);
 }
 
 void	set_print_child_handlers(void)

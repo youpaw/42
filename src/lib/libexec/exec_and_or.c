@@ -27,6 +27,8 @@ void exec_and_or(t_ast *ast, char is_foreground, t_token *token)
 			wait_for_job(job);
 		g_exit_code = get_job_status(job);
 		printf("job with PID=%d has status=%d\n", job->pgid, g_exit_code);
+		if (job_is_completed(job))
+			remove_job(job->index);
 	}
 	if (ast->right)
 		exec_and_or(ast->right, is_foreground, ast->token);

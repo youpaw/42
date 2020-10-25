@@ -9,7 +9,8 @@ int 	queue_get_current(void)
 {
 	int		index;
 
-	if (!vec_get_last(&index, g_job_queue))
+	if (g_job_queue->size > 1 && !vec_get_at(&index, g_job_queue,
+											 g_job_queue->size - 2))
 		return (index);
 	return (-1);
 }

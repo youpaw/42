@@ -13,6 +13,7 @@ static int	put_job_in_fg(int index)
 	if (!(job = find_job_by_index(index)))
 		return (1);
 	queue_move_back(index);
+	job->notified = 0;
 	put_job_in_foreground(job, 1);
 	return (0);
 }

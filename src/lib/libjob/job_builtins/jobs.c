@@ -11,7 +11,7 @@ static void	print_job_formatted(const t_job *job, char spec)
 {
 	puts("[");
 	putnbr(job->index);
-	puts("] ");
+	puts("]");
 	putchar(spec);
 	puts("  PID: ");
 	putnbr(job->pgid);
@@ -54,17 +54,17 @@ int 	jobs(const char **av)
 	int		cur_index;
 	int		last_index;
 
-	putendl("jobs:");
+	//putendl("jobs:");
 	cur_index = queue_get_current();
 	last_index = queue_get_last();
-	job = g_first_job;
-	while (job)
-	{
-		print_job_formatted(job, get_spec(job->index, cur_index, last_index));
-		job = job->next;
-	}
-	putendl("jobs ended");
-	queue_print();
+	if ((job = g_first_job))
+		while (job->next)
+		{
+			print_job_formatted(job, get_spec(job->index, cur_index, last_index));
+			job = job->next;
+		}
+	//putendl("jobs ended");
+	//queue_print();
 	return (0);
 }
 
