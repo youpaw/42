@@ -13,15 +13,20 @@ int								lex_err(t_lexer *lexer, int error)
 
 	if (!error && lexer->slices->size > 1)
 		error = E_INCINP;
-	if (!error && lexer->tokens->size && \
-	vec_get_last(&last_token, lexer->tokens))
+	if (!error && lexer->tokens->size)
 	{
-		index = 0;
-		while (inc_types_map[index] >= 0 && \
-		inc_types_map[index] != last_token.type)
-			index++;
-		if (inc_types_map[index] >= 0)
-			error = E_INCINP;
+		vec_get_last(&last_token, lexer->tokens);
+		if (lexer->tokens->size == 1 && last_token.type == l_newline)
+			error = E_NOINP;
+		else
+		{
+			index = 0;
+			while (inc_types_map[index] >= 0 && \
+			inc_types_map[index] != last_token.type)
+				index++;
+			if (inc_types_map[index] >= 0)
+				error = E_INCINP;
+		}
 	}
 	return (error);
 }
