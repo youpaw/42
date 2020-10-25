@@ -11,9 +11,10 @@ int handle_backspace(t_input *inp)
 {
 	unsigned char ch[5];
 	int len;
-	if (inp->cursor_x_position)
+	if (inp->cursor_x_position - inp->indent)
+//	if (inp->cursor_x_position)
 	{
-		g_input_changed_flg = 1;
+		g_input_state_flag = INP_CH_FLAG;
 		bzero(ch, 5);
 		vec_get_at(ch, inp->line[inp->cursor_y_position], inp->cursor_x_position - 1);
 		len = get_displayed_symbol_len(ch);

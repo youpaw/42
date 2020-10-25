@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "cc_mem.h"
 
-int 		tok_back_slash(t_lexer *lexer)
+int 		vld_back_slash(t_lexer *lexer)
 {
 	char c;
 

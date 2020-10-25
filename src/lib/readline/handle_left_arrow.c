@@ -10,10 +10,10 @@
 int handle_left_arrow(t_input *inp)
 {
 	unsigned char ch[5];
-	int len;
-	if (inp->cursor_x_position)
+	if (inp->cursor_x_position - inp->indent)
+//		if (inp->cursor_x_position)
 	{
-		g_input_changed_flg = 1;
+		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("le", NULL), 1, &putchar);
 		inp->cursor_x_position--;
 	}

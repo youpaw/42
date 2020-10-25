@@ -11,7 +11,7 @@ t_ast 		*node_list(t_tokens *tokens)
 	node = new_ast_node(p_list);
 	if ((node->left = node_and_or(tokens)))
 	{
-		if (!get_node_token(node, tokens) && tokens->index < tokens->size)
+		if (!get_node_token(node, tokens))
 			node->right = node_list(tokens);
 	}
 	else
