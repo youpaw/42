@@ -45,8 +45,6 @@ typedef enum	e_error_code
 	E_HOMENOTSET,					/* HOME not set */
 	E_OLDPWDNOTSET,					/* OLDPWD not set */
 	E_NAMETOOLONG,					/* File name too long */
-	E_ALIASOPT,						/* unalias: -%: invalid option unalas: usage: unalias [-a] name [name ...] */
-	E_UNALIASOPT					/* alias: -%: invalid option\nalias: usage: alias [-p] [name[=value] ... ] */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);
