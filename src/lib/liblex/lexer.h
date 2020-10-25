@@ -34,6 +34,7 @@
 # define N_TOKEN_OPERATORS 12
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 4
+# define N_INC_INP_TYPES 3
 # include <stddef.h>
 # include "cc_vec.h"
 # include "error.h"
@@ -147,7 +148,6 @@ int			is_number(const char *str);
 
 int			get_brace(const char *str, t_brace *brace);
 t_token_type get_operator(const char *str, t_operator *op);
-t_token		*get_last_token(t_tokens *tokens);
 
 t_token_type recognize_token(t_lexer *lexer);
 t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
@@ -187,8 +187,6 @@ t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
 
 t_tokens	*validate_str(const char *string);
-t_tokens	*tokenize_str(const char *string);
-t_tokens	*tokenize_str_sub(const char *string, size_t len);
 
 // prints the array of tokens in the following format
 // 1. [ ls ] [ word ]
