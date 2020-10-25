@@ -12,8 +12,9 @@ char *find_same_part(t_list *files, char *token)
 	char same[1024];
 	unsigned int len;
 
-	len = strlen(token);
+//	len = strlen(token);
 	i = 0;
+	len = 0;
 	cur = files->next;
 	while (((char*)cur->content)[i + len] == ((char*)files->content)[i + len])
 	{

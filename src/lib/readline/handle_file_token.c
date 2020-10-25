@@ -5,6 +5,7 @@
 #include "readline.h"
 #include <dirent.h>
 #include "cc_str.h"
+#include "cc.h"
 
 static void check_cr(char filename[1027])
 {
@@ -72,7 +73,7 @@ static t_list *scan_dir(char *path, char *name)
 t_list *get_list_files(char *fullname)
 {
 	char *delimiter;
-
+	fullname = strdup(fullname);
 	delimiter = strrchr(fullname, '/');
 	if (delimiter)
 	{
@@ -87,15 +88,38 @@ t_list *get_list_files(char *fullname)
 		return scan_dir("./", fullname);
 }
 
+void print_part(t_input *input, char *part)
+{
+	size_t i;
+	t_letter let;
+
+	i = 0;
+	bzero(let.ch, 5);
+	while (part[i])
+	{
+		let.ch[0] = part[i++];
+		handle_key(let.ch, input);
+	}
+	free(part);
+}
+
 void 	handle_file_token(t_input *input, t_token *token)
 {
 	t_list *files;
+	t_list *first;
 	char 	*part;
 
+//	printf("%s", token->raw);
 	files  = get_list_files(token->raw);
+	first = files;
+	do
+	{
+		printf("|%s|\n", files->content);
+		files = files->next;
+	} while (files != first);
 	part = find_same_part(files, token->raw);
-	printf("\n\n\n%s|\n", part);
+	printf("!!!%s", part);
+	print_part(input, part);
 	tty_restore();
 	exit(0);
-
 }

@@ -14,7 +14,7 @@
 #define READLINE_H
 
 #define N_ORD_KEY_HANDLERS 7
-#define N_ESC_KEY_HANDLERS 7
+#define N_ESC_KEY_HANDLERS 9
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
@@ -66,16 +66,34 @@ typedef struct		s_key_handler{
 	int				(*handler)(t_input *);
 }					t_key_handler;
 
+typedef enum s_predict_type{
+	r_cmd,
+	r_file,
+	r_param
+}				t_predict_type;
+
+typedef  struct s_predict_token
+{
+	char 		*raw;
+	size_t		original_len;
+	enum s_predict_type type;
+}				t_predict_token;
+
 int 		g_input_state_flag;
 
 void		tty_init(void);
 void		tty_restore(void);
 void		termcap_init(void);
 
+void 		del_predict_token(t_predict_token **token);
+t_predict_token *get_predict_token(char *raw, size_t len);
+
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
 int			handle_shift_up(t_input *inp);
 int			handle_shift_down(t_input *inp);
+int			handle_shift_right(t_input *inp);
+int			handle_shift_left(t_input *inp);
 int			handle_backspace(t_input *inp);
 int			handle_del(t_input *inp);
 int			handle_tab(t_input *inp);

@@ -8,14 +8,14 @@
 
 const char 	*g_error_msg[] = {
 		NULL,
-		"No such file or directory",
+		"%: %: No such file or directory",
 		"Input/output error",
 		"Bad file descriptor",
 		"Cannot allocate memory",
 		"Permission denied",
 		"File exists",
-		"Not a directory",
-		"Is a directory",
+		"%: %: Not a directory",
+		"%: %: Is a directory",
 		"Invalid argument",
 		"File too large",
 		"Broken pipe",
@@ -25,14 +25,16 @@ const char 	*g_error_msg[] = {
 		"!%: event not found",
 		"syntax error near unexpected token `%'",
 		"%: %: syntax error: operand expected (error token is \"%\")",
-		"%: `%': not a valid identifier",
+		"%: %: not a valid identifier",
 		"%: %: numeric argument required",
 		"%: too many arguments",
 		"%: %: invalid option",
   		"%: %: not found",
-		"HOME not set",
-		"OLDPWD not set",
-  		"%: %: no such job",
+		"%: HOME not set",
+		"%: OLDPWD not set",
+		"%: %: no such job",
+		"%: %: File name too long"
+
 };
 
 void 	error_print(t_error_code er_code, const char **args)
