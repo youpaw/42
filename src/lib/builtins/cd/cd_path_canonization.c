@@ -96,7 +96,7 @@ static int 	tokenizer(char *path, char ***tokens)
 	return (0);
 }
 
-char	*path_canonization(const char *path)
+char	*cd_path_canonization(const char *path)
 {
 	char **tokens;
 	char *new_path;

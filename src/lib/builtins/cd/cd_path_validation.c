@@ -67,7 +67,7 @@ static int envv_set(const char *cn_path)
 	return (1);
 }
 
-int path_validation(const char *cn_path)
+int cd_path_validation(const char *cn_path)
 {
 	if (!cn_path || !(*cn_path))
 		return (0);

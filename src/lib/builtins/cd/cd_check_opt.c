@@ -4,7 +4,7 @@
 
 #include "cd.h"
 
-int			check_opt(const char **av, unsigned char *flags)
+int			cd_check_opt(const char **av, unsigned char *flags)
 {
 	t_parsed_opt 	opt;
 	int				skip_args;

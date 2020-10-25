@@ -28,8 +28,8 @@ enum					e_paths
 	oldpwd,
 };
 
-char				*path_canonization(const char *path);
-int					path_validation(const char *cn_path);
+char				*cd_path_canonization(const char *path);
+int					cd_path_validation(const char *cn_path);
 int					check_opt(const char **av, unsigned char *flags);
 void				cd_error_print(t_error_code er_code, const char *arg);
 

@@ -32,7 +32,9 @@ const char 	*g_error_msg[] = {
   		"%: %: not found",
 		"%: HOME not set",
 		"%: OLDPWD not set",
-		"%: %: File name too long"
+		"%: %: File name too long",
+  		"unalias: -%: invalid option\nunalas: usage: unalias [-a] name [name ...]",
+  		"alias: -%: invalid option\nalias: usage: alias [-p] [name[=value] ... ]"
 
 };
 
