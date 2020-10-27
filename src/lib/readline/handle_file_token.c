@@ -7,6 +7,9 @@
 #include "cc_str.h"
 #include "cc.h"
 
+#include <stdio.h>
+#include <stdbool.h>
+
 static void check_cr(char filename[1027])
 {
 	char *cr;
@@ -41,7 +44,7 @@ static t_list *get_file_from_name(struct dirent *dir)
  * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
 */
 
-static t_list *scan_dir(char *path, char *name)
+static t_list *get_list_files(char *path, char *name)
 {
 	DIR *d;
 	struct dirent *dir;
@@ -67,25 +70,45 @@ static t_list *scan_dir(char *path, char *name)
 }
 
 /*
- * This function returns list of filenames, which equal to first letters fo input
+ * Splits fullname into path and name,  and put them into filename[0] and [1] respectively
  */
 
-t_list *get_list_files(char *fullname)
+char	**get_filename(char *fullname)
 {
 	char *delimiter;
+	char **filename;
+	size_t len;
+
+	filename = xmalloc(sizeof(char*) * 2);
+	len = strlen(fullname);
+	filename[0] = xmalloc(sizeof(char) * (len + 1));
+	filename[1] = xmalloc(sizeof(char) * (len + 1));
 	fullname = strdup(fullname);
 	delimiter = strrchr(fullname, '/');
+
 	if (delimiter)
 	{
-		if (!(delimiter + 1))
-			return scan_dir(fullname, "");
+		if (!(*(delimiter + 1)))
+		{
+			strcpy(filename[0], fullname);
+			strcpy(filename[1], "");
+		}
 		if (delimiter == fullname)
-			return scan_dir("/", fullname + 1);
+		{
+			strcpy(filename[0], "/");
+			strcpy(filename[1], fullname + 1);
+		}
 		*delimiter = '\0';
-		return scan_dir(fullname, delimiter + 1);
+		strcpy(filename[0], fullname);
+		strcpy(filename[1], delimiter + 1);
 	}
 	else
-		return scan_dir("./", fullname);
+	{
+		strcpy(filename[0], "./");
+		strcpy(filename[1], fullname);
+	}
+	strdel(&fullname);
+	return (filename);
 }
 
 void print_part(t_input *input, char *part)
@@ -103,23 +126,49 @@ void print_part(t_input *input, char *part)
 	free(part);
 }
 
-void 	handle_file_token(t_input *input, t_token *token)
+int	get_input_ending(char *name, char *part)
+{
+	size_t i;
+	char *part_cpy;
+
+	i = 0;
+	while (name[i])
+		i++;
+	if (!part[i])
+	{
+//		strdel(&part);
+		return (0);
+	}
+	part_cpy = strdup(&part[i]);
+	strdel(&part);
+	part = part_cpy;
+	return (1);
+}
+
+void 	handle_file_token(t_input *input, t_predict_token *token)
 {
 	t_list *files;
-	t_list *first;
 	char 	*part;
+	char **filename;
 
-//	printf("%s", token->raw);
-	files  = get_list_files(token->raw);
-	first = files;
-	do
+	filename = get_filename(token->raw);
+	files = get_list_files(filename[0], filename[1]);
+	if (!files)
+		return ;
+	part = find_same_part(files, filename[1]);
+	if (part)
 	{
-		printf("|%s|\n", files->content);
-		files = files->next;
-	} while (files != first);
-	part = find_same_part(files, token->raw);
-	printf("!!!%s", part);
-	print_part(input, part);
-	tty_restore();
-	exit(0);
+		print_part(input, part);
+		strdel(&filename[0]);
+		strdel(&filename[1]);
+		free(filename);
+	}
+	else
+	{
+		choose_file(files, input);
+	}
+//	else
+//		;
+//	tty_restore();
+//	exit(0);
 }

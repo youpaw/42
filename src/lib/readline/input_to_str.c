@@ -32,6 +32,5 @@ char *input_to_str(t_input input)
 		input.cursor_x_position = 0;
 		input.cursor_y_position++;
 	}
-	strcat(string, "\n");
 	return string;
 }

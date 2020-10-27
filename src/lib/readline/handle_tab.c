@@ -12,18 +12,17 @@
 
 #include "readline.h"
 
+#include "cc.h"
+#include <stdio.h>
+
 int			handle_tab(t_input *inp)
 {
 	static t_list	*options;
 	t_predict_token *token;
 
-	if (g_input_state_flag == INP_MAKING_CHOICE)
-		handle_choice_tab(inp, &options);
-	else
-	{
-		token = get_predict_token(input_to_str(*inp), inp->cursor_x_position);
-		//		if (token->type == l_word) //file
-//			handle_file_token(inp, &token);
-	}
+	token = get_predict_token(input_to_str(*inp), inp->cursor_x_position);
+//	printf("type = %d, %d %d %d\n", token->type, r_file, r_cmd, r_param);
+//	if (token->type == r_file) //file
+		handle_file_token(inp, token);
 	return 0;
 }

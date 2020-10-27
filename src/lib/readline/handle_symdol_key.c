@@ -27,6 +27,8 @@ int handle_symbol_key(t_input *inp, char *key)
 	inp->line_len[inp->cursor_y_position]++;
 	inp->len++;
 	redraw_input_adding(inp);
+	if (*key == '\n')
+		return (1);
 	return (0);
 }
 

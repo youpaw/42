@@ -42,7 +42,7 @@ int			handle_key(char *key, t_input *input)
 			{"\2", &handle_left_arrow},
 			{"\177",&handle_backspace},
 			{"\t", &handle_tab},
-			{"\n", NULL},
+//			{"\n", NULL},
 			{"\20", NULL}, //down
 			{"\16", NULL} //up
 	};
