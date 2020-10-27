@@ -165,7 +165,8 @@ void 	handle_file_token(t_input *input, t_predict_token *token)
 	}
 	else
 	{
-		choose_file(files, input);
+//		choise_making(files, input);
+;
 	}
 //	else
 //		;

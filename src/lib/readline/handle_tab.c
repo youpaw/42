@@ -21,7 +21,7 @@ int			handle_tab(t_input *inp)
 	t_predict_token *token;
 
 	token = get_predict_token(input_to_str(*inp), inp->cursor_x_position);
-//	printf("type = %d, %d %d %d\n", token->type, r_file, r_cmd, r_param);
+//	sleep(1);
 //	if (token->type == r_file) //file
 		handle_file_token(inp, token);
 	return 0;

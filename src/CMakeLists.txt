@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
 set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
-add_executable(${PROJECT_NAME} bin/42sh/main.c bin/42sh/main.h bin/42sh/main_init.c bin/42sh/main_manager.c bin/42sh/main.c)
+add_executable(${PROJECT_NAME} bin/42sh/main.c bin/42sh/ft_select.h bin/42sh/main_init.c bin/42sh/main_manager.c bin/42sh/main.c)
 
 #add libcc to the project
 set(LIBCC_DIR "lib/libcc")
@@ -61,6 +61,12 @@ set(LIBLEX_DIR "lib/liblex")
 include_directories(${LIBLEX_DIR})
 add_subdirectory(${LIBLEX_DIR})
 target_link_libraries(${PROJECT_NAME} lex)
+
+#add ft_select to the project
+set(FT_SELECT_DIR "lib/ft_select")
+include_directories(${FT_SELECT_DIR})
+add_subdirectory(${FT_SELECT_DIR})
+target_link_libraries(${PROJECT_NAME} ft_select)
 
 #add readline to the project
 set(READLINE_DIR "lib/readline")
