@@ -5,5 +5,6 @@
 #include "readline.h"
 void	make_choice(t_input *inp, char **options)
 {
+
  	;
 }

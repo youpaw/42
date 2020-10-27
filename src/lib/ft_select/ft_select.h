@@ -23,10 +23,6 @@
 
 typedef struct	s_outputs
 {
-	struct termios	savetty;
-	char			tbuf[2048];
-	char			strings[256];
-	char			*p;
 	char			*tname;
 	char			*clear;
 	char			*clear_after;
