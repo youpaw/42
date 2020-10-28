@@ -45,6 +45,7 @@ typedef enum	e_error_code
 	E_HOMENOTSET,					/* HOME not set */
 	E_OLDPWDNOTSET,					/* OLDPWD not set */
 	E_NAMETOOLONG,					/* File name too long */
+	E_ARGCNOTENOUGH,				/* %: not enough arguments */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

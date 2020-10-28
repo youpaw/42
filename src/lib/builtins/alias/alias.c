@@ -28,9 +28,9 @@ int		alias(const char **av)
 		alias_print();
 		return (0);
 	}
-	if ((arg_i = alias_check_opt(ALIAS, av, &flag)) < 1)
+	if ((arg_i = alias_check_opt("alias", ALIAS, av, &flag)) < 1)
 		return (1);
-	if (flag == ALIAS_BUILTINS_FLAG)
+	if (flag == ALIAS_BUILTINS_FLAG || av[arg_i][0] == '#')
 		alias_print();
 	while (av[arg_i])
 	{

@@ -10,7 +10,7 @@ static	int get_builtin(const char *name)
 {
 	int		i;
 	static const char *builtins_names[N_BUILTINS] = {
-			"exit", "set", "unset", "cd", "export", "hash", "echo", "alias", "unaslias"};
+			"exit", "set", "unset", "cd", "export", "hash", "echo", "alias", "unalias"};
 	i = 0;
 	while (i < N_BUILTINS)
 	{
