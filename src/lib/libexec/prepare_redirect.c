@@ -11,8 +11,13 @@ int 	prepare_redirect(t_ast *ast, t_process *process)
 {
 	size_t i;
 	int		out;
+	int 	in;
 	t_ast **redirects;
+	int redirect_type;
 
+
+
+	redirect_type = 0;
 	i = 0;
 	out = -1;
 	if ((redirects = get_redirect_nodes(ast)) == NULL)
@@ -25,20 +30,38 @@ int 	prepare_redirect(t_ast *ast, t_process *process)
 		{
 			if (process->stdin != STDIN_FILENO)
 				close(process->stdin);
-			out = open(redirects[i]->token->raw, O_RDONLY);
+			in = open(redirects[i]->token->raw, O_RDONLY);
 			//if (-1 == out)
 			//	open_error!!
-			process->stdin = out;
+			process->stdin = in;
 		}
 		if (redirects[i]->left)
 		{
 			//left leaf redirect type
+			if (redirects[i]->left->type == p_io_file)
+			{
+				if (redirects[i]->left->token->type == l_less)
+					less_redirect(process);
+				else if (redirects[i]->left->token->type == l_great)
+					greater_redirect(process);
+			}
 		}
 		if (redirects[i]->left->left)
 		{
-			// left left leaf (last one) where to redirect
+			if (redirects[i]->left->left->type == p_io_file)
+			{
+				if (redirects[i]->left->left->token->type == l_word)
+				{
+					if (process->stdout != STDOUT_FILENO)
+						close(process->stdout);
+					out = open(redirects[i]->left->left->token->raw, O_WRONLY | O_CREAT | O_TRUNC);
+					//if (-1 == out)
+					//	open_error!!!
+					process->stdout = out;
+				}
+			}
 		}
-		if (redirects[i]->token)
+		// i don't actually know what I am doing...TO BE DONE TOMORROW!!!!
 		i++;
 	}
 	return (0);
