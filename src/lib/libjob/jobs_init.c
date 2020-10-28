@@ -38,7 +38,7 @@ void	jobs_init(void)
 		signal (SIGTSTP, SIG_IGN);
 		signal (SIGTTIN, SIG_IGN);
 		signal (SIGTTOU, SIG_IGN);
-		signal (SIGCHLD, SIG_IGN);
+		//signal (SIGCHLD, SIG_IGN);
 
 		/* Put ourselves in our own process group.  */
 		g_pgid = getpid();
