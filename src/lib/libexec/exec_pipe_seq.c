@@ -39,7 +39,8 @@ void exec_pipe_seq(t_ast *ast)
 			create_pipe_seq(ast, NULL);
 			exit(0);
 		}
-		waitpid(pid, NULL, 0);
+		else
+			waitpid(pid, NULL, 0);
 	}
 	else
 		exec_simple_cmd(ast->left);

@@ -15,6 +15,7 @@ const char *token_type_to_string(t_token_type t)
 			"great",
 			"semi",
 			"bang",
+			"newline",
 			"io number",
 			"assignment word",
 			"command name",

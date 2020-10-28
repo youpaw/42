@@ -6,7 +6,7 @@
 #include "cc_mem.h"
 #include "cc_str.h"
 
-static int init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
+static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
 	t_state	state;
 
@@ -20,7 +20,6 @@ static int init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 	bzero(lexer->flags, sizeof(char) * N_LEX_FLAGS);
 	state = l_unset;
 	vec_push(lexer->slices, &state);
-	return (E_OK);
 }
 
 int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
@@ -28,9 +27,8 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 	t_state		current;
 	int			error;
 
-	if ((error = init_lexer(lexer, raw, stage)))
-		return (error);
-	while (lexer->index <= lexer->size)
+	init_lexer(lexer, raw, stage);
+	while (lexer->index < lexer->size)
 	{
 		current = get_current_state(lexer);
 		if ((error = lex_map(lexer, current)) != E_OK)
