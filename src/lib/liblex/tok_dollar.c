@@ -8,10 +8,17 @@ int 	tok_dollar(t_lexer *lexer)
 	t_brace	brace;
 	int		error;
 
-	error = E_OK;
+	error = 0;
 	if (get_brace(lexer->raw + lexer->index, &brace) > 0)
 		error = match_brace(lexer, brace);
-	lexer->index--;
-	vec_rm_last(lexer->slices);
+	else
+		match_parameter(lexer);
+	if (!error && lexer->index >= lexer->size)
+		error = E_INCINP;
+	if (!error)
+	{
+		lexer->index--;
+		vec_rm_last(lexer->slices);
+	}
 	return (error);
 }
