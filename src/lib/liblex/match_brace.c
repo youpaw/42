@@ -48,8 +48,7 @@ int match_brace(t_lexer *lexer, t_brace brace)
 	}
 	if (!error && braces->size)
 		error = E_INCINP;
-	else
-		vec_rm_last(lexer->slices);
+	vec_rm_last(lexer->slices);
 	vec_del(&braces);
 	return (error);
 }
