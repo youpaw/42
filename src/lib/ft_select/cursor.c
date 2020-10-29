@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "cc_char.h"
 
 int		get_max_vert_elem(t_selection *selection)
 {
@@ -33,7 +34,7 @@ int		get_max_vert_elem(t_selection *selection)
 	return (max_pos);
 }
 
-void	move_cursor_down(t_selection **selection)
+int		move_cursor_down(t_selection **selection)
 {
 	int			to_find_vert;
 	int			to_find_hor;
@@ -41,7 +42,7 @@ void	move_cursor_down(t_selection **selection)
 
 	cpy = get_under_cursor(selection);
 	if (cpy->vert_pos == get_max_vert_elem(cpy))
-		ft_fdprintf(g_out.fd, "\7");
+		putchar('\7');
 	else
 	{
 		to_find_hor = cpy->hor_pos;
@@ -50,7 +51,7 @@ void	move_cursor_down(t_selection **selection)
 	}
 }
 
-void	move_cursor_up(t_selection **selection)
+int		move_cursor_up(t_selection **selection)
 {
 	int			to_find_vert;
 	int			to_find_hor;
@@ -58,11 +59,12 @@ void	move_cursor_up(t_selection **selection)
 
 	cpy = get_under_cursor(selection);
 	if (cpy->vert_pos == 0)
-		ft_fdprintf(g_out.fd, "\7");
+		putchar('\7');
 	else
 	{
 		to_find_hor = cpy->hor_pos;
 		to_find_vert = cpy->vert_pos - 1;
 		set_cursor_on_pos(cpy, to_find_hor, to_find_vert);
 	}
+	return(0);
 }

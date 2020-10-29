@@ -25,7 +25,7 @@ t_selection	*move_display_left(t_selection *selection)
 	return (selection);
 }
 
-void		move_cursor_right(t_selection **selection)
+int			move_cursor_right(t_selection **selection)
 {
 	t_selection	*cpy;
 
@@ -36,7 +36,7 @@ void		move_cursor_right(t_selection **selection)
 		*selection = cpy->next;
 }
 
-void		move_cursor_left(t_selection **selection)
+int			move_cursor_left(t_selection **selection)
 {
 	t_selection	*cpy;
 

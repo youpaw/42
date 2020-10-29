@@ -11,44 +11,20 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "cc_str.h"
+#include "cc_mem.h"
+#include "cc_num.h"
 
-void	set_colour_for_type(int fd, mode_t type)
-{
-	if (S_ISREG(type))
-	{
-		if (S_IXUSR & type)
-			ft_fdprintf(fd, "{red}");
-		return ;
-	}
-	else if (S_ISDIR(type))
-	{
-		if (S_ISVTX & type)
-			ft_fdprintf(fd, "\e[102m\e[30m");
-		else
-			ft_fdprintf(fd, "{blue}");
-	}
-	else if (S_ISBLK(type))
-		ft_fdprintf(fd, "\e[46m\e[94m");
-	else if (S_ISCHR(type))
-		ft_fdprintf(fd, "\e[43m\e[94m");
-	else if (S_ISLNK(type))
-		ft_fdprintf(fd, "{magnetic}");
-	else if (S_ISSOCK(type))
-		ft_fdprintf(fd, "{magnetic}");
-}
 
 void	draw_letters(t_selection *selection, int wide)
 {
 	if (selection->under_cursor)
-		ft_putstr_fd(g_out.underline, g_out.fd);
-	if (selection->selected)
-		ft_putstr_fd(g_out.reverse_video, g_out.fd);
-	set_colour_for_type(g_out.fd, selection->filetype);
-	ft_fdprintf(g_out.fd, "%s{eoc}\e[49m", selection->word);
-	ft_putstr_fd(g_out.norm, g_out.fd);
+		puts(g_out.reverse_video);
+	puts(selection->word);
+	puts(g_out.norm);
 	while ((wide - selection->len - 1) != 0)
 	{
-		ft_putstr_fd(g_out.move_right, g_out.fd);
+		puts(g_out.move_right);
 		wide--;
 	}
 }
@@ -61,12 +37,14 @@ void	draw_word(t_selection *selection, int *cur, int cn)
 	(cur[1])++;
 	if (cur[1] == cn)
 	{
-		ft_putstr_fd(g_out.move_down, g_out.fd);
+		puts(g_out.move_down);
 		cur[1] = 0;
 		(cur[0])++;
 	}
 	else
-		ft_fdprintf(g_out.fd, " ");
+	{
+		puts(" ");
+	}
 }
 
 int		get_max_words_len(t_selection *selection)
@@ -93,9 +71,9 @@ void	draw_selections(void)
 	int			column_num;
 	int			cur[2];
 
-	selection = selection_storage(NULL);
+	selection = g_selection;
 	restore_displayed(selection);
-	ft_bzero(cur, sizeof(int) * 2);
+	bzero(cur, sizeof(int) * 2);
 	if (!(column_num = check_winsize(get_max_words_len(selection))))
 		return ;
 	first = selection;
@@ -108,4 +86,5 @@ void	draw_selections(void)
 		draw_word(selection, cur, column_num);
 		selection = selection->next;
 	}
+	g_out.cur_y_pos = cur[0];
 }

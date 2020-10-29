@@ -24,5 +24,6 @@ int			handle_tab(t_input *inp)
 //	sleep(1);
 //	if (token->type == r_file) //file
 		handle_file_token(inp, token);
+	del_predict_token(&token);
 	return 0;
 }

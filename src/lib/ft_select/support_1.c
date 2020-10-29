@@ -21,24 +21,3 @@ t_selection	*get_under_cursor(t_selection **selection)
 		cpy = cpy->next;
 	return (cpy);
 }
-
-mode_t		get_filetype(char *word)
-{
-	struct stat buf;
-
-	if (!lstat(word, &buf))
-		return (buf.st_mode);
-	else
-		return (0);
-}
-
-t_selection	*selection_storage(t_selection *obj)
-{
-	static t_selection *storage;
-
-	if (obj == NULL)
-		return (storage);
-	else
-		storage = obj;
-	return (NULL);
-}

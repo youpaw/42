@@ -11,75 +11,51 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "cc_str.h"
+#include "cc_mem.h"
 
-void	abort_selections(t_selection **selection)
+int select_handle_key(char *key)
 {
-	t_selection *garbage;
+	size_t index;
+	t_selection *selection;
+	static const t_key_select_handler hanlders[N_SELECT_KEY_HANDLERS_COUNT] = {
+			{"\t", move_cursor_right},			//tab
+			{"\33\133\101", move_cursor_up},	//up
+			{"\33\133\102", move_cursor_down},	//down
+			{"\33\133\103", move_cursor_right},	//down
+			{"\33\133\104", move_cursor_left}	//down
+	};
+	int ret;
 
-	garbage = *selection;
-	ft_fdprintf(g_out.fd, "%s%s%s", g_out.show_cursor, \
-	g_out.move_start, g_out.clear_after);
-	exit(0);
-}
-
-void	set_selection(t_selection **selection)
-{
-	t_selection	*s;
-
-	s = *selection;
-	while (!s->under_cursor)
-		s = s->next;
-	s->selected = !s->selected;
-}
-
-void	empty_function(void)
-{
-}
-
-void	*get_key(char key[4])
-{
-	if (!ft_strcmp(key, "\33"))
-		return (abort_selections);
-	else if (!ft_strcmp(key, "\12"))
-		return (NULL);
-	else if (g_out.flag_lil_wnd)
+	index = 0;
+	ret = 0;
+	selection = g_selection;
+	while (index < N_SELECT_KEY_HANDLERS_COUNT)
 	{
-		ft_fdprintf(g_out.fd, "\7");
-		return (empty_function);
+		if (!strcmp(hanlders[index].primary_key, key))
+		{
+			ret = hanlders[index].handler(&selection);
+			g_selection = selection;
+			return (0);
+		}
+		index++;
 	}
-	else if (!ft_strcmp(key, " "))
-		return (set_selection);
-	else if (!ft_strcmp(key, "\177") ||
-			(key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126))
-		return (delete_elem);
-	else if (!ft_strcmp(key, "\33\133\101"))
-		return (move_cursor_up);
-	else if (!ft_strcmp(key, "\33\133\102"))
-		return (move_cursor_down);
-	else if (!ft_strcmp(key, "\33\133\103"))
-		return (move_cursor_right);
-	else if (!ft_strcmp(key, "\33\133\104"))
-		return (move_cursor_left);
-	return (empty_function);
+	return 1;
 }
 
-char	*select_args(t_selection *selection)
+char	*select_args(t_selection *selections)
 {
-	char	key[4];
-	void	(*work_funct)(t_selection**);
+	char	key[5];
+	int		ret;
 
-	work_funct = NULL;
 	while (1)
 	{
-		ft_bzero(key, 4);
-		ft_putstr_fd(g_out.move_start, g_out.fd);
-		ft_putstr_fd(g_out.clear_after, g_out.fd);
-		draw_selections(selection);
+		bzero(key, 5);
+		move_start();
+		draw_selections(selections);
 		if (read(STDIN_FILENO, key, 4) == -1)
-			escape();
-		if ((work_funct = get_key(key)) == NULL)
-			return (get_args_array(selection));
-		work_funct(&selection);
-		selection_storage(selection);
+			return (NULL);
+		if ((ret = select_handle_key(key)))
+			return (strdup(key));
 	}
 }

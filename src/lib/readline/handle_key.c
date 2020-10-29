@@ -37,12 +37,11 @@
 
 int			handle_key(char *key, t_input *input)
 {
-	static const t_key_handler hanlders[N_ORD_KEY_HANDLERS] = {
+	static const t_key_readline_handler hanlders[N_ORD_KEY_HANDLERS] = {
 			{"\6", &handle_right_arrow},
 			{"\2", &handle_left_arrow},
 			{"\177",&handle_backspace},
 			{"\t", &handle_tab},
-//			{"\n", NULL},
 			{"\20", NULL}, //down
 			{"\16", NULL} //up
 	};

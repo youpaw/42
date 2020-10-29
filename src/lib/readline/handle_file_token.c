@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include "cc_str.h"
 #include "cc.h"
+#include "ft_select.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -107,43 +108,46 @@ char	**get_filename(char *fullname)
 		strcpy(filename[0], "./");
 		strcpy(filename[1], fullname);
 	}
-	strdel(&fullname);
+	free(fullname);
 	return (filename);
 }
 
-void print_part(t_input *input, char *part)
+void put_str_to_inp(t_input *input, char *part)
 {
 	size_t i;
 	t_letter let;
+	int 	len;
 
 	i = 0;
-	bzero(let.ch, 5);
 	while (part[i])
 	{
-		let.ch[0] = part[i++];
+		bzero(let.ch, 5);
+		len = get_utf8_len(part[i]);
+		strncpy(let.ch, &part[i], len);
 		handle_key(let.ch, input);
+		i += len;
 	}
 	free(part);
 }
 
-int	get_input_ending(char *name, char *part)
-{
-	size_t i;
-	char *part_cpy;
-
-	i = 0;
-	while (name[i])
-		i++;
-	if (!part[i])
-	{
+//int	get_input_ending(char *name, char *part)
+//{
+//	size_t i;
+//	char *part_cpy;
+//
+//	i = 0;
+//	while (name[i])
+//		i++;
+//	if (!part[i])
+//	{
 //		strdel(&part);
-		return (0);
-	}
-	part_cpy = strdup(&part[i]);
-	strdel(&part);
-	part = part_cpy;
-	return (1);
-}
+//		return (0);
+//	}
+//	part_cpy = strdup(&part[i]);
+//	strdel(&part);
+//	part = part_cpy;
+//	return (1);
+//}
 
 void 	handle_file_token(t_input *input, t_predict_token *token)
 {
@@ -158,18 +162,16 @@ void 	handle_file_token(t_input *input, t_predict_token *token)
 	part = find_same_part(files, filename[1]);
 	if (part)
 	{
-		print_part(input, part);
-		strdel(&filename[0]);
-		strdel(&filename[1]);
+		put_str_to_inp(input, part);
+		lst_del_circle(&files, NULL);
+		free(filename[0]);
+		free(filename[1]);
 		free(filename);
 	}
 	else
 	{
-//		choise_making(files, input);
-;
+		select_choise(convert_list_2_selection(files), input);
+		lst_del_circle(&files, NULL);
 	}
-//	else
-//		;
-//	tty_restore();
-//	exit(0);
+
 }

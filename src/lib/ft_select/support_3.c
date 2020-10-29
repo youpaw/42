@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "cc_str.h"
+#include "cc_char.h"
 
 int		check_winsize(int len)
 {
@@ -20,16 +22,16 @@ int		check_winsize(int len)
 	if (len <= 2)
 	{
 		g_out.flag_lil_wnd = true;
-		ft_putstr_fd("..", g_out.fd);
+		puts("..");
 		return (0);
 	}
 	else if (len > screen_size)
 	{
 		g_out.flag_lil_wnd = true;
 		if (screen_size >= 13)
-			ft_putstr_fd("Too few space", g_out.fd);
+			puts("Too few space");
 		else
-			ft_putstr_fd("...", g_out.fd);
+			puts("...");
 		return (0);
 	}
 	else
@@ -53,4 +55,19 @@ void	restore_displayed(t_selection *selection)
 		selection->vert_pos = -1;
 		selection = selection->next;
 	}
+}
+
+void move_start()
+{
+	int shift;
+
+	shift = g_out.cur_y_pos;
+	while (shift)
+	{
+		tputs(tgetstr("up", NULL), 1, putchar);
+		shift--;
+	}
+	tputs(tgetstr("cr", NULL), 1, putchar);
+	tputs(tgetstr("cd", NULL), 1, putchar);
+
 }

@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "cc_mem.h"
+#include "cc_str.h"
+#include <stdlib.h>
 
 t_selection	*add_doubly_list(t_selection *lst, char *word, size_t len)
 {
@@ -18,10 +21,9 @@ t_selection	*add_doubly_list(t_selection *lst, char *word, size_t len)
 	t_selection *p;
 
 	new = NULL;
-	new = ft_memalloc(sizeof(t_selection));
+	new = xmalloc(sizeof(t_selection));
 	new->word = word;
 	new->len = len;
-	new->filetype = get_filetype(word);
 	new->under_cursor = false;
 	new->selected = false;
 	new->vert_pos = -1;
@@ -41,6 +43,27 @@ t_selection	*add_doubly_list(t_selection *lst, char *word, size_t len)
 	return (lst);
 }
 
+void		del_selections(t_selection **selections)
+{
+	t_selection *first;
+	t_selection *cur;
+	t_selection *next;
+
+	first = *selections;
+	next = (*selections)->next;
+	cur = *selections;
+
+	free(cur);
+	cur = next;
+	next = cur->next;
+	while (cur != first)
+	{
+		free(cur);
+		cur = next;
+		next = cur->next;
+	}
+	*selections = NULL;
+}
 void		delete_elem(t_selection **selection)
 {
 	t_selection *cpy;
@@ -52,7 +75,7 @@ void		delete_elem(t_selection **selection)
 		*selection = cpy->next;
 	cpy->next->under_cursor = true;
 	if (del_double_list_item(cpy))
-		escape();
+		return;
 }
 
 int			del_double_list_item(t_selection *lst)
@@ -64,7 +87,7 @@ int			del_double_list_item(t_selection *lst)
 		flag = true;
 	lst->prev->next = lst->next;
 	lst->next->prev = lst->prev;
-	ft_strdel(&lst->word);
+	strdel(&lst->word);
 	free(lst);
 	lst = NULL;
 	if (flag)

@@ -23,6 +23,7 @@
 
 # include <termios.h>
 #include <stdint.h>
+#include "ft_select.h"
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"
@@ -61,10 +62,10 @@ typedef struct {
 	int				bits_stored;
 }					utf_t;
 
-typedef struct		s_key_handler{
+typedef struct		s_key_readline_handler{
 	char			primary_key[5];
 	int				(*handler)(t_input *);
-}					t_key_handler;
+}					t_key_readline_handler;
 
 typedef enum s_predict_type{
 	r_cmd,
@@ -87,6 +88,10 @@ void		termcap_init(void);
 
 void 		del_predict_token(t_predict_token **token);
 t_predict_token *get_predict_token(char *raw, size_t len);
+
+void 		select_choise(t_selection *files, t_input *inp);
+
+void put_str_to_inp(t_input *input, char *part);
 
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
