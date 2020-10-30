@@ -34,7 +34,7 @@ typedef enum	e_error_code
 	E_NOINP,						/* Empty input */
 	E_INCINP,						/* Incomplete input */
 	E_BADSUBS,						/* Bad substitution */
-	E_NOEVENT,						/* Event not found */
+	E_NOEVENT,						/* % Event not found */
 	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/
 	E_OPEXPEC,						/* %: %: syntax error: operand expected (error token is \"%\") */
 	E_INVIDENT,						/* %: `%': not a valid identifier*/

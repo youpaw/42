@@ -8,10 +8,9 @@
 
 static void handle_error(const char *str)
 {
-	const char *args[2];
+	const char *args[1];
 
 	args[0] = str;
-	args[1] = NULL;
 	error_print(E_NOEVENT, args);
 }
 
