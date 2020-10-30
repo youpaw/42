@@ -14,7 +14,7 @@ static void		value_parse(const char *arg)
 		putendl(value);
 	}
 	else
-		alias_add(value);
+		alias_add(arg);
 }
 
 int		alias(const char **av)

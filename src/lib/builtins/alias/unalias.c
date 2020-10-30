@@ -6,7 +6,7 @@
 
 static void		value_parse(const char *cmd, const char *arg)
 {
-	if (alias_remove(arg))
+	if (!(alias_remove(arg)))
 		return;
 	else
 		alias_error_print(E_NOTFOUND, cmd, arg);
