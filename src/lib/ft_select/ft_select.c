@@ -61,7 +61,7 @@ char	*prepare_choise(t_selection *selection, const char *letter)
 		return (NULL);
 	while (!selection->under_cursor)
 		selection = selection->next;
-	ret = xmalloc(sizeof(char) * ((selection->len * 2) + 2));
+	ret = xmalloc(sizeof(char) * ((selection->cstring_len * 2) + 2));
 	while (selection->word[i])
 	{
 		if (selection->word[i] == ' ')
@@ -84,6 +84,7 @@ char *ft_select(t_selection *selections)
 	last_letter = prepare_choise(selections, last_letter);
 	move_start();
 	tputs(tgetstr("ve", NULL), 1, putchar);
+	g_out.cur_y_pos = 0;
 	del_selections(&selections);
 	return (last_letter);
 }

@@ -21,6 +21,7 @@ void 	select_choise(t_selection *files, t_input *inp)
 	struct winsize ws;
 
 	i = 0;
+	tputs(tgetstr("do", NULL), 1, putchar);
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	selection = ft_select(files);
 	tputs(tgetstr("up", NULL), 1, putchar);

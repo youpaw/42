@@ -42,7 +42,8 @@ typedef struct	s_outputs
 typedef struct	s_selection
 {
 	char				*word;
-	int					len;
+	size_t				cstring_len;
+	size_t 				display_len;
 	bool				selected;
 	bool				under_cursor;
 	int					vert_pos;

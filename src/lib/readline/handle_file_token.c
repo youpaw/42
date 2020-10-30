@@ -112,6 +112,28 @@ char	**get_filename(char *fullname)
 	return (filename);
 }
 
+int	check_for_utf8_comb_charecter(char *prev, char *letter, size_t len)
+{
+	if (!strncmp(&prev[len], "\xcc\x86", 2))
+	{
+		if (!strncmp(prev, "\xd0\x98", 2))
+			letter[1] = '\x99';
+		else if (!strncmp(prev, "\xd0\xb8", 2))
+			letter[1] = '\xb9';
+		return 2;
+	}
+	if (!strncmp(&prev[len], "\xcc\x88", 2))
+	{
+		if (!strncmp(prev, "\xd0\xb5", 2))
+			strcpy(letter, "\xd1\x91");
+		else if (!strncmp(prev, "\xd0\x95", 2))
+			strcpy(letter, "\xd0\x81");
+		return (2);
+	}
+	return (0);
+}
+
+#include "cc_num.h"
 void put_str_to_inp(t_input *input, char *part)
 {
 	size_t i;
@@ -119,12 +141,37 @@ void put_str_to_inp(t_input *input, char *part)
 	int 	len;
 
 	i = 0;
+//	while (part[i])
+//		printf("\\x%x", (unsigned char)part[i++]);
+//	exit(1);
 	while (part[i])
 	{
 		bzero(let.ch, 5);
-		len = get_utf8_len(part[i]);
+		len = utf8_sizeof_symbol(part[i]);
 		strncpy(let.ch, &part[i], len);
-		handle_key(let.ch, input);
+		if (len >= 2)
+		{
+//			if (!strncmp(&part[i + len], "\xcc\x86", 2))
+//			{
+//				if (!strncmp(&part[i], "\xd0\x98", 2))
+//						let.ch[1] = '\x99';
+//				else if (!strncmp(&part[i], "\xd0\xb8", 2))
+//					let.ch[1] = '\xb9';
+//				i += 2;
+//			}
+//			if (!strncmp(&part[i + len], "\xcc\x88", 2))
+//			{
+//				if (!strncmp(&part[i], "\xd0\xb5", 2))
+//					strcpy(let.ch, "\xd1\x91");
+//				else if (!strncmp(&part[i], "\xd0\x95", 2))
+//					strcpy(let.ch, "\xd0\x81");
+//				i += 2;
+//			}
+		i += check_for_utf8_comb_charecter(&part[i], let.ch, len);
+		}
+		handle_symbol_key(input, let.ch);
+//		sleep(1);
+//		putnbr(len);
 		i += len;
 	}
 	free(part);
@@ -154,11 +201,16 @@ void 	handle_file_token(t_input *input, t_predict_token *token)
 	t_list *files;
 	char 	*part;
 	char **filename;
+	size_t i;
 
+	i = 0;
 	filename = get_filename(token->raw);
 	files = get_list_files(filename[0], filename[1]);
 	if (!files)
-		return ;
+	{
+		handle_key(" \0\0\0", input);
+		return;
+	}
 	part = find_same_part(files, filename[1]);
 	if (part)
 	{
@@ -170,6 +222,11 @@ void 	handle_file_token(t_input *input, t_predict_token *token)
 	}
 	else
 	{
+		while (filename[1][i])
+		{
+			handle_backspace(input);
+			i += utf8_sizeof_symbol(filename[1][i]);
+		}
 		select_choise(convert_list_2_selection(files), input);
 		lst_del_circle(&files, NULL);
 	}

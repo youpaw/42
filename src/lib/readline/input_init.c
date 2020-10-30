@@ -18,7 +18,7 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 	*vec_ptr = vec_new(8, sizeof(char[5]), NULL);
 	while (*str)
 	{
-		letter_len = get_utf8_len(*str);
+		letter_len = utf8_sizeof_symbol(*str);
 		bzero(letter, 5);
 		strncpy(letter, str, letter_len);
 		vec_push(*vec_ptr, letter);

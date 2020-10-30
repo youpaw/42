@@ -53,7 +53,6 @@
 void		select_init(void)
 {
 	tinit();
-	tputs(tgetstr("do", NULL), 1, putchar);
 	puts(g_out.hide_cursor);
 }
 

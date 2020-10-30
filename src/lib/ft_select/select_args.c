@@ -25,16 +25,14 @@ int select_handle_key(char *key)
 			{"\33\133\103", move_cursor_right},	//down
 			{"\33\133\104", move_cursor_left}	//down
 	};
-	int ret;
 
 	index = 0;
-	ret = 0;
 	selection = g_selection;
 	while (index < N_SELECT_KEY_HANDLERS_COUNT)
 	{
 		if (!strcmp(hanlders[index].primary_key, key))
 		{
-			ret = hanlders[index].handler(&selection);
+			hanlders[index].handler(&selection);
 			g_selection = selection;
 			return (0);
 		}
@@ -46,7 +44,6 @@ int select_handle_key(char *key)
 char	*select_args(t_selection *selections)
 {
 	char	key[5];
-	int		ret;
 
 	while (1)
 	{
@@ -55,7 +52,7 @@ char	*select_args(t_selection *selections)
 		draw_selections(selections);
 		if (read(STDIN_FILENO, key, 4) == -1)
 			return (NULL);
-		if ((ret = select_handle_key(key)))
+		if (select_handle_key(key))
 			return (strdup(key));
 	}
 }

@@ -28,7 +28,7 @@ void	common_redraw(t_input *input)
 		while (cur_x_pos != input->line_len[cur_y_pos])
 		{
 			vec_get_at(&buf[i], input->line[cur_y_pos], cur_x_pos);
-			i += get_utf8_len(buf[i]);
+			i += utf8_sizeof_symbol(buf[i]);
 			if (i >= 1020)
 			{
 				write(STDIN_FILENO, buf, i);

@@ -23,7 +23,8 @@ t_selection	*add_doubly_list(t_selection *lst, char *word, size_t len)
 	new = NULL;
 	new = xmalloc(sizeof(t_selection));
 	new->word = word;
-	new->len = len;
+	new->cstring_len = len;
+	new->display_len = utf8_display_strlen(word);
 	new->under_cursor = false;
 	new->selected = false;
 	new->vert_pos = -1;
