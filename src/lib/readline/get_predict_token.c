@@ -22,10 +22,9 @@ static t_predict_token *init_token(t_lexer *lexer, t_slice *slice)
 	else if (lexer->tokens->size)
 	{
 		vec_get_last(&last_token, lexer->tokens);
-		if (is_delimiter(last_token.type))
+		if (is_delimiter(last_token.type) || last_token.type == l_assignment_word)
 			token->type = r_cmd;
-		else if (is_operator(last_token.type) || \
-		last_token.type == l_io_number || last_token.type == l_assignment_word)
+		else
 			token->type = r_file;
 	}
 	else

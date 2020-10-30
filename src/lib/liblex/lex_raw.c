@@ -8,7 +8,7 @@
 
 static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
-	t_state	state;
+	t_slice	slice;
 
 	lexer->raw = strdup(raw);
 	lexer->begin = 0;
@@ -18,8 +18,9 @@ static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 	lexer->tokens = vec_new(TOKENS_STACK_SIZE, sizeof(t_token), NULL);
 	lexer->stage = stage;
 	bzero(lexer->flags, sizeof(char) * N_LEX_FLAGS);
-	state = l_unset;
-	vec_push(lexer->slices, &state);
+	slice.state = l_unset;
+	slice.index = 0;
+	vec_push(lexer->slices, &slice);
 }
 
 int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)

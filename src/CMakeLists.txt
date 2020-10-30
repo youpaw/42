@@ -62,6 +62,12 @@ include_directories(${LIBLEX_DIR})
 add_subdirectory(${LIBLEX_DIR})
 target_link_libraries(${PROJECT_NAME} lex)
 
+#add ft_select to the project
+set(FT_SELECT_DIR "lib/ft_select")
+include_directories(${FT_SELECT_DIR})
+add_subdirectory(${FT_SELECT_DIR})
+target_link_libraries(${PROJECT_NAME} ft_select)
+
 #add readline to the project
 set(READLINE_DIR "lib/readline")
 include_directories(${READLINE_DIR})

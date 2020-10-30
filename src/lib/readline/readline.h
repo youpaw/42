@@ -13,7 +13,7 @@
 #ifndef READLINE_H
 #define READLINE_H
 
-#define N_ORD_KEY_HANDLERS 7
+#define N_ORD_KEY_HANDLERS 6
 #define N_ESC_KEY_HANDLERS 9
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
@@ -23,6 +23,7 @@
 
 # include <termios.h>
 #include <stdint.h>
+#include "ft_select.h"
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"
@@ -61,10 +62,10 @@ typedef struct {
 	int				bits_stored;
 }					utf_t;
 
-typedef struct		s_key_handler{
+typedef struct		s_key_readline_handler{
 	char			primary_key[5];
 	int				(*handler)(t_input *);
-}					t_key_handler;
+}					t_key_readline_handler;
 
 typedef enum s_predict_type{
 	r_cmd,
@@ -87,6 +88,10 @@ void		termcap_init(void);
 
 void 		del_predict_token(t_predict_token **token);
 t_predict_token *get_predict_token(char *raw, size_t len);
+
+void 		select_choise(t_selection *files, t_input *inp);
+
+void put_str_to_inp(t_input *input, char *part);
 
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
@@ -112,9 +117,9 @@ void		redraw_input_del(t_input *inp);
 
 char		*input_to_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
-void 		handle_file_token(t_input *input, t_token *token);
+void 		handle_file_token(t_input *input, t_predict_token *token);
 void handle_choice_tab(t_input *input, t_list **options);
-char *find_same_part(t_list *files, char *token);
+char *find_same_part(t_list *files, char*filename);
 void		choose_token(t_input *input, t_list *lst);
 
 
