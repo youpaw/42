@@ -22,13 +22,17 @@ int		mark_process_status (pid_t pid, int status)
 			for (p = j->first_process; p; p = p->next)
 				if (p->pid == pid)
 				{
+					//p->status =
+					if (WIFEXITED(status))
 					p->status = status;
+
+					//printf("\n exit status=%d\n\n", p->status);
 					if (WIFSTOPPED (status))
 						p->stopped = 1;
 					else
 					{
 						p->completed = 1;
-						if (WIFSIGNALED (status))
+						if (WIFSIGNALED(status))
 							fprintf (stderr, "%d: Terminated by signal %d.\n",
 									 (int) pid, WTERMSIG (p->status));
 					}

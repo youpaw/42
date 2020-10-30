@@ -29,13 +29,13 @@ int 	fg(const char **av)
 	putendl("fg builtin");
 	index = -1;
 	if (!av[1])
-		index = queue_get_current();
+		index = queue_get_current(1);
 	else
 	{
 		if (av[1][0] == '+')
-			index = queue_get_current();
+			index = queue_get_current(1);
 		else if (av[1][0] == '-')
-			index = queue_get_last();
+			index = queue_get_last(1);
 		else if (is_number(av[1]))
 			index = atoi(av[1]);
 	}

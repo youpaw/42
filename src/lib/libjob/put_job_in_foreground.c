@@ -32,7 +32,6 @@ void	put_job_in_foreground (t_job *j, int cont)
 	//putendl("job wait ended");
 
 	/* Put the shell back in the foreground.  */
-	//tcsetpgrp (g_terminal, g_pgid);
 	//setpgid(getpid(), j->pgid);
 	signal(SIGTTOU, SIG_IGN);
 	//print_process_stats("before");

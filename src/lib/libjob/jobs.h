@@ -108,7 +108,15 @@ void	queue_print(void);
 void	queue_push_back(int index);
 void	queue_remove(int index);
 void	queue_move_back(int index);
-int 	queue_get_current(void);
-int 	queue_get_last(void);
+int		queue_get_current(int is_job_builtin);
+int		queue_get_last(int is_job_builtin);
+
+void	print_job_info(t_job *job);
+
+/*
+** Job utils
+*/
+
+void	print_job_formatted(t_job *job, int is_job_builtin);
 
 #endif
