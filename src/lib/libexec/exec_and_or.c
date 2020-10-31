@@ -19,10 +19,12 @@ void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 		job = job_new();
 		exec_pipeline(ast->left, job);
 		job->command = get_command(ast->left);
-		if (!is_forked)
+		if (is_forked)
 			job->pgid = getpid();
 		push_job(job);
 		launch_job(job, is_foreground);
+		if (is_forked)
+			wait_for_job_complete(job);
 		g_exit_code = get_job_status(job);
 		//printf("[%d->%d] \n", job->pgid, g_exit_code);
 		//fflush(NULL);

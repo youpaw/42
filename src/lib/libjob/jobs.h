@@ -50,6 +50,7 @@ extern	t_vec	*g_job_queue;
 
 
 
+void	wait_for_job_complete(t_job *j);
 
 /* Find the active job with the indicated pgid.  */
 t_job	*find_job (pid_t pgid);
