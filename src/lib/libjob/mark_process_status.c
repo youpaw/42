@@ -22,8 +22,6 @@ int		mark_process_status (pid_t pid, int status)
 			for (p = j->first_process; p; p = p->next)
 				if (p->pid == pid)
 				{
-					//p->status =
-					if (WIFEXITED(status))
 					p->status = status;
 
 					//printf("\n exit status=%d\n\n", p->status);

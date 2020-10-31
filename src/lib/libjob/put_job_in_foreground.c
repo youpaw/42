@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include "cc_str.h"
+#include "cc_num.h"
 
 /* Put job j in the foreground.  If cont is nonzero,
    restore the saved terminal modes and send the process group a
@@ -28,8 +29,6 @@ void	put_job_in_foreground (t_job *j, int cont)
 
 	/* Wait for it to report.  */
 	wait_for_job(j);
-
-	//putendl("job wait ended");
 
 	/* Put the shell back in the foreground.  */
 	//setpgid(getpid(), j->pgid);

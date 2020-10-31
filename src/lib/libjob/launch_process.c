@@ -10,6 +10,10 @@
 #include <signal.h>
 #include <unistd.h>
 
+
+#include "cc_num.h"
+#include "cc_str.h"
+
 static int	is_path(const char *str)
 {
 	if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
