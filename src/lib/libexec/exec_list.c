@@ -11,13 +11,14 @@ void exec_list(t_ast *ast)
 	t_job *job;
 
 	if (!ast->token || ast->token->type == l_semi)
-		exec_and_or(ast->left, 1, NULL);
+		exec_and_or(ast->left, 1, 0, NULL);
 	else
 	{
 		if (!(pid = fork()))
 		{
-			exec_and_or(ast->left, 0, NULL);
-			exit(0);
+//			set_ignore_handlers();
+			exec_and_or(ast->left, 1, 1, NULL);
+			exit(g_exit_code);
 		}
 		else
 		{
