@@ -7,22 +7,74 @@
 #include <fcntl.h>
 #include <cc_str.h> // delete ???
 #include <cc_num.h> // delete ??
-
+#include <cc_char.h>
 
 void open_error()
 {
 	write(STDERR_FILENO, "open error while redirecting", strlen("open error while redirecting")); // delete this
 }
 
-void 	l_great_and_redirect(t_ast *leafs, t_process *process, int from)
+void bad_descriptor()
+{
+	return ;
+}
+
+static int is_valid_number(const char *str)
+{
+	if (!str || !*str)
+		return (0);
+	while (isdigit(*str))
+		str++;
+	if (!*str)
+		return (1);
+	return (0);
+}
+
+void 	l_great_and_redirect(t_ast *leafs, t_process *process)
 {
 	int out;
+	int from;
+	int to_fd;
 
+	to_fd = -1;
+	from = -1;
 	out = -1;
+	if (leafs->token)
+	{
+		if (leafs->token->type == l_io_number)
+			from = atoi(leafs->token->raw);
+	}
+	else
+		from = 1;
 	if (leafs->left->left->token)
 	{
 		if (leafs->left->left->token->type == l_word)
 		{
+			if (leafs->left->left->token->raw)
+			{
+				if (is_valid_number(leafs->left->left->token->raw[0]))
+				{
+					to_fd = atoi(leafs->left->left->token->raw[0]);
+					if (to_fd != 0 && to_fd != 1 && to_fd != 2)
+						bad_descriptor();
+				}
+				else
+				{
+					if (from == 1)
+					{
+						out = open(leafs->left->left->token->raw, O_RDWR | O_CREAT | O_TRUNC, 0644);
+						if (-1 == out)
+							open_error();
+						if (process->stdout != STDOUT_FILENO && process->stdout != STDIN_FILENO && process->stdout != STDERR_FILENO)
+							close(process->stdout);
+						if (process->stderr != STDOUT_FILENO && process->stderr != STDIN_FILENO && process->stderr != STDERR_FILENO)
+							close(process->stderr);
+						process->stdout = out;
+						process->stderr = out;
+					}
+				}
+
+			}
 			out = open(leafs->left->left->token->raw, O_RDWR | O_CREAT | O_TRUNC, 0644);
 			if (-1 == out)
 				open_error();
@@ -33,18 +85,46 @@ void 	l_great_and_redirect(t_ast *leafs, t_process *process, int from)
 	}
 }
 
+
+
+void 	init_process_ioerr(t_process *process, int from, int to)
+{
+	if (STDIN_FILENO == from)
+	{
+		if (process->stdin != STDIN_FILENO && process->stdin != STDOUT_FILENO && process->stdin != STDERR_FILENO)
+			close(process->stdin);
+		process->stdin = to;
+	}
+	else if (STDERR_FILENO == from)
+	{
+		if (process->stderr != STDIN_FILENO && process->stderr != STDOUT_FILENO && process->stderr != STDERR_FILENO)
+			close(process->stderr);
+		process->stderr = to;
+	}
+	else if (STDOUT_FILENO == from)
+	{
+		if (process->stdout != STDIN_FILENO && process->stdout != STDOUT_FILENO && process->stdout != STDERR_FILENO)
+			close(process->stdout);
+		process->stdout = to;
+	}
+}
+
 void 	l_great_redirect(t_ast *leafs, t_process *process, int is_double_great)
 {
 	int out;
-    int options;
-    int from;
+	int options;
+	int from;
 
-    from = -1;
-    options = O_RDWR | O_CREAT | (is_double_great ? O_APPEND : O_TRUNC);
+	from = -1;
+	options = O_RDWR | O_CREAT | (is_double_great ? O_APPEND : O_TRUNC);
 	out = -1;
 	if (leafs->token)
-	    if (leafs->token->type == p_io_file)
-	        from = atoi(leafs->token->raw);
+	{
+		if (leafs->token->type == l_io_number)
+			from = atoi(leafs->token->raw);
+	}
+	else
+		from = 1;
 	if (leafs->left->left->token)
 	{
 		if (leafs->left->left->token->type == l_word)
@@ -52,52 +132,32 @@ void 	l_great_redirect(t_ast *leafs, t_process *process, int is_double_great)
 			out = open(leafs->left->left->token->raw, options, 0644);
 			if (-1 == out)
 				open_error();
-			if (from != -1)
-            {
-			    if (STDERR_FILENO == from)
-			        process->stderr = out;
-			    else if (STDOUT_FILENO == from)
-			        process->stdout = out;
-			    else if (STDIN_FILENO == from)
-			        process->stdin = out;
-            }
-			else
-            {
-                if (process->stdout != STDOUT_FILENO && process->stdout != STDIN_FILENO && process->stdout != STDERR_FILENO)
-                    close(process->stdout);
-                process->stdout = out;
-            }
+			init_process_ioerr(process, from, out);
 		}
 	}
 }
-void 	l_less_redirect(t_ast *leafs, t_process *process)
-{
-	int in;
+void 	l_less_redirect(t_ast *leafs, t_process *process) {
+    int in;
 
-	in = -1;
-	if (leafs->left->left->token)
-	{
-		if (leafs->left->left->token->type == l_word)
-		{
-			in = open(leafs->left->left->token->raw, O_RDONLY);
-			if (-1 == in)
-				open_error();
-			if (process->stdin != STDOUT_FILENO && process->stdin != STDIN_FILENO && process->stdin != STDERR_FILENO)
-				close(process->stdin);
-			process->stdin = in;
-		}
-	}
+    in = -1;
+    if (leafs->left->left->token) {
+        if (leafs->left->left->token->type == l_word) {
+            in = open(leafs->left->left->token->raw, O_RDONLY);
+            if (-1 == in)
+                open_error();
+            if (process->stdin != STDOUT_FILENO && process->stdin != STDIN_FILENO && process->stdin != STDERR_FILENO)
+                close(process->stdin);
+            process->stdin = in;
+        }
+    }
 }
+
 int 	prepare_redirect(t_ast *ast, t_process *process)
 {
 	size_t i;
-	int from;
 	t_ast **redirects;
-	int redirect_type;
 
-	redirect_type = 0;
 	i = 0;
-	from = -1;
 	if ((redirects = get_redirect_nodes(ast)) == NULL)
 		return (0);
 	while(redirects[i])
@@ -111,7 +171,7 @@ int 	prepare_redirect(t_ast *ast, t_process *process)
 			else if (redirects[i]->left->token->type == l_double_great)
 				l_great_redirect(redirects[i], process, 1);
 			else if (redirects[i]->left->token->type == l_great_and)
-			    l_great_and_redirect(redirects[i], process, from);
+			    l_great_and_redirect(redirects[i], process);
 		}
 		i++;
 	}
