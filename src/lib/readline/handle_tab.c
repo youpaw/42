@@ -20,8 +20,7 @@ int			handle_tab(t_input *inp)
 	static t_list	*options;
 	t_predict_token *token;
 
-	token = get_predict_token(input_to_str(*inp), inp->cursor_x_position);
-//	sleep(1);
+	token = get_predict_token(input_to_n_str(*inp));
 //	if (token->type == r_file) //file
 		handle_file_token(inp, token);
 	del_predict_token(&token);

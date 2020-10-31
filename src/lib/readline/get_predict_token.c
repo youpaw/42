@@ -50,28 +50,24 @@ static void 	skip_special_chars(t_lexer *lexer)
 	}
 }
 
-t_predict_token *get_predict_token(char *raw, size_t len)
+t_predict_token *get_predict_token(char *raw)
 {
 	t_lexer			lexer;
 	t_slice			last_slice;
 	t_predict_token *token;
-	char			*sub;
 
-	if (!raw || !*raw)
+	if (!raw)
 		return (NULL);
-	sub = strsub(raw, 0, len);
-	lex_raw(&lexer, sub, l_tok);
+	lex_raw(&lexer, raw, l_tok);
 	vec_get_last(&last_slice, lexer.slices);
 	if (last_slice.state == l_dollar && \
 	!strncmp(lexer.raw + last_slice.index, "$(", 2))
-		token = get_predict_token(lexer.raw + last_slice.index + 2, \
-        strlen(lexer.raw + last_slice.index + 2));
+		token = get_predict_token(lexer.raw + last_slice.index + 2);
 	else
 	{
 		skip_special_chars(&lexer);
 		token = init_token(&lexer, &last_slice);
 	}
 	lex_del(&lexer);
-	free(sub);
 	return (token);
 }

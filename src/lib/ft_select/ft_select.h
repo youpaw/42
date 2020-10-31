@@ -36,6 +36,7 @@ typedef struct	s_outputs
 	int				fd;
 	int 			cur_y_pos;
 	bool			flag_lil_wnd;
+	bool			flag_sigwinch;
 	int 			engaged_space;
 }				t_outputs;
 
@@ -62,24 +63,24 @@ t_selection 	*g_selection;
 
 t_selection		*add_doubly_list(t_selection *lst, char *word, size_t len);
 int				del_double_list_item(t_selection *lst);
-char * select_args(t_selection *selections);
+char 			*select_args(t_selection *selections);
 void			delete_elem(t_selection **selection);
 void			del_selections(t_selection **selections);
 void			draw_selections();
 struct winsize	get_winsize(void);
 void			tinit(void);
 t_selection		*get_under_cursor(t_selection **selection);
-int move_cursor_up(t_selection **selection);
-int move_cursor_down(t_selection **selection);
-int move_cursor_left(t_selection **selection);
-int move_cursor_right(t_selection **selection);
+int				move_cursor_up(t_selection **selection);
+int 			move_cursor_down(t_selection **selection);
+int				move_cursor_left(t_selection **selection);
+int				move_cursor_right(t_selection **selection);
 void			select_init(void);
 void			init_signals(void);
 t_selection		*set_cursor_on_pos(t_selection *cpy, int fnd_hor, int fnd_vert);
 int				check_winsize(int len);
 void			restore_displayed(t_selection *selection);
-void move_start();
-t_selection *convert_list_2_selection(t_list *lst);
-char *ft_select(t_selection *selections);
+void			move_start();
+t_selection		*convert_list_2_selection(t_list *lst);
+char			*ft_select(t_selection *selections);
 
 #endif

@@ -33,20 +33,18 @@ char g_prompt[PROMPT_LEN + 1];
 
 typedef struct		s_input
 {
-	t_vec			**line;
-	int				cursor_x_position;
-	int				cursor_y_position;
-	size_t 			len;
-	int				*line_len;
-	int 			indent;
+	t_vec			**line;					//array with letters of string
+	size_t 			cursor_x_position;		//current position of cursor
+	size_t 			cursor_y_position;		//current position of cursor
+	size_t 			len;					//len of whole string
+	size_t 			*line_len;				//len of line before newline
+	size_t 			indent;					//len of indent
 }					t_input;
 
 typedef union		u_letter
 {
 	char			ch[5];
-	unsigned char	uch[5];
 	int				num;
-	unsigned int	unum;
 }					t_letter;
 
 /*
@@ -54,6 +52,7 @@ typedef union		u_letter
 *				  mask        lead        beg      end       bits
 *        &(utf_t){0b00111111, 0b10000000, 0,       0,        6    }
 */
+
 typedef struct {
 	char			mask;
 	char			lead;
@@ -87,7 +86,7 @@ void		tty_restore(void);
 void		termcap_init(void);
 
 void 		del_predict_token(t_predict_token **token);
-t_predict_token *get_predict_token(char *raw, size_t len);
+t_predict_token *get_predict_token(char *raw);
 
 void 		select_choise(t_selection *files, t_input *inp);
 
@@ -116,6 +115,7 @@ void		redraw_input_adding(t_input *inp);
 void		redraw_input_del(t_input *inp);
 
 char		*input_to_str(t_input input);
+char		*input_to_n_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
 void 		handle_file_token(t_input *input, t_predict_token *token);
 void handle_choice_tab(t_input *input, t_list **options);
