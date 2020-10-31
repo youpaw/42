@@ -14,7 +14,8 @@ static void		value_parse(const char *arg)
 		putendl(value);
 	}
 	else
-		alias_add(arg);
+		if (alias_add(arg))
+			alias_bash_error_print(E_NOTFOUND, "alias", arg);
 }
 
 int		alias(const char **av)
@@ -29,7 +30,7 @@ int		alias(const char **av)
 		return (0);
 	}
 	if ((arg_i = alias_check_opt("alias", ALIAS, av, &flag)) < 1)
-		return (1);
+		return (E_INVALOPT);
 	if (flag == ALIAS_BUILTINS_FLAG || av[arg_i][0] == '#')
 		alias_print();
 	while (av[arg_i])

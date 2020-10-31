@@ -77,7 +77,7 @@ int cd(const char **av)
 		return (0);
 	}
 	if ((path_i = cd_check_opt(av, &flags)) < 1 || !(av[path_i]))
-		return (1);
+		return (E_INVALOPT);
 	cn_path = cd_path_canonization(av[path_i]);
 	if (cd_path_validation(cn_path))
 		return (1);
