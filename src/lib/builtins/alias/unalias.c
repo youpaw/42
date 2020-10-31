@@ -9,7 +9,7 @@ static void		value_parse(const char *cmd, const char *arg)
 	if (!(alias_remove(arg)))
 		return;
 	else
-		alias_error_print(E_NOTFOUND, cmd, arg);
+		alias_bash_error_print(E_NOTFOUND, cmd, arg);
 }
 
 int		unalias(const char **av)
@@ -20,7 +20,7 @@ int		unalias(const char **av)
 	flag = 0;
 	if (!av[1])
 	{
-		alias_error_print(E_ARGCNOTENOUGH, av[0], NULL);
+		alias_error_print("unalias");
 		return (0);
 	}
 	if ((arg_i = alias_check_opt("unalias", UNALIAS, av, &flag)) < 1)

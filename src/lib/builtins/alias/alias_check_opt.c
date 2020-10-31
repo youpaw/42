@@ -14,19 +14,16 @@ int alias_check_opt(char *builtin, t_opt_map built_i, const char **av,
 
 	strcpy(opt_alias_map[ALIAS], "p\0");
 	strcpy(opt_alias_map[UNALIAS], "a\0");
-//	putnbr(isalpha('d'));
-	skip_args = optparse(av, opt_alias_map[built_i], &opt);
-	if (isalpha(opt.invalid_opt))
+	if (!(skip_args = optparse(av, opt_alias_map[built_i], &opt)))
 	{
 		invalid_opt[0] = opt.invalid_opt;
 		invalid_opt[1] = '\0';
-		alias_error_print(E_INVALOPT, builtin, invalid_opt);
+		alias_bash_error_print(E_INVALOPT, builtin, invalid_opt);
 		free(opt.options);
 		return (-1);
 	}
-	if (skip_args > 1)
+	else if (skip_args > 1)
 		if (opt.options[strlen(opt.options) - 1] == opt_alias_map[built_i][0])
 			*flags = ALIAS_BUILTINS_FLAG;
-	free(opt.options);
 	return (skip_args);
 }
