@@ -20,6 +20,7 @@
 #define INP_MAKING_CHOICE 2
 #define PROMPT_TEXT "42sh $>"
 #define PROMPT_LEN 7
+#define N_BUILTINS 9
 
 # include <termios.h>
 #include <stdint.h>
@@ -27,6 +28,7 @@
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"
+#include "cc_graph.h"
 
 struct termios		g_tty_backup;
 char g_prompt[PROMPT_LEN + 1];
@@ -127,5 +129,6 @@ void		signal_init(void);
 void		signal_handler(int sig);
 
 void 	print_prompt(t_input *inp);
+void	fill_complition_graph(t_graph *graph);
 
 #endif //READLINE_H
