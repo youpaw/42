@@ -18,7 +18,7 @@ void exec_list(t_ast *ast)
 	{
 		if (!(pid = fork()))
 		{
-//			set_ignore_handlers();
+			set_print_child_handlers();
 			exec_and_or(ast->left, 0, 1, NULL);
 			exit(g_exit_code);
 		}
@@ -31,7 +31,6 @@ void exec_list(t_ast *ast)
 			setpgid(pid, job->pgid);
 			job->command = get_command(ast->left);
 			push_job(job);
-			put_job_in_background(job, 0);
 		}
 	}
 	if (ast->right)

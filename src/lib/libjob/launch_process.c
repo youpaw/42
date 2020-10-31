@@ -42,8 +42,8 @@ void	launch_process (t_process *p, pid_t pgid, int foreground)
 		signal (SIGTSTP, SIG_DFL);
 		signal (SIGTTIN, SIG_DFL);
 		signal (SIGTTOU, SIG_DFL);
-		signal (SIGCHLD, SIG_DFL);
-		 */
+		*/
+		//signal (SIGCHLD, SIG_DFL);
 	}
 
 	/* Set the standard input/output channels of the new process.  */

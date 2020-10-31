@@ -57,6 +57,21 @@ void	set_dfl_handlers(void)
 {
 	set_handlers(SIG_DFL, SIG_DFL);
 }
+void ignore_tty_job_signals()
+{
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+}
+
+void default_tty_job_signals()
+{
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGTTIN, SIG_DFL);
+	signal(SIGTTOU, SIG_DFL);
+}
+
+
 
 //#define SIGHUP  1       /* hangup */
 //#define SIGINT  2       /* interrupt */
