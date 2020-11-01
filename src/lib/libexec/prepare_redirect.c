@@ -52,11 +52,15 @@ void 	l_great_and_redirect(t_ast *leafs, t_process *process)
 		{
 			if (leafs->left->left->token->raw)
 			{
-				if (is_valid_number(leafs->left->left->token->raw[0]))
+				if (is_valid_number(leafs->left->left->token->raw))
 				{
-					to_fd = atoi(leafs->left->left->token->raw[0]);
+					to_fd = atoi(leafs->left->left->token->raw);
 					if (to_fd != 0 && to_fd != 1 && to_fd != 2)
+					{
 						bad_descriptor();
+						return ;
+					}
+
 				}
 				else
 				{
@@ -70,17 +74,11 @@ void 	l_great_and_redirect(t_ast *leafs, t_process *process)
 						if (process->stderr != STDOUT_FILENO && process->stderr != STDIN_FILENO && process->stderr != STDERR_FILENO)
 							close(process->stderr);
 						process->stdout = out;
-						process->stderr = out;
+						process->stderr = dup(out);
 					}
 				}
 
 			}
-			out = open(leafs->left->left->token->raw, O_RDWR | O_CREAT | O_TRUNC, 0644);
-			if (-1 == out)
-				open_error();
-			if (process->stdout != STDOUT_FILENO && process->stdout != STDIN_FILENO && process->stdout != STDERR_FILENO)
-				close(process->stdout);
-			process->stdout = out;
 		}
 	}
 }

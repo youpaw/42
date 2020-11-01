@@ -8,6 +8,16 @@
 #include "cc_num.h"
 #include "builtins.h"
 
+static void close_fds(t_process *process)
+{
+	if (process->stdin != STDIN_FILENO)
+		close (process->stdin);
+	if (process->stdout != STDOUT_FILENO)
+		close (process->stdout);
+	if (process->stderr != STDOUT_FILENO)
+		close (process->stderr);
+}
+
 void launch_job(t_job *job, int is_foreground, int is_forked)
 {
 	t_process *process;
@@ -75,6 +85,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 			close (infile);
 		if (outfile != STDOUT_FILENO)
 			close (outfile);
+		close_fds(process);
 		infile = pfd[0];
 	}
 	if (!is_forked && !is_foreground)

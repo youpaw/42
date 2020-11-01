@@ -57,16 +57,21 @@ void	launch_process (t_process *p, pid_t pgid, int is_foreground)
 		dup2 (p->stdin, STDIN_FILENO);
 		close (p->stdin);
 	}
-	if (p->stdout != STDOUT_FILENO)
-	{
-		dup2 (p->stdout, STDOUT_FILENO);
-		close (p->stdout);
-	}
 	if (p->stderr != STDERR_FILENO)
 	{
 		dup2 (p->stderr, STDERR_FILENO);
 		close (p->stderr);
 	}
+	if (p->stdout != STDOUT_FILENO)
+	{
+		dup2 (p->stdout, STDOUT_FILENO);
+		close (p->stdout);
+	}
+	//if (p->stderr != STDERR_FILENO)
+	//{
+	//	dup2 (p->stderr, STDERR_FILENO);
+	//	close (p->stderr);
+	//}
 
 	/* Exec the new process.  Make sure we exit.  */
 
