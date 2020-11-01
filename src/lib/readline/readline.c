@@ -7,12 +7,16 @@
 #include "readline.h"
 #include <stdio.h>
 #include "cc_char.h"
+#include "cc_graph.h"
+#include "cc_str.h"
 
 
 int			readline(char **line)
 {
 	t_letter key;
 	t_input input;
+	t_graph graph;
+	char 	**strs;
 
 	tty_init();
 	input = input_init(*line);
