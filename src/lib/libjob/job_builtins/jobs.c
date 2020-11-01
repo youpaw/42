@@ -5,11 +5,12 @@
 #include "jobs.h"
 
 
-int 	jobs(const char **av)
+int jobs(const char **av)
 {
 	t_job	*job;
 
-	if ((job = g_first_job))
+	//do_job_notification();
+	if ((job = g_first_job) && g_has_job_control)
 		while (job->next)
 		{
 			print_job_formatted(job, 1);

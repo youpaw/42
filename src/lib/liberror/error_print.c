@@ -33,6 +33,7 @@ const char 	*g_error_msg[] = {
 		"%: HOME not set",
 		"%: OLDPWD not set",
 		"%: %: no such job",
+		"%: no job control",
 		"%: %: File name too long"
 
 };

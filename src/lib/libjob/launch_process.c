@@ -21,11 +21,12 @@ static int	is_path(const char *str)
 	return (0);
 }
 
-void	launch_process (t_process *p, pid_t pgid, int foreground)
+void	launch_process (t_process *p, pid_t pgid, int is_foreground)
 {
 	pid_t pid;
 	const char	*path;
 
+	g_has_job_control = 0;
 	if (g_is_interactive)
 	{
 		/* Put the process into the process group and give the process group
@@ -36,7 +37,7 @@ void	launch_process (t_process *p, pid_t pgid, int foreground)
 		if (pgid == 0)
 			pgid = pid;
 		setpgid(pid, pgid);
-		if (foreground)
+		if (is_foreground)
 			tcsetpgrp (g_terminal, pgid);
 
 		/* Set the handling for job control signals back to the default.  */
@@ -69,7 +70,8 @@ void	launch_process (t_process *p, pid_t pgid, int foreground)
 
 	/* Exec the new process.  Make sure we exit.  */
 
-	if (!run_builtin((const char **)p->argv))
+	if (!run_builtin((const char **)p->argv) ||
+			!run_job_builtin((const char **) p->argv))
 		exit(g_exit_code);
 	if (is_path(p->argv[0]))
 		path = p->argv[0];

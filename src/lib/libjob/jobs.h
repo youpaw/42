@@ -14,6 +14,7 @@ extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
 extern int				g_terminal;
 extern int				g_is_interactive;
+extern int 				g_has_job_control;
 
 /* A process is a single process.  */
 typedef struct s_process
@@ -68,8 +69,8 @@ t_job	*job_new(void);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
 void	del_process(t_process *p);
-void	launch_job(t_job *job, int is_foreground);
-void	launch_process (t_process *p, pid_t pgid, int foreground);
+void	launch_job(t_job *job, int is_foreground, int is_forked);
+void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 
 t_process	*process_new(void);
 void	print_process_stats(const char *str);
@@ -92,11 +93,12 @@ void	set_print_main_handlers(void);
 ** Job builtins
 */
 
-int 	run_job_builtin(const char **av, int is_foreground);
-int 	sh_exit(const char **av);
-int		jobs(const char **av);
-int		fg(const char **av);
-int		bg(const char **av);
+int run_job_builtin(const char **av);
+int sh_exit(const char **av);
+int jobs(const char **av);
+int fg_builtin(const char **av);
+int bg_builtin(const char **av);
+int bg_fg(const char **av, int is_bg_builtin);
 
 void	remove_job(int job_index);
 /*

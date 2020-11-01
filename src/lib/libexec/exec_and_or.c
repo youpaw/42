@@ -22,7 +22,7 @@ void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 		if (is_forked)
 			job->pgid = getpid();
 		push_job(job);
-		launch_job(job, is_foreground);
+		launch_job(job, is_foreground, is_forked);
 		if (is_forked)
 			wait_for_job_complete(job);
 		g_exit_code = get_job_status(job);

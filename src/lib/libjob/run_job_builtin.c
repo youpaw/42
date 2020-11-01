@@ -21,11 +21,11 @@ static	int get_builtin(const char *name)
 	return (-1);
 }
 
-int 	run_job_builtin(const char **av, int is_foreground)
+int run_job_builtin(const char **av)
 {
 	int 	i;
 	static int (*builtins_funcs[N_JOB_BUILTINS])(const char **) = {
-			sh_exit, jobs, fg, bg};
+			sh_exit, jobs, fg_builtin, bg_builtin};
 	if ((i = get_builtin(av[0])) == -1)
 		return (1);
 	g_exit_code = builtins_funcs[i](av);

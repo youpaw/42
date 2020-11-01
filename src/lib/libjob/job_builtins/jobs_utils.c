@@ -76,6 +76,6 @@ void	print_job_formatted(t_job *job, int is_job_builtin)
 	puts("\t");
 	puts(job->command);
 	puts("\n");
-	print_job_info(job);
+	//print_job_info(job);
 }
 
