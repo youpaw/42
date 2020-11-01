@@ -3,8 +3,6 @@
 //
 
 #include <cc.h>
-#include <stdio.h>
-#include "cc_char.h"
 #include "readline.h"
 #include "cc_str.h"
 
@@ -16,11 +14,11 @@ char *input_to_str(t_input input)
 	while (input.line[input.cursor_y_position])
 		input.cursor_y_position++;
 	string = strnew((input.len * 4) + 1 + input.cursor_y_position);
-	input.cursor_x_position = input.indent;
 	input.cursor_y_position = 0;
 	bzero(let, 5);
 	while (input.line[input.cursor_y_position])
 	{
+		input.cursor_x_position = get_prompt_len(input.cursor_y_position);
 		while (input.cursor_x_position != input.line_len[input.cursor_y_position])
 		{
 			vec_get_at(let, input.line[input.cursor_y_position], input.cursor_x_position);
@@ -29,7 +27,6 @@ char *input_to_str(t_input input)
 		}
 		if (input.line[input.cursor_y_position + 1])
 			strcat(string, "\n");
-		input.cursor_x_position = 0;
 		input.cursor_y_position++;
 	}
 	return string;

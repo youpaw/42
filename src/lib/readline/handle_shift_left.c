@@ -10,7 +10,7 @@ int handle_shift_left(t_input *inp)
 	t_letter let;
 
 	let.ch[0] = !0;
-	while (inp->cursor_x_position - PROMPT_LEN)
+	while (inp->cursor_x_position - FIRST_PROMPT_LEN)
 	{
 		vec_get_at(&let, inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		if (isspace(let.ch[0]))

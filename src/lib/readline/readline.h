@@ -18,8 +18,10 @@
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
-#define PROMPT_TEXT "42sh $>"
-#define PROMPT_LEN 7
+#define FIRST_PROMPT_TEXT "42sh $> "
+#define FIRST_PROMPT_LEN 8
+#define NEXT_PROMPT_TEXT "> "
+#define NEXT_PROMPT_LEN 2
 #define N_BUILTINS 9
 #define MAX_PATH 1024
 
@@ -32,7 +34,7 @@
 #include "cc_graph.h"
 
 struct termios		g_tty_backup;
-char g_prompt[PROMPT_LEN + 1];
+char g_prompt[FIRST_PROMPT_LEN + 1];
 
 typedef struct		s_input
 {
@@ -41,7 +43,6 @@ typedef struct		s_input
 	size_t 			cursor_y_position;		//current position of cursor
 	size_t 			len;					//len of whole string
 	size_t 			*line_len;				//len of line before newline
-	size_t 			indent;					//len of indent
 }					t_input;
 
 typedef union		u_letter
@@ -130,6 +131,8 @@ void		signal_init(void);
 void		signal_handler(int sig);
 
 void 	print_prompt(t_input *inp);
+char 	*get_prompt(int y);
+int 	get_prompt_len(int y);
 void	fill_complition_graph(t_graph *graph);
 
 #endif //READLINE_H
