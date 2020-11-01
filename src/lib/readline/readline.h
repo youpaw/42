@@ -21,6 +21,7 @@
 #define PROMPT_TEXT "42sh $>"
 #define PROMPT_LEN 7
 #define N_BUILTINS 9
+#define MAX_PATH 1024
 
 # include <termios.h>
 #include <stdint.h>
