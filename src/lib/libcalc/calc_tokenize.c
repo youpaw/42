@@ -21,6 +21,14 @@ static int		push_parenthesis(t_calc *calc, char c)
 	return (0);
 }
 
+static void print_tokenize_error(t_calc *calc, int error)
+{
+	const char *args[2];
+
+	args[0] = calc->raw;
+	args[1] = calc->raw + calc->index;
+	error_print(error, args);
+}
 
 int		calc_tokenize(t_calc *calc)
 {
@@ -40,7 +48,10 @@ int		calc_tokenize(t_calc *calc)
 			else
 				error = calc_get_token(calc);
 			if (error)
+			{
+				print_tokenize_error(calc, error);
 				break ;
+			}
 		}
 		calc->index++;
 	}

@@ -3,6 +3,7 @@
 //
 
 #include "calc.h"
+#include "error.h"
 
 int 	calc_operate_div(t_calc_eval *a, t_calc_eval *b)
 {

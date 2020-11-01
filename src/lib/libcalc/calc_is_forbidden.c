@@ -6,7 +6,7 @@
 
 static int isspecial(char c)
 {
-	static const char *str = "*+_/%()<=>!&|";
+	static const char *str = "*+-/%()<=>!&|";
 	int index;
 
 	index = 0;
