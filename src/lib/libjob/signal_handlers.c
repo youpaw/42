@@ -9,12 +9,12 @@
 static void	set_handlers(void (*sig_handler)(int arg),
 							void(*sigint_handler)(int arg))
 {
-	signal (SIGQUIT, sig_handler);
-	signal (SIGTSTP, sig_handler);
-	signal (SIGTTIN, sig_handler);
-	signal (SIGTTOU, sig_handler);
-	signal (SIGCHLD, sig_handler);
-	signal (SIGINT, sigint_handler);
+	signal(SIGQUIT, sig_handler);
+	signal(SIGTSTP, sig_handler);
+	signal(SIGTTIN, sig_handler);
+	signal(SIGTTOU, sig_handler);
+	//signal(SIGCHLD, sig_handler);
+	signal(SIGINT, sigint_handler);
 }
 
 static void print_msg(const char *msg, int arg)
@@ -38,6 +38,7 @@ static void	child_sig_handler(int arg)
 void	set_print_main_handlers(void)
 {
 	set_handlers(main_sig_handler, main_sig_handler);
+	//signal(SIGCHLD, SIG_DFL);
 }
 
 void	set_print_child_handlers(void)
@@ -48,12 +49,29 @@ void	set_print_child_handlers(void)
 void	set_ignore_handlers(void)
 {
 	set_handlers(SIG_IGN, SIG_IGN);
+	//signal(SIGCHLD, SIG_DFL);
+
 }
 
 void	set_dfl_handlers(void)
 {
 	set_handlers(SIG_DFL, SIG_DFL);
 }
+void ignore_tty_job_signals()
+{
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+}
+
+void default_tty_job_signals()
+{
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGTTIN, SIG_DFL);
+	signal(SIGTTOU, SIG_DFL);
+}
+
+
 
 //#define SIGHUP  1       /* hangup */
 //#define SIGINT  2       /* interrupt */

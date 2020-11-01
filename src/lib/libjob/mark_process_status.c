@@ -23,12 +23,14 @@ int		mark_process_status (pid_t pid, int status)
 				if (p->pid == pid)
 				{
 					p->status = status;
+
+					//printf("\n exit status=%d\n\n", p->status);
 					if (WIFSTOPPED (status))
 						p->stopped = 1;
 					else
 					{
 						p->completed = 1;
-						if (WIFSIGNALED (status))
+						if (WIFSIGNALED(status))
 							fprintf (stderr, "%d: Terminated by signal %d.\n",
 									 (int) pid, WTERMSIG (p->status));
 					}

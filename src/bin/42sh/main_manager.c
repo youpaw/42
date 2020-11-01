@@ -34,8 +34,8 @@ int 	main_manager(void)
 	print_entry();
 	while (42)
 	{
-		print_process_stats("readline");
-		jobs(NULL);
+		//print_process_stats("readline");
+		//jobs(NULL);
 		set_ignore_handlers();
 		readline(&str);
 		set_print_main_handlers();

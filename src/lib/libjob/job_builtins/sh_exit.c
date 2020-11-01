@@ -17,18 +17,18 @@ static int	is_numeric(const char *nb)
 	return (1);
 }
 
-int 	sh_exit(const char **args)
+int sh_exit(const char **av)
 {
-	if (!args[1])
+	if (!av[1])
 		exit(0);
-	else if (!is_numeric(args[1]))
+	else if (!is_numeric(av[1]))
 	{
-		error_print(E_NUMARGREQ, args);
+		error_print(E_NUMARGREQ, av);
 		exit(255);
 	}
-	else if (!args[2])
-		exit(atoi(args[1]));
+	else if (!av[2])
+		exit(atoi(av[1]));
 	else
-		error_print(E_TOOMANYARGS, args);
+		error_print(E_TOOMANYARGS, av);
 	return (0);
 }

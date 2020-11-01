@@ -8,7 +8,7 @@
 #include "cc_num.h"
 #include "builtins.h"
 
-void	launch_job(t_job *job, int foreground)
+void launch_job(t_job *job, int is_foreground, int is_forked)
 {
 	t_process *process;
 	pid_t pid;
@@ -16,8 +16,9 @@ void	launch_job(t_job *job, int foreground)
 	int infile;
 	int outfile;
 
-	if (!job->first_process->next && foreground &&
-		!run_builtin((const char **) job->first_process->argv))
+	if (!job->first_process->next && is_foreground &&
+			((!run_builtin((const char **)job->first_process->argv)) || \
+			!run_job_builtin((const char **) job->first_process->argv)))
 	{
 		job->first_process->completed = 1;
 		return ;
@@ -48,7 +49,7 @@ void	launch_job(t_job *job, int foreground)
 		if (pid == 0)
 		{
 			/* This is the child process.  */
-			launch_process(process, job->pgid, foreground);
+			launch_process(process, job->pgid, is_foreground);
 		}
 		else if (pid < 0)
 		{
@@ -60,7 +61,6 @@ void	launch_job(t_job *job, int foreground)
 		{
 			/* This is the parent process.  */
 			set_print_main_handlers();
-			//set_print_child_handlers();
 			process->pid = pid;
 			if (g_is_interactive)
 			{
@@ -77,10 +77,11 @@ void	launch_job(t_job *job, int foreground)
 			close (outfile);
 		infile = pfd[0];
 	}
-	format_job_info(job, "launched");
+	if (!is_forked && !is_foreground)
+		print_job_formatted(job, 0);
 	if (!g_is_interactive)
 		wait_for_job(job);
-	else if (foreground)
+	else if (is_foreground)
 		put_job_in_foreground(job, 0);
 	else
 		put_job_in_background(job, 0);

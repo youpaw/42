@@ -25,7 +25,7 @@ int			readline(char **line)
 		if (handle_key(key.ch, &input))
 		{
 			*line = input_to_str(input);
-			printf("\n%d\n|%s|\n", input.line_len[input.cursor_y_position], *line);
+//			printf("|%s|", input.line_len[input.cursor_y_position], *line);
 			tty_restore();
 			return 0;
 		}
