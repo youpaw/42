@@ -47,7 +47,8 @@ typedef enum	e_job_print_mode
 {
 	JPM_DEFAULT = 1,
 	JPM_PID,
-	JPM_LONG
+	JPM_LONG,
+	JPM_BG
 }				t_job_print_mode;
 
 /* The active jobs are linked into a list.  This is its head.   */
@@ -86,7 +87,7 @@ void	update_status(void);
 void	wait_for_job(t_job *j);
 void	format_job_info(t_job *j, const char *status);
 void	do_job_notification(void);
-void	continue_job(t_job *j, int foreground);
+void	continue_job(t_job *j, int is_foreground);
 void	mark_job_as_running(t_job *j);
 
 void	set_dfl_handlers(void);
@@ -103,7 +104,8 @@ int sh_exit(const char **av);
 int jobs(const char **av);
 int fg_builtin(const char **av);
 int bg_builtin(const char **av);
-int bg_fg(const char **av, int is_bg_builtin);
+int bg_fg(const char **av, int is_foreground);
+void	continue_job(t_job *j, int is_foreground);
 
 void	remove_job(int job_index);
 /*
@@ -125,7 +127,7 @@ void	print_job_info(t_job *job);
 ** Job utils
 */
 
-void	print_job_formatted(t_job *job, int is_job_builtin);
+void    print_job_formatted(t_job *job, int is_job_builtin, t_job_print_mode mode);
 int		get_job_index_from_queue(const char *str);
 
 #endif

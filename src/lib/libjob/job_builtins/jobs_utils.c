@@ -46,38 +46,70 @@ static void print_job_status(t_job *job)
 
 }
 
-static char	get_spec(t_job *job, int is_job_builtin)
+static char	get_spec(int job_index, int is_job_builtin)
 {
 	const int	cur_index = queue_get_current(is_job_builtin);
 	const int 	last_index = queue_get_last(is_job_builtin);
 
-	if (job->index == cur_index)
+	if (job_index == cur_index)
 		return ('+');
-	if (job->index == last_index)
+	if (job_index == last_index)
 		return ('-');
 	return (' ');
 }
 
-
-void	print_job_formatted(t_job *job, int is_job_builtin)
+void    print_job_pid(t_job *job)
 {
-	if (!job)
-	{
-		putendl("job is NULL");
-		return ;
-	}
-	putchar('[');
-	putnbr(job->index);
-	putchar(']');
-	putchar(get_spec(job, is_job_builtin));
-	putchar(' ');
+    putnbr(job->pgid);
+    puts("\n");
+}
+
+void    print_job_index_with_spec(t_job *job, char spec)
+{
+    putchar('[');
+    putnbr(job->index);
+    putchar(']');
+    putchar(spec);
+    putchar(' ');
+}
+
+
+void	print_job_default(t_job *job, int is_job_builtin)
+{
+	print_job_index_with_spec(job, get_spec(job->index, is_job_builtin));
 	print_job_status(job);
-	puts("PID: ");
-	putnbr(job->pgid);
 	puts("\t");
-	puts(job->command);
-	puts("\n");
-	//print_job_info(job);
+	putendl(job->command);
+}
+
+void	print_job_long(t_job *job, int is_job_builtin)
+{
+    print_job_index_with_spec(job, get_spec(job->index, is_job_builtin));
+    putnbr(job->pgid);
+    putchar(' ');
+    print_job_status(job);
+    puts(" (signal)");
+    puts("\t");
+    putendl(job->command);
+}
+
+void    print_job_bg(t_job *job)
+{
+    print_job_index_with_spec(job, ' ');
+    print_job_pid(job);
+}
+
+
+void	print_job_formatted(t_job *job, int is_job_builtin, t_job_print_mode mode)
+{
+    if (mode == JPM_DEFAULT)
+        print_job_default(job, is_job_builtin);
+    else if (mode == JPM_BG)
+        print_job_bg(job);
+    else if (mode == JPM_LONG)
+        print_job_long(job, is_job_builtin);
+    else
+        print_job_pid(job);
 }
 /*
 int			print_job_status(t_job *j, int verbose, t_job_print_mode mode)

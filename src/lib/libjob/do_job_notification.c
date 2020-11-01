@@ -33,7 +33,7 @@ void	do_job_notification(void)
 		if (job_is_completed(j))
 		{
 			format_job_info(j, "completed");
-			print_job_formatted(j, 0);
+            print_job_formatted(j, 0, JPM_DEFAULT);
 			//print_job_info(j);
 			if (jlast)
 				jlast->next = jnext;
@@ -48,7 +48,7 @@ void	do_job_notification(void)
 		else if (job_is_stopped(j) && !j->notified)
 		{
 			format_job_info(j, "stopped");
-			print_job_formatted(j, 0);
+            print_job_formatted(j, 0, JPM_DEFAULT);
 			//print_job_info(j);
 			j->notified = 1;
 			jlast = j;

@@ -6,7 +6,7 @@
 #include "jobs.h"
 #include "error.h"
 
-static int	put_job_in_bg_fg(const char *str, int is_bg_builtin)
+static int	put_job_in_bg_fg(const char *str, int is_foreground)
 {
 	t_job	*job;
 	int		index;
@@ -16,19 +16,19 @@ static int	put_job_in_bg_fg(const char *str, int is_bg_builtin)
 		return (1);
 	queue_move_back(index);
 	job->notified = 0;
-	if (is_bg_builtin)
+	if (is_foreground)
 		put_job_in_foreground(job, 1);
 	else
 		put_job_in_background(job, 1);
 	return (0);
 }
 
-int bg_fg(const char **av, int is_bg_builtin)
+int bg_fg(const char **av, int is_foreground)
 {
 	const char	*error_args[2];
 
 	error_args[0] = av[0];
-	if (g_has_job_control && !put_job_in_bg_fg(av[1], is_bg_builtin))
+	if (g_has_job_control && !put_job_in_bg_fg(av[1], is_foreground))
 		return (0);
 	if (!g_has_job_control)
 		error_print(E_NOJOBCONTROL, error_args);

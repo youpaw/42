@@ -58,7 +58,7 @@ int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 			err_code = E_NOSUCHJOB;
 		}
 		else if (g_has_job_control)
-			print_job_formatted(job, 1);
+            print_job_formatted(job, 1, mode);
 		av++;
 	}
 	return (err_code);
@@ -71,7 +71,7 @@ int 	print_all_jobs(t_job_print_mode mode)
 	if ((job = g_first_job) && g_has_job_control)
 		while (job->next)
 		{
-			print_job_formatted(job, 1);
+            print_job_formatted(job, 1, mode);
 			job = job->next;
 		}
 	return (0);

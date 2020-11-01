@@ -78,7 +78,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		infile = pfd[0];
 	}
 	if (!is_forked && !is_foreground)
-		print_job_formatted(job, 0);
+        print_job_formatted(job, 0, JPM_BG);
 	if (!g_is_interactive)
 		wait_for_job(job);
 	else if (is_foreground)
