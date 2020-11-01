@@ -37,6 +37,7 @@ int match_brace(t_lexer *lexer, t_brace brace)
 	current.state = l_unset;
 	current.index = lexer->index;
 	vec_push(lexer->slices, &current);
+	error = 0;
 	while (lexer->index < lexer->size && braces->size)
 	{
 		current.state = get_current_state(lexer);
@@ -47,8 +48,7 @@ int match_brace(t_lexer *lexer, t_brace brace)
 	}
 	if (!error && braces->size)
 		error = E_INCINP;
-	else
-		vec_rm_last(lexer->slices);
+	vec_rm_last(lexer->slices);
 	vec_del(&braces);
 	return (error);
 }

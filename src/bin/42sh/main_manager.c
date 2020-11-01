@@ -38,7 +38,6 @@ int 	main_manager(void)
 		//jobs(NULL);
 		set_ignore_handlers();
 		readline(&str);
-		putendl("");
 		set_print_main_handlers();
 		tokens = validate_str(str);
 		if (tokens && !tokens->error)
