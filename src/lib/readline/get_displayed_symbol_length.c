@@ -22,7 +22,7 @@ static uint32_t to_cp(const char chr[4])
 	utf[3] = &(utf_t){0b00001111, 0b11100000, 04000,   0177777,  4    };
 	utf[4] = &(utf_t){0b00000111, 0b11110000, 0200000, 04177777, 3    };
 	utf[5] = &(utf_t){0};
-	bytes = get_utf8_len(*chr);
+	bytes = utf8_sizeof_symbol(*chr);
 	shift = utf[0]->bits_stored * (bytes - 1);
 	uint32_t codep = (*chr++ & utf[bytes]->mask) << shift;
 	i = 0;

@@ -8,7 +8,7 @@
 
 int handle_escape_sequence(t_input *input)
 {
-	static const t_key_handler hanlders[N_ESC_KEY_HANDLERS] = {
+	static const t_key_readline_handler hanlders[N_ESC_KEY_HANDLERS] = {
 			{"\103",    &handle_right_arrow},
 			{"\104",    &handle_left_arrow},
 			{"\63\176", &handle_del},
