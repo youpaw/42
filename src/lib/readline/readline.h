@@ -22,6 +22,8 @@
 #define FIRST_PROMPT_LEN 8
 #define NEXT_PROMPT_TEXT "> "
 #define NEXT_PROMPT_LEN 2
+#define N_BUILTINS 9
+#define MAX_PATH 1024
 
 # include <termios.h>
 #include <stdint.h>
@@ -29,6 +31,7 @@
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "lexer.h"
+#include "cc_graph.h"
 
 struct termios		g_tty_backup;
 char g_prompt[FIRST_PROMPT_LEN + 1];
@@ -130,5 +133,6 @@ void		signal_handler(int sig);
 void 	print_prompt(t_input *inp);
 char 	*get_prompt(int y);
 int 	get_prompt_len(int y);
+void	fill_complition_graph(t_graph *graph);
 
 #endif //READLINE_H
