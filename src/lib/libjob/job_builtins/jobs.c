@@ -57,7 +57,7 @@ int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 			error_print(E_NOSUCHJOB, error_args);
 			err_code = E_NOSUCHJOB;
 		}
-		else
+		else if (g_has_job_control)
 			print_job_formatted(job, 1);
 		av++;
 	}

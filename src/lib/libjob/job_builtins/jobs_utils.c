@@ -46,11 +46,14 @@ static void print_job_status(t_job *job)
 
 }
 
-static char	get_spec(int index, int cur_index, int last_index)
+static char	get_spec(t_job *job, int is_job_builtin)
 {
-	if (index == cur_index)
+	const int	cur_index = queue_get_current(is_job_builtin);
+	const int 	last_index = queue_get_last(is_job_builtin);
+
+	if (job->index == cur_index)
 		return ('+');
-	if (index == last_index)
+	if (job->index == last_index)
 		return ('-');
 	return (' ');
 }
@@ -66,9 +69,7 @@ void	print_job_formatted(t_job *job, int is_job_builtin)
 	putchar('[');
 	putnbr(job->index);
 	putchar(']');
-	putchar(get_spec(job->index,
-				  queue_get_current(is_job_builtin),
-				  queue_get_last(is_job_builtin)));
+	putchar(get_spec(job, is_job_builtin));
 	putchar(' ');
 	print_job_status(job);
 	puts("PID: ");
