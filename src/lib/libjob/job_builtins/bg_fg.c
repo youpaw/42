@@ -3,29 +3,15 @@
 //
 
 
-#include "cc_str.h"
 #include "jobs.h"
 #include "error.h"
-
-static int	get_index_from_queue(const char *str)
-{
-	if (!str)
-		return (queue_get_current(1));
-	if (str[0] == '+')
-		return (queue_get_current(1));
-	if (str[0] == '-')
-		return (queue_get_last(1));
-	if (is_number(str))
-		return (atoi(str));
-	return (-1);
-}
 
 static int	put_job_in_bg_fg(const char *str, int is_bg_builtin)
 {
 	t_job	*job;
 	int		index;
 
-	index = get_index_from_queue(str);
+	index = get_job_index_from_queue(str);
 	if (!(job = find_job_by_index(index)))
 		return (1);
 	queue_move_back(index);

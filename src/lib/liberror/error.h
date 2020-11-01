@@ -40,7 +40,7 @@ typedef enum	e_error_code
 	E_INVIDENT,						/* %: `%': not a valid identifier*/
 	E_NUMARGREQ,					/* %: %: numeric argument required*/
 	E_TOOMANYARGS,					/* %: too many arguments*/
-	E_INVALOPT,						/* %: %: invalid option*/
+	E_INVALOPT,						/* %: -%: invalid option*/
 	E_NOTFOUND,						/* %: %: not found*/
 	E_HOMENOTSET,					/* HOME not set */
 	E_OLDPWDNOTSET,					/* OLDPWD not set */
@@ -50,5 +50,6 @@ typedef enum	e_error_code
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);
+int		print_invalid_option(const char *bin, char opt);
 
 #endif

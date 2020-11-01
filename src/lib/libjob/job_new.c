@@ -15,7 +15,6 @@ t_job *job_new(void)
 	job->first_process = NULL;
 	job->pgid = 0;
 	job->notified = 0;
-	job->sequence = NULL;
 	job->index = get_new_job_index();
 	tcgetattr(g_terminal, &job->tmodes);
 	queue_push_back(job->index);

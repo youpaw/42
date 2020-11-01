@@ -41,9 +41,14 @@ typedef struct s_job
 	int				index;				/* job index in list */
 	char			notified;              /* true if user told about stopped job */
 	struct termios	tmodes;      /* saved terminal modes */
-	t_token 		*sequence;
 } t_job;
 
+typedef enum	e_job_print_mode
+{
+	JPM_DEFAULT = 1,
+	JPM_PID,
+	JPM_LONG
+}				t_job_print_mode;
 
 /* The active jobs are linked into a list.  This is its head.   */
 extern	t_job	*g_first_job;
@@ -121,5 +126,6 @@ void	print_job_info(t_job *job);
 */
 
 void	print_job_formatted(t_job *job, int is_job_builtin);
+int		get_job_index_from_queue(const char *str);
 
 #endif
