@@ -38,6 +38,4 @@ char			*expand_suffix(const char *name, const char *pattern);
 char			*expand_prefix(const char *name, const char *pattern);
 t_param_type	get_operator_type(const char *str);
 
-# define	E_EXPAND 30
-
 #endif //EXPAND_H

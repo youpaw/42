@@ -13,7 +13,7 @@ static int		push_parenthesis(t_calc *calc, char c)
 
 	if ((c == '(' && calc->state == c_st_number) || \
 		(c == ')' && calc->state == c_st_operator))
-		return (E_UNEXPTOK);
+		return (E_OPEXPEC);
 	token.raw = strsub(calc->raw, calc->index, 1);
 	token.type = c_parenthesis;
 	token.priority = calc_get_priority(token.type);
@@ -24,8 +24,13 @@ static int		push_parenthesis(t_calc *calc, char c)
 static void print_tokenize_error(t_calc *calc, int error)
 {
 	const char *args[2];
+	char *tmp;
+	size_t last_index;
 
-	args[0] = calc->raw;
+	tmp = calc->raw + 1;
+	last_index = strlen(tmp) - 1;
+	tmp[last_index] = '\0';
+	args[0] = tmp;
 	args[1] = calc->raw + calc->index;
 	error_print(error, args);
 }
@@ -42,7 +47,10 @@ int		calc_tokenize(t_calc *calc)
 		if (!isspace(c))
 		{
 			if (calc_is_forbidden(c))
-				error = E_UNEXPTOK;
+			{
+				putendl("!!!!!!!!"); //!Todo remove check + arithmetick error
+				error = calc->state == c_st_number ? E_OPEXPEC : E_INVAOP;
+			}
 			else if (c == '(' || c == ')')
 				error = push_parenthesis(calc, c);
 			else

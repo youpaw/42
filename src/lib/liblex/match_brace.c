@@ -13,14 +13,12 @@ static int validate_brace(t_lexer *lexer, t_vec *braces)
 	if ((direction = get_brace(lexer->raw + lexer->index, &current)))
 	{
 		if (direction > 0)
-			vec_push(braces, &braces);
+			vec_push(braces, &current);
 		else
 		{
 			if (!vec_get_last(&last, braces) && last == current)
 				vec_rm_last(braces);
 		}
-		if (current == l_double_round_brace)
-			lexer->index++;
 	}
 	return (E_OK);
 }
@@ -30,10 +28,13 @@ int match_brace(t_lexer *lexer, t_brace brace)
 	int		error;
 	t_slice current;
 	t_vec	*braces;
+	t_stage stage;
 
 	braces = vec_new(BRACES_STACK_SIZE, sizeof(t_brace), NULL);
 	vec_push(braces, &brace);
-	lexer->index += brace == l_double_round_brace ? 2 : 1;
+	lexer->index++;
+	stage = lexer->stage;
+	lexer->stage = l_vld;
 	current.state = l_unset;
 	current.index = lexer->index;
 	vec_push(lexer->slices, &current);
@@ -50,5 +51,6 @@ int match_brace(t_lexer *lexer, t_brace brace)
 		error = E_INCINP;
 	vec_rm_last(lexer->slices);
 	vec_del(&braces);
+	lexer->stage = stage;
 	return (error);
 }
