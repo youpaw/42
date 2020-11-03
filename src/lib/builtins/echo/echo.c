@@ -26,7 +26,7 @@ int					echo(const char **av)
 	int				arg_cnt;
 
 	flags = ECHO_E_FLAG;
-	arg_cnt = cd_check_opt(av, &flags);
+	arg_cnt = check_opt(av, &flags);
 	while (av[arg_cnt])
 	{
 		puts(av[arg_cnt]);
