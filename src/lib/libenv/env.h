@@ -64,4 +64,10 @@ int 		env_cmp_pair(const t_hash_pair *lhs, const t_hash_pair *rhs);
 int 		env_insert_to(t_hash_map *hm, const char *field);
 int 		env_remove_from(t_hash_map *hm, const char *key);
 
+/*
+** for autocompletion ENV
+ */
+
+char		**get_all_env_names_sorted(void);
+
 #endif //ENV_H

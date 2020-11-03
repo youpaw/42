@@ -15,8 +15,6 @@ int			readline(char **line)
 {
 	t_letter key;
 	t_input input;
-	t_graph graph;
-	char 	**strs;
 
 	tty_init();
 	input = input_init(*line);

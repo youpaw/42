@@ -45,25 +45,22 @@ static t_list *get_file_from_name(struct dirent *dir)
  * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
 */
 
-static t_list *get_list_files(char *path, char *name)
+t_list *get_list_files(char *path, char *name, int access_mode)
 {
 	DIR *d;
 	struct dirent *dir;
 	t_list *lst = NULL;
-	size_t cur_len;
-	int dot_flg;
 
-	cur_len = strlen(name);
-	dot_flg = (*name == '.') ? 1 : 0;
 	if (!(d = opendir(path)))
 		return NULL;
 	while ((dir = readdir(d)))
 	{
-		if (strncmp(dir->d_name, name, cur_len) == 0)
+		if (strncmp(dir->d_name, name, strlen(name)) == 0)
 		{
-			if (!dot_flg && (!strcmp(".", dir->d_name) || !strcmp("..", dir->d_name)))
+			if (!*name && (!strcmp(".", dir->d_name) || !strcmp("..", dir->d_name)))
 				continue;
-			lst_add_sort(&lst, get_file_from_name(dir), (int (*)(const void *, const void *)) &strcmp);
+			if (!access(dir->d_name, access_mode))
+				lst_add_sort(&lst, get_file_from_name(dir), (int (*)(const void *, const void *)) &strcmp);
 		}
 	}
 	lst_circle(lst);
@@ -133,7 +130,6 @@ int	check_for_utf8_comb_charecter(char *prev, char *letter, size_t len)
 	return (0);
 }
 
-#include "cc_num.h"
 void put_str_to_inp(t_input *input, char *part)
 {
 	size_t i;
@@ -141,71 +137,27 @@ void put_str_to_inp(t_input *input, char *part)
 	int 	len;
 
 	i = 0;
-//	while (part[i])
-//		printf("\\x%x", (unsigned char)part[i++]);
-//	exit(1);
 	while (part[i])
 	{
 		bzero(let.ch, 5);
 		len = utf8_sizeof_symbol(part[i]);
 		strncpy(let.ch, &part[i], len);
 		if (len >= 2)
-		{
-//			if (!strncmp(&part[i + len], "\xcc\x86", 2))
-//			{
-//				if (!strncmp(&part[i], "\xd0\x98", 2))
-//						let.ch[1] = '\x99';
-//				else if (!strncmp(&part[i], "\xd0\xb8", 2))
-//					let.ch[1] = '\xb9';
-//				i += 2;
-//			}
-//			if (!strncmp(&part[i + len], "\xcc\x88", 2))
-//			{
-//				if (!strncmp(&part[i], "\xd0\xb5", 2))
-//					strcpy(let.ch, "\xd1\x91");
-//				else if (!strncmp(&part[i], "\xd0\x95", 2))
-//					strcpy(let.ch, "\xd0\x81");
-//				i += 2;
-//			}
-		i += check_for_utf8_comb_charecter(&part[i], let.ch, len);
-		}
+			i += check_for_utf8_comb_charecter(&part[i], let.ch, len);
 		handle_symbol_key(input, let.ch);
-//		sleep(1);
-//		putnbr(len);
 		i += len;
 	}
 	free(part);
 }
 
-//int	get_input_ending(char *name, char *part)
-//{
-//	size_t i;
-//	char *part_cpy;
-//
-//	i = 0;
-//	while (name[i])
-//		i++;
-//	if (!part[i])
-//	{
-//		strdel(&part);
-//		return (0);
-//	}
-//	part_cpy = strdup(&part[i]);
-//	strdel(&part);
-//	part = part_cpy;
-//	return (1);
-//}
-
-void 	handle_file_token(t_input *input, t_predict_token *token)
+void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 {
 	t_list *files;
 	char 	*part;
 	char **filename;
-	size_t i;
 
-	i = 0;
 	filename = get_filename(token->raw);
-	files = get_list_files(filename[0], filename[1]);
+	files = get_list_files(filename[0], filename[1], access_mode);
 	if (!files)
 	{
 		handle_key(" \0\0\0", input);
@@ -222,11 +174,12 @@ void 	handle_file_token(t_input *input, t_predict_token *token)
 	}
 	else
 	{
-		while (filename[1][i])
-		{
-			handle_backspace(input);
-			i += utf8_sizeof_symbol(filename[1][i]);
-		}
+//		while (filename[1][i])
+//		{
+//			handle_backspace(input);
+//			i += utf8_sizeof_symbol(filename[1][i]);
+//		}
+		clear_last_disp_token(filename[1], input);
 		select_choise(convert_list_2_selection(files), input);
 		lst_del_circle(&files, NULL);
 	}

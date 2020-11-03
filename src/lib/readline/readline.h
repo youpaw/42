@@ -26,15 +26,13 @@
 #define MAX_PATH 1024
 
 # include <termios.h>
-#include <stdint.h>
-#include "ft_select.h"
+# include <stdint.h>
 # include "cc_vec.h"
 # include "cc_lst.h"
+# include "cc_graph.h"
 # include "lexer.h"
-#include "cc_graph.h"
 
 struct termios		g_tty_backup;
-char g_prompt[FIRST_PROMPT_LEN + 1];
 
 typedef struct		s_input
 {
@@ -92,7 +90,7 @@ void		termcap_init(void);
 void 		del_predict_token(t_predict_token **token);
 t_predict_token *get_predict_token(char *raw);
 
-void 		select_choise(t_selection *files, t_input *inp);
+void 		select_choise(void *files, t_input *inp);
 
 void put_str_to_inp(t_input *input, char *part);
 
@@ -110,6 +108,8 @@ int			handle_escape_sequence(t_input *input);
 
 int			handle_key(char *key, t_input *input);
 
+void 	handle_command_token(t_input *inp, t_predict_token *token);
+
 t_input 	input_init(char *line);
 int			readline(char **line);
 
@@ -121,10 +121,14 @@ void		redraw_input_del(t_input *inp);
 char		*input_to_str(t_input input);
 char		*input_to_n_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
-void 		handle_file_token(t_input *input, t_predict_token *token);
-void handle_choice_tab(t_input *input, t_list **options);
+void		handle_file_token(t_input *input, t_predict_token *token, int access_mode);
+void		handle_param_token(t_input *input, t_predict_token *token);
+void		handle_choice_tab(t_input *input, t_list **options);
+t_list		*get_list_files(char *path, char *name, int access_mode);
+char		**get_filename(char *fullname);
 char *find_same_part(t_list *files, char*filename);
 void		choose_token(t_input *input, t_list *lst);
+void clear_last_disp_token(char *token, t_input *input);
 
 
 void		signal_init(void);
@@ -133,6 +137,7 @@ void		signal_handler(int sig);
 void 	print_prompt(t_input *inp);
 char 	*get_prompt(int y);
 int 	get_prompt_len(int y);
+
 void	fill_complition_graph(t_graph *graph);
 
 #endif //READLINE_H

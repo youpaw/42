@@ -81,6 +81,7 @@ int				check_winsize(int len);
 void			restore_displayed(t_selection *selection);
 void			move_start();
 t_selection		*convert_list_2_selection(t_list *lst);
+t_selection		*convert_array_2_selection(char **argv);
 char			*ft_select(t_selection *selections);
 
 #endif
