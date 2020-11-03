@@ -5,6 +5,7 @@
 #include "builtins.h"
 #include "cc_str.h"
 #include "env.h"
+#include "jobs.h"
 
 static	int get_builtin(const char *name)
 {
@@ -28,6 +29,7 @@ int 	run_builtin(const char **av)
 			set, unset, cd, export, hash, echo};
 	if ((i = get_builtin(av[0])) == -1)
 		return (1);
+	g_can_exit = 0;
 	g_exit_code = builtins_funcs[i](av);
 	return (0);
 }

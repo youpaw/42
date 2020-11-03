@@ -6,14 +6,6 @@
 #include "cc_str.h"
 #include <stdlib.h>
 
-static void	free_job(t_job *j)
-{
-	strdel(&(j->command));
-	del_process(j->first_process);
-	queue_remove(j->index);
-	free(j->first_process);
-	j->first_process = NULL;
-}
 
 /* Notify the user about stopped or terminated jobs.
    Delete terminated jobs from the active job list.  */

@@ -9,8 +9,8 @@
 static int	set_process_status(t_process *p, int status)
 {
 	p->status = status;
-	//if (WIFCONTINUED(status))
-	//	p->stopped = 0;
+	if (WIFCONTINUED(status))
+		p->stopped = 0;
 	if (WIFSTOPPED(status))
 		p->stopped = 1;
 	else

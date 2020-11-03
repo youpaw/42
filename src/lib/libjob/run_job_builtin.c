@@ -25,7 +25,7 @@ int run_job_builtin(const char **av)
 {
 	int 	i;
 	static int (*builtins_funcs[N_JOB_BUILTINS])(const char **) = {
-			sh_exit, jobs, fg_builtin, bg_builtin};
+			exit_builtin, jobs, fg_builtin, bg_builtin};
 	if ((i = get_builtin(av[0])) == -1)
 		return (1);
 	g_exit_code = builtins_funcs[i](av);

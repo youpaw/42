@@ -11,7 +11,6 @@
 void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 {
 	t_job	*job;
-	int		cur_job_status;
 
 	if (!token || (!g_exit_code && token->type == l_and_if) \
 				|| (g_exit_code && token->type == l_or_if))

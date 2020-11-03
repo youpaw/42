@@ -15,6 +15,7 @@ struct termios	g_tmodes;
 int				g_terminal;
 int				g_is_interactive;
 int				g_has_job_control;
+int				g_can_exit;
 t_job				*g_first_job = NULL;
 t_vec				*g_job_queue = NULL;
 
@@ -27,6 +28,7 @@ void	jobs_init(void)
 	g_terminal = STDIN_FILENO;
 	g_is_interactive = isatty(g_terminal);
 	g_has_job_control = 0;
+	g_can_exit = 0;
 	if (g_is_interactive)
 	{
 		g_has_job_control = 1;

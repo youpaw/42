@@ -83,7 +83,7 @@ int		jobs(const char **av)
 	int 			skip;
 	int 			err_code;
 
-	err_code = 0;
+	g_can_exit = 1;
 	if (!(skip = optparse(av, "pl", &opt_res)))
 	{
 		err_code = print_invalid_option("jobs", opt_res.invalid_opt);

@@ -23,6 +23,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		job->first_process->completed = 1;
 		return ;
 	}
+	g_can_exit = 0;
 	infile = STDIN_FILENO;
 
 	for (process = job->first_process; process; process = process->next)

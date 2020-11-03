@@ -5,13 +5,6 @@
 #include "jobs.h"
 #include <stdlib.h>
 
-static void	free_job(t_job *j)
-{
-	free(j->command);
-	del_process(j->first_process);
-	queue_remove(j->index);
-}
-
 void	remove_job(int job_index)
 {
 	t_job	*j;

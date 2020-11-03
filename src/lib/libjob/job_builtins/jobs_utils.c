@@ -10,8 +10,8 @@
 #include <stdio.h>
 
 /*
-** ----------------
-*/
+** ----------------TO REMOVE-------------
+
 static void print_process(t_process *p)
 {
 	printf("      %d status=%d completed=%d stopped=%d\n", p->pid,
@@ -31,9 +31,11 @@ void	print_job_info(t_job *job)
 	}
 }
 
-/*
+
 ** ----------------
 */
+
+
 
 static void print_job_status(t_job *job)
 {

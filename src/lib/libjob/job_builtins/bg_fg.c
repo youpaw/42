@@ -15,11 +15,7 @@ static int	put_job_in_bg_fg(const char *str, int is_foreground)
 	if (!(job = find_job_by_index(index)))
 		return (1);
 	queue_move_back(index);
-	job->notified = 0;
-	if (is_foreground)
-		put_job_in_foreground(job, 1);
-	else
-		put_job_in_background(job, 1);
+	continue_job(job, is_foreground);
 	return (0);
 }
 
@@ -27,6 +23,7 @@ int bg_fg(const char **av, int is_foreground)
 {
 	const char	*error_args[2];
 
+	g_can_exit = 0;
 	error_args[0] = av[0];
 	if (g_has_job_control && !put_job_in_bg_fg(av[1], is_foreground))
 		return (0);
