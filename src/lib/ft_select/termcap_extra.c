@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   autocomplete.c                                     :+:      :+:    :+:   */
+/*   termcap_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/20 16:40:10 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/22 22:29:19 by mgena            ###   ########.fr       */
+/*   Created: 2020/07/24 14:48:09 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/14 18:21:00 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "ft_select.h"
 
-#include "cc.h"
-#include <stdio.h>
-
-int			handle_tab(t_input *inp)
+void	set_term_str(void)
 {
-	static t_list	*options;
-	t_predict_token *token;
+	g_out.reverse_video = tgetstr("mr", NULL);
+	g_out.norm = tgetstr("me", NULL);
+	g_out.hide_cursor = tgetstr("vi", NULL);
+	g_out.show_cursor = tgetstr("ve", NULL);
+	g_out.move_right = tgetstr("nd", NULL);
+	g_out.move_down = tgetstr("do", NULL);
+}
 
-	token = get_predict_token(input_to_n_str(*inp));
-//	if (token->type == r_file) //file
-		handle_file_token(inp, token);
-	del_predict_token(&token);
-	return 0;
+void	tinit(void)
+{
+
+		set_term_str();
+
 }

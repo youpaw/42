@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   support.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgena <mgena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 16:54:11 by mgena             #+#    #+#             */
-/*   Updated: 2020/08/28 14:23:31 by mgena            ###   ########.fr       */
+/*   Created: 2020/07/04 14:48:13 by mgena             #+#    #+#             */
+/*   Updated: 2020/08/14 18:28:51 by mgena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
-#include <stdio.h>
+#include "ft_select.h"
 
-void	complete_print(t_input *input, t_list **to_print)
+t_selection	*get_under_cursor(t_selection **selection)
 {
-	char *line;
+	t_selection *cpy;
 
-	g_input_state_flag = 1;
-	line = (*to_print)->content;
-	while (*line)
-	{
-		putchar(*line);
-		vec_push(input->line[input->cursor_y_position], line);
-		input->len++;
-		input->cursor_x_position++;
-		line++;
-	}
-	lst_del_circle(to_print, NULL);
-	*to_print = NULL;
+	cpy = *selection;
+	while (!cpy->under_cursor)
+		cpy = cpy->next;
+	return (cpy);
 }

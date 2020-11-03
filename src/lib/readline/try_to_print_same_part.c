@@ -5,16 +5,19 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *find_same_part(t_list *files, char *token)
+char *find_same_part(t_list *files, char *filename)
 {
 	t_list *cur;
 	unsigned int i;
 	char same[1024];
 	unsigned int len;
 
-//	len = strlen(token);
+	if (!files)
+		return (NULL);
+	len = strlen(filename);
+	if (files->next == files)
+		return (strdup(&(files->content)[len]));
 	i = 0;
-	len = 0;
 	cur = files->next;
 	while (((char*)cur->content)[i + len] == ((char*)files->content)[i + len])
 	{

@@ -8,6 +8,7 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
+
 static int strcmp_in_input(t_vec **vec_ptr, char *str)
 {
 	char	letter[5];
@@ -15,20 +16,15 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 	int		line_len;
 
 	line_len = 0;
-	*vec_ptr = vec_new(8, sizeof(char[5]), NULL);
 	while (*str)
 	{
-		letter_len = get_utf8_len(*str);
+		letter_len = utf8_sizeof_symbol(*str);
 		bzero(letter, 5);
 		strncpy(letter, str, letter_len);
 		vec_push(*vec_ptr, letter);
 		str += letter_len;
 		line_len++;
 	}
-//	letter[0] = '\n';
-//	letter[1] = '\0';
-//	vec_push(*vec_ptr, letter);
-//	line_len++;
 	return line_len;
 }
 
@@ -46,7 +42,10 @@ static t_input	fill_input(char *line)
 	inp.cursor_y_position = 0;
 	while (prev[inp.cursor_y_position])
 	{
-		inp.line_len[inp.cursor_y_position] = strcmp_in_input(
+		inp.line[inp.cursor_y_position] = vec_new(8, sizeof(char[5]), NULL);
+		inp.line_len[inp.cursor_y_position] = strcmp_in_input(&inp.line[inp.cursor_y_position],
+														get_prompt(inp.cursor_y_position));
+		inp.line_len[inp.cursor_y_position] += strcmp_in_input(
 				&inp.line[inp.cursor_y_position], prev[inp.cursor_y_position]);
 		inp.cursor_y_position++;
 	}
@@ -57,7 +56,6 @@ t_input 	input_init(char *line)
 {
 	t_input inp;
 
-	strcpy(g_prompt, PROMPT_TEXT);
 	if (*line)
 		inp = fill_input(line);
 	else
