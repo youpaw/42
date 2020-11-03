@@ -19,6 +19,12 @@ void 	handle_command_token(t_input *inp, t_predict_token *token)
 	{
 		fill_complition_graph(&graph);
 		cmds = graph_get_names(&graph, token->raw);
+		if (!cmds)
+		{
+			handle_symbol_key(inp, " \0\0\0");
+			graph_del(&graph);
+			return ;
+		}
 		clear_last_disp_token(token->raw, inp);
 		select_choise(convert_array_2_selection(cmds), inp);
 		i = 0;

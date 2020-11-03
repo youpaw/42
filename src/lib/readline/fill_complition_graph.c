@@ -71,6 +71,8 @@ static void 	get_bin_paths(t_graph *graph)
 		fill_bins(graph, paths[cnt]);
 		cnt++;
 	}
+	strarr_del(paths);
+	free(paths);
 }
 
 void	fill_complition_graph(t_graph *graph)

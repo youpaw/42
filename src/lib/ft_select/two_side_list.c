@@ -44,51 +44,29 @@ t_selection	*add_doubly_list(t_selection *lst, char *word, size_t len)
 	return (lst);
 }
 
-void		del_selections(t_selection **selections)
-{
-	t_selection *first;
-	t_selection *cur;
-	t_selection *next;
-
-	first = *selections;
-	next = (*selections)->next;
-	cur = *selections;
-
-	free(cur);
-	cur = next;
-	next = cur->next;
-	while (cur != first)
-	{
-		free(cur);
-		cur = next;
-		next = cur->next;
-	}
-	*selections = NULL;
-}
-void		delete_elem(t_selection **selection)
+void		delete_lst(t_selection **selection)
 {
 	t_selection *cpy;
 
 	cpy = *selection;
-	while (!cpy->under_cursor)
-		cpy = cpy->next;
-	if (cpy == *selection)
-		*selection = cpy->next;
-	cpy->next->under_cursor = true;
-	if (del_double_list_item(cpy))
-		return;
+	while (cpy->next != cpy)
+		del_double_list_item(cpy->next);
+	del_double_list_item(cpy);
+	*selection = NULL;
 }
 
 int			del_double_list_item(t_selection *lst)
 {
 	bool flag;
 
+//	puts("!");
+//	sleep(1);
 	flag = false;
 	if (lst == lst->next)
 		flag = true;
 	lst->prev->next = lst->next;
 	lst->next->prev = lst->prev;
-	strdel(&lst->word);
+//	free(&lst->word);
 	free(lst);
 	lst = NULL;
 	if (flag)

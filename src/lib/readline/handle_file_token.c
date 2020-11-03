@@ -26,6 +26,7 @@ static t_list *get_file_from_name(struct dirent *dir)
 {
 	char filename[1027];
 	t_list *file;
+	*filename = '\0';
 	if (DT_DIR == dir->d_type)
 	{
 		strcpy(filename, dir->d_name);
@@ -63,6 +64,7 @@ t_list *get_list_files(char *path, char *name, int access_mode)
 				lst_add_sort(&lst, get_file_from_name(dir), (int (*)(const void *, const void *)) &strcmp);
 		}
 	}
+	closedir(d);
 	lst_circle(lst);
 	return (lst);
 }
@@ -159,29 +161,24 @@ void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 	filename = get_filename(token->raw);
 	files = get_list_files(filename[0], filename[1], access_mode);
 	if (!files)
-	{
 		handle_key(" \0\0\0", input);
-		return;
-	}
-	part = find_same_part(files, filename[1]);
-	if (part)
-	{
-		put_str_to_inp(input, part);
-		lst_del_circle(&files, NULL);
-		free(filename[0]);
-		free(filename[1]);
-		free(filename);
-	}
 	else
 	{
-//		while (filename[1][i])
-//		{
-//			handle_backspace(input);
-//			i += utf8_sizeof_symbol(filename[1][i]);
-//		}
-		clear_last_disp_token(filename[1], input);
-		select_choise(convert_list_2_selection(files), input);
-		lst_del_circle(&files, NULL);
+		part = find_same_part(files, filename[1]);
+		if (part)
+		{
+			put_str_to_inp(input, part);
+			lst_del_circle(&files, NULL);
+		}
+		else
+		{
+			clear_last_disp_token(filename[1], input);
+			select_choise(convert_list_2_selection(files), input);
+			lst_del_circle(&files, NULL);
+		}
 	}
+	free(filename[0]);
+	free(filename[1]);
+	free(filename);
 
 }

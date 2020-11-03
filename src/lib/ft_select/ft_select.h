@@ -64,7 +64,7 @@ t_selection 	*g_selection;
 t_selection		*add_doubly_list(t_selection *lst, char *word, size_t len);
 int				del_double_list_item(t_selection *lst);
 char 			*select_args(t_selection *selections);
-void			delete_elem(t_selection **selection);
+void			delete_lst(t_selection **selection);
 void			del_selections(t_selection **selections);
 void			draw_selections();
 struct winsize	get_winsize(void);

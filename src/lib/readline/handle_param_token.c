@@ -8,17 +8,20 @@
 
 void 	handle_param_token(t_input *inp, t_predict_token *token)
 {
-//	size_t i;
-//	t_graph graph;
-//	char **params;
-//
-//	fill_complition_graph(&graph);
-//	params = graph_get_names(&graph, token->raw);
-//	clear_last_disp_token(token->raw, inp);
-//	select_choise(convert_array_2_selection(params), inp);
-//	i = 0;
-//	while (params[i])
-//		free(params[i++]);
-//	free(params);
-//	graph_del(&graph);
+	size_t i;
+	t_graph graph;
+	char **params;
+
+	fill_graph_by_env_names(&graph);
+	params = graph_get_names(&graph, token->raw);
+	if (params)
+	{
+		clear_last_disp_token(token->raw, inp);
+		select_choise(convert_array_2_selection(params), inp);
+		i = 0;
+		while (params[i])
+			free(params[i++]);
+		free(params);
+		graph_del(&graph);
+	}
 }
