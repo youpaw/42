@@ -23,7 +23,7 @@ int		unalias(const char **av)
 		alias_error_print("unalias");
 		return (0);
 	}
-	if ((arg_i = alias_check_opt("unalias", UNALIAS, av, &flag)) < 1)
+	if ((arg_i = alias_check_opt(UNALIAS, av, &flag)) < 1)
 		return (1);
 	if (flag == ALIAS_BUILTINS_FLAG)
 	{

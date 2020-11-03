@@ -75,7 +75,7 @@ int cd_path_validation(const char *cn_path)
 		return (1);
 	if (!envv_set(cn_path))
 		return (1);
-	if (strcmp(cn_path, "-") == 0 && !valid_dir(cn_path))
+	if (strcmp(cn_path, "-") != 0 && !valid_dir(cn_path))
 		return (1);
 	return (0);
 }

@@ -15,8 +15,10 @@ static int			check_opt(const char  **av, unsigned char *flags)
 	{
 		if (opt.options[0] == 'n')
 			*flags = ECHO_N_FLAG;
+		free(opt.options);
 	}
-	free(opt.options);
+	if (skip_args == 0)
+		return (1);
 	return (skip_args);
 }
 

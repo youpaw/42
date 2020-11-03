@@ -22,7 +22,7 @@ int			cd_check_opt(const char **av, unsigned char *flags)
 	{
 		if (opt.options[strlen(opt.options) - 1] == 'P')
 			*flags = CD_P_FLAG;
+		free(opt.options);
 	}
-	free(opt.options);
 	return (skip_args);
 }
