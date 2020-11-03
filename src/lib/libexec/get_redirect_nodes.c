@@ -8,9 +8,9 @@ static void get_nodes_recursive(t_ast *ast, t_vec *vec)
 {
 	if (!ast)
 		return ;
-	get_nodes_recursive(ast->right, vec);
 	if (ast->left && ast->left->type == p_io_redirect)
 		vec_push(vec, &ast->left);
+	get_nodes_recursive(ast->right, vec);
 }
 
 t_ast	**get_redirect_nodes(t_ast *ast)
