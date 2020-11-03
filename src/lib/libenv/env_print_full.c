@@ -22,12 +22,11 @@ static void	print_by_names(const char **names)
 
 void		env_print_full(void)
 {
-	char	**names;
+	const char	**names;
 
 	if ((names = get_all_env_names_sorted()))
 	{
 		print_by_names((const char **)names);
-		strarr_del(names);
 		free(names);
 	}
 }

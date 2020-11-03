@@ -9,7 +9,7 @@
 #include "cc_mem.h"
 #include "cc_sort.h"
 
-static void 	get_names(char **names)
+static void 	get_names(const char **names)
 {
 	size_t i;
 	t_list *lst;
@@ -20,7 +20,7 @@ static void 	get_names(char **names)
 		lst = g_env->buckets[i++];
 		while (lst)
 		{
-			*names++ = strdup(((t_hash_pair *)(lst->content))->key);
+			*names++ = ((t_hash_pair *)(lst->content))->key;
 			lst = lst->next;
 		}
 	}
@@ -30,16 +30,16 @@ static void 	get_names(char **names)
 		lst = g_inter_env->buckets[i++];
 		while (lst)
 		{
-			*names++ = strdup(((t_hash_pair *)(lst->content))->key);
+			*names++ = ((t_hash_pair *)(lst->content))->key;
 			lst = lst->next;
 		}
 	}
 }
 
-char	**get_all_env_names_sorted(void)
+const char ** get_all_env_names_sorted(void)
 {
 	size_t		size;
-	char 	**names;
+	const char 	**names;
 
 	size = hash_map_get_size(g_env) + hash_map_get_size(g_inter_env);
 	if (size)
@@ -47,7 +47,7 @@ char	**get_all_env_names_sorted(void)
 		names = xmalloc(sizeof(char *) * (size + 1));
 		names[size] = NULL;
 		get_names(names);
-		quick_sort((void **) names, 0, (int)size - 1,
+		quick_sort((void **)names, 0, (int)size - 1,
 				   (int (*)(const void *, const void *)) strcmp);
 		return (names);
 	}

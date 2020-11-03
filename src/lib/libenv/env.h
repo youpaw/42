@@ -10,6 +10,7 @@
 
 //#include <glob.h>
 #include "cc_hash_map.h"
+#include "cc_graph.h"
 extern int	g_exit_code;
 extern char *g_av[N_MAX_AV];
 extern t_hash_map *g_exec_env;
@@ -56,6 +57,7 @@ size_t		get_valid_name_length_no_check(const char *name);
 void		env_print_pair(const t_hash_pair *pair);
 void 		env_del_pair(t_hash_pair *pair);
 int 		env_cmp_pair(const t_hash_pair *lhs, const t_hash_pair *rhs);
+const char 	**get_all_env_names_sorted(void);
 
 /*
 ** general funcs for env
@@ -68,6 +70,6 @@ int 		env_remove_from(t_hash_map *hm, const char *key);
 ** for autocompletion ENV
  */
 
-char		**get_all_env_names_sorted(void);
+void		fill_graph_by_env_names(t_graph *graph);
 
 #endif //ENV_H
