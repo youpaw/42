@@ -21,8 +21,12 @@ int			handle_tab(t_input *inp)
 	t_predict_token *token;
 
 	token = get_predict_token(input_to_n_str(*inp));
-//	if (token->type == r_file) //file
-		handle_file_token(inp, token);
+	if (token->type == r_file) //file
+		handle_file_token(inp, token, F_OK);
+	else if (token->type == r_cmd)
+		handle_command_token(inp, token);
+	else if (token->type == r_param)
+		handle_param_token(inp, token);
 	del_predict_token(&token);
 	return 0;
 }

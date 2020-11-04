@@ -12,7 +12,6 @@
 
 #include "ft_select.h"
 #include "cc_str.h"
-#include "cc_vec.h"
 #include "cc_lst.h"
 #include "cc_char.h"
 #include "cc_mem.h"
@@ -43,13 +42,13 @@ t_selection	*convert_array_2_selection(char **argv)
 	res = NULL;
 	while (argv[i])
 	{
-		word = strdup(argv[i++]);
+		word = argv[i++];
 		res = add_doubly_list(res, word, strlen(word));
 	}
 	return (res);
 }
 
-char	*prepare_choise(t_selection *selection, const char *letter)
+char	*prepare_choise(t_selection *selection, char *letter)
 {
 	size_t i;
 	size_t k;
@@ -58,7 +57,10 @@ char	*prepare_choise(t_selection *selection, const char *letter)
 	i = 0;
 	k = 0;
 	if (*letter == '\33')
+	{
+		free(letter);
 		return (NULL);
+	}
 	while (!selection->under_cursor)
 		selection = selection->next;
 	ret = xmalloc(sizeof(char) * ((selection->cstring_len * 2) + 2));
@@ -71,6 +73,7 @@ char	*prepare_choise(t_selection *selection, const char *letter)
 	if (*letter == ' ')
 		ret[k++] = ' ';
 	ret[k] = '\0';
+	free(letter);
 	return (ret);
 }
 
@@ -85,6 +88,6 @@ char *ft_select(t_selection *selections)
 	move_start();
 	tputs(tgetstr("ve", NULL), 1, putchar);
 	g_out.cur_y_pos = 0;
-	del_selections(&selections);
+	delete_lst(&selections);
 	return (last_letter);
 }
