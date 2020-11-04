@@ -5,7 +5,7 @@
 #include "jobs.h"
 #include <stdlib.h>
 
-void	remove_job(int job_index)
+void	remove_job_by_index(int job_index)
 {
 	t_job	*j;
 	t_job	*jlast;
@@ -22,7 +22,7 @@ void	remove_job(int job_index)
 				jlast->next = jnext;
 			else
 				g_first_job = jnext;
-			free_job(j);
+			free_job(&j);
 			return ;
 		}
 		jlast = j;

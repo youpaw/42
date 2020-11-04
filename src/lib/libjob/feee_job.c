@@ -4,11 +4,16 @@
 #include "jobs.h"
 #include "cc_str.h"
 
-void	free_job(t_job *j)
+void	free_job(t_job **job)
 {
+	t_job	*j;
+
+	if (!job || !(j = *job))
+		return ;
 	strdel(&(j->command));
-	del_process(j->first_process);
 	queue_remove(j->index);
+	free_processes(j->first_process);
 	free(j->first_process);
-	j->first_process = NULL;
+	free(j);
+	j = NULL;
 }

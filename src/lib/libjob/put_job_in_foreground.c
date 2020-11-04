@@ -25,7 +25,7 @@ void	put_job_in_foreground (t_job *j, int cont)
 	}
 	wait_for_job(j);
 	/* Put the shell back in the foreground.  */
-	signal(SIGTTOU, SIG_IGN);
+	//signal(SIGTTOU, SIG_IGN);
 	//setpgid(getpid(), j->pgid);
 	if( tcsetpgrp (g_terminal, g_pgid) < 0)
 	{

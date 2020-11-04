@@ -43,7 +43,7 @@ void	exit_shell(int exit_code)
 		free_all_jobs();
 		exit(exit_code);
 	}
-	fdputendl("There are stopped jobs", 2);
+	fdputendl("There are stopped jobs.", 2);
 	g_can_exit = 1;
 }
 

@@ -38,12 +38,7 @@ void	jobs_init(void)
 			kill (-g_pgid, SIGTTIN);
 
 		/* Ignore interactive and job-control signals.  */
-		signal (SIGINT, SIG_IGN);
-		signal (SIGQUIT, SIG_IGN);
-		signal (SIGTSTP, SIG_IGN);
-		signal (SIGTTIN, SIG_IGN);
-		signal (SIGTTOU, SIG_IGN);
-		//signal (SIGCHLD, SIG_IGN);
+		ignore_job_and_interactive_signals();
 
 		/* Put ourselves in our own process group.  */
 		g_pgid = getpid();

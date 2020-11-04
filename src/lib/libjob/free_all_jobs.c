@@ -13,8 +13,7 @@ void	free_all_jobs(void)
 	while (j)
 	{
 		next_job = j->next;
-		free_job(j);
-		free(j);
+		free_job(&j);
 		j = next_job;
 	}
 }

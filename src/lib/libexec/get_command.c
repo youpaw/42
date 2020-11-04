@@ -29,6 +29,5 @@ char *get_command(t_ast *ast)
 	get_node_tokens(ast, vec);
 	command = strnjoin((const char **)vec->data);
 	vec_del(&vec);
-	free(vec);
 	return (command);
 }

@@ -5,7 +5,6 @@
 #include "jobs.h"
 #include "cc_str.h"
 #include <unistd.h>
-#include "cc_num.h"
 #include "builtins.h"
 
 void launch_job(t_job *job, int is_foreground, int is_forked)
@@ -50,6 +49,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		if (pid == 0)
 		{
 			/* This is the child process.  */
+			restore_job_and_interactive_signals();
 			launch_process(process, job->pgid, is_foreground);
 		}
 		else if (pid < 0)
@@ -61,7 +61,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		else
 		{
 			/* This is the parent process.  */
-			set_print_main_handlers();
+			//set_print_main_handlers();
 			process->pid = pid;
 			if (g_is_interactive)
 			{

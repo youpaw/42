@@ -75,7 +75,7 @@ void	jobs_init(void);
 t_job	*job_new(void);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
-void	del_process(t_process *p);
+void	free_processes(t_process *p);
 void	launch_job(t_job *job, int is_foreground, int is_forked);
 void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 
@@ -105,7 +105,7 @@ int bg_builtin(const char **av);
 int bg_fg(const char **av, int is_foreground);
 void	continue_job(t_job *j, int is_foreground);
 
-void	remove_job(int job_index);
+void	remove_job_by_index(int job_index);
 /*
 ** Job queue
 */
@@ -132,13 +132,17 @@ int		get_job_index_from_queue(const char *str);
 ** Signals
 */
 
+void	ignore_job_and_interactive_signals(void);
+void	restore_job_and_interactive_signals(void);
+
+/*
 void	set_dfl_handlers(void);
 void	set_ignore_handlers(void);
 void	set_print_child_handlers(void);
 void	set_print_main_handlers(void);
+*/
 
-
-void	free_job(t_job *j);
+void	free_job(t_job **j);
 void	free_all_jobs(void);
 
 #endif

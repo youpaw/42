@@ -24,22 +24,20 @@ void	do_job_notification(void)
 		   completed and delete it from the list of active jobs.  */
 		if (job_is_completed(j))
 		{
-			format_job_info(j, "completed");
+			//format_job_info(j, "completed");
             print_job_formatted(j, 0, JPM_DEFAULT);
 			//print_job_info(j);
 			if (jlast)
 				jlast->next = jnext;
 			else
 				g_first_job = jnext;
-			free_job(j);
-			free(j);
-			j = NULL;
+			free_job(&j);
 		}
 			/* Notify the user about stopped jobs,
 			   marking them so that we won’t do this more than once.  */
 		else if (job_is_stopped(j) && !j->notified)
 		{
-			format_job_info(j, "stopped");
+			//format_job_info(j, "stopped");
             print_job_formatted(j, 0, JPM_DEFAULT);
 			//print_job_info(j);
 			j->notified = 1;
