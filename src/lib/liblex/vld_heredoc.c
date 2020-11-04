@@ -30,12 +30,15 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 
 static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
 {
-	char	*arr[1];
+	const char	*arr[1];
 
 	vec_get_at(end, tokens, start_token_index);
 	if (end->type != l_word)
 	{
-		arr[0] = end->raw;
+		if (end->type == l_newline)
+			arr[0] = token_type_to_string(l_newline);
+		else
+			arr[0] = end->raw;
 		error_print(E_UNEXPTOK, (const char **) arr);
 		return (E_UNEXPTOK);
 	}

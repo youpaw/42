@@ -17,7 +17,9 @@ t_ast				*parse(t_tokens *tokens)
 		del_ast(&ast);
 		tokens->error = E_UNEXPTOK;
 		g_exit_code = E_UNEXPTOK;
-		args[0] = tokens->tokens[tokens->index]->raw;
+		args[0] = tokens->tokens[tokens->index]->type == l_newline ? \
+			token_type_to_string(l_newline) : \
+			tokens->tokens[tokens->index]->raw;
 		error_print(E_UNEXPTOK, args);
 	}
 	return (ast);

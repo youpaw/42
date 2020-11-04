@@ -14,9 +14,7 @@ static t_param_type get_colon_operator(char c)
 		return (e_param_or_error);
 	if (c == '+')
 		return (e_null_or_word);
-	if (c == '\0')
-		return (e_er_bad_subst); // or syntax error
-	return (e_er_syntax);
+	return (e_unknown);
 }
 
 t_param_type get_operator_type(const char *str)
@@ -33,6 +31,5 @@ t_param_type get_operator_type(const char *str)
 		return (e_rm_longest_suffix);
 	if (!strncmp(str, "%", 1))
 		return (e_rm_shortest_suffix);
-	return (e_er_bad_subst);
+	return (e_unknown);
 }
-

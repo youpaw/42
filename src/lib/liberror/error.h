@@ -34,21 +34,26 @@ typedef enum	e_error_code
 	E_NOINP,						/* Empty input */
 	E_INCINP,						/* Incomplete input */
 	E_BADSUBS,						/* Bad substitution */
-	E_NOEVENT,						/* Event not found */
+	E_NOEVENT,						/* % Event not found */
 	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/
-	E_OPEXPEC,						/* %: %: syntax error: operand expected (error token is \"%\") */
+	E_OPEXPEC,						/* %: syntax error: operand expected (error token is "%") */
+	E_INVAOP,						/* %: syntax error: invalid arithmetic operator (error token is "%") */
+	E_INVEXP,						/* %: syntax error in expression (error token is "%") */
+	E_ZERODIV,						/* %: division by 0 (error token is "%") */
 	E_INVIDENT,						/* %: `%': not a valid identifier*/
 	E_NUMARGREQ,					/* %: %: numeric argument required*/
 	E_TOOMANYARGS,					/* %: too many arguments*/
-	E_INVALOPT,						/* %: %: invalid option*/
+	E_INVALOPT,						/* %: -%: invalid option*/
 	E_NOTFOUND,						/* %: %: not found*/
 	E_HOMENOTSET,					/* HOME not set */
 	E_OLDPWDNOTSET,					/* OLDPWD not set */
 	E_NOSUCHJOB,					/* %: %: no such job */
 	E_NOJOBCONTROL,					/* %: no job control*/
 	E_NAMETOOLONG,					/* File name too long */
+	E_NOCMD							/* %: command not found */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);
+int		print_invalid_option(const char *bin, char opt);
 
 #endif

@@ -5,7 +5,6 @@
 #include "jobs.h"
 #include "cc_str.h"
 #include <unistd.h>
-#include "cc_num.h"
 #include "builtins.h"
 
 static void close_fds(t_process *process)
@@ -33,6 +32,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		job->first_process->completed = 1;
 		return ;
 	}
+	g_can_exit = 0;
 	infile = STDIN_FILENO;
 
 	for (process = job->first_process; process; process = process->next)
@@ -59,6 +59,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		if (pid == 0)
 		{
 			/* This is the child process.  */
+			restore_job_and_interactive_signals();
 			launch_process(process, job->pgid, is_foreground);
 		}
 		else if (pid < 0)
@@ -70,7 +71,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		else
 		{
 			/* This is the parent process.  */
-			set_print_main_handlers();
+			//set_print_main_handlers();
 			process->pid = pid;
 			if (g_is_interactive)
 			{
@@ -89,7 +90,7 @@ void launch_job(t_job *job, int is_foreground, int is_forked)
 		infile = pfd[0];
 	}
 	if (!is_forked && !is_foreground)
-		print_job_formatted(job, 0);
+        print_job_formatted(job, 0, JPM_BG);
 	if (!g_is_interactive)
 		wait_for_job(job);
 	else if (is_foreground)

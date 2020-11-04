@@ -15,34 +15,27 @@
 
 void	put_job_in_foreground (t_job *j, int cont)
 {
-	/* Put the job into the foreground.  */
 	tcsetpgrp(g_terminal, j->pgid);
-	//putendl("job putted in fg");
-
 	/* Send the job a continue signal, if necessary.  */
 	if (cont)
 	{
+		putendl(j->command);
 		tcsetattr (g_terminal, TCSADRAIN, &j->tmodes);
-		if (kill (- j->pgid, SIGCONT) < 0)
+		if (kill (-j->pgid, SIGCONT) < 0)
 			fdputendl("kill (SIGCONT)", 2);
 	}
-
-	/* Wait for it to report.  */
 	wait_for_job(j);
-
 	/* Put the shell back in the foreground.  */
+	//signal(SIGTTOU, SIG_IGN);
 	//setpgid(getpid(), j->pgid);
-	signal(SIGTTOU, SIG_IGN);
-	//print_process_stats("before");
+	//if (job_is_completed(j))
+	//	j->notified = 1;
 	if( tcsetpgrp (g_terminal, g_pgid) < 0)
 	{
-		fdputendl("terminal failed to return", 2);
+		fdputendl("Terminal failed to return", 2);
 		exit(1);
 	}
-	//putendl("shell putted in fg");
-
 	/* Restore the shell’s terminal modes.  */
 	tcgetattr (g_terminal, &j->tmodes);
 	tcsetattr (g_terminal, TCSADRAIN, &g_tmodes);
-	//putendl("shell tmode restorred");
 }

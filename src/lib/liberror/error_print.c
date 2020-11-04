@@ -21,20 +21,24 @@ const char 	*g_error_msg[] = {
 		"Broken pipe",
 		NULL,
 		NULL,
-		"%: bad substitution",
+		"${%}: bad substitution",
 		"!%: event not found",
 		"syntax error near unexpected token `%'",
-		"%: %: syntax error: operand expected (error token is \"%\")",
+		"%: syntax error: operand expected (error token is \"%\")",
+		"%: syntax error: invalid arithmetic operator (error token is \"%\")",
+		"%: syntax error in expression (error token is \"%\")",
+		"%: division by 0 (error token is \"%\")",
 		"%: %: not a valid identifier",
 		"%: %: numeric argument required",
 		"%: too many arguments",
-		"%: %: invalid option",
+		"%: -%: invalid option",
   		"%: %: not found",
 		"%: HOME not set",
 		"%: OLDPWD not set",
 		"%: %: no such job",
 		"%: no job control",
-		"%: %: File name too long"
+		"%: %: File name too long",
+		"%: command not found"
 
 };
 

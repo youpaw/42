@@ -11,7 +11,6 @@
 void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 {
 	t_job	*job;
-	int		cur_job_status;
 
 	if (!token || (!g_exit_code && token->type == l_and_if) \
 				|| (g_exit_code && token->type == l_or_if))
@@ -29,7 +28,7 @@ void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 		//printf("[%d->%d] \n", job->pgid, g_exit_code);
 		//fflush(NULL);
 		if (job_is_completed(job))
-			remove_job(job->index);
+			remove_job_by_index(job->index);
 	}
 	if (ast->right)
 		exec_and_or(ast->right, is_foreground, is_forked, ast->token);

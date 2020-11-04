@@ -28,6 +28,6 @@ char *get_command(t_ast *ast)
 	vec = vec_new(EXEC_VEC_CAPACITY, sizeof(char *), NULL);
 	get_node_tokens(ast, vec);
 	command = strnjoin((const char **)vec->data);
-	free(vec);
+	vec_del(&vec);
 	return (command);
 }

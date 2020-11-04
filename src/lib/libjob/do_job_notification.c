@@ -6,14 +6,6 @@
 #include "cc_str.h"
 #include <stdlib.h>
 
-static void	free_job(t_job *j)
-{
-	strdel(&(j->command));
-	del_process(j->first_process);
-	queue_remove(j->index);
-	free(j->first_process);
-	j->first_process = NULL;
-}
 
 /* Notify the user about stopped or terminated jobs.
    Delete terminated jobs from the active job list.  */
@@ -22,7 +14,6 @@ void	do_job_notification(void)
 {
 	t_job *j, *jlast, *jnext;
 
-	/* Update status information for child processes.  */
 	update_status();
 	jlast = NULL;
 	for (j = g_first_job; j; j = jnext)
@@ -32,28 +23,20 @@ void	do_job_notification(void)
 		   completed and delete it from the list of active jobs.  */
 		if (job_is_completed(j))
 		{
-			format_job_info(j, "completed");
-			print_job_formatted(j, 0);
-			//print_job_info(j);
+			//if (!j->notified)
+			print_job_formatted(j, 0, JPM_DEFAULT);
 			if (jlast)
 				jlast->next = jnext;
 			else
 				g_first_job = jnext;
-			free_job(j);
-			free(j);
-			j = NULL;
+			free_job(&j);
 		}
-			/* Notify the user about stopped jobs,
-			   marking them so that we won’t do this more than once.  */
 		else if (job_is_stopped(j) && !j->notified)
 		{
-			format_job_info(j, "stopped");
-			print_job_formatted(j, 0);
-			//print_job_info(j);
+            print_job_formatted(j, 0, JPM_DEFAULT);
 			j->notified = 1;
 			jlast = j;
 		}
-			/* Don’t say anything about jobs that are still running.  */
 		else
 			jlast = j;
 	}

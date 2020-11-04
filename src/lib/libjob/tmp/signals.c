@@ -15,9 +15,9 @@ void int_handler(int arg)
 }
 
 
-void sig_handler(int arg)
+void sig_handler(int code)
 {
-	printf("Signal %d caught\n", arg);
+	printf("Signal %d caught\n", code);
 }
 
 int main(void)
