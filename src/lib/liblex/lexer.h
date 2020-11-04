@@ -144,6 +144,7 @@ int			is_redirection(t_token_type type);
 int 		is_delimiter(t_token_type type);
 int 		is_operator(t_token_type type);
 int			is_number(const char *str);
+int 		is_doublequote_esc(char c);
 
 int			get_brace(const char *str, t_brace *brace);
 t_token_type get_operator(const char *str, t_operator *op);
