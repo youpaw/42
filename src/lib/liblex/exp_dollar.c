@@ -14,7 +14,9 @@ static int handle_brace_expand(t_lexer *lexer, t_brace brace)
 	int		error;
 
 	index = lexer->index + 1;
+	lexer->stage = l_vld;
 	match_brace(lexer, brace);
+	lexer->stage = l_exp;
 	sub = strsub(lexer->raw, index, lexer->index - index - 1);
 	error = 0;
 	if (brace == l_figure_brace)

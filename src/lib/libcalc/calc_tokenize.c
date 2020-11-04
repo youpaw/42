@@ -46,12 +46,7 @@ int		calc_tokenize(t_calc *calc)
 		c = calc->raw[calc->index];
 		if (!isspace(c))
 		{
-			if (calc_is_forbidden(c))
-			{
-				putendl("!!!!!!!!"); //!Todo remove check + arithmetick error
-				error = calc->state == c_st_number ? E_OPEXPEC : E_INVAOP;
-			}
-			else if (c == '(' || c == ')')
+			if (c == '(' || c == ')')
 				error = push_parenthesis(calc, c);
 			else
 				error = calc_get_token(calc);

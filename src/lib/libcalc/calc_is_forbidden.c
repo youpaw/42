@@ -10,7 +10,7 @@ static int isspecial(char c)
 	int index;
 
 	index = 0;
-	while (c != str[index])
+	while (str[index] && c != str[index])
 		index++;
 	if (str[index])
 		return (1);
