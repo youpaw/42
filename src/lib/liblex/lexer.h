@@ -23,7 +23,7 @@
 
 #ifndef LEXER_H
 # define LEXER_H
-# define N_BRACES 4
+# define N_BRACES 3
 # define N_STATES 6
 # define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
@@ -93,7 +93,6 @@ enum e_state{
 };
 
 enum e_brace{
-	l_double_round_brace,
 	l_round_brace,
 	l_figure_brace,
 	l_square_brace
