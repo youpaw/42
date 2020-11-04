@@ -23,6 +23,7 @@ int 	vld_bang(t_lexer *lexer)
 	if (match_bang(lexer))
 	{
 		lexer->index--;
+		vec_rm_last(lexer->slices);
 		return (E_OK);
 	}
 	expand = strsub(lexer->raw + index, 0, lexer->index - index);

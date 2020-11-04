@@ -15,7 +15,7 @@ int 	tok_double_quote(t_lexer *lexer)
 		slice.state = l_history;
 	else if (c == '$')
 		slice.state = l_dollar;
-	else if (c == '\\')
+	else if (c == '\\' && is_doublequote_esc(lexer->raw[lexer->index + 1]))
 		slice.state = l_back_slash;
 	else if (c == '\"')
 		vec_rm_last(lexer->slices);
