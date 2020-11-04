@@ -7,6 +7,8 @@
 #include "readline.h"
 #include <stdio.h>
 #include "cc_char.h"
+#include "cc_graph.h"
+#include "cc_str.h"
 
 
 int			readline(char **line)

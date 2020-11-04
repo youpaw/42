@@ -64,7 +64,7 @@ t_selection 	*g_selection;
 t_selection		*add_doubly_list(t_selection *lst, char *word, size_t len);
 int				del_double_list_item(t_selection *lst);
 char 			*select_args(t_selection *selections);
-void			delete_elem(t_selection **selection);
+void			delete_lst(t_selection **selection);
 void			del_selections(t_selection **selections);
 void			draw_selections();
 struct winsize	get_winsize(void);
@@ -81,6 +81,7 @@ int				check_winsize(int len);
 void			restore_displayed(t_selection *selection);
 void			move_start();
 t_selection		*convert_list_2_selection(t_list *lst);
+t_selection		*convert_array_2_selection(char **argv);
 char			*ft_select(t_selection *selections);
 
 #endif

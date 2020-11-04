@@ -7,7 +7,7 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
-void 	select_choise(t_selection *files, t_input *inp)
+void 	select_choise(void *files, t_input *inp)
 {
 	char *selection;
 	size_t i;
