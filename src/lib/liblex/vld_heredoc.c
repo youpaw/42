@@ -8,6 +8,7 @@
 static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 {
 	char	*end;
+	char	*nl;
 
 	end = strjoin(token->raw, "\n");
 	while (lexer->index < lexer->size)
@@ -58,16 +59,17 @@ int 		vld_heredoc(t_lexer *lexer)
 	slice.index = lexer->index;
 	slice.state = l_unset;
 	vec_push(lexer->slices, &slice);
-	while (lexer->index < lexer->size && lexer->raw[lexer->index] != '\n')
+	while (lexer->index < lexer->size)
 	{
 		current = get_current_state(lexer);
 		if ((error = lex_map(lexer, current)) != E_OK)
 			break ;
+		if (lexer->raw[lexer->index] == '\n')
+			break ;
 		lexer->index++;
 	}
-	if (!error && lexer->index == lexer->size)
-		error = E_INCINP;
-	else if (!(error = get_end(lexer->tokens, start_token_index, &end)))
+	lexer->index++;
+	if (!error && !(error = get_end(lexer->tokens, start_token_index, &end)))
 		error = match_end(lexer, start_token_index, &end);
 	return (error);
 }
