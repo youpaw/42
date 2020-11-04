@@ -39,13 +39,15 @@ void	print_job_info(t_job *job)
 
 static void print_job_status(t_job *job)
 {
-	if (job_is_completed(job))
-		puts("Done\t");
-	else if (job_is_stopped(job))
-		puts("Stopped\t");
+	char	*msg;
+	if (job_is_completed(job) || job_is_stopped(job))
+	{
+		msg = get_status_message(get_last_process_status(job->first_process));
+		puts(msg);
+		strdel(&msg);
+	}
 	else
 		puts("Running\t");
-
 }
 
 static char	get_spec(int job_index, int is_job_builtin)
@@ -90,7 +92,6 @@ void	print_job_long(t_job *job, int is_job_builtin)
     putnbr(job->pgid);
     putchar(' ');
     print_job_status(job);
-    puts(" (signal)");
     puts("\t");
     putendl(job->command);
 }

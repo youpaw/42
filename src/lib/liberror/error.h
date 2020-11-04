@@ -47,6 +47,7 @@ typedef enum	e_error_code
 	E_NOSUCHJOB,					/* %: %: no such job */
 	E_NOJOBCONTROL,					/* %: no job control*/
 	E_NAMETOOLONG,					/* File name too long */
+	E_NOCMD							/* %: command not found */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

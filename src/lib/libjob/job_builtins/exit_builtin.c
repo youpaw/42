@@ -35,8 +35,6 @@ static int	has_stopped_jobs(void)
 
 void	exit_shell(int exit_code)
 {
-	if (g_can_exit)
-		putendl("Can exit!!!");
 	if (g_can_exit || !has_stopped_jobs())
 	{
 		// save history and free variables

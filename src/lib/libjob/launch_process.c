@@ -21,37 +21,8 @@ static int	is_path(const char *str)
 	return (0);
 }
 
-void	launch_process (t_process *p, pid_t pgid, int is_foreground)
+static void	set_pipes(t_process *p)
 {
-	pid_t pid;
-	const char	*path;
-
-	g_has_job_control = 0;
-	if (g_is_interactive)
-	{
-		/* Put the process into the process group and give the process group
-		   the terminal, if appropriate.
-		   This has to be done both by the shell and in the individual
-		   child processes because of potential race conditions.  */
-		pid = getpid();
-		if (pgid == 0)
-			pgid = pid;
-		setpgid(pid, pgid);
-		if (is_foreground)
-			tcsetpgrp (g_terminal, pgid);
-
-		/* Set the handling for job control signals back to the default.  */
-		/*
-		signal (SIGINT, SIG_DFL);
-		signal (SIGQUIT, SIG_DFL);
-		signal (SIGTSTP, SIG_DFL);
-		signal (SIGTTIN, SIG_DFL);
-		signal (SIGTTOU, SIG_DFL);
-		*/
-		//signal (SIGCHLD, SIG_DFL);
-	}
-
-	/* Set the standard input/output channels of the new process.  */
 	if (p->stdin != STDIN_FILENO)
 	{
 		dup2 (p->stdin, STDIN_FILENO);
@@ -67,9 +38,24 @@ void	launch_process (t_process *p, pid_t pgid, int is_foreground)
 		dup2 (p->stderr, STDERR_FILENO);
 		close (p->stderr);
 	}
+}
 
-	/* Exec the new process.  Make sure we exit.  */
+void	launch_process (t_process *p, pid_t pgid, int is_foreground)
+{
+	pid_t pid;
+	const char	*path;
 
+	g_has_job_control = 0;
+	if (g_is_interactive)
+	{
+		pid = getpid();
+		if (pgid == 0)
+			pgid = pid;
+		setpgid(pid, pgid);
+		if (is_foreground)
+			tcsetpgrp (g_terminal, pgid);
+	}
+	set_pipes(p);
 	if (!run_builtin((const char **)p->argv) ||
 			!run_job_builtin((const char **) p->argv))
 		exit(g_exit_code);
@@ -79,6 +65,6 @@ void	launch_process (t_process *p, pid_t pgid, int is_foreground)
 		path = hash_get_path(p->argv[0]);
 	if (path)
 		execve(path, p->argv, p->env);
-	fdputendl("Command not found", 2);
-	exit(1);
+	error_print(E_NOCMD, (const char **)p->argv);
+	exit(127);
 }

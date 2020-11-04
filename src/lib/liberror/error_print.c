@@ -34,7 +34,8 @@ const char 	*g_error_msg[] = {
 		"%: OLDPWD not set",
 		"%: %: no such job",
 		"%: no job control",
-		"%: %: File name too long"
+		"%: %: File name too long",
+		"%: command not found"
 
 };
 

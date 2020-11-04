@@ -106,6 +106,7 @@ int bg_fg(const char **av, int is_foreground);
 void	continue_job(t_job *j, int is_foreground);
 
 void	remove_job_by_index(int job_index);
+char				*get_status_message(int status);
 /*
 ** Job queue
 */

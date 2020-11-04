@@ -19,6 +19,7 @@ void	put_job_in_foreground (t_job *j, int cont)
 	/* Send the job a continue signal, if necessary.  */
 	if (cont)
 	{
+		putendl(j->command);
 		tcsetattr (g_terminal, TCSADRAIN, &j->tmodes);
 		if (kill (-j->pgid, SIGCONT) < 0)
 			fdputendl("kill (SIGCONT)", 2);
@@ -27,6 +28,8 @@ void	put_job_in_foreground (t_job *j, int cont)
 	/* Put the shell back in the foreground.  */
 	//signal(SIGTTOU, SIG_IGN);
 	//setpgid(getpid(), j->pgid);
+	//if (job_is_completed(j))
+	//	j->notified = 1;
 	if( tcsetpgrp (g_terminal, g_pgid) < 0)
 	{
 		fdputendl("Terminal failed to return", 2);
