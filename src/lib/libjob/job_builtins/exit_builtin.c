@@ -19,32 +19,6 @@ static int	is_numeric(const char *nb)
 	return (1);
 }
 
-static int	has_stopped_jobs(void)
-{
-	t_job *j;
-
-	j = g_first_job;
-	while (j)
-	{
-		if (job_is_stopped(j))
-			return (1);
-		j = j->next;
-	}
-	return (0);
-}
-
-void	exit_shell(int exit_code)
-{
-	if (g_can_exit || !has_stopped_jobs())
-	{
-		// save history and free variables
-		free_all_jobs();
-		exit(exit_code);
-	}
-	fdputendl("There are stopped jobs.", 2);
-	g_can_exit = 1;
-}
-
 int exit_builtin(const char **av)
 {
 	if (!av[1])

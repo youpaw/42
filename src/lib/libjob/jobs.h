@@ -97,6 +97,7 @@ void	mark_job_as_running(t_job *j);
 ** Job builtins
 */
 
+void	exit_shell(int exit_code);
 int run_job_builtin(const char **av);
 int exit_builtin(const char **av);
 int jobs(const char **av);
