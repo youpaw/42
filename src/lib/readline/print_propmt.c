@@ -35,4 +35,5 @@ void 	print_prompt(t_input *inp)
 		sym[0] = prompt[i++];
 		handle_key(sym, inp);
 	}
+	free(prompt);
 }

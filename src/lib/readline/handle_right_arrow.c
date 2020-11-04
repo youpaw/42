@@ -15,8 +15,7 @@
 #include <sys/ioctl.h>
 #include <zconf.h>
 #include "cc_mem.h"
-#include <stdio.h>
-
+#include "cc_char.h"
 int handle_right_arrow(t_input *inp)
 {
 	struct winsize ws;

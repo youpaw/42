@@ -150,7 +150,6 @@ int			get_brace(const char *str, t_brace *brace);
 t_token_type get_operator(const char *str, t_operator *op);
 
 t_token_type recognize_token(t_lexer *lexer);
-t_token_type recognize_operator(t_lexer *lexer, t_token_type type);
 
 int			match_parameter(t_lexer *lexer);
 int			match_brace(t_lexer *lexer, t_brace brace);

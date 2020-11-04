@@ -38,14 +38,14 @@ static int	match_word(t_lexer *lexer)
 {
 	char c;
 	t_brace brace;
-	t_state current;
+	t_slice current;
 
-	vec_get_last(&current, lexer->slices);
+	vec_get_at(&current, lexer->slices, lexer->slices->size - 2);
 	while (lexer->index < lexer->size)
 	{
 		c = lexer->raw[lexer->index];
 		if (iswspace(c) || get_brace(lexer->raw + lexer->index, &brace) || \
-		(current == l_double_quote && c == '"'))
+		(current.state == l_double_quote && c == '"'))
 			break ;
 		lexer->index++;
 	}
@@ -54,9 +54,14 @@ static int	match_word(t_lexer *lexer)
 
 int 		match_bang(t_lexer *lexer)
 {
+	size_t index;
+
 	if (lexer->index >= lexer->size - 1)
 		return (1);
+	index = lexer->index;
 	if (match_prev(lexer) && match_num(lexer))
 		match_word(lexer);
+	if (lexer->index == index)
+		return (1);
 	return (0);
 }
