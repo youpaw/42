@@ -6,11 +6,11 @@
 
 static int isspecial(char c)
 {
-	static const char *str = "*+_/%()<=>!&|";
+	static const char *str = "*+-/%()<=>!&|";
 	int index;
 
 	index = 0;
-	while (c != str[index])
+	while (str[index] && c != str[index])
 		index++;
 	if (str[index])
 		return (1);

@@ -32,7 +32,6 @@ static void change_shlvl(void)
 
 int 	main_init(const char *name, const char *av[], const char *en[])
 {
-	g_exit_code = 0;
 	av_init(name, av);
 	env_init(en);
 	hash_init();

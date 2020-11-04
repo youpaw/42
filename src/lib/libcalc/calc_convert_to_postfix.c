@@ -29,7 +29,7 @@ static void convert_operators(t_vec *postfix, t_vec *stack, \
 	t_calc_token tmp;
 
 	vec_pop(&tmp, stack);
-	while (calc_is_operator(tmp.type) && tmp.priority >= token->priority)
+	while (calc_is_operator(tmp.type) && tmp.priority < token->priority)
 	{
 		vec_push(postfix, &tmp);
 		vec_pop(&tmp, stack);

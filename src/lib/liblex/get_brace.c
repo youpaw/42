@@ -6,7 +6,6 @@
 #include "cc_str.h"
 
 const struct s_brace_raw g_brace_map[N_BRACES] = {
-		{"((", "))", 2},
 		{"(", ")", 1},
 		{"{", "}", 1},
 		{"[", "]", 1}

@@ -35,10 +35,10 @@ int			handle_shift_up(t_input *inp)
 		}
 		else
 			inp->cursor_x_position -= ws.ws_col;
-		if (inp->cursor_x_position < inp->indent)
+		if (inp->cursor_x_position < get_prompt_len(inp->cursor_y_position))
 		{
-			tputs(tgoto(tgetstr("ch", NULL), 1, inp->indent), 1, putchar);
-			inp->cursor_x_position = inp->indent;
+			tputs(tgoto(tgetstr("ch", NULL), 1, get_prompt_len(inp->cursor_y_position)), 1, putchar);
+			inp->cursor_x_position = get_prompt_len(inp->cursor_y_position);
 		}
 
 	}

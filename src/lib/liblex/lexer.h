@@ -23,7 +23,7 @@
 
 #ifndef LEXER_H
 # define LEXER_H
-# define N_BRACES 4
+# define N_BRACES 3
 # define N_STATES 6
 # define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
@@ -93,7 +93,6 @@ enum e_state{
 };
 
 enum e_brace{
-	l_double_round_brace,
 	l_round_brace,
 	l_figure_brace,
 	l_square_brace
@@ -145,6 +144,7 @@ int			is_redirection(t_token_type type);
 int 		is_delimiter(t_token_type type);
 int 		is_operator(t_token_type type);
 int			is_number(const char *str);
+int 		is_doublequote_esc(char c);
 
 int			get_brace(const char *str, t_brace *brace);
 t_token_type get_operator(const char *str, t_operator *op);

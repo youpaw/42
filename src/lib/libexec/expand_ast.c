@@ -20,10 +20,7 @@ int 	expand_ast(t_ast *ast)
 	if (ast->token && is_expand_token(ast->token->type))
 	{
 		if ((error = expand_token(ast->token)))
-		{
-			g_exit_code = error;
 			return (error);
-		}
 	}
 	if ((error = expand_ast(ast->left)) || (error = expand_ast(ast->right)))
 		return (error);

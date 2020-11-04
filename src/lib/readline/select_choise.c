@@ -5,19 +5,12 @@
 #include "readline.h"
 #include "ft_select.h"
 #include "cc_str.h"
-#include "cc_mem.h"
 #include "cc_char.h"
-
-int		get_engaged_space(t_input *inp)
-{
-	return 0 ;
-}
 
 void 	select_choise(t_selection *files, t_input *inp)
 {
 	char *selection;
 	size_t i;
-	t_letter key;
 	struct winsize ws;
 
 	i = 0;

@@ -4,7 +4,7 @@
 
 #include "stdlib.h"
 #include "cc_str.h"
-#include "env.h"
+#include "error.h"
 #include "expand.h"
 #include "cc_char.h"
 
@@ -33,11 +33,10 @@ static size_t get_operator_len(t_param_type t)
 	return (2);
 }
 
-static t_param_type get_len_operator_params(const char *str, char **name,
-											char **word)
+static t_param_type get_len_operator_params(const char *str, char **name)
 {
 	if (!(*name = get_parameter_name(str)) || strcmp(str, *name) != 0)
-		return (e_er_bad_subst);
+		return (e_unknown);
 	return (e_get_length);
 }
 static t_param_type get_params(const char *str, char **value, char **word)
@@ -46,14 +45,14 @@ static t_param_type get_params(const char *str, char **value, char **word)
 	t_param_type 	type;
 
 	if (*str == '#')
-		return (get_len_operator_params(&str[1], value, word));
+		return (get_len_operator_params(&str[1], value));
 	if (!(name = get_parameter_name(str)))
-		return (e_er_bad_subst);
+		return (e_unknown);
 	str += strlen(name);
-	if ((type = get_operator_type(str)) == e_er_bad_subst)
+	if ((type = get_operator_type(str)) == e_unknown)
 	{
 		free(name);
-		return (e_er_bad_subst);
+		return (e_unknown);
 	}
 	str += get_operator_len(type);
 	*value = name;
@@ -66,11 +65,16 @@ int 	expand_parameter(char **str)
 	t_param_type	type;
 	char 			*value;
 	char 			*word;
+	const char		*arg[1];
 
 	value = NULL;
 	word = NULL;
-	if ((type = get_params(*str, &value, &word)) < 2)
-		return (1);
+	if ((type = get_params(*str, &value, &word)) == e_unknown)
+	{
+		arg[0] = *str;
+		error_print(E_BADSUBS, arg);
+		return (E_BADSUBS);
+	}
 	free(*str);
 	*str = expand_by_type(type, value, word);
 	if (value)

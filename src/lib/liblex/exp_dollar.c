@@ -5,6 +5,7 @@
 #include "lexer.h"
 #include "expand.h"
 #include "cc_str.h"
+#include "cc_regex.h"
 
 static int handle_brace_expand(t_lexer *lexer, t_brace brace)
 {
@@ -13,12 +14,19 @@ static int handle_brace_expand(t_lexer *lexer, t_brace brace)
 	int		error;
 
 	index = lexer->index + 1;
+	lexer->stage = l_vld;
 	match_brace(lexer, brace);
+	lexer->stage = l_exp;
 	sub = strsub(lexer->raw, index, lexer->index - index - 1);
 	error = 0;
 	if (brace == l_figure_brace)
 		error = expand_parameter(&sub);
-	else if (brace == l_double_round_brace)
+	else if (brace == l_round_brace)
+	{
+		if (match(sub, "(*)"))
+			error = expand_calc(&sub);
+	}
+	else if (brace == l_square_brace)
 		error = expand_calc(&sub);
 	if (!error)
 		strjoin_expanded(lexer, index, sub, 2);

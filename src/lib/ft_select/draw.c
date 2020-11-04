@@ -22,7 +22,7 @@ void	draw_letters(t_selection *selection, int wide)
 		puts(g_out.reverse_video);
 	puts(selection->word);
 	puts(g_out.norm);
-	while ((wide - selection->cstring_len - 1) != 0)
+	while ((wide - selection->display_len - 1) != 0)
 	{
 		puts(g_out.move_right);
 		wide--;
@@ -52,13 +52,13 @@ int		get_max_words_len(t_selection *selection)
 	t_selection	*first;
 	int			max_len;
 
-	max_len = selection->cstring_len;
+	max_len = selection->display_len;
 	first = selection;
 	selection = selection->next;
 	while (selection != first)
 	{
-		if (selection->cstring_len > max_len)
-			max_len = selection->cstring_len;
+		if (selection->display_len > max_len)
+			max_len = selection->display_len;
 		selection = selection->next;
 	}
 	return (max_len > 2 ? max_len : 3);

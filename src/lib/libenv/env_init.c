@@ -12,8 +12,6 @@ t_hash_map *g_inter_env;
 
 static void init_env_from_str(t_hash_map *map, const char **env)
 {
-	char		**key_value;
-
 	if (map && env)
 		while (*env)
 			env_insert_to(map, *env++);
