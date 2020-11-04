@@ -7,8 +7,6 @@
 
 typedef enum	e_param_type
 {
-	e_er_bad_subst,
-	e_er_syntax,
 	e_default,
 	e_param_or_word,
 	e_assign_param,
@@ -18,7 +16,8 @@ typedef enum	e_param_type
 	e_rm_shortest_prefix,
 	e_rm_longest_prefix,
 	e_rm_shortest_suffix,
-	e_rm_longest_suffix
+	e_rm_longest_suffix,
+	e_unknown
 }				t_param_type;
 
 
