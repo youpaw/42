@@ -31,6 +31,12 @@ int	calc(char **raw)
 	t_vec	*postfix;
 	int		error;
 
+	if (strlen(*raw) == 2)
+	{
+		free(*raw);
+		*raw = strdup("0");
+		return (0);
+	}
 	calc_init(&calc, *raw);
 	if (!(error = calc_tokenize(&calc)))
 	{
