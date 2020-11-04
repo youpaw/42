@@ -57,6 +57,7 @@ void	exec_simple_cmd(t_ast *ast)
 		return ;
 	if (expand_ast(ast) || prepare_redirect(ast, &fd_arr))
 	{
+		g_exit_code = 1;
 		close_fds(fd_backup, 3);
 		return ;
 	}

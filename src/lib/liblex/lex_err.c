@@ -3,6 +3,7 @@
 //
 
 #include "lexer.h"
+
 int								lex_err(t_lexer *lexer, int error)
 {
 	static const t_token_type	inc_types_map[N_INC_INP_TYPES] = {
