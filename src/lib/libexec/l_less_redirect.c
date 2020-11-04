@@ -25,7 +25,7 @@ int		l_less_redirect(t_ast *leafs, t_process *process) // c
 				init_process_ioerr(process, to, in);
 			}
 			else
-				return (1); //errormsg: "42sh: %leafs->left->left->token->raw: no such file or directory"
+				return redirect_print_error(E_NOENT, leafs->left->left->token->raw); //errormsg: "42sh: %leafs->left->left->token->raw: no such file or directory"
 		}
 	}
 	return (0);

@@ -9,8 +9,8 @@ int 	l_less_and_redirect(t_ast *leafs, t_process *process) // c
 	int from;
 	int to;
 
-	from = -1;
-	to = -1;
+	from = left_side(leafs, 0);
+//	to = right_side(leafs, );
 	if (leafs->token)
 	{
 		if (leafs->token->type == l_io_number)

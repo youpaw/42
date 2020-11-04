@@ -78,7 +78,7 @@ int 			l_great_and_redirect(t_ast *leafs, t_process *process) // c
 	!is_standard_io(to) && !is_minus(leafs))
 	{
 		close(to);
-		return (1); // msg_error "42sh: %to: Bad descriptor
+		return (redirect_print_error(E_BADFD, leafs->left->left->token->raw));
 	}
 	if (STDOUT_FILENO == from)
 		from_stdout(process, to);

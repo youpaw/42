@@ -38,8 +38,8 @@ const char 	*g_error_msg[] = {
 		"%: %: no such job",
 		"%: no job control",
 		"%: %: File name too long",
-		"%: command not found"
-
+		"%: command not found",
+		"%: Bad file descriptor"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
