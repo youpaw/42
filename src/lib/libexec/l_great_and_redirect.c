@@ -50,23 +50,14 @@ static void 	from_stdin(t_process *process, int to)
 		process->stdin = to;
 }
 
-static int		minus(t_process *process, int from)
-{
-	if (from == STDOUT_FILENO)
-		close(process->stdout);
-	else if (from == STDERR_FILENO)
-		close(process->stderr);
-	else if (from == STDIN_FILENO)
-		close(process->stdin);
-	return (0);
-}
-
 int 			l_great_and_redirect(t_ast *leafs, t_process *process) // c
 {
 	int from;
 	int to;
 
 	from = left_side(leafs, 1);
+	if (STDOUT_FILENO != from && !is_valid_number(leafs->left->left->token->raw))
+		return (redirect_print_error(E_AMBIG, leafs->left->left->token->raw));
 	to = right_side(leafs, O_RDWR | O_CREAT | O_TRUNC, 1, 1);
 	if (to == -2)
 		return (minus(process, from));

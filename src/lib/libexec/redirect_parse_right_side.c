@@ -6,6 +6,7 @@
 #include "cc_str.h"
 #include <fcntl.h>
 #include "error.h"
+#include <unistd.h>
 
 int 	right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus) // c
 {

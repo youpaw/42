@@ -10,5 +10,5 @@ int			redirect_print_error(int errcode, const char *token)
 
 	args[0] = token;
 	error_print(errcode, args);
-	return (1);
+	return (-1);
 }

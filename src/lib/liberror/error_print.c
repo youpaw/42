@@ -39,7 +39,8 @@ const char 	*g_error_msg[] = {
 		"%: no job control",
 		"%: %: File name too long",
 		"%: command not found",
-		"%: Bad file descriptor"
+		"%: Bad file descriptor",
+		"%: ambiguous redirect"
 };
 
 void 	error_print(t_error_code er_code, const char **args)

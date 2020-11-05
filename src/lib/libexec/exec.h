@@ -20,6 +20,7 @@ int 	expand_ast(t_ast *ast);
 
 void	prepare_exec_env(t_ast *ast);
 
+int		minus(t_process *process, int from);
 int		redirect_print_error(int errcode, const char *token);
 int 	is_standard_io(int fd);
 int 	is_valid_number(const char *str);
