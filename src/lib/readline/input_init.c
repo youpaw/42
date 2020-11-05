@@ -38,7 +38,7 @@ static t_input	fill_input(char *line)
 	while (prev[inp.cursor_y_position])
 		inp.cursor_y_position++;
 	inp.line = xmalloc(sizeof(t_vec*) * (inp.cursor_y_position + 2));
-	inp.line_len = xmalloc(sizeof(int) * (inp.cursor_y_position + 2));
+	inp.line_len = xmalloc(sizeof(size_t) * (inp.cursor_y_position + 2));
 	inp.cursor_y_position = 0;
 	while (prev[inp.cursor_y_position])
 	{
@@ -63,11 +63,11 @@ t_input 	input_init(char *line)
 		inp.line = xmalloc(sizeof(t_vec*) * 2);
 		inp.line_len = xmalloc(sizeof(int) * 2);
 		inp.cursor_y_position = 0;
+		inp.len = 0;
 	}
 	inp.line[inp.cursor_y_position] = vec_new(8, sizeof(char[5]), NULL);
 	inp.line[inp.cursor_y_position + 1] = NULL;
 	inp.line_len[inp.cursor_y_position] = 0;
 	inp.cursor_x_position = 0;
-	inp.len = 0;
 	return (inp);
 }
