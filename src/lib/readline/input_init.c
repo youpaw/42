@@ -14,17 +14,20 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 	char	letter[5];
 	int		letter_len;
 	int		line_len;
+	size_t i;
 
+	i = 0;
 	line_len = 0;
-	while (*str)
+	while (str[i])
 	{
-		letter_len = utf8_sizeof_symbol(*str);
+		letter_len = utf8_sizeof_symbol(str[i]);
 		bzero(letter, 5);
-		strncpy(letter, str, letter_len);
+		strncpy(letter, &str[i], letter_len);
 		vec_push(*vec_ptr, letter);
-		str += letter_len;
+		i += letter_len;
 		line_len++;
 	}
+	free(str);
 	return line_len;
 }
 
@@ -49,6 +52,7 @@ static t_input	fill_input(char *line)
 				&inp.line[inp.cursor_y_position], prev[inp.cursor_y_position]);
 		inp.cursor_y_position++;
 	}
+	free(prev);
 	return (inp);
 }
 

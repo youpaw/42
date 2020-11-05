@@ -11,9 +11,9 @@
 #include <sys/ioctl.h>
 int handle_up_arrow(t_input *inp)
 {
-	char *newhist;
 
-	hist_push(input_to_str(*inp));
+//	hist_push(input_to_str(*inp));
 	clear_display_input(inp);
+	put_str_to_inp(inp, strdup(hist_get_prev()));
 	return (0);
 }
