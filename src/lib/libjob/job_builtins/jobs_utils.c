@@ -123,7 +123,7 @@ int	get_job_index_from_queue(const char *str)
 		return (queue_get_current(1));
 	if (str[0] == '-')
 		return (queue_get_last(1));
-	if (is_number(str))
+	if (strisnum(str))
 		return (atoi(str));
 	return (-1);
 }
