@@ -30,7 +30,6 @@ static t_predict_token *init_token(t_lexer *lexer, t_slice *slice)
 	else
 		token->type = r_cmd;
 	token->raw = strsub(lexer->raw, lexer->begin, lexer->size - lexer->begin);
-	token->original_len = lexer->size - lexer->begin;
 	return (token);
 }
 
@@ -56,6 +55,9 @@ t_predict_token *get_predict_token(char *raw)
 	t_slice			last_slice;
 	t_predict_token *token;
 
+//	puts("|");
+//	puts(raw);
+//	puts("|");
 	if (!raw)
 		return (NULL);
 	lex_raw(&lexer, raw, l_tok);
@@ -69,5 +71,7 @@ t_predict_token *get_predict_token(char *raw)
 		token = init_token(&lexer, &last_slice);
 	}
 	lex_del(&lexer);
+//	puts(token->raw);
+//	puts("|");
 	return (token);
 }

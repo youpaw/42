@@ -8,10 +8,9 @@
 
 static void handle_error(const char *str)
 {
-	const char *args[2];
+	const char *args[1];
 
 	args[0] = str;
-	args[1] = NULL;
 	error_print(E_NOEVENT, args);
 }
 
@@ -24,6 +23,7 @@ int 	vld_bang(t_lexer *lexer)
 	if (match_bang(lexer))
 	{
 		lexer->index--;
+		vec_rm_last(lexer->slices);
 		return (E_OK);
 	}
 	expand = strsub(lexer->raw + index, 0, lexer->index - index);

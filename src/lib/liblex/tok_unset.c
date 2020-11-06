@@ -21,7 +21,7 @@ static void delimit_operator(t_lexer *lexer, t_token_type type, int token_size)
 	t_slice slice;
 
 	token.raw = strsub(lexer->raw, lexer->begin, token_size);
-	token.type = recognize_operator(lexer, type);
+	token.type = type;
 	vec_push(lexer->tokens, &token);
 	if (type == l_double_less)
 	{
@@ -31,6 +31,22 @@ static void delimit_operator(t_lexer *lexer, t_token_type type, int token_size)
 	}
 	lexer->index += token_size - 1;
 	lexer->begin = lexer->index + 1;
+}
+
+static void	recognize_io_number(t_lexer *lexer, t_token_type type)
+{
+	t_token token;
+
+	if (is_redirection(type))
+	{
+		vec_get_last(&token, lexer->tokens);
+		if (strisnum(token.raw))
+		{
+			vec_rm_last(lexer->tokens);
+			token.type = l_io_number;
+			vec_push(lexer->tokens, &token);
+		}
+	}
 }
 
 int 		tok_unset(t_lexer *lexer)
@@ -50,7 +66,10 @@ int 		tok_unset(t_lexer *lexer)
 	else if ((type = get_operator(lexer->raw + lexer->index, &op)) != l_token)
 	{
 		if (lexer->begin < lexer->index)
+		{
 			delimit_token(lexer);
+			recognize_io_number(lexer, type);
+		}
 		lexer->begin = lexer->index;
 		delimit_operator(lexer, type, op.size);
 	}

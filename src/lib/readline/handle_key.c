@@ -42,8 +42,8 @@ int			handle_key(char *key, t_input *input)
 			{"\2", &handle_left_arrow},
 			{"\177",&handle_backspace},
 			{"\t", &handle_tab},
-			{"\20", NULL}, //down
-			{"\16", NULL} //up
+			{"\20", &handle_down_arrow}, //down
+			{"\16", &handle_up_arrow} //up
 	};
 	int index;
 
