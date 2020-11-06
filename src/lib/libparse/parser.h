@@ -34,7 +34,7 @@
 #include "lexer.h"
 #include "error.h"
 #define N_NODE_TYPES 13
-#define N_MAX_TOKEN_TYPES 6
+#define N_MAX_TOKEN_TYPES 7
 
 enum e_node_type
 {
