@@ -58,7 +58,8 @@ extern	t_vec	*g_job_queue;
 
 
 
-void	wait_for_job_complete(t_job *j);
+int wait_for_job_complete(t_job *j);
+void fork_and_launch_process(t_job *job, int is_foreground);
 
 /* Find the active job with the indicated pgid.  */
 t_job	*find_job (pid_t pgid);
@@ -76,17 +77,17 @@ t_job	*job_new(void);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
 void	free_processes(t_process *p);
-void	launch_job(t_job *job, int is_foreground, int is_forked);
+int launch_job(t_job *job, int is_foreground, int is_forked);
 void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 
 t_process	*process_new(void);
 int		get_last_process_status(t_process *p);
 void	print_process_stats(const char *str);
-void	put_job_in_foreground (t_job *j, int cont);
+int put_job_in_foreground (t_job *j, int cont);
 void	put_job_in_background (t_job *j, int cont);
 int		mark_process_status (pid_t pid, int status);
 void	update_status(void);
-void	wait_for_job(t_job *j);
+int wait_for_job(t_job *j, int options);
 void	format_job_info(t_job *j, const char *status);
 void	do_job_notification(void);
 void	continue_job(t_job *j, int is_foreground);
