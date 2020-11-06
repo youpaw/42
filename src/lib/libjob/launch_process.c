@@ -10,17 +10,6 @@
 #include <signal.h>
 #include <unistd.h>
 
-
-#include "cc_num.h"
-#include "cc_str.h"
-
-static int	is_path(const char *str)
-{
-	if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
-		return (1);
-	return (0);
-}
-
 static void	set_pipes(t_process *p)
 {
 	if (p->stdin != STDIN_FILENO)
@@ -59,7 +48,7 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 	if (!run_builtin((const char **)p->argv) ||
 			!run_job_builtin((const char **) p->argv))
 		exit(g_exit_code);
-	if (is_path(p->argv[0]))
+	if (strispath(p->argv[0]))
 		path = p->argv[0];
 	else
 		path = hash_get_path(p->argv[0]);
