@@ -8,23 +8,22 @@
 static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 {
 	char	*end;
-	char	*nl;
+	size_t	index;
 
 	end = strjoin(token->raw, "\n");
-	while (lexer->index < lexer->size)
+	index = lexer->size - 1;
+	while (index && lexer->raw[index - 1] != '\n')
+		index--;
+	if (index && !strcmp(lexer->raw + index, end))
 	{
-		if (!strcmp(lexer->raw + lexer->index, end))
-		{
-			vec_rm_at(lexer->tokens, start_token_index);
-			token->raw = strsub(lexer->raw + lexer->begin, lexer->begin,\
-			lexer->index - lexer->begin);
-			token->type = l_word;
-			vec_push_at(lexer->tokens, token, start_token_index);
-			lexer->raw[lexer->begin] = '\0';
-			lexer->size = strlen(lexer->raw);
-			return (0);
-		}
-		lexer->index++;
+		vec_rm_at(lexer->tokens, start_token_index);
+		token->raw = strsub(lexer->raw, lexer->begin,index - lexer->begin);
+		token->type = l_word;
+		vec_push_at(lexer->tokens, token, start_token_index);
+		lexer->raw[lexer->begin] = '\0';
+		lexer->index = lexer->begin;
+		lexer->size = strlen(lexer->raw);
+		return (0);
 	}
 	return (E_INCINP);
 }
@@ -68,6 +67,8 @@ int 		vld_heredoc(t_lexer *lexer)
 			break ;
 		lexer->index++;
 	}
+	if (lexer->index >= lexer->size)
+		return (E_INCINP);
 	lexer->index++;
 	if (!error && !(error = get_end(lexer->tokens, start_token_index, &end)))
 		error = match_end(lexer, start_token_index, &end);
