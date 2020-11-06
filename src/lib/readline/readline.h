@@ -78,7 +78,6 @@ typedef enum s_predict_type{
 typedef  struct s_predict_token
 {
 	char 		*raw;
-	size_t		original_len;
 	enum s_predict_type type;
 }				t_predict_token;
 

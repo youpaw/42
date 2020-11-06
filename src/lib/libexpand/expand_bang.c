@@ -9,11 +9,14 @@
 
 static int is_number(const char *num)
 {
+	size_t index;
+
 	if (*num == '-')
 		num++;
-	while (isdigit(*num))
-		num++;
-	if (!*num)
+	index = 0;
+	while (isdigit(num[index]))
+		index++;
+	if (!index)
 		return (1);
 	return (0);
 }

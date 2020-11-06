@@ -7,7 +7,7 @@
 int		lex_map(t_lexer *lexer, t_state current)
 {
 	static int	(*handlers[N_LEX_STAGES][N_STATES + 1])(t_lexer *) = {
-			{NULL, &tok_single_quote, &tok_double_quote, \
+			{&vld_back_slash, &tok_single_quote, &tok_double_quote, \
 			&tok_dollar, &tok_bang, NULL, &tok_unset},
 			{&vld_back_slash, &tok_single_quote, &tok_double_quote, \
 			&tok_dollar, &vld_bang, &vld_heredoc, &tok_unset},
