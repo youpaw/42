@@ -8,8 +8,24 @@
 
 int handle_down_arrow(t_input *inp)
 {
-//	hist_push(input_to_str(*inp));
+	char *new_hist;
+
+	new_hist = hist_get_next();
+	if (!new_hist)
+	{
+		if (inp->hist_storage)
+		{
+			new_hist = inp->hist_storage;
+			free(inp->hist_storage);
+			inp->hist_storage = NULL;
+		}
+		else
+		{
+			puts("\7");
+			return (0);
+		}
+	}
 	clear_display_input(inp);
-	put_str_to_inp(inp, strdup(hist_get_next()));
+	put_str_to_inp(inp, strdup(new_hist));
 	return (0);
 }

@@ -41,6 +41,7 @@ typedef struct		s_input
 	size_t 			cursor_y_position;		//current position of cursor
 	size_t 			len;					//len of whole string
 	size_t 			*line_len;				//len of line before newline
+	char 			*hist_storage;
 }					t_input;
 
 typedef union		u_letter
@@ -121,7 +122,7 @@ void		common_redraw(t_input *input);
 void		redraw_input_adding(t_input *inp);
 void		redraw_input_del(t_input *inp);
 
-char		*input_to_str(t_input input);
+char *input_to_str(t_input input, int newline);
 char		*input_to_n_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
 void		handle_file_token(t_input *input, t_predict_token *token, int access_mode);
@@ -143,4 +144,6 @@ int 		get_prompt_len(int y);
 
 void		fill_complition_graph(t_graph *graph);
 
+char		*restore_from_hist_storage(t_input *inp);
+void		save_to_hist_storage(t_input *inp);
 #endif //READLINE_H

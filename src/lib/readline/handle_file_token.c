@@ -139,6 +139,8 @@ void put_str_to_inp(t_input *input, char *part)
 	int 	len;
 
 	i = 0;
+	if (!part)
+		return ;
 	while (part[i])
 	{
 		bzero(let.ch, 5);
