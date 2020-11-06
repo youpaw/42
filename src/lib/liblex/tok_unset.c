@@ -40,7 +40,7 @@ static void	recognize_io_number(t_lexer *lexer, t_token_type type)
 	if (is_redirection(type))
 	{
 		vec_get_last(&token, lexer->tokens);
-		if (is_number(token.raw))
+		if (strisnum(token.raw))
 		{
 			vec_rm_last(lexer->tokens);
 			token.type = l_io_number;
