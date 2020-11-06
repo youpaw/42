@@ -12,8 +12,8 @@ int handle_escape_sequence(t_input *input)
 			{"\103",    &handle_right_arrow},
 			{"\104",    &handle_left_arrow},
 			{"\63\176", &handle_del},
-			{"\101", NULL}, // up
-			{"\102", NULL}, // down
+			{"\101", &handle_up_arrow}, // up
+			{"\102", &handle_down_arrow}, // down
 			{"\61\73\62\101", &handle_shift_up}, //shift + up
 			{"\61\73\62\102", &handle_shift_down}, // shift + down
 			{"\61\73\62\103", &handle_shift_right}, //shift + right

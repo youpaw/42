@@ -18,7 +18,7 @@ static int		update_job_status(t_job *j)
 	while
 }
 */
-void	wait_for_job_complete(t_job *j)
+int wait_for_job_complete(t_job *j)
 {
 	int status;
 	pid_t pid;
@@ -33,4 +33,5 @@ void	wait_for_job_complete(t_job *j)
 				fdputendl("kill (SIGSTOP)", 2);
 		}
 	}
+	return (status);
 }

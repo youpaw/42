@@ -4,6 +4,7 @@
 
 #include "readline.h"
 #include "exec.h"
+#include "history.h"
 #include "cc_str.h"
 #include <unistd.h>
 #include <time.h>
@@ -31,7 +32,7 @@ int 	main_manager(void)
 	ast = NULL;
 	tokens = NULL;
 	str = strdup("");
-	print_entry();
+//	print_entry();
 	while (42)
 	{
 		readline(&str);
@@ -39,7 +40,10 @@ int 	main_manager(void)
 		if (tokens && !tokens->error)
 		{
 			if ((ast = parse(tokens)))
+			{
 				exec(ast);
+				hist_reset_cur_ind();
+			}
 		}
 		if (!tokens || tokens->error != E_INCINP)
 		{

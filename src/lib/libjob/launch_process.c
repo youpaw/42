@@ -40,7 +40,7 @@ static void	set_pipes(t_process *p)
 	}
 }
 
-void	launch_process (t_process *p, pid_t pgid, int is_foreground)
+void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 {
 	pid_t pid;
 	const char	*path;
