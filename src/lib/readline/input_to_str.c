@@ -13,7 +13,8 @@ char *input_to_str(t_input input)
 
 	while (input.line[input.cursor_y_position])
 		input.cursor_y_position++;
-	string = strnew((input.len * 4) + 1 + input.cursor_y_position);
+	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.cursor_y_position);
+	*string = '\0';
 	input.cursor_y_position = 0;
 	bzero(let, 5);
 	while (input.line[input.cursor_y_position])

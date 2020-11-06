@@ -92,7 +92,7 @@ t_predict_token *get_predict_token(char *raw);
 
 void 		select_choise(void *files, t_input *inp);
 
-void put_str_to_inp(t_input *input, char *part);
+void 		put_str_to_inp(t_input *input, char *part);
 
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
@@ -105,14 +105,17 @@ int			handle_del(t_input *inp);
 int			handle_tab(t_input *inp);
 int 		handle_symbol_key(t_input *inp, char *key);
 int			handle_escape_sequence(t_input *input);
+int			handle_down_arrow(t_input *inp);
+int			handle_up_arrow(t_input *inp);
 
 int			handle_key(char *key, t_input *input);
 
-void 	handle_command_token(t_input *inp, t_predict_token *token);
+void 		handle_command_token(t_input *inp, t_predict_token *token);
 
 t_input 	input_init(char *line);
 int			readline(char **line);
 
+void		clear_display_input(t_input *inp);
 void		complete_print(t_input *input, t_list **to_print);
 void		common_redraw(t_input *input);
 void		redraw_input_adding(t_input *inp);
@@ -126,18 +129,18 @@ void		handle_param_token(t_input *input, t_predict_token *token);
 void		handle_choice_tab(t_input *input, t_list **options);
 t_list		*get_list_files(char *path, char *name, int access_mode);
 char		**get_filename(char *fullname);
-char *find_same_part(t_list *files, char*filename);
+char 		*find_same_part(t_list *files, char*filename);
 void		choose_token(t_input *input, t_list *lst);
-void clear_last_disp_token(char *token, t_input *input);
+void 		clear_last_disp_token(char *token, t_input *input);
 
 
 void		signal_init(void);
 void		signal_handler(int sig);
 
-void 	print_prompt(t_input *inp);
-char 	*get_prompt(int y);
-int 	get_prompt_len(int y);
+void 		print_prompt(t_input *inp);
+char 		*get_prompt(int y);
+int 		get_prompt_len(int y);
 
-void	fill_complition_graph(t_graph *graph);
+void		fill_complition_graph(t_graph *graph);
 
 #endif //READLINE_H

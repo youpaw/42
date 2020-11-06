@@ -14,17 +14,20 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 	char	letter[5];
 	int		letter_len;
 	int		line_len;
+	size_t i;
 
+	i = 0;
 	line_len = 0;
-	while (*str)
+	while (str[i])
 	{
-		letter_len = utf8_sizeof_symbol(*str);
+		letter_len = utf8_sizeof_symbol(str[i]);
 		bzero(letter, 5);
-		strncpy(letter, str, letter_len);
+		strncpy(letter, &str[i], letter_len);
 		vec_push(*vec_ptr, letter);
-		str += letter_len;
+		i += letter_len;
 		line_len++;
 	}
+	free(str);
 	return line_len;
 }
 
@@ -38,7 +41,7 @@ static t_input	fill_input(char *line)
 	while (prev[inp.cursor_y_position])
 		inp.cursor_y_position++;
 	inp.line = xmalloc(sizeof(t_vec*) * (inp.cursor_y_position + 2));
-	inp.line_len = xmalloc(sizeof(int) * (inp.cursor_y_position + 2));
+	inp.line_len = xmalloc(sizeof(size_t) * (inp.cursor_y_position + 2));
 	inp.cursor_y_position = 0;
 	while (prev[inp.cursor_y_position])
 	{
@@ -49,6 +52,7 @@ static t_input	fill_input(char *line)
 				&inp.line[inp.cursor_y_position], prev[inp.cursor_y_position]);
 		inp.cursor_y_position++;
 	}
+	free(prev);
 	return (inp);
 }
 
@@ -63,11 +67,11 @@ t_input 	input_init(char *line)
 		inp.line = xmalloc(sizeof(t_vec*) * 2);
 		inp.line_len = xmalloc(sizeof(int) * 2);
 		inp.cursor_y_position = 0;
+		inp.len = 0;
 	}
 	inp.line[inp.cursor_y_position] = vec_new(8, sizeof(char[5]), NULL);
 	inp.line[inp.cursor_y_position + 1] = NULL;
 	inp.line_len[inp.cursor_y_position] = 0;
 	inp.cursor_x_position = 0;
-	inp.len = 0;
 	return (inp);
 }
