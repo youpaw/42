@@ -32,6 +32,8 @@ char *input_to_n_str(t_input input)
 			strcat(string, let);
 			input.cursor_x_position++;
 		}
+		if (input.line[input.cursor_y_position + 1])
+			strcat(string, "\n");
 		input.cursor_y_position++;
 	}
 	return string;

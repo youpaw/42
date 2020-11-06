@@ -6,7 +6,7 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *input_to_str(t_input input)
+char *input_to_str(t_input input, int newline)
 {
 	char *string;
 	char let[5];
@@ -26,7 +26,7 @@ char *input_to_str(t_input input)
 			strcat(string, let);
 			input.cursor_x_position++;
 		}
-		if (input.line[input.cursor_y_position + 1])
+		if (input.line[input.cursor_y_position + 1] && newline)
 			strcat(string, "\n");
 		input.cursor_y_position++;
 	}
