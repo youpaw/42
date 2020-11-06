@@ -8,7 +8,7 @@
 #include "error.h"
 #include <unistd.h>
 
-int 	right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus) // c
+int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus) // c
 {
 	int right_side;
 
@@ -17,7 +17,7 @@ int 	right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_
 	{
 		if (leafs->left->left->token->raw)
 		{
-			if (can_be_number && is_valid_number(leafs->left->left->token->raw))
+			if (can_be_number && strisnum(leafs->left->left->token->raw))
 			{
 				right_side = atoi(leafs->left->left->token->raw);
 				if (!is_standard_io(right_side))

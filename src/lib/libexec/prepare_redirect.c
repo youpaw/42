@@ -3,7 +3,6 @@
 //
 
 #include "exec.h"
-#include <cc_str.h> // delete ???
 
 int 	prepare_redirect(t_ast *ast, t_process *process) // c
 {
@@ -20,17 +19,17 @@ int 	prepare_redirect(t_ast *ast, t_process *process) // c
 		if (redirects[i]->left->token)
 		{
 			if (redirects[i]->left->token->type == l_great)
-				err = l_great_redirect(redirects[i], process, 0);
+				err = redirect_great(redirects[i], process, 0);
 			else if (redirects[i]->left->token->type == l_less)
-				err = l_less_redirect(redirects[i], process);
+				err = redirect_less(redirects[i], process);
 			else if (redirects[i]->left->token->type == l_double_great)
-				err = l_great_redirect(redirects[i], process, 1);
+				err = redirect_great(redirects[i], process, 1);
 			else if (redirects[i]->left->token->type == l_great_and)
-			    err = l_great_and_redirect(redirects[i], process);
+			    err = redirect_great_and(redirects[i], process);
 			else if (redirects[i]->left->token->type == l_heredoc)
-				err = l_heredoc_redirect(redirects[i], process);
+				err = redirect_heredoc(redirects[i], process);
 			else if (redirects[i]->left->token->type == l_less_and)
-				err = l_less_and_redirect(redirects, process);
+				err = redirect_less_and(redirects[i], process);
 			if (err != 0)
 				return (1);
 		}

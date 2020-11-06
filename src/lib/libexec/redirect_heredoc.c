@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "cc_str.h"
 
-int l_heredoc_redirect(t_ast *leafs, t_process *process) // c
+int redirect_heredoc(t_ast *leafs, t_process *process) // c
 {
 	int pfd[2];
 

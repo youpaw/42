@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-int 	left_side(t_ast *leafs, int default_value) // c
+int 	redirect_parse_left_side(t_ast *leafs, int default_value) // c
 {
 	int left;
 

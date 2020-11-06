@@ -6,12 +6,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int		l_less_redirect(t_ast *leafs, t_process *process) // c
+int		redirect_less(t_ast *leafs, t_process *process) // c
 {
 	int in;
 	int to;
 
-	to = left_side(leafs, 0);
+	to = redirect_parse_left_side(leafs, 0);
 	in = -1;
 	if (leafs->left->left->token)
 	{

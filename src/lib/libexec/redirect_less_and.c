@@ -16,7 +16,7 @@ static int less_and_right_side(t_ast *leafs)
 	{
 		if (leafs->left->left->token->raw)
 		{
-			if (is_valid_number(leafs->left->left->token->raw))
+			if (strisnum(leafs->left->left->token->raw))
 			{
 				to = atoi(leafs->left->left->token->raw);
 				if (!is_standard_io(to))
@@ -31,12 +31,12 @@ static int less_and_right_side(t_ast *leafs)
 	return (to);
 }
 
-int 	l_less_and_redirect(t_ast *leafs, t_process *process) // c
+int 	redirect_less_and(t_ast *leafs, t_process *process) // c
 {
 	int from;
 	int to;
 
-	from = left_side(leafs, 0);
+	from = redirect_parse_left_side(leafs, 0);
 	to = less_and_right_side(leafs);
 	if (from == to)
 		return (0);

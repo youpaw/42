@@ -5,6 +5,7 @@
 #include "exec.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include "cc_str.h"
 
 static void 	from_stdout(t_process *process, int to)
 {
@@ -50,22 +51,22 @@ static void 	from_stdin(t_process *process, int to)
 		process->stdin = to;
 }
 
-int 			l_great_and_redirect(t_ast *leafs, t_process *process) // c
+int 			redirect_great_and(t_ast *leafs, t_process *process) // c
 {
 	int from;
 	int to;
 
-	from = left_side(leafs, 1);
-	if (STDOUT_FILENO != from && !is_valid_number(leafs->left->left->token->raw))
+	from = redirect_parse_left_side(leafs, 1);
+	if (STDOUT_FILENO != from && !strisnum(leafs->left->left->token->raw))
 		return (redirect_print_error(E_AMBIG, leafs->left->left->token->raw));
-	to = right_side(leafs, O_RDWR | O_CREAT | O_TRUNC, 1, 1);
+	to = redirect_parse_right_side(leafs, O_RDWR | O_CREAT | O_TRUNC, 1, 1);
 	if (to == -2)
 		return (minus(process, from));
 	if (to == -1)
 		return (1);
 	if (to == from)
 		return (0); // is it really 0?
-	if (is_valid_number(leafs->left->left->token->raw) &&
+	if (strisnum(leafs->left->left->token->raw) &&
 	!is_standard_io(to) && !is_minus(leafs))
 	{
 		close(to);
