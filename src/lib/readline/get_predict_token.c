@@ -30,7 +30,6 @@ static t_predict_token *init_token(t_lexer *lexer, t_slice *slice)
 	else
 		token->type = r_cmd;
 	token->raw = strsub(lexer->raw, lexer->begin, lexer->size - lexer->begin);
-	token->original_len = lexer->size - lexer->begin;
 	return (token);
 }
 
