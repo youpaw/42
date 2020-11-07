@@ -12,6 +12,8 @@ static char	*ft_handle_chr(char *str, int cnt)
 		return (NULL);
 	rchars = "\\\a\b\0\f\n\r\t\v";
 	*(++str) = rchars[cnt];
+	putchar(rchars[cnt]);
+	*(str++);
 	return (str);
 }
 
@@ -93,6 +95,11 @@ char	*handle_esc_chars(char *str)
 			str = ft_handle_hex(str);
 		else
 			str = ft_handle_chr(str, cnt);
+	}
+	else
+	{
+		putchar('\\');
+		str++;
 	}
 	return (str);
 }

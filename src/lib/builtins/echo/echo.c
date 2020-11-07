@@ -4,24 +4,20 @@
 
 #include "echo.h"
 
-static void e_flag_print(char *str)
+void		printspchars(char *str)
 {
 	size_t cnt;
 
 	cnt = 0;
 	while (str[cnt])
 	{
-		while (str[cnt] == '\\')
+		if (str[cnt] == '\\')
 		{
-			if (cnt)
-				write(1, str, cnt);
 			str += cnt;
 			cnt = 0;
 			if (!(str = handle_esc_chars(str)))
 				return ;
 		}
-//		if (cnt)
-//			write(1, str, cnt);
 		if (str[cnt] && str[cnt] != '\\')
 		{
 			write(1, &str[cnt], 1);
@@ -30,7 +26,7 @@ static void e_flag_print(char *str)
 	}
 }
 
-static int			echo_check_opt(const char  **av, unsigned char *flags)
+static int			check_opt(const char  **av, unsigned char *flags)
 {
 	t_parsed_opt 	opt;
 	int				skip_args;
@@ -38,10 +34,10 @@ static int			echo_check_opt(const char  **av, unsigned char *flags)
 	skip_args = optparse(av, "en", &opt);
 	if (skip_args > 1)
 	{
-		if (opt.options[0] == 'n')
-			*flags = ECHO_n_FLAG;
-		else if (opt.options[0] == 'e')
-			*flags = ECHO_e_FLAG;
+		if (strchr(opt.options, 'n') != NULL)
+			*flags |= ECHO_n_FLAG;
+		if (strchr(opt.options, 'e') != NULL)
+			*flags |= ECHO_e_FLAG;
 		free(opt.options);
 	}
 	if (skip_args == 0)
@@ -54,13 +50,12 @@ int					echo(const char **av)
 	unsigned char	flags;
 	int				arg_cnt;
 
-	char *tmp = av[1];
 	flags = ECHO_E_FLAG;
-	arg_cnt = echo_check_opt(av, &flags);
+	arg_cnt = check_opt(av, &flags);
 	while (av[arg_cnt])
 	{
 		if (flags & ECHO_e_FLAG)
-			e_flag_print((char *)av[arg_cnt]);
+			printspchars((char *) av[arg_cnt]);
 		else
 			puts(av[arg_cnt]);
 		if (av[arg_cnt + 1])

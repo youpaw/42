@@ -31,11 +31,12 @@ const char 	*g_error_msg[] = {
 		"%: %: not a valid identifier",
 		"%: %: numeric argument required",
 		"%: too many arguments",
-		"%: %: invalid option",
+		"%: -%: invalid option",
   		"%: %: not found",
 		"%: HOME not set",
 		"%: OLDPWD not set",
-		"%: %: File name too long"
+		"%: %: File name too long",
+		"%: not enough arguments",
 
 };
 
