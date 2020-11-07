@@ -23,8 +23,8 @@ void	prepare_exec_env(t_ast *ast);
 int 	is_standard_io(int fd);
 int 	is_minus(t_ast *leafs);
 
-int		minus(t_process *process, int from);
-void 	init_process_ioerr(t_process *process, int from, int to);
+int		redirect_close_stdio(t_process *process, int from);
+void 	redirect_init_process_file(t_process *process, int from, int to);
 int		redirect_print_error(int errcode, const char *token);
 int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus);
 int 	redirect_parse_left_side(t_ast *leafs, int default_value);

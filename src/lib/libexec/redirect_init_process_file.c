@@ -5,7 +5,7 @@
 #include "exec.h"
 #include <unistd.h>
 
-void 	init_process_ioerr(t_process *process, int from, int to) // c
+void 	redirect_init_process_file(t_process *process, int from, int to) // c
 {
 	if (STDIN_FILENO == from)
 	{

@@ -61,7 +61,7 @@ int 			redirect_great_and(t_ast *leafs, t_process *process) // c
 		return (redirect_print_error(E_AMBIG, leafs->left->left->token->raw));
 	to = redirect_parse_right_side(leafs, O_RDWR | O_CREAT | O_TRUNC, 1, 1);
 	if (to == -2)
-		return (minus(process, from));
+		return (redirect_close_stdio(process, from));
 	if (to == -1)
 		return (1);
 	if (to == from)

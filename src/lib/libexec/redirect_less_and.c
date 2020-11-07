@@ -41,7 +41,7 @@ int 	redirect_less_and(t_ast *leafs, t_process *process) // c
 	if (from == to)
 		return (0);
 	if (to == -2)
-		return (minus(process, from));
+		return (redirect_close_stdio(process, from));
 	if (!is_standard_io(from) && to != -1)
 		return (0);
 	if (from == STDIN_FILENO)
