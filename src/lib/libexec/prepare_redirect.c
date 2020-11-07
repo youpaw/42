@@ -26,7 +26,7 @@ int 	prepare_redirect(t_ast *ast, t_process *process) // c
 				err = redirect_great(redirects[i], process, 1);
 			else if (redirects[i]->left->token->type == l_great_and)
 			    err = redirect_great_and(redirects[i], process);
-			else if (redirects[i]->left->token->type == l_heredoc)
+			else if (redirects[i]->left->token->type == l_double_less)
 				err = redirect_heredoc(redirects[i], process);
 			else if (redirects[i]->left->token->type == l_less_and)
 				err = redirect_less_and(redirects[i], process);
