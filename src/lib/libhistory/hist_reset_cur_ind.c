@@ -6,5 +6,5 @@
 
 void 	hist_reset_cur_ind(void)
 {
-	g_hist.cur_ind = g_hist.size;
+	g_hist.cur_ind = g_hist.commands->size;
 }

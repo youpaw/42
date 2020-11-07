@@ -12,22 +12,22 @@ void hist_init(const char *home_dir)
 
 	//if (!home_dir || access(home_dir, F_OK | R_OK | W_OK | X_OK) == -1)
 	//need more checks for file and permissions
+	g_hist.commands = vec_new(HIST_FILE_SIZE, sizeof(char *), free);
 	if (!home_dir || access(home_dir, F_OK) == -1)
 		g_hist.file_path = NULL;
 	else
 		g_hist.file_path = strjoin(home_dir, "/.bash_history");
 	if ((file_fd = open(g_hist.file_path, O_RDONLY)) == -1)
 		return ;
-	g_hist.size = 0;
 	while (get_next_line(file_fd, &line) > 0)
 	{
 		if (strlen(line))
-			g_hist.commands[g_hist.size++] = line;
+			vec_push(g_hist.commands, &line);
 		else
 			free(line);
 	}
 	free(line);
-	g_hist.cur_ind = g_hist.size;
+	g_hist.cur_ind = g_hist.commands->size;
 	close(file_fd);
 //	char **str;
 //
