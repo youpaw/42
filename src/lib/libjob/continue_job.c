@@ -4,8 +4,6 @@
 
 #include "jobs.h"
 
-/* Continue the job J.  */
-
 void	continue_job(t_job *j, int is_foreground)
 {
 	mark_job_as_running(j);
