@@ -41,6 +41,7 @@ typedef struct s_job
 	pid_t 			pgid;                 /* process group ID */
 	int				index;				/* job index in list */
 	char			notified;              /* true if user told about stopped job */
+	int 			is_fg;
 	struct termios	tmodes;      /* saved terminal modes */
 } t_job;
 
@@ -73,7 +74,7 @@ int	job_is_stopped (t_job *j);
 int	job_is_completed (t_job *j);
 
 void	jobs_init(void);
-t_job	*job_new(void);
+t_job *job_new(int is_foreground);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
 void	free_processes(t_process *p);
@@ -151,5 +152,6 @@ void	set_print_main_handlers(void);
 
 void	free_job(t_job **j);
 void	free_all_jobs(void);
+
 
 #endif

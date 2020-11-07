@@ -31,7 +31,7 @@ static int		exec_or_hash(const char **argv)
 
 	if ((index = get_builtin_index(argv[0])) != -1)
 		return (exec_builtin_by_index(argv, index));
-	else if (strchr(argv[0], '/') || hash_get_path(argv[0]) )
+	else if (hash_get_path(argv[0]))
 		return (-1);
 	return (-1);
 }

@@ -18,7 +18,6 @@ void exec_list(t_ast *ast)
 	{
 		if (!(pid = fork()))
 		{
-//			set_print_child_handlers();
 			g_has_job_control = 0;
 			exec_and_or(ast->left, 0, 1, NULL);
 			exit(g_exit_code);
@@ -26,7 +25,7 @@ void exec_list(t_ast *ast)
 		else
 		{
 			setpgid(pid, pid);
-			job = job_new();
+			job = job_new(0);
 			job->first_process = process_new();
 			job->first_process->pid = pid;
 			job->pgid = pid;

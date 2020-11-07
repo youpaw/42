@@ -48,6 +48,7 @@ int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 
 	err_code = 0;
 	error_args[0] = "jobs";
+	update_status();
 	while (*av)
 	{
 		index = get_job_index_from_queue(*av);
