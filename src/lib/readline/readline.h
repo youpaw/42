@@ -126,11 +126,14 @@ void		redraw_input_del(t_input *inp);
 char *input_to_str(t_input input, int newline);
 char		*input_to_n_str(t_input input);
 int			get_displayed_symbol_len(unsigned char *num);
+
 void		handle_file_token(t_input *input, t_predict_token *token, int access_mode);
 void		handle_param_token(t_input *input, t_predict_token *token);
 void		handle_choice_tab(t_input *input, t_list **options);
+
 t_list		*get_list_files(char *path, char *name, int access_mode);
 char		**get_filename(char *fullname);
+int			check_for_utf8_comb_charecter(char *prev, char *letter, size_t len);
 char 		*find_same_part(t_list *files, char*filename);
 void		choose_token(t_input *input, t_list *lst);
 void 		clear_last_disp_token(char *token, t_input *input);

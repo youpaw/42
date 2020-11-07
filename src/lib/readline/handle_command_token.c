@@ -14,7 +14,7 @@ void 	handle_command_token(t_input *inp, t_predict_token *token)
 	char **cmds;
 
 	if (strchr(token->raw, '/'))
-		handle_file_token(inp, token, X_OK);
+		handle_file_token(inp, token, 1);
 	else
 	{
 		fill_complition_graph(&graph);
