@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "cc_str.h"
 
-static void delimit_token(t_lexer *lexer)
+static int delimit_token(t_lexer *lexer)
 {
 	t_token token;
 
@@ -13,6 +13,9 @@ static void delimit_token(t_lexer *lexer)
 	token.type = recognize_token(lexer);
 	vec_push(lexer->tokens, &token);
 	lexer->begin = lexer->index + 1;
+	if (lexer->stage == l_vld && token.type == l_command_name)
+		return (replace_alias(lexer, &token));
+	return (0);
 }
 
 static void delimit_operator(t_lexer *lexer, t_token_type type, int token_size)
@@ -51,27 +54,29 @@ static void	recognize_io_number(t_lexer *lexer, t_token_type type)
 
 int 		tok_unset(t_lexer *lexer)
 {
+	int			error;
 	char		c;
 	t_operator	op;
 	t_token_type type;
 
+	error = 0;
 	c = lexer->raw[lexer->index];
 	if (c == ' ' || c == '\t' || !c)
 	{
 		if (lexer->begin == lexer->index)
 			lexer->begin++;
 		else
-			delimit_token(lexer);
+			error = delimit_token(lexer);
 	}
 	else if ((type = get_operator(lexer->raw + lexer->index, &op)) != l_token)
 	{
 		if (lexer->begin < lexer->index)
 		{
-			delimit_token(lexer);
+			error = delimit_token(lexer);
 			recognize_io_number(lexer, type);
 		}
 		lexer->begin = lexer->index;
 		delimit_operator(lexer, type, op.size);
 	}
-	return (E_OK);
+	return (error);
 }
