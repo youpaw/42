@@ -4,8 +4,7 @@
 
 #include <unistd.h>
 
-
-int is_standard_io(int fd)
+int	is_standard_io(int fd)
 {
 	return (fd == STDIN_FILENO || fd == STDERR_FILENO || fd == STDOUT_FILENO);
 }

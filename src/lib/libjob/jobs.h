@@ -146,24 +146,25 @@ void	free_processes(t_process *p);
 ** Redirects
 */
 
-char 	**get_args(t_ast *ast);
+char	**get_args(t_ast *ast);
 t_ast	**get_redirect_nodes(t_ast *ast);
-int 	expand_ast(t_ast *ast);
+int		expand_ast(t_ast *ast);
 void	prepare_exec_env(t_ast *ast);
-int 	is_standard_io(int fd);
-int 	is_minus(t_ast *leafs);
-int 	set_redirects(t_process *p);
+int		is_standard_io(int fd);
+int		is_minus(t_ast *leafs);
+int		set_redirects(t_process *p);
 int		redirect_close_stdio(t_process *process, int from);
-void 	redirect_init_process_file(t_process *process, int from, int to);
+void	redirect_init_process_file(t_process *process, int from, int to);
 int		redirect_print_error(int errcode, const char *token);
-int 	redirect_parse_right_side(t_ast *leafs, int open_options,
-							   		int can_be_number, int is_maybe_minus);
-int 	redirect_parse_left_side(t_ast *leafs, int default_value);
-int 	redirect_great_and(t_ast *leafs, t_process *process);
-int 	redirect_less_and(t_ast *leafs, t_process *process);
-int 	redirect_great(t_ast *leafs, t_process *process, int is_double_great);
+int		redirect_parse_right_side(t_token *token, int open_options,
+									int can_be_number, int is_maybe_minus);
+int		redirect_parse_left_side(t_ast *leafs, int default_value);
+int		redirect_great_and(t_ast *leafs, t_process *process);
+int		redirect_less_and(t_ast *leafs, t_process *process);
+int		redirect_less_and_right_side(t_ast *leafs);
+int		redirect_great(t_ast *leafs, t_process *process, int is_double_great);
 int		redirect_less(t_ast *leafs, t_process *process);
-int 	redirect_heredoc(t_ast *leafs, t_process *process);
-int 	prepare_redirect(t_ast *ast, t_process *process);
+int		redirect_heredoc(t_ast *leafs, t_process *process);
+int		prepare_redirect(t_ast *ast, t_process *process);
 
 #endif

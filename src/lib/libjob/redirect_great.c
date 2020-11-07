@@ -1,9 +1,11 @@
 //
 // Created by Fidelia Mallister on 11/4/20.
 //
+
 #include <fcntl.h>
 #include "jobs.h"
-int 	redirect_great(t_ast *leafs, t_process *process, int is_double_great) // c
+
+int		redirect_great(t_ast *leafs, t_process *process, int is_double_great)
 {
 	int options;
 	int from;

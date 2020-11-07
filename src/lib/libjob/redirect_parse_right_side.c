@@ -8,30 +8,25 @@
 #include "error.h"
 #include "cc_num.h"
 
-int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus) // c
+int		redirect_parse_right_side(t_token *token, int open_options,
+							int can_be_number, int is_maybe_minus)
 {
 	int right_side;
 
 	right_side = -1;
-	if (leafs->left->left->token)
+	if (can_be_number && strisnum(token->raw))
 	{
-		if (leafs->left->left->token->raw)
-		{
-			if (can_be_number && strisnum(leafs->left->left->token->raw))
-			{
-				right_side = atoi(leafs->left->left->token->raw);
-				if (!is_standard_io(right_side))
-					return redirect_print_error(E_BADFD, leafs->left->left->token->raw);
-				return (right_side);
-			}
-			else if (is_maybe_minus)
-			{
-				if (strcmp(leafs->left->left->token->raw, "-") == 0)
-					return (-2);
-			}
-			if ((right_side = open(leafs->left->left->token->raw, open_options, 0644)) == -1)
-				return (1);
-		}
+		right_side = atoi(token->raw);
+		if (!is_standard_io(right_side))
+			return (redirect_print_error(E_BADFD, token->raw));
+		return (right_side);
 	}
+	else if (is_maybe_minus)
+	{
+		if (strcmp(token->raw, "-") == 0)
+			return (-2);
+	}
+	if ((right_side = open(token->raw, open_options, 0644)) == -1)
+		return (1);
 	return (right_side);
 }
