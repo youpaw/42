@@ -19,6 +19,19 @@ static int	get_job_return_value(t_job *j, int is_foreground, int is_forked)
 	return (0);
 }
 
+static int	status_to_return_value(int status)
+{
+	int		return_value;
+
+	if (WIFSIGNALED(status))
+		return_value = WTERMSIG(status) + 128;
+	else if (WIFSTOPPED(status))
+		return_value = WSTOPSIG(status) + 128;
+	else
+		return_value = WEXITSTATUS(status);
+	return (return_value);
+}
+
 int launch_job(t_job *job, int is_foreground, int is_forked)
 {
 	int			return_value;
@@ -45,5 +58,5 @@ int launch_job(t_job *job, int is_foreground, int is_forked)
 			strdel(&msg);
 		}
 	}
-	return (return_value);
+	return (status_to_return_value(return_value));
 }
