@@ -5,7 +5,7 @@
 #include "jobs.h"
 #include <unistd.h>
 
-void 	redirect_init_process_file(t_process *process, int from, int to) // c
+void	redirect_init_process_file(t_process *process, int from, int to)
 {
 	if (STDIN_FILENO == from)
 	{

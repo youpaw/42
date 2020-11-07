@@ -12,3 +12,4 @@ int			redirect_print_error(int errcode, const char *token)
 	error_print(errcode, args);
 	return (-1);
 }
+

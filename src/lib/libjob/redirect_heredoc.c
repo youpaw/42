@@ -6,12 +6,12 @@
 #include <unistd.h>
 #include "cc_str.h"
 
-int redirect_heredoc(t_ast *leafs, t_process *process) // c
+int		redirect_heredoc(t_ast *leafs, t_process *process)
 {
 	int pfd[2];
 
 	if (pipe(pfd) < 0)
-		return (1); // pipe error
+		return (1);
 	if (!is_standard_io(process->stdin))
 		close(process->stdin);
 	fdputs(leafs->left->left->token->raw, pfd[1]);
