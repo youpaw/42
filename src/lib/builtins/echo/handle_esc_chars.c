@@ -4,21 +4,21 @@
 
 #include "echo.h"
 
-static char	*ft_handle_chr(char *str, int cnt)
+static char	*handle_chr(char *str, int cnt)
 {
 	char *rchars;
 
 	if (cnt == 3)
 		return (NULL);
 	rchars = "\\\a\b\0\f\n\r\t\v";
-	*(++str) = rchars[cnt];
 	putchar(rchars[cnt]);
-	*(str++);
+	if ((str + 1) && (str + 2))
+		str += 2;
 	return (str);
 }
 
 
-static int	ft_get_hex(char c)
+static int	get_hex(char c)
 {
 	int		cnt;
 	char	*set;
@@ -32,16 +32,16 @@ static int	ft_get_hex(char c)
 	return (cnt);
 }
 
-static char		*ft_handle_hex(char *str)
+static char		*handle_hex(char *str)
 {
 	int		ch;
 	int		tmp;
 
 	str += 2;
-	if ((ch = ft_get_hex(toupper(*str))) >= 0)
+	if ((ch = get_hex(toupper(*str))) >= 0)
 	{
 		str++;
-		if ((tmp = ft_get_hex(toupper(*str))) >= 0)
+		if ((tmp = get_hex(toupper(*str))) >= 0)
 		{
 			str++;
 			ch *= 16;
@@ -53,7 +53,7 @@ static char		*ft_handle_hex(char *str)
 }
 
 
-static char	*ft_handle_oct(char *str)
+static char	*handle_oct(char *str)
 {
 	int ch;
 
@@ -90,11 +90,11 @@ char	*handle_esc_chars(char *str)
 	if (echars[cnt])
 	{
 		if (echars[cnt] == '0')
-			str = ft_handle_oct(str);
+			str = handle_oct(str);
 		else if (echars[cnt] == 'x')
-			str = ft_handle_hex(str);
+			str = handle_hex(str);
 		else
-			str = ft_handle_chr(str, cnt);
+			str = handle_chr(str, cnt);
 	}
 	else
 	{
