@@ -185,6 +185,7 @@ int			expand_token(t_token *token);
 t_tokens	*get_tokens(t_lexer *lexer, int error);
 void 		destruct_tokens(t_tokens **tokens);
 
+int 		replace_alias(t_lexer *lexer, t_token *token);
 t_tokens	*validate_str(const char *string);
 
 // prints the array of tokens in the following format
