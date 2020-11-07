@@ -7,20 +7,22 @@ t_state 	get_current_state(t_lexer *lexer)
 {
 	int					cnt;
 	t_slice 			current;
-	static const char	state_map[N_STATES] = {'\\', '\'', '"', '$', '!'};
+	static const char	state_map[N_STATES - 1] = {'\\', '\'', '"', '$', '!'};
 
 	vec_get_last(&current, lexer->slices);
 	if (current.state != l_unset)
 		return (current.state);
 	cnt = 0;
-	while (cnt < N_STATES && state_map[cnt] != lexer->raw[lexer->index])
+	while (cnt < (N_STATES - 1) && state_map[cnt] != lexer->raw[lexer->index])
 		cnt++;
-	if (cnt < N_STATES)
+	if (cnt < (N_STATES - 1))
 	{
 		current.state = cnt;
 		current.index = lexer->index;
 		vec_push(lexer->slices, &current);
 		lexer->index++;
 	}
+	else
+		return (l_unset);
 	return (cnt);
 }
