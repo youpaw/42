@@ -14,7 +14,7 @@
 #define READLINE_H
 
 #define N_ORD_KEY_HANDLERS 6
-#define N_ESC_KEY_HANDLERS 9
+#define N_ESC_KEY_HANDLERS 11
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
 #define INP_MAKING_CHOICE 2
@@ -107,6 +107,8 @@ int 		handle_symbol_key(t_input *inp, char *key);
 int			handle_escape_sequence(t_input *input);
 int			handle_down_arrow(t_input *inp);
 int			handle_up_arrow(t_input *inp);
+int			handle_home_key(t_input *inp);
+int			handle_end_key(t_input *inp);
 
 int			handle_key(char *key, t_input *input);
 
