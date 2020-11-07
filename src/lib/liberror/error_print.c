@@ -35,9 +35,13 @@ const char 	*g_error_msg[] = {
   		"%: %: not found",
 		"%: HOME not set",
 		"%: OLDPWD not set",
+		"%: %: no such job",
+		"%: no job control",
 		"%: %: File name too long",
-		"%: not enough arguments",
-
+		"%: command not found",
+		"%: Bad file descriptor",
+		"%: ambiguous redirect",
+		"%: not enough arguments"
 };
 
 void 	error_print(t_error_code er_code, const char **args)

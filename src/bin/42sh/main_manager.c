@@ -32,7 +32,7 @@ int 	main_manager(void)
 	ast = NULL;
 	tokens = NULL;
 	str = strdup("");
-	print_entry();
+//	print_entry();
 	while (42)
 	{
 		readline(&str);
@@ -51,5 +51,6 @@ int 	main_manager(void)
 		del_ast(&ast);
 		destruct_tokens(&tokens);
 		hist_reset_cur_ind();
+		do_job_notification();
 	}
 }
