@@ -33,6 +33,7 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 {
 	pid_t pid;
 	const char	*path;
+	int 		index;
 
 	g_has_job_control = 0;
 	if (g_is_interactive)
@@ -45,9 +46,9 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 			tcsetpgrp (g_terminal, pgid);
 	}
 	set_pipes(p);
-	if (!run_builtin((const char **)p->argv) ||
-			!run_job_builtin((const char **) p->argv))
-		exit(g_exit_code);
+
+	if ((index = get_builtin_index(p->argv[0])) != -1)
+		exit(exec_builtin_by_index((const char **)p->argv, index));
 	if (strispath(p->argv[0]))
 		path = p->argv[0];
 	else
