@@ -3,8 +3,6 @@
 //
 #include "jobs.h"
 
-/* Mark a stopped job J as being running again.  */
-
 void	mark_job_as_running(t_job *j)
 {
 	t_process *p;

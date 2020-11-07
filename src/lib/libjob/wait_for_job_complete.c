@@ -7,17 +7,6 @@
 #include <signal.h>
 #include "cc_str.h"
 
-/* Check for processes that have status information available,
-   blocking until all processes in the given job have reported.  */
-
-/*
-static int		update_job_status(t_job *j)
-{
-	t_process *p;
-
-	while
-}
-*/
 int wait_for_job_complete(t_job *j)
 {
 	int status;

@@ -41,23 +41,6 @@ static int		exec_or_hash(t_process *process)
 	return (-1);
 }
 
-/*
-**	Creates a temporary argv and checks if argv[0] is a builtin.
-**	If argv[0] contains a '/'.
-**	If argv[0] is a builtin.
-**	If argv[0] is in hashmap, adds a hit tag to it, but does not execute.
-**	If argv[0] is not in hashmap, add it to hashmap and add a hit to it but
-**	does not execute it.
-**	If argv[0] is a builtin:
-**			- if it got executed, returns 0.
-**			- if there was an error returns error number
-**	Else (argv[0] is NOT a builtin) returns -1.
-**	If execution should stop, returns -2
-**
-**	If fake_argv() found no real argv:
-**	apply the assignation table to shell_vars (and env if 'exported')
-*/
-
 int		run_builtin_or_hash(t_process *process)
 {
 	int						return_value;

@@ -7,5 +7,6 @@
 
 int 	is_minus(t_ast *leafs)
 {
-	return (leafs->left->left->token->raw && (strcmp(leafs->left->left->token->raw, "-") == 0));
+	return (leafs->left->left->token->raw && \
+			(strcmp(leafs->left->left->token->raw, "-") == 0));
 }

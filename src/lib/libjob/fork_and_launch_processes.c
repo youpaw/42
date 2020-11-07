@@ -57,14 +57,8 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 	while (p)
 	{
 		set_pipe_fds(p, in_out_fds, pipe_fds);
-		pid = fork();
-		if (pid == 0)
-		{
-			restore_job_and_interactive_signals();
-			//if (in_out_fds[0] != pipe_fds[0])
-			//	close(pipe_fds[0]);
+		if (!(pid = fork()))
 			launch_process(p, job->pgid, is_foreground);
-		}
 		else if (pid < 0)
 		{
 			fdputendl("fork failed", 2);

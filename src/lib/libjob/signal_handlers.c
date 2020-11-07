@@ -4,14 +4,6 @@
 
 #include <signal.h>
 #include "jobs.h"
-#include "cc_char.h"
-
-static void	sig_handler(int code)
-{
-	signal(code, SIG_DFL);
-	kill(0, code);
-	//fdputchar('\n', g_terminal);
-}
 
 static void	set_handlers(void (*sig_handler)(int arg),
 							void(*sigint_handler)(int arg))
@@ -21,7 +13,6 @@ static void	set_handlers(void (*sig_handler)(int arg),
 	signal(SIGTSTP, sig_handler);
 	signal(SIGTTIN, sig_handler);
 	signal(SIGTTOU, sig_handler);
-	//signal(SIGCHLD, sig_handler);
 }
 
 void	ignore_job_and_interactive_signals(void)
@@ -31,7 +22,6 @@ void	ignore_job_and_interactive_signals(void)
 
 void	restore_job_and_interactive_signals(void)
 {
-	//set_handlers(sig_handler, sig_handler);
 	set_handlers(SIG_DFL, SIG_DFL);
 }
 

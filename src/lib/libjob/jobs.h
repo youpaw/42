@@ -17,35 +17,36 @@ extern int				g_terminal;
 extern int				g_is_interactive;
 extern int 				g_has_job_control;
 extern int 				g_can_exit;
+extern t_vec			*g_job_queue;
 
-/* A process is a single process.  */
-typedef struct s_process
+typedef struct	s_process
 {
-	struct s_process *next;       /* next process in pipeline */
+	struct s_process *next;
 	t_ast *ast;
-	char **argv;                /* for exec */
+	char **argv;
 	char **env;
-	pid_t pid;                  /* process ID */
-	char completed;             /* true if process has completed */
-	char stopped;               /* true if process has stopped */
-	int status;                 /* reported status value */
+	pid_t pid;
+	char completed;
+	char stopped;
+	int status;
 	int stdin;
 	int	stdout;
-	int	stderr;  /* standard i/o channels */
-} t_process;
+	int	stderr;
+}				t_process;
 
-/* A job is a pipeline of processes.  */
 typedef struct s_job
 {
-	struct s_job 	*next;           /* next active job */
-	char 			*command;              /* command line, used for messages */
-	t_process 		*first_process;     /* list of processes in this job */
-	pid_t 			pgid;                 /* process group ID */
-	int				index;				/* job index in list */
-	char			notified;              /* true if user told about stopped job */
+	struct s_job 	*next;
+	char 			*command;
+	t_process 		*first_process;
+	pid_t 			pgid;
+	int				index;
+	char			notified;
 	int 			is_fg;
-	struct termios	tmodes;      /* saved terminal modes */
+	struct termios	tmodes;
 } t_job;
+
+extern	t_job	*g_first_job;
 
 typedef enum	e_job_print_mode
 {
@@ -55,48 +56,40 @@ typedef enum	e_job_print_mode
 	JPM_BG
 }				t_job_print_mode;
 
-/* The active jobs are linked into a list.  This is its head.   */
-extern	t_job	*g_first_job;
-extern	t_vec	*g_job_queue;
 
 
-
-int wait_for_job_complete(t_job *j);
-void fork_and_launch_processes(t_job *job, int is_foreground);
-
-/* Find the active job with the indicated pgid.  */
-t_job	*find_job (pid_t pgid);
-t_job	*find_job_by_index(int index);
-int		get_job_status(t_job *job);
-
-/* Return true if all processes in the job have stopped or completed.  */
-int	job_is_stopped (t_job *j);
-
-/* Return true if all processes in the job have completed.  */
-int	job_is_completed (t_job *j);
+/*
+** Job management
+*/
 
 void	jobs_init(void);
-t_job *job_new(int is_foreground);
+t_job	*job_new(int is_foreground);
+int		get_new_job_index(void);
 int		push_job(t_job *job);
-int		del_job_by_pid(size_t pid);
-void	free_processes(t_process *p);
-int launch_job(t_job *job, int is_foreground, int is_forked);
-void	launch_process (t_process *p, pid_t pgid, int is_foreground);
-
-int 		process_init(t_process *p);
-t_process	*process_new(void);
-int		get_last_process_status(t_process *p);
-void	print_process_stats(const char *str);
-int put_job_in_foreground (t_job *j, int cont);
-void	put_job_in_background (t_job *j, int cont);
-int		mark_process_status (pid_t pid, int status);
-void	update_status(void);
-int wait_for_job(t_job *j, int options);
-void	format_job_info(t_job *j, const char *status);
-void	do_job_notification(void);
+int		launch_job(t_job *job, int is_foreground, int is_forked);
 void	continue_job(t_job *j, int is_foreground);
+int		put_job_in_foreground (t_job *j, int cont);
+void	put_job_in_background (t_job *j, int cont);
 void	mark_job_as_running(t_job *j);
+void	update_status(void);
+void	do_job_notification(void);
+int		wait_for_job_complete(t_job *j);
+int		wait_for_job(t_job *j, int options);
+int		job_is_stopped (t_job *j);
+int		job_is_completed (t_job *j);
+t_job	*find_job_by_index(int index);
+void	remove_job_by_index(int job_index);
 
+/*
+** Processes management
+*/
+
+t_process	*process_new(void);
+int 	process_init(t_process *p);
+void	fork_and_launch_processes(t_job *job, int is_foreground);
+void	launch_process (t_process *p, pid_t pgid, int is_foreground);
+int		mark_process_status (pid_t pid, int status);
+int		get_last_process_status(t_process *p);
 
 /*
 ** Job builtins
@@ -107,37 +100,32 @@ int		get_builtin_index(const char *name);
 int 	exec_builtin_by_index(const char **av, int index);
 
 void	exit_shell(int exit_code);
-int run_job_builtin(const char **av);
-int exit_builtin(const char **av);
-int jobs(const char **av);
-int fg_builtin(const char **av);
-int bg_builtin(const char **av);
-int bg_fg(const char **av, int is_foreground);
-void	continue_job(t_job *j, int is_foreground);
+int		exit_builtin(const char **av);
+int		jobs(const char **av);
+int		fg_builtin(const char **av);
+int		bg_builtin(const char **av);
+int		bg_fg(const char **av, int is_foreground);
 
-void	remove_job_by_index(int job_index);
-char				*get_status_message(int status);
 /*
 ** Job queue
 */
 
-int		get_new_job_index(void);
-void	queue_print(void);
 void	queue_push_back(int index);
 void	queue_remove(int index);
 void	queue_move_back(int index);
 int		queue_get_current(int is_job_builtin);
 int		queue_get_last(int is_job_builtin);
-
-void	print_job_info(t_job *job);
+int		queue_get_job_index_by_str(const char *str);
 
 /*
-** Job utils
+** Job print functions
 */
 
+void    print_job_pid(t_job *job);
+void	print_job_status_str(t_job *job);
 void    print_job_formatted(t_job *job, int is_job_builtin, t_job_print_mode mode);
-int		get_job_index_from_queue(const char *str);
-
+char	get_status_sign_for_job(int job_index, int is_job_builtin);
+char	*get_status_message(int status);
 
 /*
 ** Signals
@@ -147,35 +135,29 @@ void	ignore_job_and_interactive_signals(void);
 void	restore_job_and_interactive_signals(void);
 
 /*
-void	set_dfl_handlers(void);
-void	set_ignore_handlers(void);
-void	set_print_child_handlers(void);
-void	set_print_main_handlers(void);
+** Free functions
 */
 
 void	free_job(t_job **j);
 void	free_all_jobs(void);
+void	free_processes(t_process *p);
 
 /*
- * Redirect
- */
+** Redirects
+*/
 
 char 	**get_args(t_ast *ast);
 t_ast	**get_redirect_nodes(t_ast *ast);
-
 int 	expand_ast(t_ast *ast);
-
 void	prepare_exec_env(t_ast *ast);
-
 int 	is_standard_io(int fd);
 int 	is_minus(t_ast *leafs);
-
 int 	set_redirects(t_process *p);
-
 int		redirect_close_stdio(t_process *process, int from);
 void 	redirect_init_process_file(t_process *process, int from, int to);
 int		redirect_print_error(int errcode, const char *token);
-int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus);
+int 	redirect_parse_right_side(t_ast *leafs, int open_options,
+							   		int can_be_number, int is_maybe_minus);
 int 	redirect_parse_left_side(t_ast *leafs, int default_value);
 int 	redirect_great_and(t_ast *leafs, t_process *process);
 int 	redirect_less_and(t_ast *leafs, t_process *process);

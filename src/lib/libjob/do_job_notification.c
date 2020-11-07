@@ -3,41 +3,31 @@
 //
 
 #include "jobs.h"
-#include "cc_str.h"
-#include <stdlib.h>
 
-
-/* Notify the user about stopped or terminated jobs.
-   Delete terminated jobs from the active job list.  */
+void	notify_and_remove_completed_job(t_job *j)
+{
+	if (!j->is_fg)
+		print_job_formatted(j, 0, JPM_DEFAULT);
+	remove_job_by_index(j->index);
+}
 
 void	do_job_notification(void)
 {
-	t_job *j, *jlast, *jnext;
+	t_job	*j;
+	t_job	*jnext;
 
 	update_status();
-	jlast = NULL;
-	for (j = g_first_job; j; j = jnext)
+	j = g_first_job;
+	while (j)
 	{
 		jnext = j->next;
-		/* If all processes have completed, tell the user the job has
-		   completed and delete it from the list of active jobs.  */
 		if (job_is_completed(j))
-		{
-			if (!j->is_fg)
-				print_job_formatted(j, 0, JPM_DEFAULT);
-			if (jlast)
-				jlast->next = jnext;
-			else
-				g_first_job = jnext;
-			free_job(&j);
-		}
+			notify_and_remove_completed_job(j);
 		else if (job_is_stopped(j) && !j->notified)
 		{
             print_job_formatted(j, 0, JPM_DEFAULT);
 			j->notified = 1;
-			jlast = j;
 		}
-		else
-			jlast = j;
+		j = jnext;
 	}
 }

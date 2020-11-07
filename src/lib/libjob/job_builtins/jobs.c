@@ -7,22 +7,6 @@
 #include "error.h"
 #include "cc_str.h"
 
-/*
-int jobs(const char **av)
-{
-	t_job	*job;
-
-	//do_job_notification();
-	if ((job = g_first_job) && g_has_job_control)
-		while (job->next)
-		{
-			print_job_formatted(job, 1);
-			job = job->next;
-		}
-	return (0);
-}
-*/
-
 static t_job_print_mode	get_job_print_mode(char *options)
 {
 	t_job_print_mode	mode;
@@ -39,7 +23,7 @@ static t_job_print_mode	get_job_print_mode(char *options)
 	return (mode);
 }
 
-int 	print_specific_jobs(const char **av, t_job_print_mode mode)
+static int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 {
 	int		err_code;
 	t_job	*job;
@@ -51,7 +35,7 @@ int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 	update_status();
 	while (*av)
 	{
-		index = get_job_index_from_queue(*av);
+		index = queue_get_job_index_by_str(*av);
 		if (!(job = find_job_by_index(index)))
 		{
 			error_args[1] = *av;
@@ -65,7 +49,7 @@ int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 	return (err_code);
 }
 
-int 	print_all_jobs(t_job_print_mode mode)
+static int 	print_all_jobs(t_job_print_mode mode)
 {
 	t_job	*job;
 

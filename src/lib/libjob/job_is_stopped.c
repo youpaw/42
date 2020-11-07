@@ -4,8 +4,6 @@
 
 #include "jobs.h"
 
-
-/* Return true if all processes in the job have stopped or completed.  */
 int	job_is_stopped (t_job *j)
 {
 	t_process *p;

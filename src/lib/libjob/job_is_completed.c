@@ -4,8 +4,6 @@
 
 #include "jobs.h"
 
-
-/* Return true if all processes in the job have completed.  */
 int	job_is_completed (t_job *j)
 {
 	t_process *p;
