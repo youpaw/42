@@ -23,8 +23,8 @@ void	do_job_notification(void)
 		   completed and delete it from the list of active jobs.  */
 		if (job_is_completed(j))
 		{
-			//if (!j->notified)
-			print_job_formatted(j, 0, JPM_DEFAULT);
+			if (!j->is_fg)
+				print_job_formatted(j, 0, JPM_DEFAULT);
 			if (jlast)
 				jlast->next = jnext;
 			else
