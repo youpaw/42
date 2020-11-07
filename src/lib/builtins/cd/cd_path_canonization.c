@@ -4,44 +4,47 @@
 
 #include "cd.h"
 
-static int 	token_cpy(char *new_path, const char *token, int curr_i)
+static char		*fill_empty_path(const char *path)
 {
-	int 	i;
+	char		*new_path;
+	const char *oldpwd;
+	int 		len;
 
-	i = 0;
-	while (token[i] && curr_i < MAX_PATH)
-	{
-		new_path[curr_i] = token[i];
-		curr_i++;
-		i++;
-	}
-	return (curr_i);
+	oldpwd = env_get_value("OLDPWD");
+	len = strlen(path) - 1;
+	while (len > 0 && path[len] == '/')
+		len--;
+	if (len == 0 && strcmp(path, "//") != 0)
+		new_path = strdup("/");
+	else if ((strcmp(path, "-")) == 0)
+		new_path = strdup(oldpwd);
+	else
+		new_path = strdup(path);
+	return (new_path);
 }
 
 static char		*tokens_join(char ***tokens, int len)
 {
 	char	*new_path;
 	int 	cnt;
-	int		curr_i;
 
 	cnt = 0;
-	curr_i = 0;
 	new_path = memalloc(MAX_PATH + 1);
-	while (cnt < len && curr_i < MAX_PATH)
+	while (cnt < len && cnt < MAX_PATH)
 	{
-		while ((*tokens)[cnt] == NULL && cnt < len)
-			cnt++;
-		if (cnt == len)
-			break ;
-		new_path[curr_i] ='/';
-		curr_i++;
-		curr_i = token_cpy(new_path, (*tokens)[cnt], curr_i);
+		if ((*tokens)[cnt] != NULL)
+		{
+			strcat(new_path, "/\0");
+			strcat(new_path, (*tokens)[cnt]);
+		}
 		cnt++;
 	}
-	new_path[curr_i] = '\0';
-	cnt = -1;
-	while (++cnt < len)
+	cnt = 0;
+	while (cnt < len)
+	{
 		free((*tokens)[cnt]);
+		cnt++;
+	}
 	free(*tokens);
 	return(new_path);
 }
@@ -96,11 +99,10 @@ static int 	tokenizer(const char *path, char ***tokens)
 	return (0);
 }
 
-char	*path_canonization(const char *path)
+char	*cd_path_canonization(const char *path)
 {
 	char **tokens;
 	char *new_path;
-	const char *oldpwd;
 	int len;
 
 	len = 0;
@@ -112,11 +114,7 @@ char	*path_canonization(const char *path)
 	tokens_handler(tokens, len);
 	if (!tokens || !(*tokens))
 	{
-		oldpwd = env_get_value("OLDPWD");
-		if (strcmp(path, "-") == 0)
-			new_path = strdup(oldpwd);
-		else
-			new_path = strdup(path);
+		new_path = fill_empty_path(path);
 		return (new_path);
 	}
 	new_path = tokens_join(&tokens, len);

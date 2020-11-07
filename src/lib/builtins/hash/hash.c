@@ -5,6 +5,7 @@
 #include "hash.h"
 #include "optparse.h"
 #include "error.h"
+#include "cc.h"
 
 static int	print_error_option(char opt)
 {
@@ -36,6 +37,13 @@ static void	hash_remove_all(void)
 	hash_init();
 }
 
+static int		is_path(const char *str)
+{
+		if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
+			return (1);
+		return (0);
+}
+
 int 	hash(const char **av)
 {
 	t_parsed_opt	opt_res;
@@ -51,7 +59,7 @@ int 	hash(const char **av)
 	err_code = 0;
 	while (av[skip])
 	{
-		if (update_hash(av[skip]) == E_NOTFOUND)
+		if (update_hash(av[skip]) == E_NOTFOUND && !is_path(av[skip]))
 		{
 			err_code = E_NOTFOUND;
 			args[1] = av[skip];

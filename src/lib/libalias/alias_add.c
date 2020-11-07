@@ -9,7 +9,7 @@
 
 static int is_char_valid(char c)
 {
-	return (!(isspace(c) || c == '=')); // is it? this need proof
+	return (!(isspace(c) || c == '=') || c == '/');
 }
 
 size_t get_valid_alias_name_len(const char *name)
@@ -17,7 +17,7 @@ size_t get_valid_alias_name_len(const char *name)
 	size_t index;
 
 	index = 0;
-	while (is_char_valid(name[index]))
+	while (name[index] && is_char_valid(name[index]))
 		index++;
 	if (name[index] != '=')
 		return (0);

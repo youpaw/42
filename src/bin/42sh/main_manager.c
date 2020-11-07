@@ -37,21 +37,20 @@ int 	main_manager(void)
 	{
 		readline(&str);
 		tokens = validate_str(str);
-		if (tokens && !tokens->error)
-		{
-			if ((ast = parse(tokens)))
-			{
-				exec(ast);
-				hist_reset_cur_ind();
-			}
-		}
 		if (!tokens || tokens->error != E_INCINP)
 		{
+			hist_push(tokens->raw);
 			free(str);
 			str = strdup("");
 		}
+		if (tokens && !tokens->error)
+		{
+			if ((ast = parse(tokens)))
+				exec(ast);
+		}
 		del_ast(&ast);
 		destruct_tokens(&tokens);
+		hist_reset_cur_ind();
 		do_job_notification();
 	}
 }

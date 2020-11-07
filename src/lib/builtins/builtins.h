@@ -11,6 +11,8 @@ int 	unset(const char **args);
 int 	export(const char **av);
 int 	hash(const char **av);
 int		echo(const char **av);
+int		alias(const char **av);
+int		unalias(const char **av);
 
 int 	run_builtin(const char **av);
 
