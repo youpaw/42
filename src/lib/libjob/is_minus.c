@@ -2,15 +2,8 @@
 // Created by Fidelia Mallister on 11/4/20.
 //
 
-#include "exec.h"
-#include <unistd.h>
+#include "parser.h"
 #include "cc_str.h"
-#include "cc_char.h"
-
-int is_standard_io(int fd)
-{
-	return (fd == STDIN_FILENO || fd == STDERR_FILENO || fd == STDOUT_FILENO);
-}
 
 int 	is_minus(t_ast *leafs)
 {

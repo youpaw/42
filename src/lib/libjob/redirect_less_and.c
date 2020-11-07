@@ -2,10 +2,9 @@
 // Created by Fidelia Mallister on 11/4/20.
 //
 
-#include "exec.h"
-#include <unistd.h>
-#include <fcntl.h>
+#include "jobs.h"
 #include "cc_str.h"
+#include "cc_num.h"
 
 static int less_and_right_side(t_ast *leafs)
 {

@@ -2,7 +2,8 @@
 // Created by Fidelia Mallister on 11/4/20.
 //
 
-#include "exec.h"
+#include "jobs.h"
+#include "cc_num.h"
 
 int 	redirect_parse_left_side(t_ast *leafs, int default_value) // c
 {

@@ -29,7 +29,7 @@ int launch_job(t_job *job, int is_foreground, int is_forked)
 		return (return_value);
 
 	g_can_exit = 0;
-	fork_and_launch_process(job, is_foreground);
+	fork_and_launch_processes(job, is_foreground);
 
 	if (!is_forked && !is_foreground)
         print_job_formatted(job, 0, JPM_BG);

@@ -2,11 +2,11 @@
 // Created by Fidelia Mallister on 11/4/20.
 //
 
-#include "exec.h"
+#include "jobs.h"
 #include "cc_str.h"
 #include <fcntl.h>
 #include "error.h"
-#include <unistd.h>
+#include "cc_num.h"
 
 int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus) // c
 {

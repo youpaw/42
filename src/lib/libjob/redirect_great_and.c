@@ -2,7 +2,7 @@
 // Created by Fidelia Mallister on 11/4/20.
 //
 
-#include "exec.h"
+#include "jobs.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include "cc_str.h"

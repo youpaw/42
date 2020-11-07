@@ -2,7 +2,7 @@
 // Created by Fidelia Mallister on 11/5/20.
 //
 
-#include "exec.h"
+#include "jobs.h"
 #include <unistd.h>
 
 int		redirect_close_stdio(t_process *process, int from)

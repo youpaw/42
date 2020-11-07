@@ -45,7 +45,7 @@ static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
 	}
 }
 
-void fork_and_launch_process(t_job *job, int is_foreground)
+void fork_and_launch_processes(t_job *job, int is_foreground)
 {
 	pid_t		pid;
 	t_process	*p;
