@@ -24,8 +24,8 @@
 
 #ifndef HISTORY_H
 # define HISTORY_H
-# define HIST_SIZE 2000
-# define HIST_FILE_SIZE 500
+# define HIST_SIZE 2500
+# define HIST_FILE_SIZE 2500
 # define HIST_FILE_NAME ".bash_history"
 
 typedef struct	s_hist

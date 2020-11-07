@@ -9,16 +9,15 @@
 
 static int	print_error_option(char opt)
 {
-	char 		str[3];
+	char 		str[2];
 	const char	*args[2];
 
-	str[0] = '-';
-	str[1] = opt;
-	str[2] = '\0';
+	str[0] = opt;
+	str[1] = '\0';
 	args[0] = "hash";
 	args[1] = str;
 	error_print(E_INVALOPT, args);
-	return (E_INVALOPT);
+	return (2);
 }
 
 static	int	update_hash(const char *bin)
@@ -70,6 +69,6 @@ int 	hash(const char **av)
 	}
 	if (skip == 1)
 		return (hash_print());
-	return (err_code);
+	return (err_code ? 1 : 0);
 }
 

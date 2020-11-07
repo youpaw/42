@@ -2,14 +2,15 @@
 // Created by youpaw on 10/5/20.
 //
 
-#include "exec.h"
+#include "parser.h"
+#include "jobs.h"
 
 char	**get_args(t_ast *ast)
 {
 	t_vec	*vec;
 	char 	**args;
 
-	vec = vec_new(EXEC_VEC_CAPACITY, sizeof(char *), NULL);
+	vec = vec_new(JOB_VEC_CAPACITY, sizeof(char *), NULL);
 	vec_push(vec, &ast->token->raw);
 	ast = ast->right;
 	while (ast)
