@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "lexer.h"
 #include "parser.h"
-#define N_JOB_BUILTINS 4
+# define N_BUILTINS 12
 
 extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
@@ -97,6 +97,10 @@ void	mark_job_as_running(t_job *j);
 /*
 ** Job builtins
 */
+
+int		run_builtin_or_hash(t_process *process);
+int		get_builtin_index(const char *name);
+int 	exec_builtin_by_index(const char **av, int index);
 
 void	exit_shell(int exit_code);
 int run_job_builtin(const char **av);

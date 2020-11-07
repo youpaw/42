@@ -25,12 +25,9 @@ int launch_job(t_job *job, int is_foreground, int is_forked)
 	char 		*msg;
 
 	if (!job->first_process->next && is_foreground &&
-			((!run_builtin((const char **)job->first_process->argv)) || \
-			!run_job_builtin((const char **) job->first_process->argv)))
-	{
-		job->first_process->completed = 1;
-		return (0); //fiiiiiiiiiix
-	}
+			(return_value = run_builtin_or_hash(job->first_process)) != -1)
+		return (return_value);
+
 	g_can_exit = 0;
 	fork_and_launch_process(job, is_foreground);
 

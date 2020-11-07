@@ -4,7 +4,6 @@
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
-# define N_BUILTINS 6
 
 int		cd(const char **av);
 int 	set(const char **args);

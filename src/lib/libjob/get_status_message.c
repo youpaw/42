@@ -64,9 +64,9 @@ char				*get_status_message(int status)
 	char	*code;
 
 	if (WIFSTOPPED(status))
-		msg = get_signal_string(WSTOPSIG(status));
+		msg = (char *)get_signal_string(WSTOPSIG(status));
 	else if (WIFSIGNALED(status))
-		msg = get_signal_string(WTERMSIG(status));
+		msg = (char *)get_signal_string(WTERMSIG(status));
 	else
 	{
 		if (WEXITSTATUS(status) == 0)
