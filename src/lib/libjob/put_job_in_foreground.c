@@ -29,8 +29,6 @@ int put_job_in_foreground(t_job *j, int cont)
 	/* Put the shell back in the foreground.  */
 	//signal(SIGTTOU, SIG_IGN);
 	//setpgid(getpid(), j->pgid);
-	//if (job_is_completed(j))
-	//	j->notified = 1;
 	if( tcsetpgrp (g_terminal, g_pgid) < 0)
 	{
 		fdputendl("Terminal failed to return", 2);

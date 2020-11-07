@@ -8,27 +8,6 @@
 #include <signal.h>
 #include <unistd.h>
 
-static void	set_pipes(t_process *p)
-{
-	if (prepare_redirect(p->ast, p))
-		exit(1);
-	if (p->stdin != STDIN_FILENO)
-	{
-		dup2 (p->stdin, STDIN_FILENO);
-		close (p->stdin);
-	}
-	if (p->stdout != STDOUT_FILENO)
-	{
-		dup2 (p->stdout, STDOUT_FILENO);
-		close (p->stdout);
-	}
-	if (p->stderr != STDERR_FILENO)
-	{
-		dup2 (p->stderr, STDERR_FILENO);
-		close (p->stderr);
-	}
-}
-
 void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 {
 	pid_t		pid;
@@ -45,7 +24,8 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 		if (is_foreground)
 			tcsetpgrp (g_terminal, pgid);
 	}
-	set_pipes(p);
+	if (process_init(p) || set_redirects(p))
+		exit(1);
 	if ((index = get_builtin_index(p->argv[0])) != -1)
 		exit(exec_builtin_by_index((const char **)p->argv, index));
 	if (strispath(p->argv[0]))

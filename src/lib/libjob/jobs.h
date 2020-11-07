@@ -11,7 +11,6 @@
 # define N_BUILTINS 12
 # define JOB_VEC_CAPACITY 15
 
-
 extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
 extern int				g_terminal;
@@ -44,6 +43,7 @@ typedef struct s_job
 	pid_t 			pgid;                 /* process group ID */
 	int				index;				/* job index in list */
 	char			notified;              /* true if user told about stopped job */
+	int 			is_fg;
 	struct termios	tmodes;      /* saved terminal modes */
 } t_job;
 
@@ -76,7 +76,7 @@ int	job_is_stopped (t_job *j);
 int	job_is_completed (t_job *j);
 
 void	jobs_init(void);
-t_job	*job_new(void);
+t_job *job_new(int is_foreground);
 int		push_job(t_job *job);
 int		del_job_by_pid(size_t pid);
 void	free_processes(t_process *p);

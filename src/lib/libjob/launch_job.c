@@ -19,6 +19,19 @@ static int	get_job_return_value(t_job *j, int is_foreground, int is_forked)
 	return (0);
 }
 
+static int	status_to_return_value(int status)
+{
+	int		return_value;
+
+	if (WIFSIGNALED(status))
+		return_value = WTERMSIG(status) + 128;
+	else if (WIFSTOPPED(status))
+		return_value = WSTOPSIG(status) + 128;
+	else
+		return_value = WEXITSTATUS(status);
+	return (return_value);
+}
+
 int launch_job(t_job *job, int is_foreground, int is_forked)
 {
 	int			return_value;
@@ -32,8 +45,7 @@ int launch_job(t_job *job, int is_foreground, int is_forked)
 	fork_and_launch_processes(job, is_foreground);
 
 	if (!is_forked && !is_foreground)
-        print_job_formatted(job, 0, JPM_BG);
-
+		print_job_formatted(job, 0, JPM_BG);
 	return_value = get_job_return_value(job, is_foreground, is_forked);
 	if (WIFSIGNALED(return_value))
 	{
@@ -47,5 +59,5 @@ int launch_job(t_job *job, int is_foreground, int is_forked)
 			strdel(&msg);
 		}
 	}
-	return (return_value);
+	return (status_to_return_value(return_value));
 }

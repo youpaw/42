@@ -14,4 +14,5 @@ int process_init(t_process *p)
 	prepare_exec_env(p->ast);
 	p->env = exec_env_2array();
 	exec_env_del();
+	return (0);
 }
