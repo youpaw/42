@@ -9,6 +9,7 @@
 #include "lexer.h"
 #include "parser.h"
 # define N_BUILTINS 12
+# define JOB_VEC_CAPACITY 15
 
 extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
@@ -21,6 +22,7 @@ extern int 				g_can_exit;
 typedef struct s_process
 {
 	struct s_process *next;       /* next process in pipeline */
+	t_ast *ast;
 	char **argv;                /* for exec */
 	char **env;
 	pid_t pid;                  /* process ID */
@@ -60,7 +62,7 @@ extern	t_vec	*g_job_queue;
 
 
 int wait_for_job_complete(t_job *j);
-void fork_and_launch_process(t_job *job, int is_foreground);
+void fork_and_launch_processes(t_job *job, int is_foreground);
 
 /* Find the active job with the indicated pgid.  */
 t_job	*find_job (pid_t pgid);
@@ -81,6 +83,7 @@ void	free_processes(t_process *p);
 int launch_job(t_job *job, int is_foreground, int is_forked);
 void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 
+int 		process_init(t_process *p);
 t_process	*process_new(void);
 int		get_last_process_status(t_process *p);
 void	print_process_stats(const char *str);
@@ -153,5 +156,32 @@ void	set_print_main_handlers(void);
 void	free_job(t_job **j);
 void	free_all_jobs(void);
 
+/*
+ * Redirect
+ */
+
+char 	**get_args(t_ast *ast);
+t_ast	**get_redirect_nodes(t_ast *ast);
+
+int 	expand_ast(t_ast *ast);
+
+void	prepare_exec_env(t_ast *ast);
+
+int 	is_standard_io(int fd);
+int 	is_minus(t_ast *leafs);
+
+int 	set_redirects(t_process *p);
+
+int		redirect_close_stdio(t_process *process, int from);
+void 	redirect_init_process_file(t_process *process, int from, int to);
+int		redirect_print_error(int errcode, const char *token);
+int 	redirect_parse_right_side(t_ast *leafs, int open_options, int can_be_number, int is_maybe_minus);
+int 	redirect_parse_left_side(t_ast *leafs, int default_value);
+int 	redirect_great_and(t_ast *leafs, t_process *process);
+int 	redirect_less_and(t_ast *leafs, t_process *process);
+int 	redirect_great(t_ast *leafs, t_process *process, int is_double_great);
+int		redirect_less(t_ast *leafs, t_process *process);
+int 	redirect_heredoc(t_ast *leafs, t_process *process);
+int 	prepare_redirect(t_ast *ast, t_process *process);
 
 #endif

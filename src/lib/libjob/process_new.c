@@ -12,6 +12,7 @@ t_process	*process_new(void)
 
 	process = xmalloc(sizeof(t_process));
 	process->next = NULL;
+	process->ast = NULL;
 	process->argv = NULL;
 	process->env = NULL;
 	process->completed = 0;
