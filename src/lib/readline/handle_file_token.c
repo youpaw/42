@@ -151,12 +151,6 @@ void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 	char **filename;
 
 	filename = get_filename(token->raw);
-//	puts(token->raw);
-//	puts("\n");
-//	puts(filename[0]);
-//	puts("\n");
-//	puts(filename[1]);
-//	puts("\n");
 	files = get_list_files(filename[0], filename[1], access_mode);
 	if (!files)
 		handle_key(" \0\0\0", input);
@@ -170,8 +164,7 @@ void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 		}
 		else
 		{
-			clear_last_disp_token(filename[1], input);
-			select_choise(convert_list_2_selection(files), input);
+			select_choise(convert_list_2_selection(files), input, filename[1]);
 			lst_del_circle(&files, NULL);
 		}
 	}

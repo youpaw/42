@@ -90,7 +90,7 @@ void		termcap_init(void);
 void 		del_predict_token(t_predict_token **token);
 t_predict_token *get_predict_token(char *raw);
 
-void 		select_choise(void *files, t_input *inp);
+void select_choise(void *files, t_input *inp, char *current);
 
 void 		put_str_to_inp(t_input *input, char *part);
 

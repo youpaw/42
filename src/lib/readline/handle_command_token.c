@@ -25,8 +25,7 @@ void 	handle_command_token(t_input *inp, t_predict_token *token)
 			graph_del(&graph);
 			return ;
 		}
-		clear_last_disp_token(token->raw, inp);
-		select_choise(convert_array_2_selection(cmds), inp);
+		select_choise(convert_array_2_selection(cmds), inp, token->raw);
 		i = 0;
 		while (cmds[i])
 			free(cmds[i++]);

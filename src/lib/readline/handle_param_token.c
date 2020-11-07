@@ -17,7 +17,7 @@ void 	handle_param_token(t_input *inp, t_predict_token *token)
 	if (params)
 	{
 		clear_last_disp_token(token->raw, inp);
-		select_choise(convert_array_2_selection(params), inp);
+		select_choise(convert_array_2_selection(params), inp, token->raw);
 		i = 0;
 		while (params[i])
 			free(params[i++]);
