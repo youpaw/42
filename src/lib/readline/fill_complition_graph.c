@@ -15,7 +15,8 @@ static void		fill_builtins(t_graph *graph)
 	int cnt;
 	static const char *builtins_names[N_BUILTINS] = {
 			"set", "unset", "cd", "export", "hash", "echo",
-			"alias", "unalias", "exit", "jobs", "fg", "bg"};
+			"alias", "unalias", "exit", "jobs", "fg", "bg",
+			"history", "type"};
 
 	cnt = 0;
 	while (cnt < N_BUILTINS)
