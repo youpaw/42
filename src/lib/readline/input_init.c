@@ -37,6 +37,7 @@ static t_input	fill_input(char *line)
 	t_input inp;
 	char **prev;
 
+	free(line);
 	inp.cursor_y_position = 0;
 	inp.len = 0;
 	prev = strsplitcharset(line, "\n");
@@ -67,6 +68,7 @@ t_input 	input_init(char *line)
 		inp = fill_input(line);
 	else
 	{
+		free(line);
 		inp.line = xmalloc(sizeof(t_vec*) * 2);
 		inp.line_len = xmalloc(sizeof(int) * 2);
 		inp.cursor_y_position = 0;

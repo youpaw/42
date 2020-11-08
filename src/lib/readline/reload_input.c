@@ -7,6 +7,22 @@
 #include <termcap.h>
 #include "cc_char.h"
 
+static void del_input(t_input *input)
+{
+	size_t i;
+
+	i = 0;
+	while (input->line[i])
+	{
+		vec_del(&(input->line[i++]));
+	}
+	free(input->line_len);
+	free(input->line);
+	input->line_len = NULL;
+	input->line = NULL;
+	input = NULL;
+}
+
 void reload_input(t_input *inp, char *str)
 {
 	char *tmp;
@@ -14,7 +30,7 @@ void reload_input(t_input *inp, char *str)
 	tmp = inp->hist_storage;
 	clear_display_input(inp);
 	del_input(inp);
-	*inp = input_init(strdup(str));
+	*inp = input_init(str);
 	if (*str)
 	{
 		free(inp->line[inp->cursor_y_position]);

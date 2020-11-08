@@ -153,9 +153,9 @@ void		save_to_hist_storage(t_input *inp);
 
 
 void put_str_to_input(t_input *inp, char *part);
-void del_input(t_input *input);
 
 void reload_input(t_input *inp, char *str);
 void redraw_input(t_input inp, char *str);
+void put_cursor_to_the_end(t_input *inp);
 
 #endif //READLINE_H

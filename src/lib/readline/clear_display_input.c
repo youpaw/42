@@ -24,14 +24,6 @@ void clear_first_display_input(t_input *inp)
 	clear_begin_and_after_cursor(inp);
 }
 
-void put_cursor_to_the_end(t_input *inp)
-{
-	while (inp->line[inp->cursor_y_position + 1])
-		handle_shift_down(inp);
-	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
-		handle_right_arrow(inp);
-}
-
 void clear_display_input(t_input *inp)
 {
 	size_t prev_lines_count;

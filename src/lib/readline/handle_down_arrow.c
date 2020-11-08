@@ -9,15 +9,13 @@
 int handle_down_arrow(t_input *inp)
 {
 	char *new_hist;
-	char *tmp;
 
-	new_hist = hist_get_next();
+	new_hist = strdup(hist_get_next());
 	if (!new_hist)
 	{
 		if (inp->hist_storage)
 		{
 			new_hist = inp->hist_storage;
-//			free(inp->hist_storage);
 			inp->hist_storage = NULL;
 		}
 		else
@@ -26,10 +24,7 @@ int handle_down_arrow(t_input *inp)
 			return (0);
 		}
 	}
-	tmp = inp->hist_storage;
 	clear_display_input(inp);
 	reload_input(inp, new_hist);
-//	redraw_input(*inp, new_hist);
-	inp->hist_storage = tmp;
 	return (0);
 }

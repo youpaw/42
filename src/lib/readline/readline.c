@@ -10,7 +10,7 @@
 #include "cc_graph.h"
 #include "cc_str.h"
 
-void del_input(t_input *input)
+static void del_input(t_input *input)
 {
 	size_t i;
 
@@ -21,9 +21,11 @@ void del_input(t_input *input)
 	}
 	free(input->line_len);
 	free(input->line);
+	if (input->hist_storage)
+		free(input->hist_storage);
+	input->hist_storage = NULL;
 	input->line_len = NULL;
 	input->line = NULL;
-	input->hist_storage = NULL;
 	input = NULL;
 }
 
@@ -43,8 +45,6 @@ int			readline(char **line)
 		{
 			*line = input_to_str(input, 1);
 			del_input(&input);
-			free(g_rd_history_storage);
-			g_rd_history_storage = NULL;
 			tty_restore();
 			return 0;
 		}
