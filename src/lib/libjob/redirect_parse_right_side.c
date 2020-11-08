@@ -28,5 +28,6 @@ int		redirect_parse_right_side(t_token *token, int open_options,
 	}
 	if ((right_side = open(token->raw, open_options, 0644)) == -1)
 		return (1);
+	printf("AAAAAA\n\n\n");
 	return (right_side);
 }
