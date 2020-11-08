@@ -17,6 +17,9 @@ void	hist_print(void)
 			putchar(' ');
 		if (i < 100)
 			putchar(' ');
+		if (i < 1000)
+			putchar(' ');
+		putchar(' ');
 		putnbr(i);
 		puts("  ");
 		vec_get_at(&str, g_hist.commands, i - 1);
