@@ -17,7 +17,7 @@ int handle_up_arrow(t_input *inp)
 
 	if (!inp->hist_storage)
 		inp->hist_storage = input_to_str(*inp, 1);
-	new_hist = strdup(hist_get_prev());
+	new_hist = (hist_get_prev());
 	if (new_hist)
 	{
 		tmp = inp->hist_storage;

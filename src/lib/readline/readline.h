@@ -158,4 +158,5 @@ void reload_input(t_input *inp, char *str);
 void redraw_input(t_input inp, char *str);
 void put_cursor_to_the_end(t_input *inp);
 
+char **split_newline(char *line);
 #endif //READLINE_H

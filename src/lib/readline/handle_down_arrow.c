@@ -10,7 +10,7 @@ int handle_down_arrow(t_input *inp)
 {
 	char *new_hist;
 
-	new_hist = strdup(hist_get_next());
+	new_hist = (hist_get_next());
 	if (!new_hist)
 	{
 		if (inp->hist_storage)

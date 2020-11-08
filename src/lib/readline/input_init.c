@@ -8,7 +8,7 @@
 #include "cc_str.h"
 #include "cc_char.h"
 #include "cc_num.h"
-
+#include <termcap.h>
 
 static int strcmp_in_input(t_vec **vec_ptr, char *str)
 {
@@ -19,6 +19,7 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 
 	i = 0;
 	line_len = 0;
+	bzero(letter, 5);
 	while (str[i])
 	{
 		letter_len = utf8_sizeof_symbol(str[i]);
@@ -37,10 +38,9 @@ static t_input	fill_input(char *line)
 	t_input inp;
 	char **prev;
 
-	free(line);
 	inp.cursor_y_position = 0;
 	inp.len = 0;
-	prev = strsplitcharset(line, "\n");
+	prev = split_newline(line);
 	while (prev[inp.cursor_y_position])
 		inp.cursor_y_position++;
 	inp.line = xmalloc(sizeof(t_vec*) * (inp.cursor_y_position + 2));
@@ -68,7 +68,6 @@ t_input 	input_init(char *line)
 		inp = fill_input(line);
 	else
 	{
-		free(line);
 		inp.line = xmalloc(sizeof(t_vec*) * 2);
 		inp.line_len = xmalloc(sizeof(int) * 2);
 		inp.cursor_y_position = 0;
