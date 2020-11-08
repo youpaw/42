@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "lexer.h"
 #include "parser.h"
-# define N_BUILTINS 12
+# define N_BUILTINS 14
 # define JOB_VEC_CAPACITY 15
 
 extern pid_t			g_pgid;
@@ -105,6 +105,7 @@ int		jobs(const char **av);
 int		fg_builtin(const char **av);
 int		bg_builtin(const char **av);
 int		bg_fg(const char **av, int is_foreground);
+int		type(const char **av);
 
 /*
 ** Job queue

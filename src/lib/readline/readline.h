@@ -22,7 +22,7 @@
 #define FIRST_PROMPT_LEN 8
 #define NEXT_PROMPT_TEXT "> "
 #define NEXT_PROMPT_LEN 2
-#define N_BUILTINS 12
+#define N_BUILTINS 14
 #define MAX_PATH 1024
 
 # include <termios.h>

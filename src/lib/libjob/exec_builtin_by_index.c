@@ -10,7 +10,7 @@ int 	exec_builtin_by_index(const char **av, int index)
 	static int (*builtins_funcs[N_BUILTINS])(const char **) = {
 			exit_builtin, set, unset, cd, export, hash, echo,
 			alias, unalias, // replace set and unset to alias and unalias
-			jobs, fg_builtin, bg_builtin};
+			jobs, fg_builtin, bg_builtin, history, type};
 
 	if (index)
 		g_can_exit = 0;
