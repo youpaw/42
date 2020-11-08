@@ -12,7 +12,8 @@ void hist_init(const char *home_dir)
 
 	//if (!home_dir || access(home_dir, F_OK | R_OK | W_OK | X_OK) == -1)
 	//need more checks for file and permissions
-	g_hist.commands = vec_new(HIST_FILE_SIZE, sizeof(char *), free);
+	g_hist.commands = vec_new(HIST_FILE_SIZE, sizeof(char *),
+							  (void (*)(void *))strdel);
 	if (!home_dir || access(home_dir, F_OK) == -1)
 		g_hist.file_path = NULL;
 	else
