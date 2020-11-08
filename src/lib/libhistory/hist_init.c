@@ -1,7 +1,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "history.h"
-#include "cc.h"
+#include "cc_str.h"
+#include "cc_file.h"
 
 t_hist		g_hist;
 

@@ -4,7 +4,6 @@
 
 #include "jobs.h"
 #include <unistd.h>
-
 int 	set_redirects(t_process *p)
 {
 	if (prepare_redirect(p->ast, p))
