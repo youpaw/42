@@ -6,11 +6,11 @@
 #include "cc_str.h"
 #include <unistd.h>
 
-static void	clean_fds_after_pipes(int *in_out_fds, int *pipe_fds)
+static void	clean_fds_after_pipes(t_process *process, int *in_out_fds, int *pipe_fds)
 {
-	if (in_out_fds[0] != STDIN_FILENO)
+	if (in_out_fds[0] != process->stdin)
 		close(in_out_fds[0]);
-	if (in_out_fds[1] != STDOUT_FILENO)
+	if (in_out_fds[1] != process->stdout)
 		close(in_out_fds[1]);
 	in_out_fds[0] = pipe_fds[0];
 }
@@ -27,11 +27,8 @@ static void	set_pipe_fds(t_process *process, int *in_out_fds, int *pipe_fds)
 		in_out_fds[1] = pipe_fds[1];
 	}
 	else
-		in_out_fds[1] = STDOUT_FILENO;
-	if (process->stdin == STDIN_FILENO)
-		process->stdin = in_out_fds[0];
-	if (process->stdout == STDOUT_FILENO)
-		process->stdout = in_out_fds[1];
+		in_out_fds[1] = process->stdout;
+
 }
 
 static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
@@ -52,13 +49,17 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 	int			in_out_fds[2];
 	int 		pipe_fds[2];
 
-	in_out_fds[0] = STDIN_FILENO; // is redirect here?
 	p = job->first_process;
+	in_out_fds[0] = p->stdin; // is redirect here?
 	while (p)
 	{
 		set_pipe_fds(p, in_out_fds, pipe_fds);
 		if (!(pid = fork()))
+		{
+			p->stdin = in_out_fds[0];
+			p->stdout = in_out_fds[1];
 			launch_process(p, job->pgid, is_foreground);
+		}
 		else if (pid < 0)
 		{
 			fdputendl("fork failed", 2);
@@ -66,7 +67,7 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 		}
 		else
 			continue_in_parent(job, p, pid);
-		clean_fds_after_pipes(in_out_fds, pipe_fds);
+		clean_fds_after_pipes(p, in_out_fds, pipe_fds);
 		p = p->next;
 	}
 }
