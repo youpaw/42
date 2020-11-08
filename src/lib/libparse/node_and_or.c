@@ -12,7 +12,7 @@ t_ast *node_and_or(t_tokens *tokens)
 	if ((node->left = node_pipeline(tokens)))
 	{
 		if (!get_node_token(node, tokens))
-			node->right = node_list(tokens);
+			node->right = node_and_or(tokens);
 	}
 	else
 		del_ast(&node);

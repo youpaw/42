@@ -26,7 +26,7 @@ void	strjoin_expanded(t_lexer *lexer, size_t index, const char *expand, int pad)
 	else
 		raw = strjoin(expand, lexer->raw + lexer->index);
 	lexer->index = index - pad - 1;
-	lexer->size = strlen(lexer->raw);
+	lexer->size = strlen(raw);
 	free(lexer->raw);
 	lexer->raw = raw;
 }

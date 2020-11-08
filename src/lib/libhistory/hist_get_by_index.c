@@ -7,9 +7,16 @@
 
 char 	*hist_get_by_index(int index)
 {
-	if ( index == 0 || index < -g_hist.size || index > g_hist.size)
+	char	*str;
+
+	if ( index == 0 || index < -(int)(g_hist.commands->size) ||
+						index > (int)(g_hist.commands->size))
 		return (NULL);
 	if (index > 0)
-		return (g_hist.commands[index - 1]);
-	return (g_hist.commands[g_hist.size + index]);
+	{
+		vec_get_at(&str, g_hist.commands, index - 1);
+		return (str);
+	}
+	vec_get_at(&str, g_hist.commands, g_hist.commands->size + index);
+	return (str);
 }

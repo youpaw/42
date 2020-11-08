@@ -7,17 +7,22 @@
 
 void	hist_print(void)
 {
-	int i;
+	int		i;
+	char	*str;
 
 	i = 0;
-	while (i++ < g_hist.size)
+	while (i++ < g_hist.commands->size)
 	{
 		if (i < 10)
 			putchar(' ');
 		if (i < 100)
 			putchar(' ');
+		if (i < 1000)
+			putchar(' ');
+		putchar(' ');
 		putnbr(i);
 		puts("  ");
-		putendl(g_hist.commands[i - 1]);
+		vec_get_at(&str, g_hist.commands, i - 1);
+		putendl(str);
 	}
 }
