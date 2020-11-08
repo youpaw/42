@@ -22,7 +22,6 @@ int handle_right_arrow(t_input *inp)
 
 	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 		if (!((inp->cursor_x_position + 1) % ws.ws_col) && inp->cursor_x_position)
 		{

@@ -16,7 +16,6 @@ int			handle_shift_up(t_input *inp)
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	if (inp->cursor_y_position || (inp->cursor_x_position != 0 && inp->cursor_x_position >= ws.ws_col))
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("up", NULL), 1, putchar);
 		if (inp->cursor_x_position < ws.ws_col || inp->cursor_x_position == 0)
 		{

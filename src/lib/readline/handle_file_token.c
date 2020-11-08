@@ -122,28 +122,6 @@ char	**get_filename(char *fullname)
 	return (filename);
 }
 
-void put_str_to_inp(t_input *input, char *part)
-{
-	size_t i;
-	t_letter let;
-	int 	len;
-
-	i = 0;
-	if (!part)
-		return ;
-	while (part[i])
-	{
-		bzero(let.ch, 5);
-		len = utf8_sizeof_symbol(part[i]);
-		strncpy(let.ch, &part[i], len);
-		if (len >= 2)
-			i += check_for_utf8_comb_charecter(&part[i], let.ch, len);
-		handle_symbol_key(input, let.ch);
-		i += len;
-	}
-	free(part);
-}
-
 void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 {
 	t_list *files;
@@ -159,7 +137,7 @@ void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 		part = find_same_part(files, filename[1]);
 		if (part)
 		{
-			put_str_to_inp(input, part);
+			put_str_to_input(input, part);
 			lst_del_circle(&files, NULL);
 		}
 		else

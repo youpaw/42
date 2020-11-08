@@ -16,14 +16,12 @@ void clear_begin_and_after_cursor(t_input *inp)
 void clear_second_display_input(t_input *inp)
 {
 	clear_begin_and_after_cursor(inp);
-
 	handle_shift_up(inp);
 }
 
 void clear_first_display_input(t_input *inp)
 {
 	clear_begin_and_after_cursor(inp);
-
 }
 
 void put_cursor_to_the_end(t_input *inp)

@@ -14,7 +14,9 @@
 #include "unistd.h"
 #include <termcap.h>
 #include "cc_char.h"
+#include "cc_str.h"
 #include <sys/ioctl.h>
+#include "cc_num.h"
 
 
 int handle_symbol_key(t_input *inp, char *key)
@@ -22,6 +24,16 @@ int handle_symbol_key(t_input *inp, char *key)
 	if (!isprint(*key) && *key != '\n')
 		return (0);
 	write(STDOUT_FILENO, key, 4);
+//	sleep(1);
+//	sleep(1);
+//	if (*key == 'p')
+//	{
+//		sleep(1);
+//		putnbr(inp->cursor_x_position);
+//		sleep(1);
+//		putnbr(inp->cursor_y_position);
+//		sleep(1);
+//	}
 	if (vec_push_at(inp->line[inp->cursor_y_position], key, inp->cursor_x_position))
 		return (1);
 	inp->cursor_x_position++;

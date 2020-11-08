@@ -7,6 +7,7 @@
 #include "readline.h"
 #include "cc_str.h"
 #include "cc_char.h"
+#include "cc_num.h"
 
 
 static int strcmp_in_input(t_vec **vec_ptr, char *str)
@@ -37,6 +38,7 @@ static t_input	fill_input(char *line)
 	char **prev;
 
 	inp.cursor_y_position = 0;
+	inp.len = 0;
 	prev = strsplitcharset(line, "\n");
 	while (prev[inp.cursor_y_position])
 		inp.cursor_y_position++;
@@ -50,6 +52,7 @@ static t_input	fill_input(char *line)
 														get_prompt(inp.cursor_y_position));
 		inp.line_len[inp.cursor_y_position] += strcmp_in_input(
 				&inp.line[inp.cursor_y_position], prev[inp.cursor_y_position]);
+		inp.len += inp.line_len[inp.cursor_y_position];
 		inp.cursor_y_position++;
 	}
 	free(prev);

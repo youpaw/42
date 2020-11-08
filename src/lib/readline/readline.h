@@ -81,7 +81,7 @@ typedef  struct s_predict_token
 	enum s_predict_type type;
 }				t_predict_token;
 
-int 		g_input_state_flag;
+char 		*g_rd_history_storage;
 
 void		tty_init(void);
 void		tty_restore(void);
@@ -92,7 +92,7 @@ t_predict_token *get_predict_token(char *raw);
 
 void select_choise(void *files, t_input *inp, char *current);
 
-void 		put_str_to_inp(t_input *input, char *part);
+void 		put_str_to_input(t_input *inp, char *part);
 
 int			handle_left_arrow(t_input *inp);
 int			handle_right_arrow(t_input *inp);
@@ -150,4 +150,12 @@ void		fill_complition_graph(t_graph *graph);
 
 char		*restore_from_hist_storage(t_input *inp);
 void		save_to_hist_storage(t_input *inp);
+
+
+void put_str_to_input(t_input *inp, char *part);
+void del_input(t_input *input);
+
+void reload_input(t_input *inp, char *str);
+void redraw_input(t_input inp, char *str);
+
 #endif //READLINE_H

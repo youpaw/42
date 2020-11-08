@@ -23,6 +23,6 @@ void select_choise(void *files, t_input *inp, char *current)
 		selection = strdup(current);
 	while (i++ != inp->cursor_x_position % ws.ws_col)
 		tputs(tgetstr("nd", NULL), 1, putchar);
-	put_str_to_inp(inp, selection);
+	put_str_to_input(inp, selection);
 }
 

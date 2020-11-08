@@ -10,17 +10,21 @@
 #include "cc_graph.h"
 #include "cc_str.h"
 
-void del_input(t_input input)
+void del_input(t_input *input)
 {
 	size_t i;
 
 	i = 0;
-	while (input.line[i])
+	while (input->line[i])
 	{
-		vec_del(&input.line[i++]);
+		vec_del(&(input->line[i++]));
 	}
-	free(input.line_len);
-	free(input.line);
+	free(input->line_len);
+	free(input->line);
+	input->line_len = NULL;
+	input->line = NULL;
+	input->hist_storage = NULL;
+	input = NULL;
 }
 
 int			readline(char **line)
@@ -38,7 +42,9 @@ int			readline(char **line)
 		if (handle_key(key.ch, &input))
 		{
 			*line = input_to_str(input, 1);
-			del_input(input);
+			del_input(&input);
+			free(g_rd_history_storage);
+			g_rd_history_storage = NULL;
 			tty_restore();
 			return 0;
 		}

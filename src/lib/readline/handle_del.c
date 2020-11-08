@@ -19,7 +19,6 @@ int			handle_del(t_input *inp)
 {
 	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("dc", NULL), 1, &putchar);
 		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
