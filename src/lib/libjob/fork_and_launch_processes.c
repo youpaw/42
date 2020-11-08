@@ -28,7 +28,6 @@ static void	set_pipe_fds(t_process *process, int *in_out_fds, int *pipe_fds)
 	}
 	else
 		in_out_fds[1] = process->stdout;
-
 }
 
 static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
