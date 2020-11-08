@@ -9,8 +9,8 @@ char 	*hist_get_by_index(int index)
 {
 	char	*str;
 
-	if ( index == 0 || index < -g_hist.commands->size ||
-						index > g_hist.commands->size)
+	if ( index == 0 || index < -(int)(g_hist.commands->size) ||
+						index > (int)(g_hist.commands->size))
 		return (NULL);
 	if (index > 0)
 	{

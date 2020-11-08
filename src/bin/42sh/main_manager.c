@@ -39,10 +39,11 @@ int 	main_manager(void)
 		tokens = validate_str(str);
 		if (!tokens || tokens->error != E_INCINP)
 		{
-			hist_push(tokens->raw);
 			free(str);
 			str = strdup("");
 		}
+		if (tokens && tokens->error != E_INCINP && tokens->error != E_NOINP)
+			hist_push(tokens->raw);
 		if (tokens && !tokens->error)
 		{
 			if ((ast = parse(tokens)))
