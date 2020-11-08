@@ -5,19 +5,19 @@
 #include "hash.h"
 #include "optparse.h"
 #include "error.h"
+#include "cc.h"
 
 static int	print_error_option(char opt)
 {
-	char 		str[3];
+	char 		str[2];
 	const char	*args[2];
 
-	str[0] = '-';
-	str[1] = opt;
-	str[2] = '\0';
+	str[0] = opt;
+	str[1] = '\0';
 	args[0] = "hash";
 	args[1] = str;
 	error_print(E_INVALOPT, args);
-	return (E_INVALOPT);
+	return (2);
 }
 
 static	int	update_hash(const char *bin)
@@ -37,6 +37,13 @@ static void	hash_remove_all(void)
 	hash_init();
 }
 
+static int		is_path(const char *str)
+{
+		if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
+			return (1);
+		return (0);
+}
+
 int 	hash(const char **av)
 {
 	t_parsed_opt	opt_res;
@@ -52,7 +59,7 @@ int 	hash(const char **av)
 	err_code = 0;
 	while (av[skip])
 	{
-		if (update_hash(av[skip]) == E_NOTFOUND)
+		if (update_hash(av[skip]) == E_NOTFOUND && !is_path(av[skip]))
 		{
 			err_code = E_NOTFOUND;
 			args[1] = av[skip];
@@ -62,6 +69,6 @@ int 	hash(const char **av)
 	}
 	if (skip == 1)
 		return (hash_print());
-	return (err_code);
+	return (err_code ? 1 : 0);
 }
 

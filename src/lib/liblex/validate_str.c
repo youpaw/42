@@ -20,7 +20,7 @@ t_tokens	*validate_str(const char *string)
 		return (NULL);
 	}
 	if (!error && lexer.flags[l_print_command])
-		putendl(lexer.raw);
+		puts(lexer.raw);
 	tokens = get_tokens(&lexer, error);
 	lex_del(&lexer);
 	return (tokens);

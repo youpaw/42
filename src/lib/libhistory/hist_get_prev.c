@@ -7,7 +7,10 @@
 
 char 	*hist_get_prev(void)
 {
+	char	*str;
+
 	if (g_hist.cur_ind == 0)
 		return (NULL);
-	return (g_hist.commands[--g_hist.cur_ind]);
+	vec_get_at(&str, g_hist.commands, --g_hist.cur_ind);
+	return (str);
 }

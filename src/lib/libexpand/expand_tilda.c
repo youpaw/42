@@ -10,15 +10,11 @@
 
 static int replace(char **str, const char *value)
 {
-	char *slash;
 	char *tmp;
 
 	if (!value)
 		return (1);
-	if ((slash = strchr(*str, '/')))
-		tmp = strjoin(value, slash);
-	else
-		tmp = strdup(value);
+	tmp = strdup(value);
 	free(*str);
 	*str = tmp;
 	return (0);

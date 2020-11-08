@@ -28,6 +28,7 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 	t_state		current;
 	int			error;
 
+	error = 0;
 	init_lexer(lexer, raw, stage);
 	while (lexer->index < lexer->size)
 	{

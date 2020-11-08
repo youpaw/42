@@ -3,12 +3,15 @@
 //
 
 #include "main.h"
+#include "jobs.h"
 
 int main(int ac, const char *av[], const char *env[])
 {
 	int error;
-
 	if (!(error = main_init(av[0], av + 1, env)))
+	{
+		//print_process_stats("Init:");
 		error = main_manager();
+	}
 	return (error);
 }

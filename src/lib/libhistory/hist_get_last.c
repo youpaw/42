@@ -7,7 +7,10 @@
 
 char 	*hist_get_last(void)
 {
-	if (g_hist.size < 1)
+	char	*str;
+
+	if (g_hist.commands->size < 1)
 		return (NULL);
-	return (g_hist.commands[g_hist.size - 1]);
+	vec_get_at(&str, g_hist.commands, g_hist.commands->size - 1);
+	return (str);
 }

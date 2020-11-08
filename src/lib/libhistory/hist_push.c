@@ -9,10 +9,12 @@ int 	hist_push(const char *cmd)
 {
 	char *new;
 
-	if (cmd && g_hist.size < HIST_SIZE)
+	if (cmd)
 	{
-		g_hist.commands[g_hist.size++] = strdup(cmd);
+		new = strdup(cmd);
+		vec_push(g_hist.commands, &new);
+		hist_reset_cur_ind();
 		return (0);
 	}
-	return (-1); //error or overflow
+	return (-1);
 }

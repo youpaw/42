@@ -11,12 +11,11 @@
 
 static int	print_error_option(char opt)
 {
-	char 		str[3];
+	char 		str[2];
 	const char	*args[2];
 
-	str[0] = '-';
-	str[1] = opt;
-	str[2] = '\0';
+	str[0] = opt;
+	str[1] = '\0';
 	args[0] = "export";
 	args[1] = str;
 	error_print(E_INVALOPT, args);

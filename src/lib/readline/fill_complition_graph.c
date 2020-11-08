@@ -12,17 +12,15 @@
 
 static void		fill_builtins(t_graph *graph)
 {
-	static const char *builtins_names[N_BUILTINS] = {
-			"exit", "set", "unset", "cd", "export", "hash", "echo",\
-			"alias", "unalias"};
 	int cnt;
+	static const char *builtins_names[N_BUILTINS] = {
+			"set", "unset", "cd", "export", "hash", "echo",
+			"alias", "unalias", "exit", "jobs", "fg", "bg",
+			"history", "type"};
 
 	cnt = 0;
 	while (cnt < N_BUILTINS)
-	{
-		graph_insert(graph, builtins_names[cnt]);
-		cnt++;
-	}
+		graph_insert(graph, builtins_names[cnt++]);
 }
 
 static void		path_join(char *bin_path, const char *path, const char *bin)
