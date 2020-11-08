@@ -7,6 +7,7 @@
 #include "cc_hash_map.h"
 #include "env.h"
 #include "alias.h"
+#include "history.h"
 
 static int	has_stopped_jobs(void)
 {
@@ -37,6 +38,7 @@ void	exit_shell(int exit_code)
 	if (g_can_exit || !has_stopped_jobs())
 	{
 		// save history and free variables
+		hist_save();
 		free_all_data();
 		exit(exit_code);
 	}
