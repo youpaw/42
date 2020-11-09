@@ -5,7 +5,6 @@
 #include "exec.h"
 #include "jobs.h"
 #include "unistd.h"
-#include <stdio.h>
 #include "lexer.h"
 
 void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)

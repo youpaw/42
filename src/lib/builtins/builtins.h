@@ -15,6 +15,4 @@ int		alias(const char **av);
 int		unalias(const char **av);
 int		history(const char **av);
 
-int 	run_builtin(const char **av);
-
 #endif //BUILTINS_H
