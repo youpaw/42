@@ -7,33 +7,33 @@
 #include "cc_num.h"
 #include "cc_str.h"
 
-static void handle_operand(t_vec *stack, t_calc_token *token)
+static void			handle_operand(t_vec *stack, t_calc_token *token)
 {
-	t_calc_eval eval;
+	t_calc_eval	eval;
 
 	eval.val = atoi(token->raw);
 	eval.type = token->type;
 	vec_push(stack, &eval);
 }
 
-static int handle_operator(t_vec *stack, t_calc_token *token)
+static int			handle_operator(t_vec *stack, t_calc_token *token)
 {
 	return (calc_operate(stack, token));
 }
 
-static void get_result(char **raw, t_vec *stack)
+static void			get_result(char **raw, t_vec *stack)
 {
-	t_calc_eval result;
+	t_calc_eval	result;
 
 	vec_pop(&result, stack);
 	free(*raw);
 	*raw = itoa(result.val);
 }
 
-static void print_eval_error(char *raw)
+static void			print_eval_error(char *raw)
 {
-	const char *arg[2];
-	size_t last_index;
+	const char	*arg[2];
+	size_t		last_index;
 
 	raw++;
 	last_index = strlen(raw) - 1;
@@ -43,12 +43,12 @@ static void print_eval_error(char *raw)
 	error_print(E_ZERODIV, arg);
 }
 
-int	calc_evaluate(char **raw, t_vec *postfix)
+int					calc_evaluate(char **raw, t_vec *postfix)
 {
-	size_t index;
-	t_vec *stack;
-	t_calc_token token;
-	int error;
+	size_t			index;
+	t_vec			*stack;
+	t_calc_token	token;
+	int				error;
 
 	index = 0;
 	error = 0;

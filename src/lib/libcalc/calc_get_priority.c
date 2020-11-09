@@ -4,7 +4,7 @@
 
 #include "calc.h"
 
-int 	calc_get_priority(t_calc_type type)
+int	calc_get_priority(t_calc_type type)
 {
 	if (type >= N_OPERATORS)
 		return (10);
