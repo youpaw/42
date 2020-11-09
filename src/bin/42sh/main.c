@@ -4,7 +4,6 @@
 
 #include "main.h"
 #include "jobs.h"
-
 int main(int ac, const char *av[], const char *env[])
 {
 	int error;
