@@ -21,5 +21,7 @@ int 		match_tilda(t_lexer *lexer)
 		c = lexer->raw[lexer->index++];
 	if (c && c != '/')
 		return (1);
+	if (c == '/')
+		lexer->index--;
 	return (0);
 }

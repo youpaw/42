@@ -16,8 +16,15 @@ static void	set_process_group(int *pgid, int is_foreground)
 	if (*pgid == 0)
 		*pgid = pid;
 	setpgid(pid, *pgid);
+
 	if (is_foreground)
-		tcsetpgrp (g_terminal, *pgid);
+	{
+		if( tcsetpgrp(g_terminal, *pgid) < 0)
+		{
+			fdputendl("Terminal failed to return", 2);
+			exit(1);
+		}
+	}
 }
 
 void	launch_process(t_process *p, pid_t pgid, int is_foreground)
@@ -27,8 +34,11 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 
 	g_has_job_control = 0;
 	restore_job_and_interactive_signals();
+	putendl("before restore");
 	if (g_is_interactive)
 		set_process_group(&pgid, is_foreground);
+	putendl("after restore");
+
 	if (process_init(p) || set_redirects(p))
 		exit(1);
 	if ((index = get_builtin_index(p->argv[0])) != -1)
