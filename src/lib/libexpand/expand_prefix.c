@@ -6,7 +6,7 @@
 
 char	*expand_prefix(const char *name, const char *pattern)
 {
-	const char 	*value;
+	const char	*value;
 	size_t		len;
 
 	len = strlen(pattern);

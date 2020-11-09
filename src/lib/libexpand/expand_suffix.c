@@ -7,7 +7,7 @@
 
 char	*expand_suffix(const char *name, const char *pattern)
 {
-	const char 	*value;
+	const char	*value;
 	size_t		pat_len;
 	size_t		val_len;
 

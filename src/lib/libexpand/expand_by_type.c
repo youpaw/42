@@ -8,10 +8,9 @@
 #include "cc_char.h"
 #include "env.h"
 
-
 static char	*param_or_word(const char *name, const char *word)
 {
-	char 	*value;
+	char	*value;
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
@@ -22,9 +21,9 @@ static char	*param_or_word(const char *name, const char *word)
 
 static char	*assign_param(const char *name, const char *word)
 {
-	char 		*value;
-	char 		*field;
-	const char 	*arr[4];
+	char		*value;
+	char		*field;
+	const char	*arr[4];
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
@@ -42,7 +41,7 @@ static char	*assign_param(const char *name, const char *word)
 
 static char	*param_or_error(const char *name, const char *word)
 {
-	char 	*value;
+	char	*value;
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
@@ -57,7 +56,7 @@ static char	*param_or_error(const char *name, const char *word)
 
 static char	*empty_or_word(const char *name, const char *word)
 {
-	char 	*value;
+	char	*value;
 
 	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
 		strdel(&value);
@@ -66,9 +65,10 @@ static char	*empty_or_word(const char *name, const char *word)
 	return (strnew(0));
 }
 
-char	*expand_by_type(t_param_type type, const char *name, const char *word)
+char		*expand_by_type(t_param_type type, const char *name,
+					const char *word)
 {
-	char 	*result;
+	char	*result;
 
 	result = NULL;
 	if (type == e_get_length)

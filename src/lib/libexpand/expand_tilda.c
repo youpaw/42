@@ -8,9 +8,9 @@
 #include "env.h"
 #include "cc_str.h"
 
-static int replace(char **str, const char *value)
+static int			replace(char **str, const char *value)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!value)
 		return (1);
@@ -20,14 +20,14 @@ static int replace(char **str, const char *value)
 	return (0);
 }
 
-static const char *get_user_homedir(const char *str)
+static const char	*get_user_homedir(const char *str)
 {
 	struct passwd	*pw;
 	const char		*slash;
 	char			*uname;
 	size_t			uname_len;
 
-	uname_len = strlen(str)	- 1;
+	uname_len = strlen(str) - 1;
 	if ((slash = strchr(str, '/')))
 		uname_len = slash - str - 1;
 	if (!uname_len)
@@ -40,17 +40,18 @@ static const char *get_user_homedir(const char *str)
 	return (NULL);
 }
 
-static const char * get_default_homedir()
+static const char	*get_default_homedir(void)
 {
-	struct passwd *pw;
-	const char *homedir;
+	struct passwd	*pw;
+	const char		*homedir;
 
-	if (!(homedir = env_get_value("HOME")) && (pw = getpwuid(getuid())))
-		homedir = pw->pw_dir;
+	if (!(homedir = env_get_value("HOME")))
+		if ((pw = getpwuid(getuid())))
+			homedir = pw->pw_dir;
 	return (homedir);
 }
 
-int 	expand_tilda(char **str)
+int					expand_tilda(char **str)
 {
 	if (!strcmp(*str, "~"))
 		return (replace(str, get_default_homedir()));
