@@ -4,10 +4,11 @@
 #include "lexer.h"
 #include "cc_str.h"
 
-void	strjoin_expanded(t_lexer *lexer, size_t index, const char *expand, int pad)
+void	strjoin_expanded(t_lexer *lexer, size_t index,
+					const char *expand, int pad)
 {
 	char		*raw;
-	const char *arr[4];
+	const char	*arr[4];
 
 	if (index - pad && lexer->index < lexer->size)
 	{

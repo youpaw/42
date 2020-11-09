@@ -4,11 +4,11 @@
 
 #include "lexer.h"
 
-static int validate_brace(t_lexer *lexer, t_vec *braces)
+static int		validate_brace(t_lexer *lexer, t_vec *braces)
 {
-	t_brace current;
-	t_brace last;
-	int 	direction;
+	t_brace	current;
+	t_brace	last;
+	int		direction;
 
 	if ((direction = get_brace(lexer->raw + lexer->index, &current)))
 	{
@@ -23,10 +23,10 @@ static int validate_brace(t_lexer *lexer, t_vec *braces)
 	return (E_OK);
 }
 
-int match_brace(t_lexer *lexer, t_brace brace)
+int				match_brace(t_lexer *lexer, t_brace brace)
 {
 	int		error;
-	t_slice current;
+	t_slice	current;
 	t_vec	*braces;
 
 	braces = vec_new(BRACES_STACK_SIZE, sizeof(t_brace), NULL);
@@ -39,8 +39,9 @@ int match_brace(t_lexer *lexer, t_brace brace)
 	while (lexer->index < lexer->size && braces->size)
 	{
 		current.state = get_current_state(lexer);
-		if ((current.state != l_unset && (error = lex_map(lexer, current.state))) || \
-		(current.state == l_unset && (error = validate_brace(lexer, braces))))
+		if ((current.state != l_unset
+		&& (error = lex_map(lexer, current.state))) || (current.state == l_unset
+		&& (error = validate_brace(lexer, braces))))
 			break ;
 		lexer->index++;
 	}

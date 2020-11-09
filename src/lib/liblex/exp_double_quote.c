@@ -5,10 +5,10 @@
 #include "lexer.h"
 #include "cc_mem.h"
 
-int 		exp_double_quote(t_lexer *lexer)
+int			exp_double_quote(t_lexer *lexer)
 {
-	t_slice slice;
-	char c;
+	t_slice		slice;
+	char		c;
 
 	slice.state = l_unset;
 	c = lexer->raw[lexer->index];
@@ -21,8 +21,10 @@ int 		exp_double_quote(t_lexer *lexer)
 	else if (c == '\"')
 	{
 		vec_get_last(&slice, lexer->slices);
-		memmove(lexer->raw + slice.index, lexer->raw + slice.index + 1,  lexer->index - slice.index - 1);
-		memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index + 1, lexer->size - lexer->index);
+		memmove(lexer->raw + slice.index, lexer->raw + slice.index + 1,
+		lexer->index - slice.index - 1);
+		memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index + 1,
+		lexer->size - lexer->index);
 		lexer->index -= 2;
 		lexer->size -= 2;
 		vec_rm_last(lexer->slices);

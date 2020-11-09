@@ -4,12 +4,12 @@
 
 #include "lexer.h"
 
-int 	is_delimiter(t_token_type type)
+int	is_delimiter(t_token_type type)
 {
-	static const t_token_type delimiter_map[N_TOKEN_DELIMITERS] = {
+	static const t_token_type	delimiter_map[N_TOKEN_DELIMITERS] = {
 			l_and_if, l_or_if, l_and, l_or, l_semi
 	};
-	int index;
+	int							index;
 
 	index = 0;
 	while (index < N_TOKEN_DELIMITERS && type != delimiter_map[index])

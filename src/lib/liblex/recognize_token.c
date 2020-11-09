@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "env.h"
 
-t_token_type recognize_token(t_lexer *lexer)
+t_token_type	recognize_token(t_lexer *lexer)
 {
 	t_token token;
 

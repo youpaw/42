@@ -6,7 +6,7 @@
 #include "cc_mem.h"
 #include "cc_str.h"
 
-static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
+static void		init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
 	t_slice	slice;
 
