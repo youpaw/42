@@ -36,7 +36,7 @@ static int		exec_or_hash(t_process *process)
 	{
 		backup_stdio(stdio_bck);
 		if (!(error = set_redirects(process)))
-			error = exec_builtin_by_index(argv, index);
+			error = run_builtin_by_index(process, index);
 		restore_stdio(stdio_bck);
 		return (error);
 	}
@@ -55,8 +55,5 @@ int		run_builtin_or_hash(t_process *process)
 		process->completed = 1;
 	free(process->argv);
 	process->argv = NULL;
-	strarr_del(process->env);
-	free(process->env);
-	process->env = NULL;
 	return (return_value);
 }
