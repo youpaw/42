@@ -4,12 +4,16 @@
 
 #include "jobs.h"
 
-int	job_is_completed (t_job *j)
+int		job_is_completed(t_job *j)
 {
 	t_process *p;
 
-	for (p = j->first_process; p; p = p->next)
+	p = j->first_process;
+	while (p)
+	{
 		if (!p->completed)
-			return 0;
-	return 1;
+			return (0);
+		p = p->next;
+	}
+	return (1);
 }

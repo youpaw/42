@@ -7,10 +7,10 @@
 #include <signal.h>
 #include "cc_str.h"
 
-int wait_for_job_complete(t_job *j)
+int		wait_for_job_complete(t_job *j)
 {
-	int status;
-	pid_t pid;
+	int		status;
+	pid_t	pid;
 
 	while (!job_is_completed(j))
 	{

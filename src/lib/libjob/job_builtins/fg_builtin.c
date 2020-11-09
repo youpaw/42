@@ -4,7 +4,7 @@
 
 #include "jobs.h"
 
-int fg_builtin(const char **av)
+int		fg_builtin(const char **av)
 {
 	return (bg_fg(av, 1));
 }

@@ -13,4 +13,3 @@ void	continue_job(t_job *j, int is_foreground)
 	else
 		put_job_in_background(j, 1);
 }
-

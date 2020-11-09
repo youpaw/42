@@ -5,10 +5,10 @@
 #include "cc_str.h"
 #include "jobs.h"
 
-int get_builtin_index(const char *name)
+int		get_builtin_index(const char *name)
 {
-	int		i;
-	static const char *builtins_names[N_BUILTINS] = {
+	int					i;
+	static const char	*builtins_names[N_BUILTINS] = {
 			"exit", "set", "unset", "cd", "export", "hash",
 			"echo", "alias", "unalias", "jobs", "fg", "bg",
 			"history", "type"};

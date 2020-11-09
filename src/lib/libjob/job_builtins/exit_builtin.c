@@ -19,7 +19,7 @@ static int	is_numeric(const char *nb)
 	return (1);
 }
 
-int exit_builtin(const char **av)
+int			exit_builtin(const char **av)
 {
 	if (!av[1])
 		exit_shell(0);

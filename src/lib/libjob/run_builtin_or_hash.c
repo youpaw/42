@@ -7,27 +7,26 @@
 #include "hash.h"
 #include <unistd.h>
 
-static void backup_stdio(int stdio[3])
+static void		backup_stdio(int stdio[3])
 {
 	stdio[0] = dup(STDIN_FILENO);
 	stdio[1] = dup(STDOUT_FILENO);
 	stdio[2] = dup(STDERR_FILENO);
 }
 
-static void restore_stdio(int stdio[3])
+static void		restore_stdio(int stdio[3])
 {
 	dup2(stdio[0], STDIN_FILENO);
 	dup2(stdio[1], STDOUT_FILENO);
 	dup2(stdio[2], STDERR_FILENO);
 }
 
-
 static int		exec_or_hash(t_process *process)
 {
-	int		error;
-	int		index;
-	int		stdio[3];
-	const char **argv = (const char **)process->argv;
+	int			error;
+	int			index;
+	int			stdio[3];
+	const char	**argv = (const char **)process->argv;
 
 	if ((index = get_builtin_index(argv[0])) != -1)
 	{
@@ -41,7 +40,7 @@ static int		exec_or_hash(t_process *process)
 	return (-1);
 }
 
-int		run_builtin_or_hash(t_process *process)
+int				run_builtin_or_hash(t_process *process)
 {
 	int						return_value;
 

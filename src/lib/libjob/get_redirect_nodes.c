@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "jobs.h"
 
-static void get_nodes_recursive(t_ast *ast, t_vec *vec)
+static void		get_nodes_recursive(t_ast *ast, t_vec *vec)
 {
 	if (!ast)
 		return ;
@@ -14,10 +14,10 @@ static void get_nodes_recursive(t_ast *ast, t_vec *vec)
 	get_nodes_recursive(ast->right, vec);
 }
 
-t_ast	**get_redirect_nodes(t_ast *ast)
+t_ast			**get_redirect_nodes(t_ast *ast)
 {
-	t_ast **redirect_nodes;
-	t_vec *vec;
+	t_ast	**redirect_nodes;
+	t_vec	*vec;
 
 	redirect_nodes = NULL;
 	vec = vec_new(JOB_VEC_CAPACITY, sizeof(t_ast *), NULL);

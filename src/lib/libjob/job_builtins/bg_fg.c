@@ -2,7 +2,6 @@
 // Created by Azzak Omega on 11/1/20.
 //
 
-
 #include "jobs.h"
 #include "error.h"
 
@@ -19,7 +18,7 @@ static int	put_job_in_bg_fg(const char *str, int is_foreground)
 	return (0);
 }
 
-int bg_fg(const char **av, int is_foreground)
+int			bg_fg(const char **av, int is_foreground)
 {
 	const char	*error_args[2];
 
