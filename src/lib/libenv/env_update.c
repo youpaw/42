@@ -5,7 +5,7 @@
 #include "env.h"
 #include "cc_str.h"
 
-int 		env_update(const char *field)
+int		env_update(const char *field)
 {
 	t_hash_pair	pair;
 	size_t		name_len;

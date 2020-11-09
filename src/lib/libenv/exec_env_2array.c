@@ -17,12 +17,12 @@ static char	*get_field(t_hash_pair *pair)
 	return (strnjoin(arr));
 }
 
-char 		**exec_env_2array(void)
+char		**exec_env_2array(void)
 {
-	size_t cnt;
-	size_t i_arr;
-	char **arr;
-	t_list *tmp;
+	size_t		cnt;
+	size_t		i_arr;
+	char		**arr;
+	t_list		*tmp;
 
 	arr = xmalloc(sizeof(char *) * (hash_map_get_size(g_exec_env) + 1));
 	cnt = 0;

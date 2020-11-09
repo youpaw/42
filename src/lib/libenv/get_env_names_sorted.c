@@ -9,7 +9,7 @@
 #include "cc_mem.h"
 #include "cc_sort.h"
 
-static void 	get_names(const char **names)
+static void		get_names(const char **names)
 {
 	size_t i;
 	t_list *lst;
@@ -36,10 +36,10 @@ static void 	get_names(const char **names)
 	}
 }
 
-const char ** get_all_env_names_sorted(void)
+const char		**get_all_env_names_sorted(void)
 {
 	size_t		size;
-	const char 	**names;
+	const char	**names;
 
 	size = hash_map_get_size(g_env) + hash_map_get_size(g_inter_env);
 	if (size)
@@ -48,7 +48,7 @@ const char ** get_all_env_names_sorted(void)
 		names[size] = NULL;
 		get_names(names);
 		quick_sort((void **)names, 0, (int)size - 1,
-				   (int (*)(const void *, const void *)) strcmp);
+				(int (*)(const void *, const void *)) strcmp);
 		return (names);
 	}
 	return (NULL);

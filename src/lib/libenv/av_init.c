@@ -5,10 +5,9 @@
 #include "env.h"
 #include "cc_str.h"
 
-char *g_av[N_MAX_AV];
+char				*g_av[N_MAX_AV];
 
-
-static void 		av_set(const char **av)
+static void			av_set(const char **av)
 {
 	int cnt;
 
@@ -20,7 +19,7 @@ static void 		av_set(const char **av)
 		g_av[cnt++] = NULL;
 }
 
-void	av_init(const char *name, const char **av)
+void				av_init(const char *name, const char **av)
 {
 	g_av[0] = strdup(name);
 	av_set(av);

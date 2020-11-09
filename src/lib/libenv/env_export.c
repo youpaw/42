@@ -5,11 +5,11 @@
 #include "env.h"
 #include "cc_str.h"
 
-int 		env_export(const char *field)
+int			env_export(const char *field)
 {
 	t_hash_pair	pair;
 	size_t		name_len;
-	char 		*value;
+	char		*value;
 
 	if (!field || !(name_len = get_valid_name_length_no_check(field)) ||
 			(field[name_len] && field[name_len] != '='))
