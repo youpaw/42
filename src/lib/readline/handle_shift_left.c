@@ -5,7 +5,7 @@
 #include "readline.h"
 #include "cc.h"
 
-int handle_shift_left(t_input *inp)
+int handle_shift_left(t_inp *inp)
 {
 	t_letter let;
 

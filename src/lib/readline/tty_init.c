@@ -19,7 +19,6 @@ void		tty_init(void)
 	struct termios	tty;
 
 	tputs(tgetstr("im", NULL), 1, &putchar);
-//	tputs(tgetstr("bw", NULL), 1, &putchar);
 	if (!(isatty(0)))
 	{
 		//TODO "stdin not terminal" error handle
@@ -27,7 +26,7 @@ void		tty_init(void)
 	}
 	tcgetattr(0, &tty);
 	g_tty_backup = tty;
-	tty.c_lflag &= ~(ICANON | ECHO);
+	tty.c_lflag &= ~(ICANON | ECHO | ISIG);
 	tty.c_cc[VMIN] = 1;
 	tcsetattr(0, TCSAFLUSH, &tty);
 }

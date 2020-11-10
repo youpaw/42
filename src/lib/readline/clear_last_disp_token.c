@@ -5,7 +5,7 @@
 #include "readline.h"
 #include "cc_char.h"
 
-void clear_last_disp_token(char *token, t_input *input)
+void clear_last_disp_token(char *token, t_inp *input)
 {
 	size_t i;
 

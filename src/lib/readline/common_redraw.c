@@ -9,7 +9,7 @@
 #include <termcap.h>
 #include <sys/ioctl.h>
 
-void	common_redraw(t_input *input)
+void	common_redraw(t_inp *input)
 {
 	int		cur_y_pos;
 	int		cur_x_pos;

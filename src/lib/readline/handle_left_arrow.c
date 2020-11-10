@@ -7,11 +7,10 @@
 #include "cc_char.h"
 #include <termcap.h>
 
-int handle_left_arrow(t_input *inp)
+int handle_left_arrow(t_inp *inp)
 {
 	if (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("le", NULL), 1, &putchar);
 		inp->cursor_x_position--;
 	}

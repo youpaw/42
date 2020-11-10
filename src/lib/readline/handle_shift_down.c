@@ -8,7 +8,7 @@
 #include <sys/ioctl.h>
 #include <zconf.h>
 
-int			handle_shift_down(t_input *inp)
+int			handle_shift_down(t_inp *inp)
 {
 	struct winsize ws;
 
@@ -16,7 +16,6 @@ int			handle_shift_down(t_input *inp)
 	if (inp->line[inp->cursor_y_position + 1] ||
 	(inp->line_len[inp->cursor_y_position] / ws.ws_col != inp->cursor_x_position / ws.ws_col))
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("do", NULL), 1, putchar);
 		tputs(tgoto(tgetstr("ch", NULL), 1, inp->cursor_x_position % ws.ws_col), 1, putchar);
 		if (inp->line_len[inp->cursor_y_position] / ws.ws_col == inp->cursor_x_position / ws.ws_col)

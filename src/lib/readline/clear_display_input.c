@@ -6,35 +6,25 @@
 #include "cc_char.h"
 #include "termcap.h"
 
-void clear_begin_and_after_cursor(t_input *inp)
+void clear_begin_and_after_cursor(t_inp *inp)
 {
 	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 		handle_del(inp);
 	while (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
 		handle_backspace(inp);
 }
-void clear_second_display_input(t_input *inp)
+void clear_second_display_input(t_inp *inp)
 {
 	clear_begin_and_after_cursor(inp);
-
 	handle_shift_up(inp);
 }
 
-void clear_first_display_input(t_input *inp)
+void clear_first_display_input(t_inp *inp)
 {
 	clear_begin_and_after_cursor(inp);
-
 }
 
-void put_cursor_to_the_end(t_input *inp)
-{
-	while (inp->line[inp->cursor_y_position + 1])
-		handle_shift_down(inp);
-	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
-		handle_right_arrow(inp);
-}
-
-void clear_display_input(t_input *inp)
+void clear_display_input(t_inp *inp)
 {
 	size_t prev_lines_count;
 

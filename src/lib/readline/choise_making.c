@@ -3,7 +3,7 @@
 //
 
 #include "readline.h"
-void	make_choice(t_input *inp, char **options)
+void	make_choice(t_inp *inp, char **options)
 {
 
  	;
