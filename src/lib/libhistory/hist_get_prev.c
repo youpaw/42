@@ -5,7 +5,7 @@
 #include "history.h"
 #include <stddef.h>
 
-char 	*hist_get_prev(void)
+char	*hist_get_prev(void)
 {
 	char	*str;
 
