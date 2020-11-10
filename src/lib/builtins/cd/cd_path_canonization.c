@@ -16,7 +16,7 @@ static char		*fill_empty_path(const char *path)
 		len--;
 	if (len == 0 && strcmp(path, "//") != 0)
 		new_path = strdup("/");
-	else if ((strcmp(path, "-")) == 0)
+	else if ((strcmp(path, "-")) == 0 && oldpwd != NULL)
 		new_path = strdup(oldpwd);
 	else
 		new_path = strdup(path);
@@ -108,15 +108,15 @@ char	*cd_path_canonization(const char *path)
 	len = 0;
 	new_path = NULL;
 	if (!path || !*path || tokenizer(path, &tokens))
-		return (new_path);
-	while (tokens[len])
-		len++;
-	tokens_handler(tokens, len);
+		return (strdup(path));
 	if (!tokens || !(*tokens))
 	{
 		new_path = fill_empty_path(path);
 		return (new_path);
 	}
+	while (tokens[len])
+		len++;
+	tokens_handler(tokens, len);
 	new_path = tokens_join(&tokens, len);
 	return (new_path);
 }

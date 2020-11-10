@@ -3,6 +3,8 @@
 //
 
 #include "alias_builtins.h"
+#include "cc_str.h"
+
 int alias_check_opt(t_opt_map built_i, const char **av, unsigned char *flags,
 					int *er_code)
 {
@@ -16,7 +18,7 @@ int alias_check_opt(t_opt_map built_i, const char **av, unsigned char *flags,
 	{
 		*er_code = 2;
 		print_invalid_option(built_map[built_i], opt.invalid_opt);
-		alias_usage_error_print(built_map[built_i], NULL);
+		alias_usage_error_print(built_map[built_i], er_code);
 		return (0);
 	}
 	if (skip_args > 1)

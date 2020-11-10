@@ -84,7 +84,7 @@ int				cd(const char **av)
 	cn_path = cd_path_canonization(av[path_i]);
 	if (cd_path_validation(cn_path, av[path_i]))
 		return (1);
-	init_chdir(cn_path, av[path_i], flags, NULL);
+	init_chdir(cn_path, av[path_i], flags, &er_code);
 	free(cn_path);
 	return (er_code);
 }
