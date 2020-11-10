@@ -15,6 +15,4 @@ void		alias_bash_error_print(t_error_code er_code, const char *cmd,\
 		er_arr[1] = (char *)arg;
 	er_arr[2] = NULL;
 	error_print(er_code, (const char **)er_arr);
-	if (er_code == E_INVALOPT)
-		alias_error_print(cmd);
 }

@@ -4,7 +4,7 @@
 
 #include "alias_builtins.h"
 
-static void		value_parse(const char *arg)
+static void		value_parse(const char *arg, int *er_code)
 {
 	const char		*value;
 
@@ -15,28 +15,33 @@ static void		value_parse(const char *arg)
 	}
 	else
 		if (alias_add(arg))
+		{
+			*er_code = 1;
 			alias_bash_error_print(E_NOTFOUND, "alias", arg);
+		}
 }
 
 int		alias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;
+	int 			er_code;
 
+	er_code = 0;
 	flag = 0;
 	if (!av[1])
 	{
 		alias_print();
-		return (0);
+		return (er_code);
 	}
-	if ((arg_i = alias_check_opt(ALIAS, av, &flag)) < 1)
-		return (E_INVALOPT);
+	if ((arg_i = alias_check_opt(ALIAS, av, &flag, &er_code)) < 1)
+		return (er_code);
 	if (flag == ALIAS_BUILTINS_FLAG || av[arg_i][0] == '#')
 		alias_print();
 	while (av[arg_i])
 	{
-		value_parse(av[arg_i]);
+		value_parse(av[arg_i], &er_code);
 		arg_i++;
 	}
-	return (0);
+	return (er_code);
 }
