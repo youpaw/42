@@ -9,11 +9,13 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 {
 	char	*end;
 	size_t	index;
+	int		error;
 
 	end = strjoin(token->raw, "\n");
 	index = lexer->size - 1;
 	while (index && lexer->raw[index - 1] != '\n')
 		index--;
+	error = E_INCINP;
 	if (index && !strcmp(lexer->raw + index, end))
 	{
 		vec_rm_at(lexer->tokens, start_token_index);
@@ -21,9 +23,10 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 		token->type = l_word;
 		vec_push_at(lexer->tokens, token, start_token_index);
 		lexer->index = lexer->size;
-		return (0);
+		error = 0;
 	}
-	return (E_INCINP);
+	free(end);
+	return (error);
 }
 
 static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
