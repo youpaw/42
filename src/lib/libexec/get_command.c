@@ -5,7 +5,7 @@
 #include "exec.h"
 #include "cc_str.h"
 
-static void get_node_tokens(t_ast *ast, t_vec *vec)
+static void		get_node_tokens(t_ast *ast, t_vec *vec)
 {
 	static char *delimiter = " ";
 
@@ -20,10 +20,10 @@ static void get_node_tokens(t_ast *ast, t_vec *vec)
 	get_node_tokens(ast->right, vec);
 }
 
-char *get_command(t_ast *ast)
+char			*get_command(t_ast *ast)
 {
-	char *command;
-	t_vec *vec;
+	char	*command;
+	t_vec	*vec;
 
 	vec = vec_new(JOB_VEC_CAPACITY, sizeof(char *), NULL);
 	get_node_tokens(ast, vec);

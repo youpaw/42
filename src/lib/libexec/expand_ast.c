@@ -4,14 +4,14 @@
 
 #include "exec.h"
 
-static int is_expand_token(t_token_type type)
+static int	is_expand_token(t_token_type type)
 {
 	if (type == l_command_name || type == l_assignment_word || type == l_word)
 		return (1);
 	return (0);
 }
 
-int 	expand_ast(t_ast *ast)
+int			expand_ast(t_ast *ast)
 {
 	int error;
 
@@ -22,7 +22,9 @@ int 	expand_ast(t_ast *ast)
 		if ((error = expand_token(ast->token)))
 			return (error);
 	}
-	if ((error = expand_ast(ast->left)) || (error = expand_ast(ast->right)))
+	if ((error = expand_ast(ast->left)))
+		return (error);
+	if ((error = expand_ast(ast->right)))
 		return (error);
 	return (0);
 }

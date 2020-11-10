@@ -5,7 +5,7 @@
 #include "exec.h"
 #include <unistd.h>
 
-void exec_list(t_ast *ast)
+void	exec_list(t_ast *ast)
 {
 	pid_t pid;
 	t_job *job;
@@ -30,7 +30,7 @@ void exec_list(t_ast *ast)
 			job->first_process->pid = pid;
 			job->pgid = pid;
 			job->command = get_command(ast->left);
-            print_job_formatted(job, 0, JPM_BG);
+			print_job_formatted(job, 0, JPM_BG);
 			push_job(job);
 		}
 	}

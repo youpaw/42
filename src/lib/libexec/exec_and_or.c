@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include "lexer.h"
 
-void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
+void		exec_and_or(t_ast *ast, char is_foreground,
+				char is_forked, t_token *token)
 {
 	t_job	*job;
 
@@ -22,12 +23,6 @@ void exec_and_or(t_ast *ast, char is_foreground, char is_forked, t_token *token)
 			job->pgid = getpid();
 		push_job(job);
 		g_exit_code = launch_job(job, is_foreground, is_forked);
-		//if (is_forked)
-		//	wait_for_job_complete(job);
-		//g_exit_code = get_job_status(job);
-		//printf("[%d->%d] \n", job->pgid, g_exit_code);
-		//fflush(NULL);
-
 		if (job_is_completed(job))
 			remove_job_by_index(job->index);
 	}
