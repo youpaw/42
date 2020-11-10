@@ -30,6 +30,7 @@ static void	free_all_data(void)
 	hash_map_del(&g_env);
 	hash_map_del(&g_inter_env);
 	av_del();
+	exec_env_del();
 	hash_map_del(&g_aliases);
 }
 
