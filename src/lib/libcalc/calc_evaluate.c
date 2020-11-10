@@ -25,7 +25,8 @@ static void get_result(char **raw, t_vec *stack)
 {
 	t_calc_eval result;
 
-	vec_pop(&result, stack);
+	if (vec_pop(&result, stack))
+		result.val = 0;
 	free(*raw);
 	*raw = itoa(result.val);
 }

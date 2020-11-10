@@ -39,6 +39,11 @@ static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
 			job->pgid = pid;
 		setpgid(pid, job->pgid);
 	}
+	if(job->is_fg && tcsetpgrp(g_terminal, job->pgid) < 0)
+	{
+		fdputendl("Terminal failed to return", 2);
+		exit(1);
+	}
 }
 
 void fork_and_launch_processes(t_job *job, int is_foreground)
@@ -64,8 +69,7 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 			fdputendl("fork failed", 2);
 			exit_shell(1);
 		}
-		else
-			continue_in_parent(job, p, pid);
+		continue_in_parent(job, p, pid);
 		clean_fds_after_pipes(p, in_out_fds, pipe_fds);
 		p = p->next;
 	}

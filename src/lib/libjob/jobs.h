@@ -95,6 +95,8 @@ int		get_last_process_status(t_process *p);
 ** Job builtins
 */
 
+int		run_builtin(t_process *p);
+int		run_builtin_by_index(t_process *p, int index);
 int		run_builtin_or_hash(t_process *process);
 int		get_builtin_index(const char *name);
 int 	exec_builtin_by_index(const char **av, int index);

@@ -20,26 +20,6 @@ static int replace(char **str, const char *value)
 	return (0);
 }
 
-static const char *get_user_homedir(const char *str)
-{
-	struct passwd	*pw;
-	const char		*slash;
-	char			*uname;
-	size_t			uname_len;
-
-	uname_len = strlen(str)	- 1;
-	if ((slash = strchr(str, '/')))
-		uname_len = slash - str - 1;
-	if (!uname_len)
-		return (NULL);
-	uname = strsub(str, 1, uname_len);
-	pw = getpwnam(uname);
-	free(uname);
-	if (pw)
-		return (pw->pw_dir);
-	return (NULL);
-}
-
 static const char * get_default_homedir()
 {
 	struct passwd *pw;
@@ -59,5 +39,5 @@ int 	expand_tilda(char **str)
 	else if (!strcmp(*str, "~-"))
 		return (replace(str, env_get_value("OLDPWD")));
 	else
-		return (replace(str, get_user_homedir(*str)));
+		return (1);
 }
