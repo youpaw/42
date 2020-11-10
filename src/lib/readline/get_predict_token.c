@@ -15,9 +15,8 @@ static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
 	if (slice->state == l_dollar)
 	{
 		token->type = r_param;
-		lexer->begin++;
-		if (lexer->raw[lexer->begin] == '{')
-			lexer->begin++;
+		if (slice->index == lexer->begin)
+			lexer->begin += lexer->raw[lexer->begin] == '{' ? 2 : 1;
 	}
 	else if (lexer->tokens->size)
 	{

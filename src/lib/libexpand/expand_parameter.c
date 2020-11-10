@@ -26,7 +26,7 @@ static char *get_parameter_name(const char *str)
 
 static size_t get_operator_len(t_param_type t)
 {
-	if (t == e_get_length)
+	if (t == e_get_length || t == e_default)
 		return (0);
 	if (t == e_rm_shortest_suffix || t == e_rm_shortest_prefix)
 		return (1);
@@ -39,7 +39,7 @@ static t_param_type get_len_operator_params(const char *str, char **name)
 		return (e_unknown);
 	return (e_get_length);
 }
-static t_param_type get_params(const char *str, char **value, char **word)
+static t_param_type get_params(char *str, char **value, char **word)
 {
 	char 			*name;
 	t_param_type 	type;
