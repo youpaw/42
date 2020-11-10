@@ -23,6 +23,7 @@ void redraw_input(t_input inp, char *str)
 			tputs(tgetstr("cr", NULL), 1, putchar);
 			prompt = get_prompt(inp.cursor_y_position);
 			puts(prompt);
+			free(prompt);
 			i++;
 		}
 		else

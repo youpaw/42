@@ -78,5 +78,6 @@ t_input 	input_init(char *line)
 	inp.line_len[inp.cursor_y_position] = 0;
 	inp.cursor_x_position = 0;
 	inp.hist_storage = NULL;
+	free(line);
 	return (inp);
 }

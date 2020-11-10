@@ -24,6 +24,8 @@ int handle_down_arrow(t_input *inp)
 			return (0);
 		}
 	}
+	else
+		new_hist = strdup(new_hist);
 	clear_display_input(inp);
 	reload_input(inp, new_hist);
 	return (0);

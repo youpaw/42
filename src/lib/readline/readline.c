@@ -29,7 +29,6 @@ int			readline(char **line)
 	while (42)
 	{
 		key.num = getch();
-//		printf("\n%d, %d, %d, %d, %d", key.ch[0], key.ch[1], key.ch[2], key.ch[3], key.num);
 		if (handle_key(key.ch, &input))
 		{
 			*line = input_to_str(input, 1);

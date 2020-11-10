@@ -13,9 +13,8 @@ void del_input(t_input *input)
 
 	i = 0;
 	while (input->line[i])
-	{
 		vec_del(&(input->line[i++]));
-	}
+	vec_del(&(input->line[i]));
 	free(input->line_len);
 	free(input->line);
 	input->line_len = NULL;
@@ -29,10 +28,10 @@ void reload_input(t_input *inp, char *str)
 	tmp = inp->hist_storage;
 	clear_display_input(inp);
 	del_input(inp);
-	*inp = input_init(str);
+	*inp = input_init(strdup(str));
 	if (*str)
 	{
-		free(inp->line[inp->cursor_y_position]);
+		vec_del(&(inp->line[inp->cursor_y_position]));
 		inp->line[inp->cursor_y_position] = NULL;
 		inp->cursor_y_position--;
 		inp->cursor_x_position = inp->line_len[inp->cursor_y_position];
@@ -44,7 +43,7 @@ void reload_input(t_input *inp, char *str)
 		tputs(tgetstr("ce", NULL), 1, putchar);
 		print_prompt(inp);
 	}
-
 	inp->hist_storage = tmp;
+	free(str);
 }
 

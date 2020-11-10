@@ -13,17 +13,14 @@
 int handle_up_arrow(t_input *inp)
 {
 	char *new_hist;
-	char *tmp;
 
 	if (!inp->hist_storage)
 		inp->hist_storage = input_to_str(*inp, 1);
-	new_hist = (hist_get_prev());
+	new_hist = (strdup(hist_get_prev()));
 	if (new_hist)
 	{
-		tmp = inp->hist_storage;
 		clear_display_input(inp);
 		reload_input(inp, new_hist);
-		inp->hist_storage = tmp;
 	}
 	return (0);
 }
