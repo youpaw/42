@@ -26,7 +26,6 @@
 #define MAX_PATH 1024
 
 # include <termios.h>
-# include <stdint.h>
 # include "cc_vec.h"
 # include "cc_lst.h"
 # include "cc_graph.h"

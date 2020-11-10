@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include "readline.h"
-#include "unistd.h"
-#include <termcap.h>
 #include "cc_char.h"
 #include "cc_str.h"
-#include <sys/ioctl.h>
 #include "cc_num.h"
 
 
 int handle_symbol_key(t_input *inp, char *key)
 {
-	if (!isprint(*key) && *key != '\n')
+	if (*key > 0 && *key < 32 && *key != '\n')
 		return (0);
+	if (*key == '\n')
+		put_cursor_to_the_end(inp);
+	write(STDOUT_FILENO, key, 4);
 	if (vec_push_at(inp->line[inp->cursor_y_position], key, inp->cursor_x_position))
 		return (1);
 	inp->cursor_x_position++;
@@ -30,12 +30,7 @@ int handle_symbol_key(t_input *inp, char *key)
 	inp->len++;
 	redraw_input_adding(inp);
 	if (*key == '\n')
-	{
-		put_cursor_to_the_end(inp);
-		write(STDOUT_FILENO, key, 4);
 		return (1);
-	}
-	write(STDOUT_FILENO, key, 4);
 	return (0);
 }
 
