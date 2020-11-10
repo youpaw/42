@@ -6,7 +6,7 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
-int handle_escape_sequence(t_input *input)
+int handle_escape_sequence(t_inp *input)
 {
 	static const t_key_readline_handler hanlders[N_ESC_KEY_HANDLERS] = {
 			{"\103",    &handle_right_arrow},

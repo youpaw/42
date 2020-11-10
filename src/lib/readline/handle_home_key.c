@@ -4,7 +4,7 @@
 
 #include "readline.h"
 
-int			handle_home_key(t_input *inp)
+int			handle_home_key(t_inp *inp)
 {
 	size_t i;
 

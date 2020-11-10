@@ -5,7 +5,7 @@
 #include "readline.h"
 #include <unistd.h>
 
-int			handle_EOX(t_input *inp)
+int			handle_eox(t_inp *inp)
 {
 	put_cursor_to_the_end(inp);
 	write(STDOUT_FILENO, "\n", 1);

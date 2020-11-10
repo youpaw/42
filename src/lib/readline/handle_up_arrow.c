@@ -10,7 +10,7 @@
 #include "cc_char.h"
 #include <sys/ioctl.h>
 
-int handle_up_arrow(t_input *inp)
+int handle_up_arrow(t_inp *inp)
 {
 	char *new_hist;
 

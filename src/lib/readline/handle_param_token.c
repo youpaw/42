@@ -6,7 +6,7 @@
 #include "ft_select.h"
 #include "env.h"
 
-void 	handle_param_token(t_input *inp, t_predict_token *token)
+void 	handle_param_token(t_inp *inp, t_prdct_tkn *token)
 {
 	size_t i;
 	t_graph graph;

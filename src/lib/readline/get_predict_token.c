@@ -6,12 +6,12 @@
 #include "cc_str.h"
 #include "cc_mem.h"
 
-static t_predict_token *init_token(t_lexer *lexer, t_slice *slice)
+static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
 {
-	t_predict_token *token;
+	t_prdct_tkn *token;
 	t_token			last_token;
 
-	token = xmalloc(sizeof(t_predict_token));
+	token = xmalloc(sizeof(t_prdct_tkn));
 	if (slice->state == l_dollar)
 	{
 		token->type = r_param;
@@ -49,11 +49,11 @@ static void 	skip_special_chars(t_lexer *lexer)
 	}
 }
 
-t_predict_token *get_predict_token(char *raw)
+t_prdct_tkn *get_predict_token(char *raw)
 {
 	t_lexer			lexer;
 	t_slice			last_slice;
-	t_predict_token *token;
+	t_prdct_tkn *token;
 
 	if (!raw)
 		return (NULL);

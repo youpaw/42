@@ -15,7 +15,7 @@
 #include "cc_mem.h"
 #include "cc_char.h"
 
-int			handle_del(t_input *inp)
+int			handle_del(t_inp *inp)
 {
 	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{

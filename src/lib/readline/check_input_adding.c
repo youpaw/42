@@ -8,7 +8,7 @@
 #include <sys/ioctl.h>
 #include <zconf.h>
 
-void redraw_input_adding(t_input *inp)
+void redraw_input_adding(t_inp *inp)
 {
 	struct winsize ws;
 

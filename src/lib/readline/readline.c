@@ -2,15 +2,11 @@
 // Created by Darth Butterwell on 8/16/20.
 //
 
-#include <sys/ioctl.h>
-#include <zconf.h>
 #include "readline.h"
-#include <stdio.h>
 #include "cc_char.h"
 #include "cc_graph.h"
-#include "cc_str.h"
 
-static void del_input_st(t_input *input)
+static void	del_input_st(t_inp *input)
 {
 	if (input->hist_storage)
 		free(input->hist_storage);
@@ -19,13 +15,12 @@ static void del_input_st(t_input *input)
 
 int			readline(char **line)
 {
-	t_letter key;
-	t_input input;
+	t_letter	key;
+	t_inp		input;
 
 	tty_init();
 	input = input_init(*line);
 	print_prompt(&input);
-
 	while (42)
 	{
 		key.num = getch();
@@ -35,8 +30,7 @@ int			readline(char **line)
 			if (input.line)
 				del_input_st(&input);
 			tty_restore();
-			return 0;
+			return (0);
 		}
 	}
 }
-

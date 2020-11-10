@@ -8,7 +8,7 @@
 #include "cc_str.h"
 #include "termcap.h"
 
-void put_str_to_input(t_input *inp, char *part)
+void put_str_to_input(t_inp *inp, char *part)
 {
 	size_t i;
 	t_letter let;

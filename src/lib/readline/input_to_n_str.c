@@ -8,7 +8,7 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *input_to_n_str(t_input input)
+char *input_to_n_str(t_inp input)
 {
 	char *string;
 	char let[5];

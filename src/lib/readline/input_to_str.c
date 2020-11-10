@@ -6,7 +6,7 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *input_to_str(t_input input, int newline)
+char *input_to_str(t_inp input, int newline)
 {
 	char *string;
 	char let[5];

@@ -8,7 +8,7 @@
 #include <termcap.h>
 #include <unistd.h>
 
-void redraw_input(t_input inp, char *str)
+void redraw_input(t_inp inp, char *str)
 {
 	size_t i;
 	int len;

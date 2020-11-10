@@ -33,9 +33,9 @@ static int strcmp_in_input(t_vec **vec_ptr, char *str)
 	return line_len;
 }
 
-static t_input	fill_input(char *line)
+static t_inp	fill_input(char *line)
 {
-	t_input inp;
+	t_inp inp;
 	char **prev;
 
 	inp.cursor_y_position = 0;
@@ -60,9 +60,9 @@ static t_input	fill_input(char *line)
 	return (inp);
 }
 
-t_input 	input_init(char *line)
+t_inp 	input_init(char *line)
 {
-	t_input inp;
+	t_inp inp;
 
 	if (*line)
 		inp = fill_input(line);

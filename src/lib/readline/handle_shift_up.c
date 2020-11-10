@@ -9,7 +9,7 @@
 #include <zconf.h>
 #include <stdio.h>
 
-int			handle_shift_up(t_input *inp)
+int			handle_shift_up(t_inp *inp)
 {
 	struct winsize ws;
 

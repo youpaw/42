@@ -16,7 +16,7 @@
 #include <zconf.h>
 #include "cc_mem.h"
 #include "cc_char.h"
-int handle_right_arrow(t_input *inp)
+int handle_right_arrow(t_inp *inp)
 {
 	struct winsize ws;
 

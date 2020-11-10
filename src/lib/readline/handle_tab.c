@@ -15,10 +15,10 @@
 #include "cc.h"
 #include <stdio.h>
 
-int			handle_tab(t_input *inp)
+int			handle_tab(t_inp *inp)
 {
 	static t_list	*options;
-	t_predict_token *token;
+	t_prdct_tkn *token;
 	char *str;
 
 	str = input_to_n_str(*inp);

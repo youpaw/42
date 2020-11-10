@@ -21,7 +21,7 @@ char	*get_prompt(int y)
 		return (strdup(FIRST_PROMPT_TEXT));
 }
 
-void 	print_prompt(t_input *inp)
+void 	print_prompt(t_inp *inp)
 {
 	int i;
 	char sym[4];

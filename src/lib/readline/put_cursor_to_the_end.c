@@ -4,7 +4,7 @@
 
 #include "readline.h"
 
-void put_cursor_to_the_end(t_input *inp)
+void put_cursor_to_the_end(t_inp *inp)
 {
 	while (inp->line[inp->cursor_y_position + 1])
 		handle_shift_down(inp);

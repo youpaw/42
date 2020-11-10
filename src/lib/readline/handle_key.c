@@ -5,7 +5,7 @@
 #include "readline.h"
 #include "cc_str.h"
 
-//static int	get_key_func(char key[4], t_input *input)
+//static int	get_key_func(char key[4], t_inp *input)
 //{
 //	if (!strcmp(key, "\33"))
 //		return (0); //TODO escape character
@@ -35,7 +35,7 @@
 //	}
 //}
 
-int			handle_key(char *key, t_input *input)
+int			handle_key(char *key, t_inp *input)
 {
 	static const t_key_readline_handler hanlders[N_ORD_KEY_HANDLERS] = {
 			{"\6", &handle_right_arrow},
@@ -44,8 +44,8 @@ int			handle_key(char *key, t_input *input)
 			{"\t", &handle_tab},
 			{"\20", &handle_down_arrow}, //down
 			{"\16", &handle_up_arrow}, //up
-			{"\3", &handle_EOX}, //ctrl+C
-			{"\4", &handle_EOT}	//ctrl+D
+			{"\3", &handle_eox}, //ctrl+C
+			{"\4", &handle_eot}	//ctrl+D
 	};
 	int index;
 

@@ -8,7 +8,7 @@
 #include <sys/ioctl.h>
 #include <zconf.h>
 
-int			handle_shift_down(t_input *inp)
+int			handle_shift_down(t_inp *inp)
 {
 	struct winsize ws;
 

@@ -16,7 +16,7 @@
 #include "cc_num.h"
 
 
-int handle_symbol_key(t_input *inp, char *key)
+int handle_symbol_key(t_inp *inp, char *key)
 {
 	if (*key > 0 && *key < 32 && *key != '\n')
 		return (0);

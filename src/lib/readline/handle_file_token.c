@@ -122,14 +122,14 @@ char	**get_filename(char *fullname)
 	return (filename);
 }
 
-void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
+void handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
 {
 	t_list *files;
 	char 	*part;
 	char **filename;
 
 	filename = get_filename(token->raw);
-	files = get_list_files(filename[0], filename[1], access_mode);
+	files = get_list_files(filename[0], filename[1], acc_m);
 	if (!files)
 		handle_key(" \0\0\0", input);
 	else
@@ -139,6 +139,7 @@ void handle_file_token(t_input *input, t_predict_token *token, int access_mode)
 		{
 			put_str_to_input(input, part);
 			lst_del_circle(&files, NULL);
+			free(part);
 		}
 		else
 		{
