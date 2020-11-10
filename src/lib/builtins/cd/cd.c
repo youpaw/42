@@ -79,7 +79,8 @@ int				cd(const char **av)
 		init_chdir(NULL, NULL, flags, &er_code);
 		return (er_code);
 	}
-	if ((path_i = cd_check_opt(av, &flags, NULL)) < 1 || !(av[path_i]))
+	if ((path_i = cd_check_opt(av, &flags, &er_code)) < 1 ||\
+		!(av[path_i]))
 		return (er_code);
 	cn_path = cd_path_canonization(av[path_i]);
 	if (cd_path_validation(cn_path, av[path_i]))
