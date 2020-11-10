@@ -13,7 +13,7 @@
 #ifndef READLINE_H
 #define READLINE_H
 
-#define N_ORD_KEY_HANDLERS 6
+#define N_ORD_KEY_HANDLERS 8
 #define N_ESC_KEY_HANDLERS 11
 #define INP_CH_FLAG 0
 #define INP_BUILT_TABLE 1
@@ -81,8 +81,6 @@ typedef  struct s_predict_token
 	enum s_predict_type type;
 }				t_predict_token;
 
-char 		*g_rd_history_storage;
-
 void		tty_init(void);
 void		tty_restore(void);
 void		termcap_init(void);
@@ -109,6 +107,8 @@ int			handle_down_arrow(t_input *inp);
 int			handle_up_arrow(t_input *inp);
 int			handle_home_key(t_input *inp);
 int			handle_end_key(t_input *inp);
+int			handle_EOX(t_input *inp);
+int			handle_EOT(t_input *inp);
 
 int			handle_key(char *key, t_input *input);
 
@@ -118,7 +118,6 @@ t_input 	input_init(char *line);
 int			readline(char **line);
 
 void		clear_display_input(t_input *inp);
-void		complete_print(t_input *input, t_list **to_print);
 void		common_redraw(t_input *input);
 void		redraw_input_adding(t_input *inp);
 void		redraw_input_del(t_input *inp);
@@ -129,18 +128,15 @@ int			get_displayed_symbol_len(unsigned char *num);
 
 void		handle_file_token(t_input *input, t_predict_token *token, int access_mode);
 void		handle_param_token(t_input *input, t_predict_token *token);
-void		handle_choice_tab(t_input *input, t_list **options);
 
 t_list		*get_list_files(char *path, char *name, int access_mode);
 char		**get_filename(char *fullname);
 int			check_for_utf8_comb_charecter(char *prev, char *letter, size_t len);
 char 		*find_same_part(t_list *files, char*filename);
-void		choose_token(t_input *input, t_list *lst);
 void 		clear_last_disp_token(char *token, t_input *input);
 
 
-void		signal_init(void);
-void		signal_handler(int sig);
+//void		signal_handler(int sig);
 
 void 		print_prompt(t_input *inp);
 char 		*get_prompt(int y);
@@ -151,12 +147,11 @@ void		fill_complition_graph(t_graph *graph);
 char		*restore_from_hist_storage(t_input *inp);
 void		save_to_hist_storage(t_input *inp);
 
-
-void put_str_to_input(t_input *inp, char *part);
-
 void reload_input(t_input *inp, char *str);
 void redraw_input(t_input inp, char *str);
 void put_cursor_to_the_end(t_input *inp);
 
 char **split_newline(char *line);
+
+void del_input(t_input *input);
 #endif //READLINE_H

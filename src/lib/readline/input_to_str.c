@@ -11,6 +11,8 @@ char *input_to_str(t_input input, int newline)
 	char *string;
 	char let[5];
 
+	if (!input.line)
+		return(strdup(""));
 	while (input.line[input.cursor_y_position])
 		input.cursor_y_position++;
 	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.cursor_y_position);

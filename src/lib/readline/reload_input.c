@@ -7,7 +7,7 @@
 #include <termcap.h>
 #include "cc_char.h"
 
-static void del_input(t_input *input)
+void del_input(t_input *input)
 {
 	size_t i;
 
@@ -20,7 +20,6 @@ static void del_input(t_input *input)
 	free(input->line);
 	input->line_len = NULL;
 	input->line = NULL;
-	input = NULL;
 }
 
 void reload_input(t_input *inp, char *str)

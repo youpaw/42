@@ -43,7 +43,9 @@ int			handle_key(char *key, t_input *input)
 			{"\177",&handle_backspace},
 			{"\t", &handle_tab},
 			{"\20", &handle_down_arrow}, //down
-			{"\16", &handle_up_arrow} //up
+			{"\16", &handle_up_arrow}, //up
+			{"\3", &handle_EOX}, //ctrl+C
+			{"\4", &handle_EOT}	//ctrl+D
 	};
 	int index;
 
