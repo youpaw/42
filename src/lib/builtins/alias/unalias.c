@@ -33,6 +33,7 @@ int				unalias(const char **av)
 	if (flag == ALIAS_BUILTINS_FLAG)
 	{
 		alias_del();
+		alias_init();
 		return (er_code);
 	}
 	while (av[arg_i])

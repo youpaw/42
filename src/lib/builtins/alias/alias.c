@@ -4,15 +4,21 @@
 
 #include "alias_builtins.h"
 
+static void		alias_pint_pair(const char *key, const char *value)
+{
+	puts("alias ");
+	puts(key);
+	puts("='");
+	puts(value);
+	putendl("'");
+}
+
 static void		value_parse(const char *arg, int *er_code)
 {
 	const char		*value;
 
 	if ((value = alias_get_value(arg)) != NULL)
-	{
-		puts("alias ");
-		putendl(value);
-	}
+		alias_pint_pair(arg, value);
 	else
 		if (alias_add(arg))
 		{

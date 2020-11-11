@@ -54,7 +54,7 @@ static void		init_chdir(const char *cn_path, const char *path,\
 
 	home = env_get_value("HOME");
 	getcwd(pwd, MAX_PATH);
-	if (path == NULL)
+	if (path == NULL || !*path)
 	{
 		if (home)
 			*er_code = run_chdir(home, pwd, path, flags);
@@ -84,7 +84,10 @@ int				cd(const char **av)
 		return (er_code);
 	cn_path = cd_path_canonization(av[path_i]);
 	if (cd_path_validation(cn_path, av[path_i]))
+	{
+		free(cn_path);
 		return (1);
+	}
 	init_chdir(cn_path, av[path_i], flags, &er_code);
 	free(cn_path);
 	return (er_code);
