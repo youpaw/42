@@ -13,7 +13,7 @@
 #ifndef READLINE_H
 # define READLINE_H
 
-# define N_ORD_KEY_HANDLERS 8
+# define N_ORD_KEY_HANDLERS 7
 # define N_ESC_KEY_HANDLERS 11
 # define FIRST_PROMPT_TEXT "42sh $> "
 # define FIRST_PROMPT_LEN 8
@@ -33,8 +33,8 @@ struct termios		g_tty_backup;
 typedef struct		s_input
 {
 	t_vec			**line;
-	size_t			cursor_x_position;
-	size_t			cursor_y_position;
+	size_t			curs_x_pos;
+	size_t			curs_y_pos;
 	size_t			len;
 	size_t			*line_len;
 	char			*hist_storage;

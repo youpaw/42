@@ -14,16 +14,16 @@ int handle_left_arrow(t_inp *inp)
 	struct winsize ws;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	if (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
+	if (inp->curs_x_pos - get_prompt_len(inp->curs_y_pos))
 	{
-		if (!(inp->cursor_x_position % ws.ws_col) && inp->cursor_x_position)
+		if (!(inp->curs_x_pos % ws.ws_col) && inp->curs_x_pos)
 		{
 			tputs(tgetstr("up", NULL), 1, &putchar);
-			tputs(tgoto(tgetstr("ch", NULL), 1, (inp->cursor_x_position - 1) % ws.ws_col), 1, putchar);
+			tputs(tgoto(tgetstr("ch", NULL), 1, (inp->curs_x_pos - 1) % ws.ws_col), 1, putchar);
 		}
 		else
 			tputs(tgetstr("le", NULL), 1, &putchar);
-		inp->cursor_x_position--;
+		inp->curs_x_pos--;
 	}
 	else
 		putchar('\7');

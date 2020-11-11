@@ -21,7 +21,7 @@ void redraw_input(t_inp inp, char *str)
 		{
 			tputs(tgetstr("do", NULL), 1, putchar);
 			tputs(tgetstr("cr", NULL), 1, putchar);
-			prompt = get_prompt(inp.cursor_y_position);
+			prompt = get_prompt(inp.curs_y_pos);
 			puts(prompt);
 			free(prompt);
 			i++;
