@@ -2,6 +2,7 @@
 // Created by slava-nya on 9/22/20.
 //
 
+#include <sys/stat.h>
 #include "echo.h"
 
 void		printspchars(char *str)
@@ -49,7 +50,13 @@ int					echo(const char **av)
 {
 	unsigned char	flags;
 	int				arg_cnt;
+	struct stat		buf;
 
+	if ((fstat(1, &buf)) != 0)
+	{
+		putendl("lol");
+		return (1);
+	}
 	flags = ECHO_E_FLAG;
 	arg_cnt = check_opt(av, &flags);
 	while (av[arg_cnt])

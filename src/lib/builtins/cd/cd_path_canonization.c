@@ -110,16 +110,14 @@ char	*cd_path_canonization(const char *path)
 		len++;
 	if (!tokens || !(*tokens))
 	{
-		while (len--)
-			free(tokens[len]);
+		strarr_del(tokens);
 		free(tokens);
 		new_path = fill_empty_path(path);
 		return (new_path);
 	}
 	tokens_handler(tokens, len);
 	new_path = tokens_join(tokens, len);
-	while (len--)
-		free(tokens[len]);
+	strarr_del(tokens);
 	free(tokens);
 	return (new_path);
 }
