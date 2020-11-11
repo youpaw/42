@@ -26,17 +26,22 @@ static int		map_redirects(t_ast *ast, t_process *process)
 
 int				prepare_redirect(t_ast *ast, t_process *process)
 {
-	size_t		i;
 	t_ast		**redirects;
+	size_t		i;
+	int			error;
 
 	i = 0;
 	if ((redirects = get_redirect_nodes(ast)) == NULL)
 		return (0);
+	error = 0;
 	while (redirects[i])
 	{
 		if (map_redirects(redirects[i], process) != 0)
-			return (1);
+			error = 1;
+		if (error)
+			break;
 		i++;
 	}
-	return (0);
+	free(redirects);
+	return (error);
 }

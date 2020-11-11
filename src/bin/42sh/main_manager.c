@@ -36,13 +36,18 @@ int 	main_manager(void)
 	while (42)
 	{
 		readline(&str);
+		if (*str == 4)
+		{
+			free(str);
+			str = strdup("exit\n");
+		}
 		tokens = validate_str(str);
-		if (!tokens || tokens->error != E_INCINP)
+		if (!tokens || (tokens->error != E_INCINP && tokens->error != E_EOF))
 		{
 			free(str);
 			str = strdup("");
 		}
-		if (tokens && tokens->error != E_INCINP && tokens->error != E_NOINP)
+		if (tokens && tokens->error != E_INCINP && tokens->error != E_NOINP && tokens->error != E_EOF)
 			hist_push(tokens->raw);
 		if (tokens && !tokens->error)
 		{
