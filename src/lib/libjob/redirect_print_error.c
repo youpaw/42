@@ -6,9 +6,10 @@
 
 int			redirect_print_error(int errcode, const char *token)
 {
-	const char *args[1];
+	const char *args[2];
 
-	args[0] = token;
+	args[0] = "";
+	args[1] = token;
 	error_print(errcode, args);
 	return (-1);
 }
