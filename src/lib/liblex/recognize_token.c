@@ -18,6 +18,8 @@ t_token_type recognize_token(t_lexer *lexer)
 		return (l_command_name);
 	}
 	vec_get_last(&token, lexer->tokens);
+	if (is_redirection(token.type))
+		return (l_word);
 	if (is_delimiter(token.type) && lexer->raw[lexer->begin] == '!')
 		return (l_bang);
 	if (token.type == l_assignment_word || token.type == l_bang || \

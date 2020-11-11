@@ -8,7 +8,7 @@
 
 const char 	*g_error_msg[] = {
 		NULL,
-		"%: %: No such file or directory",
+		"%%: No such file or directory",
 		"Input/output error",
 		"Bad file descriptor",
 		"Cannot allocate memory",
