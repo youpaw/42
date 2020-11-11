@@ -29,7 +29,7 @@ void 	print_prompt(t_inp *inp)
 
 	i = 0;
 	bzero(sym, 4);
-	prompt = get_prompt(inp->cursor_y_position);
+	prompt = get_prompt(inp->curs_y_pos);
 	while (prompt[i])
 	{
 		sym[0] = prompt[i++];

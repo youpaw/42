@@ -6,31 +6,31 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *input_to_str(t_inp input, int newline)
+char	*input_to_str(t_inp input, int newline)
 {
 	char *string;
 	char let[5];
 
 	if (!input.line)
-		return(strdup(""));
-	while (input.line[input.cursor_y_position])
-		input.cursor_y_position++;
-	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.cursor_y_position);
+		return (strdup(""));
+	while (input.line[input.curs_y_pos])
+		input.curs_y_pos++;
+	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.curs_y_pos);
 	*string = '\0';
-	input.cursor_y_position = 0;
+	input.curs_y_pos = 0;
 	bzero(let, 5);
-	while (input.line[input.cursor_y_position])
+	while (input.line[input.curs_y_pos])
 	{
-		input.cursor_x_position = get_prompt_len(input.cursor_y_position);
-		while (input.cursor_x_position != input.line_len[input.cursor_y_position])
+		input.curs_x_pos = get_prompt_len(input.curs_y_pos);
+		while (input.curs_x_pos != input.line_len[input.curs_y_pos])
 		{
-			vec_get_at(let, input.line[input.cursor_y_position], input.cursor_x_position);
+			vec_get_at(let, input.line[input.curs_y_pos], input.curs_x_pos);
 			strcat(string, let);
-			input.cursor_x_position++;
+			input.curs_x_pos++;
 		}
-		if (input.line[input.cursor_y_position + 1] && newline)
+		if (input.line[input.curs_y_pos + 1] && newline)
 			strcat(string, "\n");
-		input.cursor_y_position++;
+		input.curs_y_pos++;
 	}
-	return string;
+	return (string);
 }

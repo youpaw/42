@@ -4,24 +4,10 @@
 
 #include "readline.h"
 #include "cc_str.h"
-#include <termcap.h>
 #include "cc_char.h"
+#include <termcap.h>
 
-void del_input(t_inp *input)
-{
-	size_t i;
-
-	i = 0;
-	while (input->line[i])
-		vec_del(&(input->line[i++]));
-	vec_del(&(input->line[i]));
-	free(input->line_len);
-	free(input->line);
-	input->line_len = NULL;
-	input->line = NULL;
-}
-
-void reload_input(t_inp *inp, char *str)
+void	reload_input(t_inp *inp, char *str)
 {
 	char *tmp;
 
@@ -31,10 +17,10 @@ void reload_input(t_inp *inp, char *str)
 	*inp = input_init(strdup(str));
 	if (*str)
 	{
-		vec_del(&(inp->line[inp->cursor_y_position]));
-		inp->line[inp->cursor_y_position] = NULL;
-		inp->cursor_y_position--;
-		inp->cursor_x_position = inp->line_len[inp->cursor_y_position];
+		vec_del(&(inp->line[inp->curs_y_pos]));
+		inp->line[inp->curs_y_pos] = NULL;
+		inp->curs_y_pos--;
+		inp->curs_x_pos = inp->line_len[inp->curs_y_pos];
 		redraw_input(*inp, str);
 	}
 	else
@@ -46,4 +32,3 @@ void reload_input(t_inp *inp, char *str)
 	inp->hist_storage = tmp;
 	free(str);
 }
-

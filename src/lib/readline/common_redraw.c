@@ -34,8 +34,8 @@ void	common_redraw(t_inp *input)
 	int		cur_y_pos;
 	int		cur_x_pos;
 
-	cur_y_pos = input->cursor_y_position;
-	cur_x_pos = input->cursor_x_position;
+	cur_y_pos = input->curs_y_pos;
+	cur_x_pos = input->curs_x_pos;
 	while (input->line[cur_y_pos])
 	{
 		inner_circle(input, cur_x_pos, cur_y_pos);
