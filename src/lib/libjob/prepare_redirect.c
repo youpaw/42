@@ -38,5 +38,6 @@ int				prepare_redirect(t_ast *ast, t_process *process)
 			return (1);
 		i++;
 	}
+	printf("PIZDA\n");
 	return (0);
 }

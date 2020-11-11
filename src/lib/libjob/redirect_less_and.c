@@ -9,7 +9,8 @@ static void		from_stdin(t_process *process, int from, int to)
 {
 	if (from == STDIN_FILENO)
 	{
-		close(process->stdin);
+		if (!is_standard_io(process->stdin))
+			close(process->stdin);
 		if (STDOUT_FILENO == to)
 			process->stdin = dup(process->stdout);
 		if (STDERR_FILENO == to)
@@ -21,7 +22,8 @@ static void		from_stderr(t_process *process, int from, int to)
 {
 	if (from == STDERR_FILENO)
 	{
-		close(process->stderr);
+		if (!is_standard_io(process->stderr))
+			close(process->stderr);
 		if (STDOUT_FILENO == to)
 			process->stderr = dup(process->stdout);
 		else if (STDIN_FILENO == to)
@@ -33,7 +35,8 @@ static void		from_stdout(t_process *process, int from, int to)
 {
 	if (from == STDOUT_FILENO)
 	{
-		close(process->stdout);
+		if (!is_standard_io(process->stdout))
+			close(process->stdout);
 		if (STDERR_FILENO == to)
 			process->stdout = dup(process->stderr);
 		else if (STDIN_FILENO == to)
