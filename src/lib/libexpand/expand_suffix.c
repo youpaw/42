@@ -11,9 +11,10 @@ char	*expand_suffix(const char *name, const char *pattern)
 	size_t		pat_len;
 	size_t		val_len;
 
-	pat_len = strlen(pattern);
-	value = get_env_or_av_value(name);
+	if (!(value = get_env_or_av_value(name)))
+		return (strnew(0));
 	val_len = strlen(value);
+	pat_len = strlen(pattern);
 	if (val_len >= pat_len && !strcmp(&value[val_len - pat_len], pattern))
 		return (strsub(value, 0, val_len - pat_len));
 	return (strdup(value));
