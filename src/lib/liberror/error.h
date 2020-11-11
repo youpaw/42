@@ -33,6 +33,7 @@ typedef enum	e_error_code
 	E_PIPE,                         /* Broken pipe */
 	E_NOINP,						/* Empty input */
 	E_INCINP,						/* Incomplete input */
+	E_EOF,							/* End of file from readline */
 	E_BADSUBS,						/* Bad substitution */
 	E_NOEVENT,						/* % Event not found */
 	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/

@@ -21,6 +21,7 @@ const char 	*g_error_msg[] = {
 		"Broken pipe",
 		NULL,
 		NULL,
+		NULL,
 		"${%}: bad substitution",
 		"!%: event not found",
 		"syntax error near unexpected token `%'",

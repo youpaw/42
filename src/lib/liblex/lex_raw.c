@@ -15,7 +15,7 @@ static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
 	t_slice	slice;
 
-	lexer->raw = strdup(raw);
+	lexer->raw = *raw == 4 ? strdup("exit\n") :strdup(raw);
 	lexer->begin = 0;
 	lexer->index = 0;
 	lexer->size = strlen(raw);
@@ -36,6 +36,8 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 
 	error = 0;
 	init_lexer(lexer, raw, stage);
+	if (lexer->raw[lexer->size - 1] == '\4')
+		return (E_EOF);
 	while (lexer->index < lexer->size)
 	{
 		current = get_current_state(lexer);
