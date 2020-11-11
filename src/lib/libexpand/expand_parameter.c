@@ -81,5 +81,7 @@ int 	expand_parameter(char **str)
 		free(value);
 	if (word)
 		free(word);
+	if (!*str)
+		return (E_EXPAND);
 	return (0);
 }

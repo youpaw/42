@@ -33,6 +33,7 @@ typedef enum	e_error_code
 	E_PIPE,                         /* Broken pipe */
 	E_NOINP,						/* Empty input */
 	E_INCINP,						/* Incomplete input */
+	E_EOF,							/* End of file from readline */
 	E_BADSUBS,						/* Bad substitution */
 	E_NOEVENT,						/* % Event not found */
 	E_UNEXPTOK,						/* syntax error near unexpected token `%'*/
@@ -53,7 +54,8 @@ typedef enum	e_error_code
 	E_NOCMD,						/* %: command not found */
 	E_BADFD,						/* %: Bad file descriptor */
 	E_AMBIG,						/* %: ambiguous redirect */
-	E_ARGCNOTENOUGH					/* %: not enough arguments */
+	E_ARGCNOTENOUGH,				/* %: not enough arguments */
+	E_EXPAND						/* %: % */
 }				t_error_code;
 
 void 	error_print(t_error_code er_code, const char **args);

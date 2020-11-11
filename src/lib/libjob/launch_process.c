@@ -31,7 +31,7 @@ static void	set_process_group(int *pgid, int is_foreground)
 static void		get_exec_env(t_process *p)
 {
 
-	prepare_exec_env(p->ast);
+	prepare_exec_env(p->ast->left);
 	p->env = exec_env_2array();
 	exec_env_del();
 }
@@ -56,6 +56,8 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 		free(p->argv);
 	if (err_code || set_redirects(p))
 		exit(1);
+	if (!p->argv)
+		exit(0);
 	if ((err_code = run_builtin(p)) >= 0)
 		exit(err_code);
 	if (strispath(p->argv[0]))

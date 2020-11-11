@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "cc_mem.h"
 #include "cc_str.h"
-
+#include "cc_num.h"
 static void del_token(t_token *token)
 {
 	free(token->raw);
@@ -43,5 +43,7 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 			break ;
 		lexer->index++;
 	}
+	if (lexer->raw[lexer->size - 1] == '\4')
+		return (E_EOF);
 	return (error);
 }

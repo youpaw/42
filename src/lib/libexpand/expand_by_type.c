@@ -2,6 +2,7 @@
 // Created by Azzak Omega on 9/2/20.
 //
 #include "expand.h"
+#include "error.h"
 #include "stddef.h"
 #include "stdlib.h"
 #include "cc_str.h"
@@ -13,9 +14,7 @@ static char	*param_or_word(const char *name, const char *word)
 {
 	char 	*value;
 
-	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
-		strdel(&value);
-	if (value)
+	if ((value = (char *)get_env_or_av_value(name)) && strlen(value))
 		return (strdup(value));
 	return (strdup(word));
 }
@@ -26,9 +25,7 @@ static char	*assign_param(const char *name, const char *word)
 	char 		*field;
 	const char 	*arr[4];
 
-	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
-		strdel(&value);
-	if (value)
+	if ((value = (char *)get_env_or_av_value(name)) && strlen(value))
 		return (strdup(value));
 	arr[0] = name;
 	arr[1] = "=";
@@ -42,16 +39,17 @@ static char	*assign_param(const char *name, const char *word)
 
 static char	*param_or_error(const char *name, const char *word)
 {
-	char 	*value;
+	char		*value;
+	const char	*err_args[2];
 
-	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
-		strdel(&value);
-	if (value)
+	err_args[0] = name;
+	if ((value = (char *)get_env_or_av_value(name)) && strlen(value))
 		return (strdup(value));
 	if (word && strlen(word))
-		fdputendl(word, 2);
+		err_args[1] = word;
 	else
-		fdputendl("bash: : parameter null or not set", 2);
+		err_args[1] = "parameter null or not set";
+	error_print(E_EXPAND, err_args);
 	return (NULL);
 }
 
@@ -59,9 +57,7 @@ static char	*empty_or_word(const char *name, const char *word)
 {
 	char 	*value;
 
-	if ((value = (char *)get_env_or_av_value(name)) && !strlen(value))
-		strdel(&value);
-	if (value)
+	if ((value = (char *)get_env_or_av_value(name)) && strlen(value))
 		return (strdup(word));
 	return (strnew(0));
 }
