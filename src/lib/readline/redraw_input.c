@@ -8,11 +8,11 @@
 #include <termcap.h>
 #include <unistd.h>
 
-void redraw_input(t_inp inp, char *str)
+void	redraw_input(t_inp inp, char *str)
 {
-	size_t i;
-	int len;
-	char *prompt;
+	size_t	i;
+	int		len;
+	char	*prompt;
 
 	i = 0;
 	while (str[i] != 0)
@@ -33,6 +33,4 @@ void redraw_input(t_inp inp, char *str)
 			i += len;
 		}
 	}
-
 }
-

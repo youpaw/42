@@ -10,16 +10,12 @@ void	termcap_init(void)
 	error = tgetent(NULL, getenv("TERM"));
 	if (error == 0)
 	{
-		; //TODO "Терминал %s не описан\n" error handle
 		exit(0);
 	}
 	else if (error == 1)
 		return ;
 	else
 	{
-		; //TODO "Different error" error handle
 		exit(0);
 	}
 }
-
-

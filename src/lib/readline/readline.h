@@ -112,8 +112,8 @@ char			*input_to_n_str(t_inp input);
 void			handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m);
 void			handle_param_token(t_inp *input, t_prdct_tkn *token);
 
-t_list			*get_list_files(char *path, char *name, int access_mode);
-char			**get_filename(char *fullname);
+//t_list			*get_list_files(char *path, char *name, int access_mode);
+char			**parse_filename(char *fullname);
 int				check_for_utf8_comb_charecter(char *p, char *let, size_t len);
 char			*find_same_part(t_list *files, char*filename);
 void			clear_last_disp_token(char *token, t_inp *input);

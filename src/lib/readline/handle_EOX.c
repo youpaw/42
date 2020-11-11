@@ -7,8 +7,11 @@
 
 int			handle_eox(t_inp *inp)
 {
+
 	put_cursor_to_the_end(inp);
 	write(STDOUT_FILENO, "\n", 1);
+	if (inp->hist_storage)
+		free(inp->hist_storage);
 	del_input(inp);
 	return(1);
 }
