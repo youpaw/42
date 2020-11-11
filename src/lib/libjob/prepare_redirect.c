@@ -36,7 +36,6 @@ int				prepare_redirect(t_ast *ast, t_process *process)
 	{
 		if (map_redirects(redirects[i], process) != 0)
 			return (1);
-		puts("Pizda\n\n");
 		i++;
 	}
 	return (0);
