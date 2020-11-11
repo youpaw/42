@@ -20,7 +20,7 @@ int 		env_export(const char *field)
 		if ((value = hash_map_get_val(g_inter_env, pair.key)))
 			pair.value = strdup(value);
 		else
-			pair.value = strnew(0);
+			pair.value = NULL;
 	}
 	else
 		pair.value = strdup(field + name_len + 1);

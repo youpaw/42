@@ -42,7 +42,8 @@ const char 	*g_error_msg[] = {
 		"%: command not found",
 		"%: Bad file descriptor",
 		"%: ambiguous redirect",
-		"%: not enough arguments"
+		"%: not enough arguments",
+		"%: %"
 };
 
 void 	error_print(t_error_code er_code, const char **args)
