@@ -24,7 +24,7 @@ static char		*fill_empty_path(const char *path)
 	return (new_path);
 }
 
-static char		*tokens_join(char **tokens, int len)
+static char *tokens_join(char **tokens, int len)
 {
 	char	*new_path;
 	int 	cnt;
@@ -33,13 +33,15 @@ static char		*tokens_join(char **tokens, int len)
 	new_path = memalloc(MAX_PATH + 1);
 	while (cnt < len && cnt < MAX_PATH)
 	{
-		if ((tokens)[cnt] != NULL)
+		if (*tokens[cnt] != '\0')
 		{
 			strcat(new_path, "/\0");
-			strcat(new_path, (tokens)[cnt]);
+			strcat(new_path, tokens[cnt]);
 		}
 		cnt++;
 	}
+	if (!*new_path)
+		strcpy(new_path, "/");
 	return(new_path);
 }
 
@@ -47,20 +49,20 @@ static void tokens_handler(char **tokens, int len)
 {
 	int curr_e;
 	int prev_e;
-
+	int i = -1;
 	curr_e = 0;
 	prev_e = 0;
 	while (curr_e < len)
 	{
 		if (strcmp(tokens[curr_e], "..") == 0)
 		{
-			tokens[curr_e] = NULL;
-			tokens[prev_e] = NULL;
+			*tokens[curr_e] = '\0';
+			*tokens[prev_e] = '\0';
 		}
 		else if (strcmp(tokens[curr_e], ".") == 0)
-			tokens[curr_e] = NULL;
+			*tokens[curr_e] = '\0';
 		prev_e = curr_e;
-		while (tokens[prev_e] == NULL && prev_e >= 0)
+		while (prev_e > 0 && *tokens[prev_e] == '\0')
 				prev_e--;
 		curr_e++;
 	}
@@ -104,18 +106,20 @@ char	*cd_path_canonization(const char *path)
 	new_path = NULL;
 	if (!path || !*path || tokenizer(path, &tokens))
 		return (strdup(path));
+	while (tokens[len])
+		len++;
 	if (!tokens || !(*tokens))
 	{
-		strarr_del(tokens);
+		while (len--)
+			free(tokens[len]);
 		free(tokens);
 		new_path = fill_empty_path(path);
 		return (new_path);
 	}
-	while (tokens[len])
-		len++;
 	tokens_handler(tokens, len);
 	new_path = tokens_join(tokens, len);
-	strarr_del(tokens);
+	while (len--)
+		free(tokens[len]);
 	free(tokens);
 	return (new_path);
 }
