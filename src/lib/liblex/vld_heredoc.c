@@ -13,17 +13,20 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 
 	end = strjoin(token->raw, "\n");
 	index = lexer->size - 1;
-	if (lexer->raw[index] != '\4')
+	if (lexer->raw[index] != 4)
 		while (index && lexer->raw[index - 1] != '\n')
 			index--;
 	error = E_INCINP;
-	if (index && !strcmp(lexer->raw + index, end))
+	if (lexer->raw[index] == 4 || (index && !strcmp(lexer->raw + index, end)))
 	{
+		if (lexer->raw[index] == 4)
+			putendl("");
 		token->raw = strsub(lexer->raw, lexer->begin,index - lexer->begin);
 		token->type = l_word;
-		lexer->raw[lexer->begin - 1] = '\0';
 		vec_rm_at(lexer->tokens, start_token_index);
 		vec_push_at(lexer->tokens, token, start_token_index);
+		lexer->raw[lexer->begin - 1] = '\0';
+		lexer->size = strlen(lexer->raw);
 		lexer->index = lexer->size;
 		error = 0;
 	}

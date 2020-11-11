@@ -36,6 +36,11 @@ int 	main_manager(void)
 	while (42)
 	{
 		readline(&str);
+		if (*str == 4)
+		{
+			free(str);
+			str = strdup("exit\n");
+		}
 		tokens = validate_str(str);
 		if (!tokens || (tokens->error != E_INCINP && tokens->error != E_EOF))
 		{
