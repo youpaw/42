@@ -6,6 +6,11 @@
 #include "cc_mem.h"
 #include "cc_str.h"
 
+static void del_token(t_token *token)
+{
+	free(token->raw);
+}
+
 static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
 	t_slice	slice;
@@ -15,7 +20,8 @@ static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 	lexer->index = 0;
 	lexer->size = strlen(raw);
 	lexer->slices = vec_new(SLICES_STACK_SIZE, sizeof(t_slice), NULL);
-	lexer->tokens = vec_new(TOKENS_STACK_SIZE, sizeof(t_token), NULL);
+	lexer->tokens = vec_new(TOKENS_STACK_SIZE, sizeof(t_token),
+							(void (*)(void *)) &del_token);
 	lexer->stage = stage;
 	bzero(lexer->flags, sizeof(char) * N_LEX_FLAGS);
 	slice.state = l_unset;

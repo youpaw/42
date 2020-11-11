@@ -3,7 +3,7 @@
 //
 
 #include "exec.h"
-
+#include "cc_str.h"
 static int		map_redirects(t_ast *ast, t_process *process)
 {
 	int		err;
