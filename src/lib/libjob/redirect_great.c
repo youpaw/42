@@ -15,6 +15,5 @@ int		redirect_great(t_ast *leafs, t_process *process, int is_double_great)
 	from = redirect_parse_left_side(leafs, 1);
 	to = redirect_parse_right_side(leafs->left->left->token, options, 0, 0);
 	redirect_init_process_file(process, from, to);
-	puts("PPizda\n\n");
 	return (0);
 }
