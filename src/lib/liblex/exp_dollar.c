@@ -47,10 +47,8 @@ static void handle_field_expand(t_lexer *lexer)
 		expand_exit_code(&sub);
 	else if (*sub)
 		expand_parameter(&sub);
-	if (sub && *sub)
-		strjoin_expanded(lexer, index, sub, 1);
-	if (sub)
-		free(sub);
+	strjoin_expanded(lexer, index, sub, 1);
+	free(sub);
 }
 
 int 	exp_dollar(t_lexer *lexer)

@@ -79,6 +79,7 @@ int		job_is_stopped (t_job *j);
 int		job_is_completed (t_job *j);
 t_job	*find_job_by_index(int index);
 void	remove_job_by_index(int job_index);
+void 	handle_assignments(t_process *process);
 
 /*
 ** Processes management
