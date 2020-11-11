@@ -55,11 +55,13 @@ int				redirect_less_and(t_ast *leafs, t_process *process)
 
 	from = redirect_parse_left_side(leafs, 0);
 	to = redirect_less_and_right_side(leafs);
+	if (to == -1)
+		return (-1);
 	if (from == to)
 		return (0);
 	if (to == -2)
 		return (redirect_close_stdio(process, from));
-	if (!is_standard_io(from) && to != -1)
+	if (!is_standard_io(from))
 		return (0);
 	less_and_init_stdio(process, from, to);
 	return (0);
