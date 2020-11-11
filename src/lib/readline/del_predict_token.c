@@ -4,7 +4,7 @@
 
 #include "readline.h"
 
-void 		del_predict_token(t_prdct_tkn **token)
+void	del_predict_token(t_prdct_tkn **token)
 {
 	if (!token || !*token)
 		return ;

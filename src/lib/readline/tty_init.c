@@ -18,7 +18,7 @@ void		tty_init(void)
 {
 	struct termios	tty;
 
-	tputs(tgetstr("im", NULL), 1, &putchar);
+//	tputs(tgetstr("im", NULL), 1, &putchar);
 	if (!(isatty(0)))
 	{
 		//TODO "stdin not terminal" error handle

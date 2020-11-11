@@ -24,7 +24,7 @@ int			handle_tab(t_inp *inp)
 	str = input_to_n_str(*inp);
 	token = get_predict_token(str);
 	free(str);
-	if (token->type == r_file) //file
+	if (token->type == r_file)
 		handle_file_token(inp, token, 0);
 	else if (token->type == r_cmd)
 		handle_command_token(inp, token);
