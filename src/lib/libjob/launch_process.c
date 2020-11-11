@@ -31,7 +31,7 @@ static void	set_process_group(int *pgid, int is_foreground)
 static void		get_exec_env(t_process *p)
 {
 
-	prepare_exec_env(p->ast);
+	prepare_exec_env(p->ast->left);
 	p->env = exec_env_2array();
 	exec_env_del();
 }
