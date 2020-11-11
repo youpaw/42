@@ -56,6 +56,8 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 		free(p->argv);
 	if (err_code || set_redirects(p))
 		exit(1);
+	if (!p->argv)
+		exit(0);
 	if ((err_code = run_builtin(p)) >= 0)
 		exit(err_code);
 	if (strispath(p->argv[0]))

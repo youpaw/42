@@ -32,11 +32,16 @@ static int		exec_or_hash(t_process *process)
 	int		stdio_bck[3];
 	const char **argv = (const char **)process->argv;
 
-	if ((index = get_builtin_index(argv[0])) != -1)
+	if (!argv || (index = get_builtin_index(argv[0])) != -1)
 	{
 		backup_stdio(stdio_bck);
 		if (!(error = set_redirects(process)))
-			error = run_builtin_by_index(process, index);
+		{
+			if (argv)
+				error = run_builtin_by_index(process, index);
+			else
+				handle_assignments(process);
+		}
 		restore_stdio(stdio_bck);
 		return (error);
 	}
@@ -44,11 +49,12 @@ static int		exec_or_hash(t_process *process)
 	return (-1);
 }
 
+
 int		run_builtin_or_hash(t_process *process)
 {
 	int						return_value;
 
-	if (process_init(process))
+	if (process->ast->token && process_init(process))
 		return (1);
 	return_value = exec_or_hash(process);
 	if (return_value >= 0)

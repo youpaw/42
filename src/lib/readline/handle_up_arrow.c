@@ -16,11 +16,14 @@ int handle_up_arrow(t_inp *inp)
 
 	if (!inp->hist_storage)
 		inp->hist_storage = input_to_str(*inp, 1);
-	new_hist = (strdup(hist_get_prev()));
+	new_hist = hist_get_prev();
 	if (new_hist)
 	{
+		new_hist = strdup(new_hist);
 		clear_display_input(inp);
 		reload_input(inp, new_hist);
 	}
+	else
+		puts("\7");
 	return (0);
 }

@@ -17,12 +17,12 @@
 
 int			handle_del(t_inp *inp)
 {
-	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
+	if (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
 	{
 		tputs(tgetstr("ce", NULL), 1, &putchar);
-		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
+		vec_rm_at(inp->line[inp->curs_y_pos], inp->curs_x_pos);
 		inp->len--;
-		inp->line_len[inp->cursor_y_position]--;
+		inp->line_len[inp->curs_y_pos]--;
 		redraw_input_readline(inp);
 	}
 	else
