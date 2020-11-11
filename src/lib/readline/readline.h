@@ -67,7 +67,6 @@ typedef	struct		s_predict_token
 
 void			tty_init(void);
 void			tty_restore(void);
-void			termcap_init(void);
 
 t_prdct_tkn	*get_predict_token(char *raw);
 void			del_predict_token(t_prdct_tkn **token);
@@ -103,7 +102,6 @@ int				readline(char **line);
 
 void			clear_display_input(t_inp *inp);
 void			common_redraw(t_inp *input);
-void			redraw_input_adding(t_inp *inp);
 void			redraw_input_readline(t_inp *inp);
 
 char			*input_to_str(t_inp input, int newline);
@@ -112,7 +110,6 @@ char			*input_to_n_str(t_inp input);
 void			handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m);
 void			handle_param_token(t_inp *input, t_prdct_tkn *token);
 
-//t_list			*get_list_files(char *path, char *name, int access_mode);
 char			**parse_filename(char *fullname);
 int				check_for_utf8_comb_charecter(char *p, char *let, size_t len);
 char			*find_same_part(t_list *files, char*filename);
