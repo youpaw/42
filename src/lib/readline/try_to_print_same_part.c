@@ -24,6 +24,7 @@ char *find_same_part(t_list *files, char *filename)
 		same[i] = ((char*)files->content)[i + len];
 		i++;
 	}
+	same[i] = 0;
 	cur = cur->next;
 	while (cur != files && *same)
 	{

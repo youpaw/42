@@ -104,7 +104,7 @@ int				readline(char **line);
 void			clear_display_input(t_inp *inp);
 void			common_redraw(t_inp *input);
 void			redraw_input_adding(t_inp *inp);
-void			redraw_input_del(t_inp *inp);
+void			redraw_input_readline(t_inp *inp);
 
 char			*input_to_str(t_inp input, int newline);
 char			*input_to_n_str(t_inp input);

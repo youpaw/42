@@ -23,7 +23,7 @@ int handle_right_arrow(t_inp *inp)
 	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-		if (!((inp->cursor_x_position + 1) % ws.ws_col) && inp->cursor_x_position)
+		if (!(inp->cursor_x_position % (ws.ws_col - 1)) && inp->cursor_x_position)
 		{
 			tputs(tgetstr("do", NULL), 1, &putchar);
 			tputs(tgetstr("cr", NULL), 1, &putchar);

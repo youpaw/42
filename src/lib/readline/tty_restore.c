@@ -14,5 +14,5 @@
 void		tty_restore(void)
 {
 	tcsetattr(0, TCSAFLUSH, &(g_tty_backup));
-	tputs(tgetstr("ei", NULL), 1, &putchar);
+//	tputs(tgetstr("ei", NULL), 1, &putchar);
 }

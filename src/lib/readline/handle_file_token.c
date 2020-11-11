@@ -85,12 +85,8 @@ char	**get_filename(char *fullname)
 {
 	char *delimiter;
 	char **filename;
-	size_t len;
 
 	filename = xmalloc(sizeof(char*) * 2);
-	len = strlen(fullname);
-	filename[0] = xmalloc(sizeof(char) * (len + 1));
-	filename[1] = xmalloc(sizeof(char) * (len + 1));
 	fullname = strdup(fullname);
 	delimiter = strrchr(fullname, '/');
 
@@ -98,25 +94,25 @@ char	**get_filename(char *fullname)
 	{
 		if (!(delimiter[1]))
 		{
-			strcpy(filename[0], fullname);
-			strcpy(filename[1], "");
+			filename[0] = strdup(fullname);
+			filename[1] = strdup("");
 		}
 		else if (delimiter == fullname)
 		{
-			strcpy(filename[0], "/");
-			strcpy(filename[1], fullname + 1);
+			filename[0] = strdup("/");
+			filename[1] = strdup(fullname + 1);
 		}
 		else
 		{
 			*delimiter = '\0';
-			strcpy(filename[0], fullname);
-			strcpy(filename[1], delimiter + 1);
+			filename[0] = strdup(fullname);
+			filename[1] = strdup(delimiter + 1);
 		}
 	}
 	else
 	{
-		strcpy(filename[0], "./");
-		strcpy(filename[1], fullname);
+		filename[0] = strdup("./");
+		filename[1] = strdup(fullname);
 	}
 	free(fullname);
 	return (filename);
@@ -139,7 +135,6 @@ void handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
 		{
 			put_str_to_input(input, part);
 			lst_del_circle(&files, NULL);
-			free(part);
 		}
 		else
 		{

@@ -19,11 +19,11 @@ int			handle_del(t_inp *inp)
 {
 	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
 	{
-		tputs(tgetstr("dc", NULL), 1, &putchar);
+		tputs(tgetstr("ce", NULL), 1, &putchar);
 		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
 		inp->len--;
 		inp->line_len[inp->cursor_y_position]--;
-		redraw_input_del(inp);
+		redraw_input_readline(inp);
 	}
 	else
 		putchar('\7');
