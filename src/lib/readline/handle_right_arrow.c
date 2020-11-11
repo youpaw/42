@@ -20,10 +20,10 @@ int handle_right_arrow(t_inp *inp)
 {
 	struct winsize ws;
 
-	if (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
+	if (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
 	{
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-		if (!(inp->cursor_x_position % (ws.ws_col - 1)) && inp->cursor_x_position)
+		if (!(inp->curs_x_pos % (ws.ws_col - 1)) && inp->curs_x_pos)
 		{
 			tputs(tgetstr("do", NULL), 1, &putchar);
 			tputs(tgetstr("cr", NULL), 1, &putchar);
@@ -31,7 +31,7 @@ int handle_right_arrow(t_inp *inp)
 		}
 		else
 			tputs(tgetstr("nd", NULL), 1, &putchar);
-		inp->cursor_x_position++;
+		inp->curs_x_pos++;
 	}
 	else
 	{

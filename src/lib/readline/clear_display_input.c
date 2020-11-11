@@ -8,9 +8,9 @@
 
 void clear_begin_and_after_cursor(t_inp *inp)
 {
-	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
+	while (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
 		handle_del(inp);
-	while (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
+	while (inp->curs_x_pos - get_prompt_len(inp->curs_y_pos))
 		handle_backspace(inp);
 }
 void clear_second_display_input(t_inp *inp)
@@ -29,8 +29,8 @@ void clear_display_input(t_inp *inp)
 	size_t prev_lines_count;
 
 	put_cursor_to_the_end(inp);
-	prev_lines_count = inp->cursor_y_position;
-	while (inp->cursor_y_position)
+	prev_lines_count = inp->curs_y_pos;
+	while (inp->curs_y_pos)
 	{
 		clear_second_display_input(inp);
 	}

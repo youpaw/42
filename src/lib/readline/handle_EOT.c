@@ -10,17 +10,17 @@ int			handle_eot(t_inp *inp)
 {
 	char *tmp;
 
-	if (inp->cursor_y_position || inp->cursor_x_position - get_prompt_len(0))
+	if (inp->curs_y_pos || inp->curs_x_pos - get_prompt_len(0))
 		handle_eox(inp);
 	else
 	{
 		tmp = inp->hist_storage;
 		del_input(inp);
 		*inp = input_init(strdup("exit "));
-		vec_del(&(inp->line[inp->cursor_y_position]));
-		inp->line[inp->cursor_y_position] = NULL;
-		inp->cursor_y_position--;
-		inp->cursor_x_position = inp->line_len[inp->cursor_y_position];
+		vec_del(&(inp->line[inp->curs_y_pos]));
+		inp->line[inp->curs_y_pos] = NULL;
+		inp->curs_y_pos--;
+		inp->curs_x_pos = inp->line_len[inp->curs_y_pos];
 		inp->hist_storage = tmp;
 	}
 	return (1);

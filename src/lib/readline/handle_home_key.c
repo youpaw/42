@@ -8,7 +8,7 @@ int			handle_home_key(t_inp *inp)
 {
 	size_t i;
 
-	i = inp->cursor_x_position - get_prompt_len(inp->cursor_y_position);
+	i = inp->curs_x_pos - get_prompt_len(inp->curs_y_pos);
 	while (i-- != 0)
 		handle_left_arrow(inp);
 	return (0);

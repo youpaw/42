@@ -6,8 +6,8 @@
 
 void put_cursor_to_the_end(t_inp *inp)
 {
-	while (inp->line[inp->cursor_y_position + 1])
+	while (inp->line[inp->curs_y_pos + 1])
 		handle_shift_down(inp);
-	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
+	while (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
 		handle_right_arrow(inp);
 }

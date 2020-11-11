@@ -38,23 +38,23 @@ static t_inp	fill_input(char *line)
 	t_inp inp;
 	char **prev;
 
-	inp.cursor_y_position = 0;
+	inp.curs_y_pos = 0;
 	inp.len = 0;
 	prev = split_newline(line);
-	while (prev[inp.cursor_y_position])
-		inp.cursor_y_position++;
-	inp.line = xmalloc(sizeof(t_vec*) * (inp.cursor_y_position + 2));
-	inp.line_len = xmalloc(sizeof(size_t) * (inp.cursor_y_position + 2));
-	inp.cursor_y_position = 0;
-	while (prev[inp.cursor_y_position])
+	while (prev[inp.curs_y_pos])
+		inp.curs_y_pos++;
+	inp.line = xmalloc(sizeof(t_vec*) * (inp.curs_y_pos + 2));
+	inp.line_len = xmalloc(sizeof(size_t) * (inp.curs_y_pos + 2));
+	inp.curs_y_pos = 0;
+	while (prev[inp.curs_y_pos])
 	{
-		inp.line[inp.cursor_y_position] = vec_new(8, sizeof(char[5]), NULL);
-		inp.line_len[inp.cursor_y_position] = strcmp_in_input(&inp.line[inp.cursor_y_position],
-														get_prompt(inp.cursor_y_position));
-		inp.line_len[inp.cursor_y_position] += strcmp_in_input(
-				&inp.line[inp.cursor_y_position], prev[inp.cursor_y_position]);
-		inp.len += inp.line_len[inp.cursor_y_position];
-		inp.cursor_y_position++;
+		inp.line[inp.curs_y_pos] = vec_new(8, sizeof(char[5]), NULL);
+		inp.line_len[inp.curs_y_pos] = strcmp_in_input(&inp.line[inp.curs_y_pos],
+													   get_prompt(inp.curs_y_pos));
+		inp.line_len[inp.curs_y_pos] += strcmp_in_input(
+				&inp.line[inp.curs_y_pos], prev[inp.curs_y_pos]);
+		inp.len += inp.line_len[inp.curs_y_pos];
+		inp.curs_y_pos++;
 	}
 	free(prev);
 	return (inp);
@@ -70,13 +70,13 @@ t_inp 	input_init(char *line)
 	{
 		inp.line = xmalloc(sizeof(t_vec*) * 2);
 		inp.line_len = xmalloc(sizeof(int) * 2);
-		inp.cursor_y_position = 0;
+		inp.curs_y_pos = 0;
 		inp.len = 0;
 	}
-	inp.line[inp.cursor_y_position] = vec_new(8, sizeof(char[5]), NULL);
-	inp.line[inp.cursor_y_position + 1] = NULL;
-	inp.line_len[inp.cursor_y_position] = 0;
-	inp.cursor_x_position = 0;
+	inp.line[inp.curs_y_pos] = vec_new(8, sizeof(char[5]), NULL);
+	inp.line[inp.curs_y_pos + 1] = NULL;
+	inp.line_len[inp.curs_y_pos] = 0;
+	inp.curs_x_pos = 0;
 	inp.hist_storage = NULL;
 	free(line);
 	return (inp);

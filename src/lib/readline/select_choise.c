@@ -21,7 +21,7 @@ void select_choise(void *files, t_inp *inp, char *current)
 	tputs(tgetstr("up", NULL), 1, putchar);
 	if (!selection)
 		selection = strdup(current);
-	while (i++ != inp->cursor_x_position % ws.ws_col)
+	while (i++ != inp->curs_x_pos % ws.ws_col)
 		tputs(tgetstr("nd", NULL), 1, putchar);
 	put_str_to_input(inp, selection);
 }
