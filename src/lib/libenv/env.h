@@ -43,6 +43,7 @@ int 		env_export(const char *field);
  */
 
 void		exec_env_init(void);
+const char	*exec_env_get_value(const char *key);
 void		exec_env_del(void);
 int 		exec_env_insert(const char *field);
 char 		**exec_env_2array(void);
