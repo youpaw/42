@@ -5,10 +5,11 @@
 #include "calc.h"
 #include "cc_regex.h"
 #include "cc_str.h"
-int 			expand_calc(char **str)
+
+int			expand_calc(char **str)
 {
-	const char *arg[4];
-	char *tmp;
+	const char	*arg[4];
+	char		*tmp;
 
 	if (!match(*str, "(*)"))
 	{

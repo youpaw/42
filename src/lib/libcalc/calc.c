@@ -1,15 +1,16 @@
+//
 //Created by Darth Butterwell on 8/16/20.
 //
 
 #include "calc.h"
 #include "cc_str.h"
 
-static void calc_vec_del(void *token)
+static void		calc_vec_del(void *token)
 {
 	free(((t_calc_token *)token)->raw);
 }
 
-static void calc_init(t_calc *calc, char *raw)
+static void		calc_init(t_calc *calc, char *raw)
 {
 	calc->raw = strdup(raw);
 	calc->index = 0;
@@ -19,13 +20,13 @@ static void calc_init(t_calc *calc, char *raw)
 	&calc_vec_del);
 }
 
-static void calc_destruct(t_calc *calc)
+static void		calc_destruct(t_calc *calc)
 {
 	free(calc->raw);
 	vec_del(&calc->tokens);
 }
 
-int	calc(char **raw)
+int				calc(char **raw)
 {
 	t_calc	calc;
 	t_vec	*postfix;

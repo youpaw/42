@@ -5,7 +5,7 @@
 #include "cc_hash_map.h"
 #include "alias.h"
 
-int 		alias_remove(const char *key)
+int		alias_remove(const char *key)
 {
 	if (!key)
 		return (1);

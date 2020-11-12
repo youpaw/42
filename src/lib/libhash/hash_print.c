@@ -7,9 +7,10 @@
 #include "cc_num.h"
 #include "cc_char.h"
 
-static void	hash_print_bin_pair(const t_hash_pair *pair)
+static void		hash_print_bin_pair(const t_hash_pair *pair)
 {
 	t_hash_bin_pair *path_count;
+
 	if (!pair)
 		return ;
 	path_count = pair->value;
@@ -24,7 +25,7 @@ static void	hash_print_bin_pair(const t_hash_pair *pair)
 	putendl(path_count->path);
 }
 
-int			hash_print(void)
+int				hash_print(void)
 {
 	if (!hash_map_get_size(g_hash))
 		putendl("hash: hash table empty");

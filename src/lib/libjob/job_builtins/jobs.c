@@ -23,11 +23,12 @@ static t_job_print_mode	get_job_print_mode(char *options)
 	return (mode);
 }
 
-static int 	print_specific_jobs(const char **av, t_job_print_mode mode)
+static int				print_specific_jobs(const char **av,
+								t_job_print_mode mode)
 {
-	int		err_code;
-	t_job	*job;
-	int		index;
+	int			err_code;
+	t_job		*job;
+	int			index;
 	const char	*error_args[2];
 
 	err_code = 0;
@@ -43,30 +44,30 @@ static int 	print_specific_jobs(const char **av, t_job_print_mode mode)
 			err_code = E_NOSUCHJOB;
 		}
 		else if (g_has_job_control)
-            print_job_formatted(job, 1, mode);
+			print_job_formatted(job, 1, mode);
 		av++;
 	}
 	return (err_code);
 }
 
-static int 	print_all_jobs(t_job_print_mode mode)
+static int				print_all_jobs(t_job_print_mode mode)
 {
 	t_job	*job;
 
 	if ((job = g_first_job) && g_has_job_control)
 		while (job->next)
 		{
-            print_job_formatted(job, 1, mode);
+			print_job_formatted(job, 1, mode);
 			job = job->next;
 		}
 	return (0);
 }
 
-int		jobs(const char **av)
+int						jobs(const char **av)
 {
 	t_parsed_opt	opt_res;
-	int 			skip;
-	int 			err_code;
+	int				skip;
+	int				err_code;
 
 	g_can_exit = 1;
 	if (!(skip = optparse(av, "pl", &opt_res)))
@@ -78,7 +79,6 @@ int		jobs(const char **av)
 		err_code = print_all_jobs(get_job_print_mode(opt_res.options));
 	else
 		err_code = print_specific_jobs(&av[skip],
-								 		get_job_print_mode(opt_res.options));
+										get_job_print_mode(opt_res.options));
 	return (err_code);
 }
-

@@ -4,7 +4,7 @@
 
 #include "calc.h"
 
-static void operate_unary(t_vec *stack, t_calc_type type)
+static void		operate_unary(t_vec *stack, t_calc_type type)
 {
 	t_calc_eval num;
 
@@ -16,12 +16,12 @@ static void operate_unary(t_vec *stack, t_calc_type type)
 	}
 }
 
-static int operate_binary(t_vec *stack, t_calc_type type)
+static int		operate_binary(t_vec *stack, t_calc_type type)
 {
-	t_calc_eval a;
-	t_calc_eval b;
-	int error;
-	static int (*op_map[N_BINARY_OPERATORS])(t_calc_eval *, t_calc_eval *) = {
+	t_calc_eval	a;
+	t_calc_eval	b;
+	int			error;
+	static int	(*op_map[N_BINARY_OPERATORS])(t_calc_eval *, t_calc_eval *) = {
 			&calc_operate_mlt, &calc_operate_div, &calc_operate_mod, \
 			&calc_operate_sub, &calc_operate_add, &calc_operate_grt, \
 			&calc_operate_les, &calc_operate_goe, &calc_operate_loe, \
@@ -36,7 +36,7 @@ static int operate_binary(t_vec *stack, t_calc_type type)
 	return (error);
 }
 
-int 	calc_operate(t_vec *stack, t_calc_token *token)
+int				calc_operate(t_vec *stack, t_calc_token *token)
 {
 	if (calc_is_unary(token->type))
 		operate_unary(stack, token->type);

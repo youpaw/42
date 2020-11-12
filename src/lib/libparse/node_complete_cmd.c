@@ -14,6 +14,5 @@ t_ast	*node_complete_cmd(t_tokens *tokens)
 			;
 	else
 		del_ast(&node);
-
 	return (node);
 }

@@ -9,10 +9,10 @@
 #include "cc_mem.h"
 #include "cc_sort.h"
 
-static void 	get_names(const char **names)
+static void		get_names(const char **names)
 {
-	size_t i;
-	t_list *lst;
+	size_t	i;
+	t_list	*lst;
 
 	i = 0;
 	while (i < g_aliases->buckets_size)
@@ -26,7 +26,7 @@ static void 	get_names(const char **names)
 	}
 }
 
-static void alias_print_pair(const t_hash_pair *pair)
+static void		alias_print_pair(const t_hash_pair *pair)
 {
 	if (!pair)
 		return ;
@@ -37,9 +37,9 @@ static void alias_print_pair(const t_hash_pair *pair)
 	putendl("'");
 }
 
-static void	print_by_names(const char **names)
+static void		print_by_names(const char **names)
 {
-	t_hash_pair pair;
+	t_hash_pair	pair;
 
 	if (names)
 		while ((pair.key = (void *)*names++))
@@ -49,10 +49,10 @@ static void	print_by_names(const char **names)
 		}
 }
 
-void		alias_print(void)
+void			alias_print(void)
 {
 	size_t		size;
-	const char 	**names;
+	const char	**names;
 
 	size = hash_map_get_size(g_aliases);
 	if (size)
@@ -60,8 +60,8 @@ void		alias_print(void)
 		names = (const char **)xmalloc(sizeof(char *) * (size + 1));
 		names[size] = NULL;
 		get_names(names);
-		quick_sort((void **) names, 0, size - 1,
-				   (int (*)(const void *, const void *)) strcmp);
+		quick_sort((void **)names, 0, size - 1,
+				(int (*)(const void *, const void *))strcmp);
 		print_by_names(names);
 		free(names);
 	}

@@ -28,12 +28,12 @@ static void	print_builtin(const char *av)
 	putendl(" is a shell builtin");
 }
 
-int		type(const char **av)
+int			type(const char **av)
 {
 	const char		*err_args[2];
-	char 			*path;
+	char			*path;
 	t_hash_bin_pair *pair;
-	int 			err;
+	int				err;
 
 	err_args[0] = *av;
 	err = 0;

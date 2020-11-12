@@ -4,15 +4,15 @@
 
 #include "hash.h"
 
-static t_hash_bin_pair *get_bin_pair(const char *bin)
+static t_hash_bin_pair	*get_bin_pair(const char *bin)
 {
-	return hash_map_get_val(g_hash, bin);
+	return (hash_map_get_val(g_hash, bin));
 }
 
-const char *hash_get_path(const char *bin)
+const char				*hash_get_path(const char *bin)
 {
-	t_hash_bin_pair *bin_pair;
-	char 			*path;
+	t_hash_bin_pair	*bin_pair;
+	char			*path;
 
 	if ((bin_pair = get_bin_pair(bin)) && ++(bin_pair->count))
 		return (bin_pair->path);

@@ -5,14 +5,16 @@
 #include "lexer.h"
 #include "cc_mem.h"
 
-int 		vld_back_slash(t_lexer *lexer)
+int		vld_back_slash(t_lexer *lexer)
 {
 	char c;
 
 	c = lexer->raw[lexer->index];
 	if (c == '\n')
 	{
-		memmove(lexer->raw + lexer->index - 1, lexer->raw + lexer->index + 1, lexer->size - lexer->index);
+		memmove(lexer->raw + lexer->index - 1,
+		lexer->raw + lexer->index + 1,
+		lexer->size - lexer->index);
 		lexer->index -= 2;
 		lexer->size -= 2;
 		if (lexer->index == lexer->size - 1)

@@ -5,7 +5,7 @@
 #include "history.h"
 #include "cc.h"
 
-int 	hist_push(const char *cmd)
+int		hist_push(const char *cmd)
 {
 	char *new;
 

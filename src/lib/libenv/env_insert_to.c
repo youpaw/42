@@ -5,7 +5,7 @@
 #include "cc_str.h"
 #include "env.h"
 
-int 	env_insert_to(t_hash_map *hm, const char *field)
+int	env_insert_to(t_hash_map *hm, const char *field)
 {
 	t_hash_pair	pair;
 	size_t		name_len;

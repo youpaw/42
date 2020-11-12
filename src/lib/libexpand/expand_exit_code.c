@@ -5,7 +5,7 @@
 #include "env.h"
 #include "cc_str.h"
 
-void 			expand_exit_code(char **str)
+void			expand_exit_code(char **str)
 {
 	free(*str);
 	*str = itoa(g_exit_code);

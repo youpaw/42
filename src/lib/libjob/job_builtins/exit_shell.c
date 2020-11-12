@@ -34,11 +34,10 @@ static void	free_all_data(void)
 	hash_map_del(&g_aliases);
 }
 
-void	exit_shell(int exit_code)
+void		exit_shell(int exit_code)
 {
 	if (g_can_exit || !has_stopped_jobs())
 	{
-		// save history and free variables
 		hist_save();
 		free_all_data();
 		exit(exit_code);

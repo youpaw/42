@@ -32,10 +32,10 @@ static int	status_to_return_value(int status)
 	return (return_value);
 }
 
-int launch_job(t_job *job, int is_foreground, int is_forked)
+int			launch_job(t_job *job, int is_foreground, int is_forked)
 {
 	int			return_value;
-	char 		*msg;
+	char		*msg;
 
 	if (!job->first_process->next && is_foreground &&
 			(return_value = run_builtin_or_hash(job->first_process)) != -1)

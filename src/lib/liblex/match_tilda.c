@@ -4,7 +4,7 @@
 #include "lexer.h"
 #include "cc_char.h"
 
-int 		match_tilda(t_lexer *lexer)
+int		match_tilda(t_lexer *lexer)
 {
 	char c;
 

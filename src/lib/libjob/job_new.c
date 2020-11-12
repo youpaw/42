@@ -5,7 +5,7 @@
 #include "jobs.h"
 #include "cc_mem.h"
 
-t_job *job_new(int is_foreground)
+t_job		*job_new(int is_foreground)
 {
 	t_job *job;
 

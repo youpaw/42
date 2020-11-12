@@ -3,7 +3,7 @@
 //
 #include "calc.h"
 
-int 	calc_is_operator(t_calc_type type)
+int	calc_is_operator(t_calc_type type)
 {
 	if (type < N_OPERATORS)
 		return (1);
