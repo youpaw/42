@@ -5,11 +5,11 @@
 #include "history.h"
 #include "cc.h"
 
-char 	*hist_get_by_prefix(const char *prefix)
+char	*hist_get_by_prefix(const char *prefix)
 {
-	int i;
-	size_t len;
-	char 	*str;
+	int		i;
+	size_t	len;
+	char	*str;
 
 	if (prefix)
 	{

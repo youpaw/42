@@ -9,7 +9,7 @@
 
 static int		push_parenthesis(t_calc *calc, char c)
 {
-	t_calc_token token;
+	t_calc_token	token;
 
 	if ((c == '(' && calc->state == c_st_number) || \
 		(c == ')' && calc->state == c_st_operator))
@@ -21,11 +21,11 @@ static int		push_parenthesis(t_calc *calc, char c)
 	return (0);
 }
 
-static void print_tokenize_error(t_calc *calc, int error)
+static void		print_tokenize_error(t_calc *calc, int error)
 {
-	const char *args[2];
-	char *tmp;
-	size_t last_index;
+	const char	*args[2];
+	char		*tmp;
+	size_t		last_index;
 
 	tmp = calc->raw + 1;
 	last_index = strlen(tmp) - 1;
@@ -35,10 +35,10 @@ static void print_tokenize_error(t_calc *calc, int error)
 	error_print(error, args);
 }
 
-int		calc_tokenize(t_calc *calc)
+int				calc_tokenize(t_calc *calc)
 {
-	int error;
-	char c;
+	int		error;
+	char	c;
 
 	error = 0;
 	while (calc->index < calc->size)

@@ -7,7 +7,7 @@
 #include "cc_str.h"
 #include "cc_mem.h"
 
-int 	hash_insert(const char *bin, const char *path)
+int		hash_insert(const char *bin, const char *path)
 {
 	t_hash_pair	pair;
 

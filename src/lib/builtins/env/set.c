@@ -1,10 +1,18 @@
-//
-// Created by Azzak Omega on 9/14/20.
-//
-#include "env.h"
-#include "cc_str.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 20:22:41 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 20:22:44 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int 	set(const char **args)
+#include "env.h"
+
+int		set(const char **args)
 {
 	env_print_full();
 	return (0);

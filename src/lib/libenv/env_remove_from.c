@@ -3,6 +3,7 @@
 //
 
 #include "cc_hash_map.h"
+
 int		env_remove_from(t_hash_map *hm, const char *key)
 {
 	if (!hm || !key)

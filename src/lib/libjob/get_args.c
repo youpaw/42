@@ -8,7 +8,7 @@
 char	**get_args(t_ast *ast)
 {
 	t_vec	*vec;
-	char 	**args;
+	char	**args;
 
 	vec = vec_new(JOB_VEC_CAPACITY, sizeof(char *), NULL);
 	vec_push(vec, &ast->token->raw);

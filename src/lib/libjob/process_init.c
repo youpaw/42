@@ -4,7 +4,7 @@
 #include "jobs.h"
 #include "env.h"
 
-int process_init(t_process *p)
+int		process_init(t_process *p)
 {
 	if (expand_ast(p->ast))
 		return (1);

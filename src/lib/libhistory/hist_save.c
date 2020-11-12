@@ -9,12 +9,12 @@
 
 void	hist_save(void)
 {
-	int 	i;
+	int		i;
 	int		file_fd;
 	char	*str;
 
 	if ((file_fd = open(g_hist.file_path, O_WRONLY | O_TRUNC | O_CREAT,
-					 				S_IREAD | S_IWRITE)) == -1)
+									S_IREAD | S_IWRITE)) == -1)
 		return ;
 	i = 0;
 	if (g_hist.commands->size > HIST_FILE_SIZE)

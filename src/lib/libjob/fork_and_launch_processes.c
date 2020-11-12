@@ -28,8 +28,6 @@ static void	set_pipe_fds(t_process *process, int *in_out_fds, int *pipe_fds)
 	}
 	else
 		in_out_fds[1] = STDOUT_FILENO;
-	process->stdin = in_out_fds[0];
-	process->stdout = in_out_fds[1];
 }
 
 static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
@@ -48,6 +46,14 @@ static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
 	}
 }
 
+void		set_process_io(t_process *p, const int *in_out_fds, int *pipe_fds)
+{
+	if (in_out_fds[0] != pipe_fds[0])
+		close(pipe_fds[0]);
+	p->stdin = in_out_fds[0];
+	p->stdout = in_out_fds[1];
+}
+
 void fork_and_launch_processes(t_job *job, int is_foreground)
 {
 	pid_t		pid;
@@ -55,13 +61,16 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 	int			in_out_fds[2];
 	int 		pipe_fds[2];
 
+	set_default_pipe_fds(in_out_fds, pipe_fds);
 	p = job->first_process;
-	in_out_fds[0] = STDIN_FILENO; // is redirect here?
 	while (p)
 	{
 		set_pipe_fds(p, in_out_fds, pipe_fds);
 		if (!(pid = fork()))
+		{
+			set_process_io(p, in_out_fds, pipe_fds);
 			launch_process(p, job->pgid, is_foreground);
+		}
 		else if (pid < 0)
 		{
 			fdputendl("fork failed", 2);

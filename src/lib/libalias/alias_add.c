@@ -7,12 +7,12 @@
 #include "cc_char.h"
 #include "alias.h"
 
-static int is_char_valid(char c)
+static int	is_char_valid(char c)
 {
 	return (!(isspace(c) || c == '=') || c == '/');
 }
 
-size_t get_valid_alias_name_len(const char *name)
+size_t		get_valid_alias_name_len(const char *name)
 {
 	size_t index;
 
@@ -24,7 +24,7 @@ size_t get_valid_alias_name_len(const char *name)
 	return (index);
 }
 
-int 		alias_add(const char *field)
+int			alias_add(const char *field)
 {
 	t_hash_pair	pair;
 	size_t		name_len;

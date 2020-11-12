@@ -6,7 +6,7 @@
 #include "cc_num.h"
 #include "jobs.h"
 
-void    print_job_pid(t_job *job)
+void	print_job_pid(t_job *job)
 {
 	putnbr(job->pgid);
 	puts("\n");

@@ -1,28 +1,29 @@
-//
-// Created by Azzak Omega on 9/18/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 20:23:01 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 20:23:04 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "hash.h"
 #include "optparse.h"
 #include "error.h"
-#include "cc.h"
+#include "cc_str.h"
 
-static int	print_error_option(char opt)
+static int			print_error_option(char opt)
 {
-	char 		str[2];
-	const char	*args[2];
-
-	str[0] = opt;
-	str[1] = '\0';
-	args[0] = "hash";
-	args[1] = str;
-	error_print(E_INVALOPT, args);
+	print_invalid_option("hash", opt);
 	return (2);
 }
 
-static	int	update_hash(const char *bin)
+static int			update_hash(const char *bin)
 {
-	char	*path;
+	char			*path;
 
 	if (!(path = hash_get_bin_path(bin)))
 		return (E_NOTFOUND);
@@ -31,25 +32,25 @@ static	int	update_hash(const char *bin)
 	return (0);
 }
 
-static void	hash_remove_all(void)
+static void			hash_remove_all(void)
 {
 	hash_map_del(&g_hash);
 	hash_init();
 }
 
-static int		is_path(const char *str)
+static int			is_path(const char *str)
 {
-		if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
-			return (1);
-		return (0);
+	if (*str == '/' || !strncmp(str, "./", 2) || !strncmp(str, "../", 3))
+		return (1);
+	return (0);
 }
 
-int 	hash(const char **av)
+int					hash(const char **av)
 {
 	t_parsed_opt	opt_res;
-	int 			skip;
+	int				skip;
 	const char		*args[2];
-	int 			err_code;
+	int				err_code;
 
 	if (!(skip = optparse(av, "r", &opt_res)))
 		return (print_error_option(opt_res.invalid_opt));
@@ -71,4 +72,3 @@ int 	hash(const char **av)
 		return (hash_print());
 	return (err_code ? 1 : 0);
 }
-

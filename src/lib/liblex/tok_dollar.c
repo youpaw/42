@@ -3,7 +3,7 @@
 //
 #include "lexer.h"
 
-int 	tok_dollar(t_lexer *lexer)
+int	tok_dollar(t_lexer *lexer)
 {
 	t_brace	brace;
 	int		error;

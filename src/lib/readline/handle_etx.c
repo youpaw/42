@@ -4,6 +4,7 @@
 
 #include "readline.h"
 #include <unistd.h>
+#include "env.h"
 
 int			handle_etx(t_inp *inp)
 {
@@ -12,5 +13,6 @@ int			handle_etx(t_inp *inp)
 	if (inp->hist_storage)
 		free(inp->hist_storage);
 	del_input(inp);
-	return (1);
+	g_exit_code = 1;
+	return(1);
 }

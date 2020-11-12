@@ -8,8 +8,8 @@
 
 static char	*get_number_str(t_calc *calc)
 {
-	char *token;
-	size_t start;
+	char	*token;
+	size_t	start;
 
 	start = calc->index;
 	token = NULL;
@@ -24,7 +24,7 @@ static char	*get_number_str(t_calc *calc)
 	return (token);
 }
 
-int		calc_get_number(t_calc *calc)
+int			calc_get_number(t_calc *calc)
 {
 	t_calc_token token;
 

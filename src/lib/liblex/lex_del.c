@@ -4,7 +4,7 @@
 
 #include "lexer.h"
 
-void 		lex_del(t_lexer *lexer)
+void		lex_del(t_lexer *lexer)
 {
 	if (lexer->slices)
 		vec_del(&lexer->slices);

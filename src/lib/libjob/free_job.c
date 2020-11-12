@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   feee_job.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: youpaw <youpaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 20:23:09 by hlorrine          #+#    #+#             */
-/*   Updated: 2020/11/12 20:23:11 by hlorrine         ###   ########.fr       */
+/*   Created: 2020/11/10 14:52:31 by youpaw            #+#    #+#             */
+/*   Updated: 2020/11/10 19:10:02 by youpaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "jobs.h"
+#include "cc_str.h"
 
-int		history(const char **av)
+void	free_job(t_job **job)
 {
-	hist_print();
-	return (0);
+	t_job	*j;
+
+	if (!job || !(j = *job))
+		return ;
+	strdel(&(j->command));
+	queue_remove(j->index);
+	free_processes(j->first_process);
+	free(j->first_process);
+	free(j);
+	j = NULL;
 }
