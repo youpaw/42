@@ -17,6 +17,7 @@ typedef enum	e_param_type
 	e_rm_longest_prefix,
 	e_rm_shortest_suffix,
 	e_rm_longest_suffix,
+	e_err_code,
 	e_unknown
 }				t_param_type;
 
@@ -36,5 +37,6 @@ const char		*get_env_or_av_value(const char *name);
 char			*expand_suffix(const char *name, const char *pattern);
 char			*expand_prefix(const char *name, const char *pattern);
 t_param_type	get_operator_type(const char *str);
+int				is_expand_err_code(const char *str);
 
 #endif

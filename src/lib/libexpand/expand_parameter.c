@@ -46,6 +46,8 @@ static t_param_type get_params(char *str, char **value, char **word)
 
 	if (*str == '#')
 		return (get_len_operator_params(&str[1], value));
+	if (!is_expand_err_code(str))
+		return (e_err_code);
 	if (!(name = get_parameter_name(str)))
 		return (e_unknown);
 	str += strlen(name);

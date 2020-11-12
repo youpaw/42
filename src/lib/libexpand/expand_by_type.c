@@ -69,6 +69,8 @@ char	*expand_by_type(t_param_type type, const char *name, const char *word)
 	result = NULL;
 	if (type == e_get_length)
 		result = itoa((long long int)strlen(get_env_or_av_value(name)));
+	else if (type == e_err_code)
+		result = itoa((long long int)g_exit_code);
 	else if (type == e_default)
 		result = param_or_word(name, "");
 	else if (type == e_param_or_word)
