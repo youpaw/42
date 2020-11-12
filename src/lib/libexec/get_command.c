@@ -11,6 +11,15 @@ static void		get_node_tokens(t_ast *ast, t_vec *vec)
 
 	if (!ast)
 		return ;
+	if (ast->type == p_io_redirect)
+	{
+		if (ast->token)
+			vec_push(vec, &ast->token->raw);
+		vec_push(vec, &ast->left->token->raw);
+		vec_push(vec, &ast->left->left->token->raw);
+		vec_push(vec, &delimiter);
+		return ;
+	}
 	get_node_tokens(ast->left, vec);
 	if (ast->token)
 	{
@@ -27,6 +36,7 @@ char			*get_command(t_ast *ast)
 
 	vec = vec_new(JOB_VEC_CAPACITY, sizeof(char *), NULL);
 	get_node_tokens(ast, vec);
+	vec_rm_last(vec);
 	command = strnjoin((const char **)vec->data);
 	vec_del(&vec);
 	return (command);

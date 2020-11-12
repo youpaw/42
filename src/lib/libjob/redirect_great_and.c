@@ -20,8 +20,7 @@ static void			from_stdout(t_process *process, int to)
 		if (!is_standard_io(to))
 		{
 			process->stdout = to;
-			if (!is_standard_io(process->stderr))
-				close(process->stderr);
+			close(process->stderr);
 			process->stderr = dup(to);
 		}
 	}
@@ -67,7 +66,7 @@ int					redirect_great_and(t_ast *leafs, t_process *process)
 	int to;
 
 	from = redirect_parse_left_side(leafs, 1);
-	if (STDOUT_FILENO != from && !strisnum(leafs->left->left->token->raw))
+	if (STDOUT_FILENO != from && (!strisnum(leafs->left->left->token->raw) && !is_minus(leafs)))
 		return (redirect_print_error(E_AMBIG, leafs->left->left->token->raw));
 	to = redirect_parse_right_side(leafs->left->left->token,
 			O_RDWR | O_CREAT | O_TRUNC, 1, 1);

@@ -30,7 +30,8 @@ static int			handle_brace_expand(t_lexer *lexer, t_brace brace)
 		error = expand_calc(&sub);
 	if (!error)
 		strjoin_expanded(lexer, index, sub, 2);
-	free(sub);
+	if (sub)
+		free(sub);
 	return (error);
 }
 
@@ -46,8 +47,7 @@ static void			handle_field_expand(t_lexer *lexer)
 		expand_exit_code(&sub);
 	else if (*sub)
 		expand_parameter(&sub);
-	if (*sub)
-		strjoin_expanded(lexer, index, sub, 1);
+	strjoin_expanded(lexer, index, sub, 1);
 	free(sub);
 }
 

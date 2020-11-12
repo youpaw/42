@@ -11,23 +11,33 @@
 /* ************************************************************************** */
 
 #include "readline.h"
-#include "unistd.h"
-#include <termcap.h>
 #include "cc_char.h"
+#include "cc_str.h"
+#include "cc_num.h"
 #include <sys/ioctl.h>
+#include <termcap.h>
 
-
-int handle_symbol_key(t_input *inp, char *key)
+int handle_symbol_key(t_inp *inp, char *key)
 {
-	g_input_state_flag = INP_CH_FLAG;
-	write(STDOUT_FILENO, key, 4);
-	if (vec_push_at(inp->line[inp->cursor_y_position], key, inp->cursor_x_position))
-		return (1);
-	inp->cursor_x_position++;
-	inp->line_len[inp->cursor_y_position]++;
-	inp->len++;
-	redraw_input_adding(inp);
+	struct winsize ws;
+
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	if (*key > 0 && *key < 32 && *key != '\n' && *key != '\4')
+		return (0);
 	if (*key == '\n')
+		put_cursor_to_the_end(inp);
+	write(STDOUT_FILENO, key, 4);
+	vec_push_at(inp->line[inp->curs_y_pos], key, inp->curs_x_pos);
+	inp->curs_x_pos++;
+	inp->line_len[inp->curs_y_pos]++;
+	inp->len++;
+	if (!(inp->curs_x_pos % ws.ws_col) && inp->curs_x_pos)
+	{
+		tputs(tgetstr("do", NULL), 1, &putchar);
+		tputs(tgetstr("cr", NULL), 1, &putchar);
+	}
+	redraw_input_readline(inp);
+	if (*key == '\n' || *key == '\4')
 		return (1);
 	return (0);
 }

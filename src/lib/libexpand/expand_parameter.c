@@ -8,9 +8,9 @@
 #include "expand.h"
 #include "cc_char.h"
 
-static char			*get_parameter_name(const char *str)
+static char *get_parameter_name(const char *str)
 {
-	const char	*head;
+	const char *head;
 
 	head = str;
 	while (isdigit(*str))
@@ -24,26 +24,25 @@ static char			*get_parameter_name(const char *str)
 	return (NULL);
 }
 
-static size_t		get_operator_len(t_param_type t)
+static size_t get_operator_len(t_param_type t)
 {
-	if (t == e_get_length)
+	if (t == e_get_length || t == e_default)
 		return (0);
 	if (t == e_rm_shortest_suffix || t == e_rm_shortest_prefix)
 		return (1);
 	return (2);
 }
 
-static t_param_type	get_len_operator_params(const char *str, char **name)
+static t_param_type get_len_operator_params(const char *str, char **name)
 {
 	if (!(*name = get_parameter_name(str)) || strcmp(str, *name) != 0)
 		return (e_unknown);
 	return (e_get_length);
 }
-
-static t_param_type	get_params(const char *str, char **value, char **word)
+static t_param_type get_params(char *str, char **value, char **word)
 {
-	char			*name;
-	t_param_type	type;
+	char 			*name;
+	t_param_type 	type;
 
 	if (*str == '#')
 		return (get_len_operator_params(&str[1], value));
@@ -61,11 +60,11 @@ static t_param_type	get_params(const char *str, char **value, char **word)
 	return (type);
 }
 
-int					expand_parameter(char **str)
+int 	expand_parameter(char **str)
 {
 	t_param_type	type;
-	char			*value;
-	char			*word;
+	char 			*value;
+	char 			*word;
 	const char		*arg[1];
 
 	value = NULL;
@@ -82,5 +81,7 @@ int					expand_parameter(char **str)
 		free(value);
 	if (word)
 		free(word);
+	if (!*str)
+		return (E_EXPAND);
 	return (0);
 }

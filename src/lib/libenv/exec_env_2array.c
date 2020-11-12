@@ -32,7 +32,8 @@ char		**exec_env_2array(void)
 		tmp = g_exec_env->buckets[cnt];
 		while (tmp)
 		{
-			arr[i_arr++] = get_field(tmp->content);
+			if (((t_hash_pair *)tmp->content)->value)
+				arr[i_arr++] = get_field(tmp->content);
 			tmp = tmp->next;
 		}
 		cnt++;

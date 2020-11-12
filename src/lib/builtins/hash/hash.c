@@ -9,14 +9,7 @@
 
 static int	print_error_option(char opt)
 {
-	char 		str[2];
-	const char	*args[2];
-
-	str[0] = opt;
-	str[1] = '\0';
-	args[0] = "hash";
-	args[1] = str;
-	error_print(E_INVALOPT, args);
+	print_invalid_option("hash", opt);
 	return (2);
 }
 

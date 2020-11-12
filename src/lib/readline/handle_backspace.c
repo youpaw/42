@@ -7,22 +7,14 @@
 #include "cc_mem.h"
 #include "cc_char.h"
 
-int handle_backspace(t_input *inp)
+int handle_backspace(t_inp *inp)
 {
-	unsigned char ch[5];
-	int len;
-	if (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
+
+	if (inp->curs_x_pos - get_prompt_len(inp->curs_y_pos))
 	{
-		bzero(ch, 5);
-		vec_get_at(ch, inp->line[inp->cursor_y_position], inp->cursor_x_position - 1);
-		len = get_displayed_symbol_len(ch);
 		handle_left_arrow(inp);
-		while (len-- != 0)
-			tputs(tgetstr("dc", NULL), 1, &putchar);
-		vec_rm_at(inp->line[inp->cursor_y_position], inp->cursor_x_position);
-		inp->len--;
-		inp->line_len[inp->cursor_y_position]--;
-		redraw_input_del(inp);
+		handle_del(inp);
+		redraw_input_readline(inp);
 	}
 	else
 		putchar('\7');

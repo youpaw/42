@@ -7,6 +7,6 @@
 
 void	signal_init(void)
 {
-	signal(SIGINT, signal_handler);
-	signal(SIGSTOP, signal_handler);
+//	signal(SIGINT, signal_handler);
+//	signal(SIGSTOP, signal_handler);
 }

@@ -25,5 +25,8 @@ t_tokens	*get_tokens(t_lexer *lexer, int error)
 		vec_get_at(tokens->tokens[index], lexer->tokens, index);
 		index++;
 	}
+	free(lexer->tokens->data);
+	free(lexer->tokens);
+	lexer->tokens = NULL;
 	return (tokens);
 }

@@ -21,7 +21,7 @@ char	*get_prompt(int y)
 		return (strdup(FIRST_PROMPT_TEXT));
 }
 
-void 	print_prompt(t_input *inp)
+void 	print_prompt(t_inp *inp)
 {
 	int i;
 	char sym[4];
@@ -29,7 +29,7 @@ void 	print_prompt(t_input *inp)
 
 	i = 0;
 	bzero(sym, 4);
-	prompt = get_prompt(inp->cursor_y_position);
+	prompt = get_prompt(inp->curs_y_pos);
 	while (prompt[i])
 	{
 		sym[0] = prompt[i++];

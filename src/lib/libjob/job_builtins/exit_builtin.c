@@ -31,6 +31,9 @@ int			exit_builtin(const char **av)
 	else if (!av[2])
 		exit_shell(atoi(av[1]));
 	else
+	{
 		error_print(E_TOOMANYARGS, av);
+		return (1);
+	}
 	return (0);
 }

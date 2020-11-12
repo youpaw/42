@@ -18,9 +18,9 @@ static void change_shlvl(void)
 	char		*field_lvl;
 
 	if ((field_lvl = (char *)env_get_value("SHLVL")))
-		n_lvl = atoi(field_lvl);
+		n_lvl = atoi(field_lvl) + 1;
 	else
-		n_lvl = 0;
+		n_lvl = 1;
 	str_lvl = itoa(n_lvl);
 	if ((field_lvl = strjoin("SHLVL=", str_lvl)))
 	{

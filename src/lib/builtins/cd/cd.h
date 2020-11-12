@@ -29,8 +29,8 @@ enum					e_paths
 };
 
 char				*cd_path_canonization(const char *path);
-int					cd_path_validation(const char *cn_path);
-int					cd_check_opt(const char **av, unsigned char *flags);
-void				cd_error_print(t_error_code er_code, const char *arg);
+int cd_path_validation(const char *cn_path, const char *path);
+int cd_check_opt(const char **av, unsigned char *flags, int *er_code);
+int cd_error_print(t_error_code er_code, const char *arg);
 
 #endif //CD_H

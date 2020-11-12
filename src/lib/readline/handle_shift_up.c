@@ -9,36 +9,35 @@
 #include <zconf.h>
 #include <stdio.h>
 
-int			handle_shift_up(t_input *inp)
+int			handle_shift_up(t_inp *inp)
 {
 	struct winsize ws;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	if (inp->cursor_y_position || (inp->cursor_x_position != 0 && inp->cursor_x_position >= ws.ws_col))
+	if (inp->curs_y_pos || (inp->curs_x_pos != 0 && inp->curs_x_pos >= ws.ws_col))
 	{
-		g_input_state_flag = INP_CH_FLAG;
 		tputs(tgetstr("up", NULL), 1, putchar);
-		if (inp->cursor_x_position < ws.ws_col || inp->cursor_x_position == 0)
+		if (inp->curs_x_pos < ws.ws_col || inp->curs_x_pos == 0)
 		{
-			inp->cursor_y_position--;
-			if (inp->cursor_x_position % ws.ws_col > inp->line_len[inp->cursor_y_position] % ws.ws_col)
+			inp->curs_y_pos--;
+			if (inp->curs_x_pos % ws.ws_col > inp->line_len[inp->curs_y_pos] % ws.ws_col)
 			{
-				inp->cursor_x_position = inp->line_len[inp->cursor_y_position];
-				tputs(tgoto(tgetstr("ch", NULL), 1, inp->cursor_x_position % ws.ws_col), 1, putchar);
+				inp->curs_x_pos = inp->line_len[inp->curs_y_pos];
+				tputs(tgoto(tgetstr("ch", NULL), 1, inp->curs_x_pos % ws.ws_col), 1, putchar);
 			}
 			else
 			{
-				inp->cursor_x_position = inp->cursor_x_position % ws.ws_col + \
-        ((inp->line_len[inp->cursor_y_position] / ws.ws_col) * ws.ws_col);
+				inp->curs_x_pos = inp->curs_x_pos % ws.ws_col + \
+        ((inp->line_len[inp->curs_y_pos] / ws.ws_col) * ws.ws_col);
 			}
 
 		}
 		else
-			inp->cursor_x_position -= ws.ws_col;
-		if (inp->cursor_x_position < get_prompt_len(inp->cursor_y_position))
+			inp->curs_x_pos -= ws.ws_col;
+		if (inp->curs_x_pos < get_prompt_len(inp->curs_y_pos))
 		{
-			tputs(tgoto(tgetstr("ch", NULL), 1, get_prompt_len(inp->cursor_y_position)), 1, putchar);
-			inp->cursor_x_position = get_prompt_len(inp->cursor_y_position);
+			tputs(tgoto(tgetstr("ch", NULL), 1, get_prompt_len(inp->curs_y_pos)), 1, putchar);
+			inp->curs_x_pos = get_prompt_len(inp->curs_y_pos);
 		}
 
 	}

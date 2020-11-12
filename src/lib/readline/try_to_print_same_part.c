@@ -5,12 +5,26 @@
 #include "readline.h"
 #include "cc_str.h"
 
-char *find_same_part(t_list *files, char *filename)
+void	inner_circle(t_list *files, t_list *cur, char *same, size_t len)
 {
-	t_list *cur;
-	unsigned int i;
-	char same[1024];
-	unsigned int len;
+	int i;
+
+	while (cur != files && *same)
+	{
+		i = 0;
+		while (same[i] == ((char*)cur->content)[i + len])
+			i++;
+		same[i] = 0;
+		cur = cur->next;
+	}
+}
+
+char	*find_same_part(t_list *files, char *filename)
+{
+	unsigned int	i;
+	unsigned int	len;
+	t_list			*cur;
+	char			same[1024];
 
 	if (!files)
 		return (NULL);
@@ -24,15 +38,9 @@ char *find_same_part(t_list *files, char *filename)
 		same[i] = ((char*)files->content)[i + len];
 		i++;
 	}
+	same[i] = 0;
 	cur = cur->next;
-	while (cur != files && *same)
-	{
-		i = 0;
-		while (same[i] == ((char*)cur->content)[i + len])
-			i++;
-		same[i] = 0;
-		cur = cur->next;
-	}
+	inner_circle(files, cur, same, len);
 	if (!*same)
 		return (NULL);
 	else

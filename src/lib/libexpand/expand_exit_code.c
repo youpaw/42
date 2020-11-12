@@ -7,5 +7,6 @@
 
 void			expand_exit_code(char **str)
 {
+	free(*str);
 	*str = itoa(g_exit_code);
 }

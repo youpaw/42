@@ -5,21 +5,21 @@
 #include "readline.h"
 #include "cc.h"
 
-int handle_shift_left(t_input *inp)
+int handle_shift_left(t_inp *inp)
 {
 	t_letter let;
 
 	let.ch[0] = !0;
-	while (inp->cursor_x_position - FIRST_PROMPT_LEN)
+	while (inp->curs_x_pos - FIRST_PROMPT_LEN)
 	{
-		vec_get_at(&let, inp->line[inp->cursor_y_position], inp->cursor_x_position);
+		vec_get_at(&let, inp->line[inp->curs_y_pos], inp->curs_x_pos);
 		if (isspace(let.ch[0]))
 			break;
 		handle_left_arrow(inp);
 	}
-	while (inp->cursor_x_position != inp->line_len[inp->cursor_y_position])
+	while (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
 	{
-		vec_get_at(&let, inp->line[inp->cursor_y_position], inp->cursor_x_position);
+		vec_get_at(&let, inp->line[inp->curs_y_pos], inp->curs_x_pos);
 		if (!isspace(let.ch[0]))
 			break;
 		handle_left_arrow(inp);

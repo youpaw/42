@@ -7,10 +7,10 @@
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 1
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 17
+# define N_TOKEN_TYPES 18
 # define N_TOKEN_OPERATORS 12
 # define N_TOKEN_DELIMITERS 5
-# define N_TOKEN_REDIRECTIONS 4
+# define N_TOKEN_REDIRECTIONS 6
 # define N_INC_INP_TYPES 3
 # include <stddef.h>
 # include "cc_vec.h"
@@ -34,6 +34,7 @@ enum						e_token_type
 	l_io_number,
 	l_assignment_word,
 	l_command_name,
+	l_filename,
 	l_word,
 	l_token
 };

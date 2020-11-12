@@ -6,23 +6,23 @@
 #include "cc_str.h"
 #include "cc_mem.h"
 
-static t_predict_token *init_token(t_lexer *lexer, t_slice *slice)
+static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
 {
-	t_predict_token *token;
+	t_prdct_tkn *token;
 	t_token			last_token;
 
-	token = xmalloc(sizeof(t_predict_token));
+	token = xmalloc(sizeof(t_prdct_tkn));
 	if (slice->state == l_dollar)
 	{
 		token->type = r_param;
-		lexer->begin++;
-		if (lexer->raw[lexer->begin] == '{')
-			lexer->begin++;
+		if (slice->index == lexer->begin)
+			lexer->begin += lexer->raw[lexer->begin] == '{' ? 2 : 1;
 	}
 	else if (lexer->tokens->size)
 	{
 		vec_get_last(&last_token, lexer->tokens);
-		if (is_delimiter(last_token.type) || last_token.type == l_assignment_word)
+		if (last_token.type == l_assignment_word || last_token.type == l_bang ||
+		last_token.type == l_filename || is_delimiter(last_token.type))
 			token->type = r_cmd;
 		else
 			token->type = r_file;
@@ -49,11 +49,11 @@ static void 	skip_special_chars(t_lexer *lexer)
 	}
 }
 
-t_predict_token *get_predict_token(char *raw)
+t_prdct_tkn *get_predict_token(char *raw)
 {
 	t_lexer			lexer;
 	t_slice			last_slice;
-	t_predict_token *token;
+	t_prdct_tkn *token;
 
 	if (!raw)
 		return (NULL);

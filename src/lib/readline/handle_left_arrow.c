@@ -5,15 +5,25 @@
 #include "readline.h"
 #include "cc_mem.h"
 #include "cc_char.h"
+#include <sys/ioctl.h>
 #include <termcap.h>
+#include <zconf.h>
 
-int handle_left_arrow(t_input *inp)
+int handle_left_arrow(t_inp *inp)
 {
-	if (inp->cursor_x_position - get_prompt_len(inp->cursor_y_position))
+	struct winsize ws;
+
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	if (inp->curs_x_pos - get_prompt_len(inp->curs_y_pos))
 	{
-		g_input_state_flag = INP_CH_FLAG;
-		tputs(tgetstr("le", NULL), 1, &putchar);
-		inp->cursor_x_position--;
+		if (!(inp->curs_x_pos % ws.ws_col) && inp->curs_x_pos)
+		{
+			tputs(tgetstr("up", NULL), 1, &putchar);
+			tputs(tgoto(tgetstr("ch", NULL), 1, (inp->curs_x_pos - 1) % ws.ws_col), 1, putchar);
+		}
+		else
+			tputs(tgetstr("le", NULL), 1, &putchar);
+		inp->curs_x_pos--;
 	}
 	else
 		putchar('\7');

@@ -10,7 +10,7 @@ t_hash_map *g_exec_env;
 static void		cpy_pair(t_hash_pair *dst, t_hash_pair *src)
 {
 	dst->key = strdup(src->key);
-	dst->value = strdup(src->value);
+	dst->value = src->value ? strdup(src->value) : NULL;
 }
 
 static t_list	*cpy_bucket(t_list *bucket)

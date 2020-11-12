@@ -6,7 +6,7 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
-int handle_escape_sequence(t_input *input)
+int handle_escape_sequence(t_inp *input)
 {
 	static const t_key_readline_handler hanlders[N_ESC_KEY_HANDLERS] = {
 			{"\103",    &handle_right_arrow},
@@ -17,7 +17,9 @@ int handle_escape_sequence(t_input *input)
 			{"\61\73\62\101", &handle_shift_up}, //shift + up
 			{"\61\73\62\102", &handle_shift_down}, // shift + down
 			{"\61\73\62\103", &handle_shift_right}, //shift + right
-			{"\61\73\62\104", &handle_shift_left} //shift + left
+			{"\61\73\62\104", &handle_shift_left}, //shift + left
+			{"\110", &handle_home_key}, //home
+			{"\106", &handle_end_key} //end
 	};
 	int index;
 	char ch[2];
