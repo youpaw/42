@@ -17,7 +17,7 @@
 #include <sys/ioctl.h>
 #include <termcap.h>
 
-int handle_symbol_key(t_inp *inp, char *key)
+int		handle_symbol_key(t_inp *inp, char *key)
 {
 	struct winsize ws;
 
@@ -27,11 +27,11 @@ int handle_symbol_key(t_inp *inp, char *key)
 	if (*key == '\n')
 		put_cursor_to_the_end(inp);
 	write(STDOUT_FILENO, key, 4);
-	vec_push_at(inp->line[inp->curs_y_pos], key, inp->curs_x_pos);
-	inp->curs_x_pos++;
-	inp->line_len[inp->curs_y_pos]++;
+	vec_push_at(inp->line[inp->y_pos], key, inp->x_pos);
+	inp->x_pos++;
+	inp->l_len[inp->y_pos]++;
 	inp->len++;
-	if (!(inp->curs_x_pos % ws.ws_col) && inp->curs_x_pos)
+	if (!(inp->x_pos % ws.ws_col) && inp->x_pos)
 	{
 		tputs(tgetstr("do", NULL), 1, &putchar);
 		tputs(tgetstr("cr", NULL), 1, &putchar);
@@ -41,4 +41,3 @@ int handle_symbol_key(t_inp *inp, char *key)
 		return (1);
 	return (0);
 }
-

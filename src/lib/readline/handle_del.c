@@ -17,15 +17,15 @@
 
 int			handle_del(t_inp *inp)
 {
-	if (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
+	if (inp->x_pos != inp->l_len[inp->y_pos])
 	{
 		tputs(tgetstr("ce", NULL), 1, &putchar);
-		vec_rm_at(inp->line[inp->curs_y_pos], inp->curs_x_pos);
+		vec_rm_at(inp->line[inp->y_pos], inp->x_pos);
 		inp->len--;
-		inp->line_len[inp->curs_y_pos]--;
+		inp->l_len[inp->y_pos]--;
 		redraw_input_readline(inp);
 	}
 	else
 		putchar('\7');
-	return 0;
+	return (0);
 }

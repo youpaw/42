@@ -24,7 +24,5 @@ void	set_term_str(void)
 
 void	tinit(void)
 {
-
 		set_term_str();
-
 }

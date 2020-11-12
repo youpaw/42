@@ -17,10 +17,10 @@ void	reload_input(t_inp *inp, char *str)
 	*inp = input_init(strdup(str));
 	if (*str)
 	{
-		vec_del(&(inp->line[inp->curs_y_pos]));
-		inp->line[inp->curs_y_pos] = NULL;
-		inp->curs_y_pos--;
-		inp->curs_x_pos = inp->line_len[inp->curs_y_pos];
+		vec_del(&(inp->line[inp->y_pos]));
+		inp->line[inp->y_pos] = NULL;
+		inp->y_pos--;
+		inp->x_pos = inp->l_len[inp->y_pos];
 		redraw_input(*inp, str);
 	}
 	else

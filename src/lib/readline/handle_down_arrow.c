@@ -6,7 +6,7 @@
 #include "history.h"
 #include "cc_str.h"
 
-int handle_down_arrow(t_inp *inp)
+int		handle_down_arrow(t_inp *inp)
 {
 	char *new_hist;
 

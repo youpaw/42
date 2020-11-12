@@ -9,41 +9,42 @@
 #include <zconf.h>
 #include <stdio.h>
 
+static void	move_on_right_place(t_inp *inp, int wide)
+{
+	if (inp->x_pos < wide || inp->x_pos == 0)
+	{
+		inp->y_pos--;
+		if (inp->x_pos % wide > inp->l_len[inp->y_pos] % wide)
+		{
+			inp->x_pos = inp->l_len[inp->y_pos];
+			tputs(tgoto(tgetstr("ch", NULL), 1,\
+					inp->x_pos % wide), 1, putchar);
+		}
+		else
+			inp->x_pos = inp->x_pos % wide + \
+				((inp->l_len[inp->y_pos] / wide) * wide);
+	}
+	else
+		inp->x_pos -= wide;
+}
+
 int			handle_shift_up(t_inp *inp)
 {
 	struct winsize ws;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	if (inp->curs_y_pos || (inp->curs_x_pos != 0 && inp->curs_x_pos >= ws.ws_col))
+	if (inp->y_pos || (inp->x_pos != 0 && inp->x_pos >= ws.ws_col))
 	{
 		tputs(tgetstr("up", NULL), 1, putchar);
-		if (inp->curs_x_pos < ws.ws_col || inp->curs_x_pos == 0)
+		move_on_right_place(inp, ws.ws_col);
+		if (inp->x_pos < get_prompt_len(inp->y_pos))
 		{
-			inp->curs_y_pos--;
-			if (inp->curs_x_pos % ws.ws_col > inp->line_len[inp->curs_y_pos] % ws.ws_col)
-			{
-				inp->curs_x_pos = inp->line_len[inp->curs_y_pos];
-				tputs(tgoto(tgetstr("ch", NULL), 1, inp->curs_x_pos % ws.ws_col), 1, putchar);
-			}
-			else
-			{
-				inp->curs_x_pos = inp->curs_x_pos % ws.ws_col + \
-        ((inp->line_len[inp->curs_y_pos] / ws.ws_col) * ws.ws_col);
-			}
-
+			tputs(tgoto(tgetstr("ch", NULL), 1,\
+				get_prompt_len(inp->y_pos)), 1, putchar);
+			inp->x_pos = get_prompt_len(inp->y_pos);
 		}
-		else
-			inp->curs_x_pos -= ws.ws_col;
-		if (inp->curs_x_pos < get_prompt_len(inp->curs_y_pos))
-		{
-			tputs(tgoto(tgetstr("ch", NULL), 1, get_prompt_len(inp->curs_y_pos)), 1, putchar);
-			inp->curs_x_pos = get_prompt_len(inp->curs_y_pos);
-		}
-
 	}
 	else
-	{
 		putchar('\7');
-	}
 	return (0);
 }

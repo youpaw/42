@@ -8,24 +8,19 @@
 #include "cc.h"
 #include "ft_select.h"
 
-#include <stdio.h>
-#include <stdbool.h>
-
-static void check_cr(char filename[1027])
+static void		check_cr(char filename[1027])
 {
 	char *cr;
 
 	if ((cr = strrchr(filename, 13)))
-	{
 		strcpy(cr, "^M");
-	}
-
 }
 
-static t_list *get_file_from_name(struct dirent *dir)
+static t_list	*get_file_lst(struct dirent *dir)
 {
-	char filename[1027];
-	t_list *file;
+	char		filename[1027];
+	t_list		*file;
+
 	*filename = '\0';
 	if (DT_DIR == dir->d_type)
 	{
@@ -35,96 +30,58 @@ static t_list *get_file_from_name(struct dirent *dir)
 		file = lst_new(filename, 1025);
 	}
 	else
-	{
 		file = lst_new(dir->d_name, 1024);
-	}
 	return (file);
-
 }
 
-/*
- * We initialize t_list for filenames, scan dir in which we can find file and returns filenames
-*/
-
-t_list *get_list_files(char *path, char *name, int check_exe)
+static void		del_at_end(DIR *d, char *fullname, t_list *lst)
 {
-	DIR *d;
-	struct dirent *dir;
-	t_list *lst = NULL;
-	char *fullname;
-
-	if (!(d = opendir(path)))
-		return NULL;
-	fullname = xmalloc(sizeof(char) * (strlen(path) + 1025));
-	*fullname = 0;
-	while ((dir = readdir(d)))
-	{
-		if (strncmp(dir->d_name, name, strlen(name)) == 0)
-		{
-			if (!*name && (!strcmp(".", dir->d_name) || !strcmp("..", dir->d_name)))
-				continue;
-			strcpy(fullname, path);
-			strcat(fullname, "/");
-			strcat(fullname, dir->d_name);
-			if (!check_exe || !access(path, X_OK))
-				lst_add_sort(&lst, get_file_from_name(dir), (int (*)(const void *, const void *)) &strcmp);
-			*fullname = 0;
-		}
-	}
 	free(fullname);
 	closedir(d);
 	lst_circle(lst);
-	return (lst);
 }
 
 /*
- * Splits fullname into path and name,  and put them into filename[0] and [1] respectively
- */
+** We initialize t_list for filenames,
+** scan dir in which we can find file and returns filenames
+*/
 
-char	**get_filename(char *fullname)
+static t_list	*get_list_files(char *path, char *n, int check_exe)
 {
-	char *delimiter;
-	char **filename;
+	DIR				*d;
+	struct dirent	*dir;
+	t_list			*lst;
+	char			*fullname;
 
-	filename = xmalloc(sizeof(char*) * 2);
-	fullname = strdup(fullname);
-	delimiter = strrchr(fullname, '/');
-
-	if (delimiter)
+	lst = NULL;
+	if (!(d = opendir(path)))
+		return (NULL);
+	fullname = xmalloc(sizeof(char) * (strlen(path) + 1025));
+	while ((dir = readdir(d)))
 	{
-		if (!(delimiter[1]))
+		if (strncmp(dir->d_name, n, strlen(n)) == 0)
 		{
-			filename[0] = strdup(fullname);
-			filename[1] = strdup("");
-		}
-		else if (delimiter == fullname)
-		{
-			filename[0] = strdup("/");
-			filename[1] = strdup(fullname + 1);
-		}
-		else
-		{
-			*delimiter = '\0';
-			filename[0] = strdup(fullname);
-			filename[1] = strdup(delimiter + 1);
+			if (!*n && (!strcmp(".", dir->d_name) \
+				|| !strcmp("..", dir->d_name)))
+				continue;
+			strcat(strcpy(fullname, path), dir->d_name);
+			if (!check_exe || !access(fullname, X_OK))
+				lst_add_sort(&lst, get_file_lst(dir), \
+				(int (*)(const void *, const void *)) &strcmp);
+			*fullname = 0;
 		}
 	}
-	else
-	{
-		filename[0] = strdup("./");
-		filename[1] = strdup(fullname);
-	}
-	free(fullname);
-	return (filename);
+	del_at_end(d, fullname, lst);
+	return (lst);
 }
 
-void handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
+void			handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
 {
-	t_list *files;
-	char 	*part;
-	char **filename;
+	t_list	*files;
+	char	*part;
+	char	**filename;
 
-	filename = get_filename(token->raw);
+	filename = parse_filename(token->raw);
 	files = get_list_files(filename[0], filename[1], acc_m);
 	if (!files)
 		handle_key(" \0\0\0", input);
@@ -145,5 +102,4 @@ void handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
 	free(filename[0]);
 	free(filename[1]);
 	free(filename);
-
 }

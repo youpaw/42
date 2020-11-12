@@ -3,13 +3,31 @@
 //
 
 #include "env.h"
-#include "readline.h"
 #include "alias.h"
 #include "history.h"
 #include "cc_num.h"
 #include "cc_str.h"
 #include "hash.h"
 #include "jobs.h"
+#include <termcap.h>
+
+static void	termcap_init(void)
+{
+	int error;
+
+	error = tgetent(NULL, getenv("TERM"));
+	if (error == 1)
+		return ;
+	else
+	{
+		if (error == 0)
+			puts("Terminal recognition error\nSorry, try another terminal\n");
+		if (error == -1)
+			puts("Terminal initialization error\nSorry, check termcap file\n");
+		else
+			exit(0);
+	}
+}
 
 static void change_shlvl(void)
 {
@@ -32,13 +50,13 @@ static void change_shlvl(void)
 
 int 	main_init(const char *name, const char *av[], const char *en[])
 {
+	termcap_init();
 	av_init(name, av);
 	env_init(en);
 	hash_init();
 	change_shlvl();
 	alias_init();
 	hist_init(env_get_value("HOME"));
-	termcap_init();
 	jobs_init();
 	return (0);
 }

@@ -9,11 +9,10 @@
 #include <unistd.h>
 #include <dirent.h>
 
-
 static void		fill_builtins(t_graph *graph)
 {
-	int cnt;
-	static const char *builtins_names[N_BUILTINS] = {
+	int					cnt;
+	static const char	*builtins_names[N_BUILTINS] = {
 			"set", "unset", "cd", "export", "hash", "echo",
 			"alias", "unalias", "exit", "jobs", "fg", "bg",
 			"history", "type"};
@@ -31,18 +30,17 @@ static void		path_join(char *bin_path, const char *path, const char *bin)
 	strcat(bin_path, bin);
 }
 
-
 static void		fill_bins(t_graph *graph, const char *path)
 {
 	struct dirent	*entry;
 	DIR				*dir;
-	char 			bin_path[MAX_PATH + 1];
+	char			bin_path[MAX_PATH + 1];
 
 	if (!(dir = opendir(path)))
 		return ;
 	while ((entry = readdir(dir)) != NULL)
 	{
-		if (strcmp(entry->d_name, ".") > 0 &&  strcmp(entry->d_name, "..") > 0)
+		if (strcmp(entry->d_name, ".") > 0 && strcmp(entry->d_name, "..") > 0)
 		{
 			path_join(bin_path, path, entry->d_name);
 			if ((access(bin_path, F_OK | X_OK)) == 0)
@@ -54,11 +52,11 @@ static void		fill_bins(t_graph *graph, const char *path)
 	closedir(dir);
 }
 
-static void 	get_bin_paths(t_graph *graph)
+static void		get_bin_paths(t_graph *graph)
 {
 	const char	*full_path;
 	char		**paths;
-	int 		cnt;
+	int			cnt;
 
 	full_path = env_get_value("PATH");
 	if (!full_path || !(paths = strsplitcharset(full_path, ":")))
@@ -73,7 +71,7 @@ static void 	get_bin_paths(t_graph *graph)
 	free(paths);
 }
 
-void	fill_complition_graph(t_graph *graph)
+void			fill_complition_graph(t_graph *graph)
 {
 	graph_init(graph);
 	fill_builtins(graph);

@@ -6,9 +6,9 @@
 #include "cc_str.h"
 #include "cc_mem.h"
 
-static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
+static t_prdct_tkn	*init_token(t_lexer *lexer, t_slice *slice)
 {
-	t_prdct_tkn *token;
+	t_prdct_tkn		*token;
 	t_token			last_token;
 
 	token = xmalloc(sizeof(t_prdct_tkn));
@@ -33,10 +33,10 @@ static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
 	return (token);
 }
 
-static void 	skip_special_chars(t_lexer *lexer)
+static void			skip_special_chars(t_lexer *lexer)
 {
-	static char special[] = "'\"(";
-	int cnt;
+	static char	special[] = "'\"(";
+	int			cnt;
 
 	while (lexer->begin < lexer->size)
 	{
@@ -49,11 +49,11 @@ static void 	skip_special_chars(t_lexer *lexer)
 	}
 }
 
-t_prdct_tkn *get_predict_token(char *raw)
+t_prdct_tkn			*get_predict_token(char *raw)
 {
 	t_lexer			lexer;
 	t_slice			last_slice;
-	t_prdct_tkn *token;
+	t_prdct_tkn		*token;
 
 	if (!raw)
 		return (NULL);

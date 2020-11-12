@@ -25,7 +25,7 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 		token->type = l_filename;
 		vec_rm_at(lexer->tokens, start_token_index);
 		vec_push_at(lexer->tokens, token, start_token_index);
-		lexer->raw[lexer->begin - 1] = '\0';
+		lexer->raw[lexer->begin] = '\0';
 		lexer->size = strlen(lexer->raw);
 		lexer->index = lexer->size;
 		error = 0;

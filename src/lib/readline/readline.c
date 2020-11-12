@@ -20,31 +20,34 @@ static int	check_eox(t_inp *inp)
 {
 	char ch[5];
 
-	if (inp->curs_y_pos)
+	if (inp->y_pos)
 	{
-		vec_get_at(ch, inp->line[inp->curs_y_pos - 1], inp->line_len[inp->curs_y_pos - 1] - 1);
+		vec_get_at(ch, inp->line[inp->y_pos - 1], \
+			inp->l_len[inp->y_pos - 1] - 1);
 		if (*ch == '\4')
 		{
-			vec_del(&inp->line[inp->curs_y_pos]);
-			inp->line[inp->curs_y_pos] = NULL;
-			inp->curs_x_pos = inp->line_len[--inp->curs_y_pos];
+			vec_del(&inp->line[inp->y_pos]);
+			inp->line[inp->y_pos] = NULL;
+			inp->x_pos = inp->l_len[--inp->y_pos];
 			puts("!");
 			handle_backspace(inp);
 			return (1);
 		}
 	}
 	return (0);
-
-
-
 }
 
 int			readline(char **line)
 {
-	t_letter	key;
+	t_let		key;
 	t_inp		input;
 
-	tty_init();
+	if (tty_init())
+	{
+		free(*line);
+		*line = strdup("\4");
+		return (0);
+	}
 	input = input_init(*line);
 	if (!check_eox(&input))
 		print_prompt(&input);
