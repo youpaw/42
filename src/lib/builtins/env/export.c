@@ -8,20 +8,7 @@
 #include "cc_hash_map.h"
 #include "env.h"
 #include "cc_str.h"
-
-static int	print_error_option(char opt)
-{
-	char 		str[2];
-	const char	*args[2];
-
-	str[0] = opt;
-	str[1] = '\0';
-	args[0] = "export";
-	args[1] = str;
-	error_print(E_INVALOPT, args);
-	return (E_INVALOPT);
-}
-
+#include "cc_num.h"
 static	int	try_export(const char *arg)
 {
 	t_hash_pair	pair;
@@ -38,15 +25,28 @@ static	int	try_export(const char *arg)
 	return (hash_map_insert(g_env, &pair));
 }
 
-int 	export(const char **av)
+static int 	check_opt(const char **av, char *opt, int *er_code)
 {
 	t_parsed_opt	opt_res;
+	int 			skip;
+
+	if (!(skip = optparse(av, opt, &opt_res)))
+	{
+		print_invalid_option("export", opt_res.invalid_opt);
+		*er_code = 2;
+	}
+	return (skip);
+}
+
+int 	export(const char **av)
+{
 	int 			skip;
 	const char		*args[2];
 	int 			err_code;
 
-	if (!(skip = optparse(av, "p", &opt_res)))
-		return (print_error_option(opt_res.invalid_opt));
+
+	if (!(skip = check_opt(av, "p", &err_code)))
+		return (err_code);
 	if (!av[skip])
 		return (print_exported_env());
 	args[0] = "export";
@@ -55,7 +55,7 @@ int 	export(const char **av)
 	{
 		if (try_export(av[skip]) == E_INVIDENT)
 		{
-			err_code = E_INVIDENT;
+			err_code = 1;
 			args[1] = av[skip];
 			error_print(E_INVIDENT, args);
 		}

@@ -22,7 +22,7 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 		if (lexer->raw[index] == 4)
 			putendl("");
 		token->raw = strsub(lexer->raw, lexer->begin,index - lexer->begin);
-		token->type = l_word;
+		token->type = l_filename;
 		vec_rm_at(lexer->tokens, start_token_index);
 		vec_push_at(lexer->tokens, token, start_token_index);
 		lexer->raw[lexer->begin - 1] = '\0';
@@ -39,7 +39,7 @@ static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
 	const char	*arr[1];
 
 	vec_get_at(end, tokens, start_token_index);
-	if (end->type != l_word)
+	if (end->type != l_filename)
 	{
 		if (end->type == l_newline)
 			arr[0] = token_type_to_string(l_newline);

@@ -39,13 +39,16 @@ static void delimit_operator(t_lexer *lexer, t_token_type type, int token_size)
 static void	recognize_io_number(t_lexer *lexer, t_token_type type)
 {
 	t_token token;
+	char 	*tmp;
 
 	if (is_redirection(type))
 	{
 		vec_get_last(&token, lexer->tokens);
 		if (strisnum(token.raw))
 		{
+			tmp = strdup(token.raw);
 			vec_rm_last(lexer->tokens);
+			token.raw = tmp;
 			token.type = l_io_number;
 			vec_push(lexer->tokens, &token);
 		}

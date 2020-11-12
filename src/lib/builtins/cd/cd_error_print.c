@@ -4,7 +4,7 @@
 
 #include "cd.h"
 
-void cd_error_print(t_error_code er_code, const char *arg)
+int cd_error_print(t_error_code er_code, const char *arg)
 {
 	char	*er_arr[3];
 
@@ -14,4 +14,5 @@ void cd_error_print(t_error_code er_code, const char *arg)
 	if (arg != NULL)
 		er_arr[1] = (char *)arg;
 	error_print(er_code, (const char **)er_arr);
+	return (1);
 }

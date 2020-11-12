@@ -11,7 +11,7 @@ int get_node_token(t_ast *node, t_tokens *tokens)
 			{l_bang, -1}, {l_or, -1}, {l_command_name, -1},
 			{l_assignment_word, -1}, {l_word, -1}, {l_io_number, -1},
 			{l_less, l_less_and, l_great, l_great_and, l_double_great, l_double_less, -1},
-			{l_double_less, -1}, {l_word, -1}, {l_word, -1}
+			{l_double_less, -1}, {l_filename, -1}, {l_filename, -1}
 	};
 	t_token *token;
 	int 	index;

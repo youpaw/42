@@ -3,6 +3,7 @@
 //
 
 #include "cd.h"
+#include "cc_mem.h"
 
 static char		*fill_empty_path(const char *path)
 {
@@ -16,14 +17,14 @@ static char		*fill_empty_path(const char *path)
 		len--;
 	if (len == 0 && strcmp(path, "//") != 0)
 		new_path = strdup("/");
-	else if ((strcmp(path, "-")) == 0)
+	else if ((strcmp(path, "-")) == 0 && oldpwd != NULL)
 		new_path = strdup(oldpwd);
 	else
 		new_path = strdup(path);
 	return (new_path);
 }
 
-static char		*tokens_join(char ***tokens, int len)
+static char *tokens_join(char **tokens, int len)
 {
 	char	*new_path;
 	int 	cnt;
@@ -32,20 +33,15 @@ static char		*tokens_join(char ***tokens, int len)
 	new_path = memalloc(MAX_PATH + 1);
 	while (cnt < len && cnt < MAX_PATH)
 	{
-		if ((*tokens)[cnt] != NULL)
+		if (*tokens[cnt] != '\0')
 		{
 			strcat(new_path, "/\0");
-			strcat(new_path, (*tokens)[cnt]);
+			strcat(new_path, tokens[cnt]);
 		}
 		cnt++;
 	}
-	cnt = 0;
-	while (cnt < len)
-	{
-		free((*tokens)[cnt]);
-		cnt++;
-	}
-	free(*tokens);
+	if (!*new_path)
+		strcpy(new_path, "/");
 	return(new_path);
 }
 
@@ -53,20 +49,20 @@ static void tokens_handler(char **tokens, int len)
 {
 	int curr_e;
 	int prev_e;
-
+	int i = -1;
 	curr_e = 0;
 	prev_e = 0;
 	while (curr_e < len)
 	{
 		if (strcmp(tokens[curr_e], "..") == 0)
 		{
-			tokens[curr_e] = NULL;
-			tokens[prev_e] = NULL;
+			*tokens[curr_e] = '\0';
+			*tokens[prev_e] = '\0';
 		}
 		else if (strcmp(tokens[curr_e], ".") == 0)
-			tokens[curr_e] = NULL;
+			*tokens[curr_e] = '\0';
 		prev_e = curr_e;
-		while (tokens[prev_e] == NULL && prev_e >= 0)
+		while (prev_e > 0 && *tokens[prev_e] == '\0')
 				prev_e--;
 		curr_e++;
 	}
@@ -78,16 +74,17 @@ static int 	tokenizer(const char *path, char ***tokens)
 	char *pwd;
 	const char *oldpwd;
 
-	pwd = memalloc(MAX_PATH + 1);
-	if (strcmp(path, "-") == 0)
-	{
-		oldpwd = env_get_value("OLDPWD");
+	oldpwd = env_get_value("OLDPWD");
+	if (strcmp(path, "-") == 0 && oldpwd != NULL)
 		*tokens = strsplitcharset(oldpwd, "/");
-	}
 	else if (path[0] != '/')
 	{
-		if (!(getcwd(pwd, MAX_PATH + 1)))
+		pwd = memalloc(MAX_PATH + 1);
+		if (!(getcwd(pwd, MAX_PATH)))
+		{
+			free(pwd);
 			return (1);
+		}
 		pwd[strlen(pwd)] = '/';
 		full_path = strjoin(pwd, path);
 		*tokens = strsplitcharset(full_path, "/");
@@ -108,15 +105,19 @@ char	*cd_path_canonization(const char *path)
 	len = 0;
 	new_path = NULL;
 	if (!path || !*path || tokenizer(path, &tokens))
-		return (new_path);
+		return (strdup(path));
 	while (tokens[len])
 		len++;
-	tokens_handler(tokens, len);
 	if (!tokens || !(*tokens))
 	{
+		strarr_del(tokens);
+		free(tokens);
 		new_path = fill_empty_path(path);
 		return (new_path);
 	}
-	new_path = tokens_join(&tokens, len);
+	tokens_handler(tokens, len);
+	new_path = tokens_join(tokens, len);
+	strarr_del(tokens);
+	free(tokens);
 	return (new_path);
 }
