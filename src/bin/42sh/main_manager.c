@@ -51,7 +51,6 @@ int 	main_manager(void)
 			hist_push(tokens->raw);
 		if (tokens && !tokens->error)
 		{
-//			print_tokens(tokens);
 			if ((ast = parse(tokens)))
 				exec(ast);
 		}
