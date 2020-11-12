@@ -13,7 +13,7 @@ int		redirect_less(t_ast *leafs, t_process *process)
 
 	to = redirect_parse_left_side(leafs, 0);
 	in = -1;
-	if (leafs->left->left->token->type == l_word)
+	if (leafs->left->left->token->type == l_filename)
 	{
 		if (!access(leafs->left->left->token->raw, R_OK))
 		{

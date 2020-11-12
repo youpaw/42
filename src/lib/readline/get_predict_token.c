@@ -21,7 +21,8 @@ static t_prdct_tkn *init_token(t_lexer *lexer, t_slice *slice)
 	else if (lexer->tokens->size)
 	{
 		vec_get_last(&last_token, lexer->tokens);
-		if (is_delimiter(last_token.type) || last_token.type == l_assignment_word)
+		if (last_token.type == l_assignment_word || last_token.type == l_bang ||
+		last_token.type == l_filename || is_delimiter(last_token.type))
 			token->type = r_cmd;
 		else
 			token->type = r_file;

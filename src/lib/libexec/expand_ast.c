@@ -6,7 +6,8 @@
 
 static int is_expand_token(t_token_type type)
 {
-	if (type == l_command_name || type == l_assignment_word || type == l_word)
+	if (type == l_command_name || type == l_assignment_word ||
+		type == l_word || type == l_filename)
 		return (1);
 	return (0);
 }
