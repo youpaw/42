@@ -8,7 +8,59 @@
 #include "cc_hash_map.h"
 #include "env.h"
 #include "cc_str.h"
-#include "cc_num.h"
+#include "expand.h"
+
+static char *join_tilda(char *result, char *tilda, size_t index, size_t end)
+{
+	char		*raw;
+	const char	*arr[4];
+
+	if (index && result[index])
+	{
+		result[index] = '\0';
+		arr[0] = result;
+		arr[1] = tilda;
+		arr[2] = result + end;
+		arr[3] = NULL;
+		raw = strnjoin(arr);
+	}
+	else if (!result[end])
+	{
+		result[index] = '\0';
+		raw = strjoin(result, tilda);
+	}
+	else
+		raw = strjoin(tilda, result + end);
+	return (raw);
+}
+
+static void expand_tildas(char **str)
+{
+	char	*result;
+	char 	*tilda;
+	size_t 	i;
+	size_t	end;
+
+	i = -1;
+	result = *str;
+	while (result[++i])
+		if (result[i] == '~' && (!i || result[i - 1] == ':'))
+		{
+			end = i + 1;
+			if (result[end] == '+' || result[end] == '-')
+				end++;
+			if (!result[end] || result[end] == '/' || result[end] == ':')
+			{
+				tilda = strsub(result, i, end - i);
+				expand_tilda(&tilda);
+				*str = join_tilda(result, tilda, i, end);
+				free(result);
+				free(tilda);
+				result = *str;
+			}
+		}
+}
+
 static	int	try_export(const char *arg)
 {
 	t_hash_pair	pair;
@@ -20,7 +72,10 @@ static	int	try_export(const char *arg)
 	pair.key = strsub(arg, 0, name_len);
 	pair.value = NULL;
 	if (arg[name_len])
+	{
 		pair.value = strdup(arg + name_len + 1);
+		expand_tildas((char **)&pair.value);
+	}
 	hash_map_del_one(g_inter_env, pair.key);
 	return (hash_map_insert(g_env, &pair));
 }

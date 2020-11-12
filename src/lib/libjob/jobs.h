@@ -91,6 +91,7 @@ void	fork_and_launch_processes(t_job *job, int is_foreground);
 void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 int		mark_process_status (pid_t pid, int status);
 int		get_last_process_status(t_process *p);
+void	set_default_pipe_fds(int *in_out_fds, int *pipe_fds);
 
 /*
 ** Job builtins

@@ -61,7 +61,7 @@ void fork_and_launch_processes(t_job *job, int is_foreground)
 	int			in_out_fds[2];
 	int 		pipe_fds[2];
 
-	in_out_fds[0] = STDIN_FILENO;
+	set_default_pipe_fds(in_out_fds, pipe_fds);
 	p = job->first_process;
 	while (p)
 	{
