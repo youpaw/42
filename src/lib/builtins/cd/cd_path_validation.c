@@ -57,8 +57,8 @@ static int envv_set(const char *cn_path, const char *path)
 {
 	const char 	*(env_paths[N_PATHS]);
 
-	env_paths[home] = env_get_value("HOME");
-	env_paths[oldpwd] = env_get_value("OLDPWD");
+	env_paths[home] = exec_env_get_value("HOME");
+	env_paths[oldpwd] = exec_env_get_value("OLDPWD");
 	if (strcmp(cn_path, "-") == 0 && env_paths[oldpwd] == NULL)
 	{
 		cd_error_print(E_OLDPWDNOTSET, path);

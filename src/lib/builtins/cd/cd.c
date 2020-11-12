@@ -52,7 +52,7 @@ static void		init_chdir(const char *cn_path, const char *path,\
 	char pwd[MAX_PATH];
 	const char *home;
 
-	home = env_get_value("HOME");
+	home = exec_env_get_value("HOME");
 	getcwd(pwd, MAX_PATH);
 	if (path == NULL || !*path)
 	{

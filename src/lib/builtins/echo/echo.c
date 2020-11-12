@@ -3,6 +3,7 @@
 //
 
 #include <sys/stat.h>
+#include <error.h>
 #include "echo.h"
 
 void		printspchars(char *str)
@@ -46,17 +47,28 @@ static int			check_opt(const char  **av, unsigned char *flags)
 	return (skip_args);
 }
 
-int					echo(const char **av)
+static int 			check_fd(void)
 {
-	unsigned char	flags;
-	int				arg_cnt;
+	const char 		*error[2];
 	struct stat		buf;
 
 	if ((fstat(1, &buf)) != 0)
 	{
-		putendl("lol");
+		error[0] = "echo: write error";
+		error[1] = NULL;
+		error_print(E_BADFD, error);
 		return (1);
 	}
+	return (0);
+}
+
+int					echo(const char **av)
+{
+	unsigned char	flags;
+	int				arg_cnt;
+
+	if (check_fd())
+		return (1);
 	flags = ECHO_E_FLAG;
 	arg_cnt = check_opt(av, &flags);
 	while (av[arg_cnt])

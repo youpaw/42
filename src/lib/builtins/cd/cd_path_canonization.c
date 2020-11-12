@@ -11,7 +11,7 @@ static char		*fill_empty_path(const char *path)
 	const char *oldpwd;
 	int 		len;
 
-	oldpwd = env_get_value("OLDPWD");
+	oldpwd = exec_env_get_value("OLDPWD");
 	len = strlen(path) - 1;
 	while (len > 0 && path[len] == '/')
 		len--;
@@ -49,7 +49,7 @@ static void tokens_handler(char **tokens, int len)
 {
 	int curr_e;
 	int prev_e;
-	int i = -1;
+
 	curr_e = 0;
 	prev_e = 0;
 	while (curr_e < len)
@@ -70,11 +70,11 @@ static void tokens_handler(char **tokens, int len)
 
 static int 	tokenizer(const char *path, char ***tokens)
 {
-	char *full_path;
-	char *pwd;
-	const char *oldpwd;
+	char 		*full_path;
+	char 		*pwd;
+	const char 	*oldpwd;
 
-	oldpwd = env_get_value("OLDPWD");
+	oldpwd = exec_env_get_value("OLDPWD");
 	if (strcmp(path, "-") == 0 && oldpwd != NULL)
 		*tokens = strsplitcharset(oldpwd, "/");
 	else if (path[0] != '/')
