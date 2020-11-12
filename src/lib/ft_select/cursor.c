@@ -49,7 +49,7 @@ int		move_cursor_down(t_selection **selection)
 		to_find_vert = cpy->vert_pos + 1;
 		set_cursor_on_pos(cpy, to_find_hor, to_find_vert);
 	}
-	return (0);
+	return(0);
 }
 
 int		move_cursor_up(t_selection **selection)
@@ -67,5 +67,5 @@ int		move_cursor_up(t_selection **selection)
 		to_find_vert = cpy->vert_pos - 1;
 		set_cursor_on_pos(cpy, to_find_hor, to_find_vert);
 	}
-	return (0);
+	return(0);
 }
