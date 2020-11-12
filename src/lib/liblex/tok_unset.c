@@ -39,8 +39,8 @@ static void		delimit_operator(t_lexer *lexer, t_token_type type,
 
 static void		recognize_io_number(t_lexer *lexer, t_token_type type)
 {
-	t_token token;
-	char 	*tmp;
+	t_token	token;
+	char	*tmp;
 
 	if (is_redirection(type))
 	{

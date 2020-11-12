@@ -21,7 +21,7 @@ static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
 	{
 		if (lexer->raw[index] == 4)
 			putendl("");
-		token->raw = strsub(lexer->raw, lexer->begin,index - lexer->begin);
+		token->raw = strsub(lexer->raw, lexer->begin, index - lexer->begin);
 		token->type = l_filename;
 		vec_rm_at(lexer->tokens, start_token_index);
 		vec_push_at(lexer->tokens, token, start_token_index);
@@ -45,7 +45,7 @@ static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
 			arr[0] = token_type_to_string(l_newline);
 		else
 			arr[0] = end->raw;
-		error_print(E_UNEXPTOK, (const char **) arr);
+		error_print(E_UNEXPTOK, (const char **)arr);
 		return (E_UNEXPTOK);
 	}
 	return (0);
@@ -53,9 +53,9 @@ static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
 
 static int	tokenize_end(t_lexer *lexer)
 {
-	int error;
-	t_state current;
-	t_slice slice;
+	int		error;
+	t_state	current;
+	t_slice	slice;
 
 	error = 0;
 	slice.index = lexer->index;
@@ -78,12 +78,11 @@ static int	tokenize_end(t_lexer *lexer)
 	return (error);
 }
 
-int 		vld_heredoc(t_lexer *lexer)
+int			vld_heredoc(t_lexer *lexer)
 {
 	t_token	end;
 	size_t	start_token_index;
-
-	int error;
+	int		error;
 
 	start_token_index = lexer->tokens->size;
 	error = tokenize_end(lexer);
