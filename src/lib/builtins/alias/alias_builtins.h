@@ -21,8 +21,10 @@ typedef enum e_opt_map{
 
 void		alias_bash_error_print(t_error_code er_code, const char *cmd,\
 									const char *arg);
-int alias_check_opt(t_opt_map built_i, const char **av, unsigned char *flags);
-void		alias_error_print(const char *cmd);
+int alias_check_opt(t_opt_map built_i, const char **av, unsigned char *flags,
+					int *er_code);
+
+void alias_usage_error_print(const char *cmd, int *er_code);
 
 
 #endif //ALIAS_BUILTINS_H
