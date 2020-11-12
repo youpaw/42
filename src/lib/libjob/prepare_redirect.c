@@ -39,7 +39,7 @@ int				prepare_redirect(t_ast *ast, t_process *process)
 		if (map_redirects(redirects[i], process) != 0)
 			error = 1;
 		if (error)
-			break ;
+			break;
 		i++;
 	}
 	free(redirects);

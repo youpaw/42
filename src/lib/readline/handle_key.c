@@ -28,9 +28,9 @@ int			handle_key(char *key, t_inp *input)
 			{"\2", &handle_left_arrow},
 			{"\177",&handle_backspace},
 			{"\t", &handle_tab},
-			{"\20", &handle_down_arrow}, //down
-			{"\16", &handle_up_arrow}, //up
-			{"\3", &handle_eox} //ctrl+C
+			{"\20", &handle_down_arrow},
+			{"\16", &handle_up_arrow},
+			{"\3", &handle_eox}
 	};
 	int index;
 
@@ -41,8 +41,6 @@ int			handle_key(char *key, t_inp *input)
 		{
 			if (hanlders[index].handler)
 				return (hanlders[index].handler(input));
-			else
-				return (1);
 		}
 		index++;
 	}
