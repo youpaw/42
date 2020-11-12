@@ -1,6 +1,14 @@
-//
-// Created by Azzak Omega on 9/16/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 23:31:37 by azomega           #+#    #+#             */
+/*   Updated: 2020/11/12 23:31:41 by azomega          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "optparse.h"
 #include "error.h"
@@ -10,7 +18,7 @@
 #include "cc_str.h"
 #include "expand.h"
 
-static char *join_tilda(char *result, char *tilda, size_t index, size_t end)
+static char	*join_tilda(char *result, char *tilda, size_t index, size_t end)
 {
 	char		*raw;
 	const char	*arr[4];
@@ -34,11 +42,11 @@ static char *join_tilda(char *result, char *tilda, size_t index, size_t end)
 	return (raw);
 }
 
-static void expand_tildas(char **str)
+static void	expand_tildas(char **str)
 {
 	char	*result;
-	char 	*tilda;
-	size_t 	i;
+	char	*tilda;
+	size_t	i;
 	size_t	end;
 
 	i = -1;
@@ -61,7 +69,7 @@ static void expand_tildas(char **str)
 		}
 }
 
-static	int	try_export(const char *arg)
+static int	try_export(const char *arg)
 {
 	t_hash_pair	pair;
 	size_t		name_len;
@@ -80,10 +88,10 @@ static	int	try_export(const char *arg)
 	return (hash_map_insert(g_env, &pair));
 }
 
-static int 	check_opt(const char **av, char *opt, int *er_code)
+static int	check_opt(const char **av, char *opt, int *er_code)
 {
 	t_parsed_opt	opt_res;
-	int 			skip;
+	int				skip;
 
 	if (!(skip = optparse(av, opt, &opt_res)))
 	{
@@ -93,12 +101,11 @@ static int 	check_opt(const char **av, char *opt, int *er_code)
 	return (skip);
 }
 
-int 	export(const char **av)
+int			export(const char **av)
 {
-	int 			skip;
+	int				skip;
 	const char		*args[2];
-	int 			err_code;
-
+	int				err_code;
 
 	if (!(skip = check_opt(av, "p", &err_code)))
 		return (err_code);

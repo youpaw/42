@@ -5,8 +5,8 @@
 #include "lexer.h"
 #include "cc_mem.h"
 #include "cc_str.h"
-#include "cc_num.h"
-static void del_token(t_token *token)
+
+static void		del_token(t_token *token)
 {
 	free(token->raw);
 }

@@ -1,15 +1,25 @@
-//
-// Created by Darth Butterwell on 8/23/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:37:54 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:37:58 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cd.h"
+#include "cc_str.h"
+#include "unistd.h"
 
-static void 		change_env(const char *cn_path, const char *oldpwd,\
-unsigned char flags)
+static void				change_env(const char *cn_path,\
+						const char *oldpwd, unsigned char flags)
 {
-	char pwd[MAX_PATH];
-	char *upd_pwd;
-	char *upd_oldpwd;
+	char				pwd[MAX_PATH];
+	char				*upd_pwd;
+	char				*upd_oldpwd;
 
 	if (flags & CD_P_FLAG)
 	{
@@ -29,10 +39,10 @@ unsigned char flags)
 	free(upd_oldpwd);
 }
 
-static int 		run_chdir(const char *newpwd, const char *oldpwd,\
-const char *path, unsigned char flags)
+static	int				run_chdir(const char *newpwd, const char *oldpwd,\
+						const char *path, unsigned char flags)
 {
-	char pwd[MAX_PATH];
+	char				pwd[MAX_PATH];
 
 	getcwd(pwd, MAX_PATH);
 	if (chdir(newpwd) == 0)
@@ -46,13 +56,13 @@ const char *path, unsigned char flags)
 	return (0);
 }
 
-static void		init_chdir(const char *cn_path, const char *path,\
-				unsigned char flags, int *er_code)
+static void				init_chdir(const char *cn_path, const char *path,\
+						unsigned char flags, int *er_code)
 {
-	char pwd[MAX_PATH];
-	const char *home;
+	char				pwd[MAX_PATH];
+	const char			*home;
 
-	home = env_get_value("HOME");
+	home = exec_env_get_value("HOME");
 	getcwd(pwd, MAX_PATH);
 	if (path == NULL || !*path)
 	{
@@ -65,12 +75,12 @@ static void		init_chdir(const char *cn_path, const char *path,\
 		*er_code = run_chdir(cn_path, pwd, path, flags);
 }
 
-int				cd(const char **av)
+int						cd(const char **av)
 {
-	int				path_i;
-	char			*cn_path;
-	unsigned char 	flags;
-	int 			er_code;
+	int						path_i;
+	char					*cn_path;
+	unsigned char			flags;
+	int						er_code;
 
 	er_code = 0;
 	flags = CD_L_FLAG;
@@ -92,4 +102,3 @@ int				cd(const char **av)
 	free(cn_path);
 	return (er_code);
 }
-
