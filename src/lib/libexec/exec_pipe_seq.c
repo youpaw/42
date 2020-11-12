@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-void exec_pipe_seq(t_ast *ast, t_process *process)
+void		exec_pipe_seq(t_ast *ast, t_process *process)
 {
 	exec_simple_cmd(ast->left, process);
 	if (ast->right)

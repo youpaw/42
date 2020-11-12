@@ -7,7 +7,7 @@
 #include "cc_str.h"
 #include "cc_regex.h"
 
-static int handle_brace_expand(t_lexer *lexer, t_brace brace)
+static int			handle_brace_expand(t_lexer *lexer, t_brace brace)
 {
 	size_t	index;
 	char	*sub;
@@ -35,7 +35,7 @@ static int handle_brace_expand(t_lexer *lexer, t_brace brace)
 	return (error);
 }
 
-static void handle_field_expand(t_lexer *lexer)
+static void			handle_field_expand(t_lexer *lexer)
 {
 	size_t	index;
 	char	*sub;
@@ -51,7 +51,7 @@ static void handle_field_expand(t_lexer *lexer)
 	free(sub);
 }
 
-int 	exp_dollar(t_lexer *lexer)
+int					exp_dollar(t_lexer *lexer)
 {
 	t_brace	brace;
 	int		error;

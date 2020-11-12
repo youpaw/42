@@ -6,7 +6,7 @@
 
 char	*expand_prefix(const char *name, const char *pattern)
 {
-	const char 	*value;
+	const char	*value;
 	size_t		len;
 
 	if (!(value = get_env_or_av_value(name)))

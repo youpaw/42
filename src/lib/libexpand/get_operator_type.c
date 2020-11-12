@@ -1,10 +1,11 @@
 //
 // Created by Azzak Omega on 9/5/20.
 //
+
 #include "expand.h"
 #include "cc_str.h"
 
-static t_param_type get_colon_operator(char c)
+static t_param_type	get_colon_operator(char c)
 {
 	if (c == '-')
 		return (e_param_or_word);
@@ -17,7 +18,7 @@ static t_param_type get_colon_operator(char c)
 	return (e_unknown);
 }
 
-t_param_type get_operator_type(const char *str)
+t_param_type		get_operator_type(const char *str)
 {
 	if (!*str)
 		return (e_default);

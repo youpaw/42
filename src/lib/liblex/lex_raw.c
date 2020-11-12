@@ -11,7 +11,7 @@ static void del_token(t_token *token)
 	free(token->raw);
 }
 
-static void init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
+static void		init_lexer(t_lexer *lexer, const char *raw, t_stage stage)
 {
 	t_slice	slice;
 

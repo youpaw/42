@@ -4,7 +4,7 @@
 
 #include "calc.h"
 
-int 	calc_operate_mlt(t_calc_eval *a, t_calc_eval *b)
+int	calc_operate_mlt(t_calc_eval *a, t_calc_eval *b)
 {
 	b->val = b->val * a->val;
 	return (0);

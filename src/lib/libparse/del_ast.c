@@ -5,7 +5,7 @@
 #include "parser.h"
 #include <stdlib.h>
 
-void 				del_ast(t_ast **node)
+void				del_ast(t_ast **node)
 {
 	if (!node || !*node)
 		return ;

@@ -4,7 +4,7 @@
 
 #include "exec.h"
 
-void prepare_exec_env(t_ast *ast)
+void	prepare_exec_env(t_ast *ast)
 {
 	exec_env_init();
 	if (!ast)

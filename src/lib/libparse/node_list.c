@@ -4,7 +4,7 @@
 
 #include "parser.h"
 
-t_ast 		*node_list(t_tokens *tokens)
+t_ast		*node_list(t_tokens *tokens)
 {
 	t_ast *node;
 

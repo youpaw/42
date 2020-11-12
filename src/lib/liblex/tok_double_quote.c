@@ -4,10 +4,10 @@
 
 #include "lexer.h"
 
-int 	tok_double_quote(t_lexer *lexer)
+int	tok_double_quote(t_lexer *lexer)
 {
-	t_slice slice;
-	char c;
+	t_slice	slice;
+	char	c;
 
 	slice.state = l_unset;
 	c = lexer->raw[lexer->index];

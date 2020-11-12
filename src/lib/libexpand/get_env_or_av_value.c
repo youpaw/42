@@ -5,9 +5,9 @@
 #include "cc_str.h"
 #include "env.h"
 
-const char *get_env_or_av_value(const char *name)
+const char	*get_env_or_av_value(const char *name)
 {
 	if (isdigit(*name))
-		return (av_get(atoi(name))); //may be errors with overflow
+		return (av_get(atoi(name)));
 	return (env_get_value(name));
 }

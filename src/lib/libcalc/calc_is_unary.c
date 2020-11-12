@@ -4,7 +4,7 @@
 
 #include "calc.h"
 
-int 	calc_is_unary(t_calc_type type)
+int	calc_is_unary(t_calc_type type)
 {
 	if (type < 2)
 		return (1);

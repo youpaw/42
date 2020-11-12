@@ -3,10 +3,10 @@
 //
 #include "lexer.h"
 
-t_state 	get_current_state(t_lexer *lexer)
+t_state		get_current_state(t_lexer *lexer)
 {
 	int					cnt;
-	t_slice 			current;
+	t_slice				current;
 	static const char	state_map[N_STATES - 1] = {'\\', '\'', '"', '$', '!'};
 
 	vec_get_last(&current, lexer->slices);

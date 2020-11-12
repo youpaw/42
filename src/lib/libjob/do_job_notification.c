@@ -25,7 +25,7 @@ void	do_job_notification(void)
 			notify_and_remove_completed_job(j);
 		else if (job_is_stopped(j) && !j->notified)
 		{
-            print_job_formatted(j, 0, JPM_DEFAULT);
+			print_job_formatted(j, 0, JPM_DEFAULT);
 			j->notified = 1;
 		}
 		j = jnext;

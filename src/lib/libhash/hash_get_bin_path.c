@@ -29,11 +29,11 @@ static char	*get_dir_path(const char **pathes, const char *bin)
 	return (NULL);
 }
 
-char	*hash_get_bin_path(const char *bin)
+char		*hash_get_bin_path(const char *bin)
 {
-	char 		**pathes;
+	char		**pathes;
 	char		*path;
-	char 		*args[4];
+	char		*args[4];
 
 	if (!bin || !(path = (char *)env_get_value("PATH")))
 		return (NULL);
@@ -51,4 +51,3 @@ char	*hash_get_bin_path(const char *bin)
 	free(pathes);
 	return (path);
 }
-

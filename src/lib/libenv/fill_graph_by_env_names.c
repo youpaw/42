@@ -5,7 +5,7 @@
 #include "cc_graph.h"
 #include "env.h"
 
-static void 	fill_graph(t_graph *graph)
+static void		fill_graph(t_graph *graph)
 {
 	size_t i;
 	t_list *lst;
@@ -32,7 +32,7 @@ static void 	fill_graph(t_graph *graph)
 	}
 }
 
-void	fill_graph_by_env_names(t_graph *graph)
+void			fill_graph_by_env_names(t_graph *graph)
 {
 	graph_init(graph);
 	fill_graph(graph);

@@ -6,10 +6,10 @@
 #include "expand.h"
 #include "cc_str.h"
 
-int 		exp_unset(t_lexer *lexer)
+int		exp_unset(t_lexer *lexer)
 {
 	char	*sub;
-	size_t index;
+	size_t	index;
 
 	index = lexer->index;
 	if (!match_tilda(lexer))

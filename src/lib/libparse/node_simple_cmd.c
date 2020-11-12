@@ -4,7 +4,7 @@
 
 #include "parser.h"
 
-t_ast *node_simple_cmd(t_tokens *tokens)
+t_ast	*node_simple_cmd(t_tokens *tokens)
 {
 	t_ast *node;
 
@@ -12,7 +12,7 @@ t_ast *node_simple_cmd(t_tokens *tokens)
 	node->left = node_cmd_prefix(tokens);
 	if (!get_node_token(node, tokens))
 		node->right = node_cmd_suffix(tokens);
-	else if(!node->left)
+	else if (!node->left)
 		del_ast(&node);
 	return (node);
 }

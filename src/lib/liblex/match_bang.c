@@ -36,9 +36,9 @@ static int	match_num(t_lexer *lexer)
 
 static int	match_word(t_lexer *lexer)
 {
-	char c;
-	t_brace brace;
-	t_slice current;
+	char	c;
+	t_brace	brace;
+	t_slice	current;
 
 	vec_get_at(&current, lexer->slices, lexer->slices->size - 2);
 	while (lexer->index < lexer->size)
@@ -52,7 +52,7 @@ static int	match_word(t_lexer *lexer)
 	return (0);
 }
 
-int 		match_bang(t_lexer *lexer)
+int			match_bang(t_lexer *lexer)
 {
 	size_t index;
 

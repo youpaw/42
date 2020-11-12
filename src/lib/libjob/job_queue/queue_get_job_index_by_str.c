@@ -17,4 +17,3 @@ int	queue_get_job_index_by_str(const char *str)
 		return (atoi(str));
 	return (-1);
 }
-

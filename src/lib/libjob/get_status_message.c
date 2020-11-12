@@ -7,11 +7,10 @@
 #include "cc_str.h"
 #define N_SIGNALS 25
 
-
-static	int get_signal_index(int signal)
+static	int			get_signal_index(int signal)
 {
-	int i;
-	static int signals[N_SIGNALS] = {
+	int				i;
+	static int		signals[N_SIGNALS] = {
 			SIGHUP, SIGINT,
 			SIGQUIT, SIGILL,
 			SIGTRAP, SIGABRT,
@@ -35,8 +34,8 @@ static	int get_signal_index(int signal)
 
 static	const char	*get_signal_string(int signal)
 {
-	int i;
-	static const char *builtins_names[N_SIGNALS] = {
+	int					i;
+	static const char	*builtins_names[N_SIGNALS] = {
 			"Hangup: 1", "Interrupt: 2",
 			"Quit: 3", "Illegal instruction: 4",
 			"Trace/BPT trap: 5", "Abort trap: 6",
@@ -55,8 +54,6 @@ static	const char	*get_signal_string(int signal)
 		return (builtins_names[i]);
 	return (NULL);
 }
-
-
 
 char				*get_status_message(int status)
 {
