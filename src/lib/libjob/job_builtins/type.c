@@ -44,7 +44,10 @@ int		type(const char **av)
 		else if ((pair = hash_map_get_val(g_hash, *av)))
 			print_hashed(*av, pair);
 		else if ((path = hash_get_bin_path(*av)))
+		{
 			print_path(*av, path);
+			free(path);
+		}
 		else
 		{
 			err = 1;

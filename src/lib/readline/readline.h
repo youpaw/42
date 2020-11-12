@@ -92,7 +92,6 @@ int				handle_up_arrow(t_inp *inp);
 int				handle_home_key(t_inp *inp);
 int				handle_end_key(t_inp *inp);
 int				handle_eox(t_inp *inp);
-int				handle_eot(t_inp *inp);
 
 int				handle_key(char *key, t_inp *input);
 
@@ -103,7 +102,6 @@ int				readline(char **line);
 
 void			clear_display_input(t_inp *inp);
 void			common_redraw(t_inp *input);
-void			redraw_input_adding(t_inp *inp);
 void			redraw_input_readline(t_inp *inp);
 
 char			*input_to_str(t_inp input, int newline);
