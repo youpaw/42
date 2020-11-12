@@ -1,17 +1,26 @@
-//
-// Created by slava-nya on 10/2/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_check_opt.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:24 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:28 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cd.h"
+#include "cc_str.h"
 
-static void		cd_usage_error_print(void)
+static void	cd_usage_error_print(void)
 {
 	putendl("cd: usage: cd [-L|-P] [dir]");
 }
 
-int cd_check_opt(const char **av, unsigned char *flags, int *er_code)
+int			cd_check_opt(const char **av, unsigned char *flags, int *er_code)
 {
-	t_parsed_opt 	opt;
+	t_parsed_opt	opt;
 	int				skip_args;
 
 	skip_args = optparse(av, "LP", &opt);

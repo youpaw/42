@@ -1,13 +1,21 @@
-//
-// Created by Halfhand Lorrine on 10/25/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unalias.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:39:49 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:39:52 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "alias_builtins.h"
 
-static void 	value_parse(const char *cmd, const char *arg, int *er_code)
+static void			value_parse(const char *cmd, const char *arg, int *er_code)
 {
 	if (!(alias_remove(arg)))
-		return;
+		return ;
 	else
 	{
 		*er_code = 1;
@@ -15,11 +23,11 @@ static void 	value_parse(const char *cmd, const char *arg, int *er_code)
 	}
 }
 
-int				unalias(const char **av)
+int					unalias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;
-	int 			er_code;
+	int				er_code;
 
 	er_code = 0;
 	flag = 0;

@@ -1,11 +1,19 @@
-//
-// Created by Halfhand Lorrine on 10/25/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alias_bash_error_print.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:39:20 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:39:24 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "alias_builtins.h"
 
 void		alias_bash_error_print(t_error_code er_code, const char *cmd,\
-							  const char *arg)
+			const char *arg)
 {
 	char	*er_arr[3];
 

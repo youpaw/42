@@ -1,13 +1,22 @@
-//
-// Created by Azzak Omega on 9/14/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 20:22:48 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 20:22:52 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env.h"
 #include "cc_str.h"
 #include "error.h"
 
-static int	print_error(const char *arg)
+static int		print_error(const char *arg)
 {
-	const char 	*args[2];
+	const char	*args[2];
 
 	args[0] = "unset";
 	args[1] = arg;
@@ -15,9 +24,9 @@ static int	print_error(const char *arg)
 	return (1);
 }
 
-int			unset(const char **args)
+int				unset(const char **args)
 {
-	int	error;
+	int			error;
 
 	error = 0;
 	if (args)

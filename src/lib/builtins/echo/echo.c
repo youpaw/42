@@ -1,13 +1,26 @@
-//
-// Created by slava-nya on 9/22/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:35 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:38 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <sys/stat.h>
+#include <error.h>
 #include "echo.h"
+#include "cc_str.h"
+#include "cc_char.h"
+#include "unistd.h"
+#include "stdlib.h"
 
-void		printspchars(char *str)
+void				printspchars(char *str)
 {
-	size_t cnt;
+	size_t			cnt;
 
 	cnt = 0;
 	while (str[cnt])
@@ -27,18 +40,18 @@ void		printspchars(char *str)
 	}
 }
 
-static int			check_opt(const char  **av, unsigned char *flags)
+static int			check_opt(const char **av, unsigned char *flags)
 {
-	t_parsed_opt 	opt;
+	t_parsed_opt	opt;
 	int				skip_args;
 
 	skip_args = optparse(av, "en", &opt);
 	if (skip_args > 1)
 	{
 		if (strchr(opt.options, 'n') != NULL)
-			*flags |= ECHO_n_FLAG;
+			*flags |= ECHO_N_FLAG;
 		if (strchr(opt.options, 'e') != NULL)
-			*flags |= ECHO_e_FLAG;
+			*flags |= ECHO_E_LC_FLAG;
 		free(opt.options);
 	}
 	if (skip_args == 0)
@@ -46,30 +59,41 @@ static int			check_opt(const char  **av, unsigned char *flags)
 	return (skip_args);
 }
 
-int					echo(const char **av)
+static int			check_fd(void)
 {
-	unsigned char	flags;
-	int				arg_cnt;
+	const char		*error[2];
 	struct stat		buf;
 
 	if ((fstat(1, &buf)) != 0)
 	{
-		putendl("lol");
+		error[0] = "echo: write error";
+		error[1] = NULL;
+		error_print(E_BADFD, error);
 		return (1);
 	}
-	flags = ECHO_E_FLAG;
+	return (0);
+}
+
+int					echo(const char **av)
+{
+	unsigned char	flags;
+	int				arg_cnt;
+
+	if (check_fd())
+		return (1);
+	flags = ECHO_E_UPC_FLAG;
 	arg_cnt = check_opt(av, &flags);
 	while (av[arg_cnt])
 	{
-		if (flags & ECHO_e_FLAG)
-			printspchars((char *) av[arg_cnt]);
+		if (flags & ECHO_E_LC_FLAG)
+			printspchars((char *)av[arg_cnt]);
 		else
 			puts(av[arg_cnt]);
 		if (av[arg_cnt + 1])
 			putchar(' ');
 		arg_cnt++;
 	}
-	if (!(flags & ECHO_n_FLAG))
+	if (!(flags & ECHO_N_FLAG))
 		putchar('\n');
 	return (0);
 }
