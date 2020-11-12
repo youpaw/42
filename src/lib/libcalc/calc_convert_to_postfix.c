@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "calc.h"
 #include "cc_str.h"
 
 static void		convert_paranthesis(t_vec *postfix, t_vec *stack, \
