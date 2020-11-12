@@ -16,7 +16,6 @@
 # include <sys/stat.h>
 # include "builtins.h"
 # include "stdio.h"
-# include "cc.h"
 # include "env.h"
 # include "optparse.h"
 # include "error.h"

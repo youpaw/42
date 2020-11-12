@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cd.h"
+#include "cc_str.h"
+#include "unistd.h"
 
 static void				change_env(const char *cn_path,\
 						const char *oldpwd, unsigned char flags)

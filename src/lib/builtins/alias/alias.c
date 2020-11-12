@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "alias_builtins.h"
+#include "cc_str.h"
 
 static void			alias_pint_pair(const char *key, const char *value)
 {

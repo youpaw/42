@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cd.h"
+#include "cc_str.h"
 
 static void	cd_usage_error_print(void)
 {

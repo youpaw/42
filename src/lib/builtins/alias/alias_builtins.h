@@ -16,7 +16,6 @@
 # include "builtins.h"
 # include "alias.h"
 # include "error.h"
-# include "cc.h"
 # include "optparse.h"
 
 # define N_ALIAS_BUILTINS 2

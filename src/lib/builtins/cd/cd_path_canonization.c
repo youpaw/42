@@ -12,6 +12,8 @@
 
 #include "cd.h"
 #include "cc_mem.h"
+#include "cc_str.h"
+#include "unistd.h"
 
 static char		*fill_empty_path(const char *path)
 {

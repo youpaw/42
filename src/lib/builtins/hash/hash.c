@@ -13,7 +13,7 @@
 #include "hash.h"
 #include "optparse.h"
 #include "error.h"
-#include "cc.h"
+#include "cc_str.h"
 
 static int			print_error_option(char opt)
 {

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <zconf.h>
 #include "cd.h"
+#include "cc_str.h"
 
 static int			len_check(const char *cn_path, const char *path)
 {
