@@ -5,8 +5,8 @@
 #include "readline.h"
 #include "cc_str.h"
 #include "cc_mem.h"
-#include "cc_num.h"
-static char **get_double_array(char *line)
+
+static char	**get_double_array(const char *line)
 {
 	size_t i;
 	size_t counter;
@@ -21,24 +21,23 @@ static char **get_double_array(char *line)
 	return (xmalloc(sizeof(char*) * (counter + 2)));
 }
 
-//static char *fill_elem(char *line, size_t i, size_t *len)
-//{
-//	char *str;
-//
-//	if (!len)
-//		str = strdup("");
-//	else
-//		str = strsub(line, i - *len, *len);
-//	*len = 0;
-//	return (str);
-//}
-
-char **split_newline(char *line)
+static char	*get_line(int i, int len, char *line)
 {
-	size_t i;
-	size_t k;
-	size_t len;
-	char **res;
+	char *res;
+
+	if (!len)
+		res = strdup("");
+	else
+		res = strsub(line, i - len, len);
+	return (res);
+}
+
+char		**split_newline(char *line)
+{
+	size_t	i;
+	size_t	k;
+	size_t	len;
+	char	**res;
 
 	i = 0;
 	k = 0;
@@ -50,10 +49,7 @@ char **split_newline(char *line)
 			len++;
 		else
 		{
-			if (!len)
-				res[k] = strdup("");
-			else
-				res[k] = strsub(line, i - len, len);
+			res[k] = get_line(i, len, line);
 			k++;
 			len = 0;
 		}

@@ -6,7 +6,7 @@
 
 int			handle_end_key(t_inp *inp)
 {
-	while (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
+	while (inp->x_pos != inp->l_len[inp->y_pos])
 		handle_right_arrow(inp);
 	return (0);
 }

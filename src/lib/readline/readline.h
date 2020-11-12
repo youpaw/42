@@ -33,10 +33,10 @@ struct termios		g_tty_backup;
 typedef struct		s_input
 {
 	t_vec			**line;
-	size_t			curs_x_pos;
-	size_t			curs_y_pos;
+	size_t			x_pos;
+	size_t			y_pos;
 	size_t			len;
-	size_t			*line_len;
+	size_t			*l_len;
 	char			*hist_storage;
 }					t_inp;
 
@@ -44,7 +44,7 @@ typedef union		u_letter
 {
 	char			ch[5];
 	int				num;
-}					t_letter;
+}					t_let;
 
 typedef struct		s_key_readline_handler
 {
@@ -65,7 +65,7 @@ typedef	struct		s_predict_token
 	enum e_predict_type	type;
 }					t_prdct_tkn;
 
-void			tty_init(void);
+int tty_init();
 void			tty_restore(void);
 
 t_prdct_tkn	*get_predict_token(char *raw);

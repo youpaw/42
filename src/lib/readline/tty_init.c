@@ -2,10 +2,8 @@
 * Created by Maxon Gena on 8/28/20.
 */
 
-#include <termcap.h>
-#include <zconf.h>
 #include "readline.h"
-#include "cc_char.h"
+#include "unistd.h"
 
 /*
  * Initialize terminal: make termcap init, enter input mode
@@ -14,19 +12,16 @@
  * variable and set terminal in noncanonical mode.
  */
 
-void		tty_init(void)
+int	tty_init(void)
 {
 	struct termios	tty;
 
-//	tputs(tgetstr("im", NULL), 1, &putchar);
 	if (!(isatty(0)))
-	{
-		//TODO "stdin not terminal" error handle
-		exit(1);
-	}
+		return (-1);
 	tcgetattr(0, &tty);
 	g_tty_backup = tty;
 	tty.c_lflag &= ~(ICANON | ECHO | ISIG);
 	tty.c_cc[VMIN] = 1;
 	tcsetattr(0, TCSAFLUSH, &tty);
+	return (0);
 }

@@ -6,11 +6,11 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
-int handle_escape_sequence(t_inp *input)
+static int	(*get_handler(char *key))(t_inp*)
 {
-	static const t_key_readline_handler hanlders[N_ESC_KEY_HANDLERS] = {
-			{"\103",    &handle_right_arrow},
-			{"\104",    &handle_left_arrow},
+	static const t_key_readline_handler	hanlders[N_ESC_KEY_HANDLERS] = {
+			{"\103", &handle_right_arrow},
+			{"\104", &handle_left_arrow},
 			{"\63\176", &handle_del},
 			{"\101", &handle_up_arrow}, // up
 			{"\102", &handle_down_arrow}, // down
@@ -21,22 +21,30 @@ int handle_escape_sequence(t_inp *input)
 			{"\110", &handle_home_key}, //home
 			{"\106", &handle_end_key} //end
 	};
-	int index;
-	char ch[2];
-	t_letter key;
+	int									index;
 
 	index = 0;
-	ch[1] = '\0';
-	key.num = getch();
 	while (index < N_ESC_KEY_HANDLERS)
 	{
-		if (!strncmp(hanlders[index].primary_key, key.ch, 4))
-		{
+		if (!strncmp(hanlders[index].primary_key, key, 4))
 			if (hanlders[index].handler)
-				return (hanlders[index].handler(input));
-		}
+				return (hanlders[index].handler);
 		index++;
 	}
+	return (NULL);
+}
+
+int			handle_escape_sequence(t_inp *input)
+{
+	int		index;
+	char	ch[2];
+	t_let	key;
+	int		(*handler)(t_inp *);
+
+	ch[1] = '\0';
+	key.num = getch();
+	if ((handler = get_handler(key.ch)))
+		return (handler(input));
 	index = 1;
 	while (index != 4 && key.ch[index])
 	{

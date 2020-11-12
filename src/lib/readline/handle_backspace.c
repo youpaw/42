@@ -10,7 +10,7 @@
 int handle_backspace(t_inp *inp)
 {
 
-	if (inp->curs_x_pos - get_prompt_len(inp->curs_y_pos))
+	if (inp->x_pos - get_prompt_len(inp->y_pos))
 	{
 		handle_left_arrow(inp);
 		handle_del(inp);

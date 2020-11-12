@@ -7,11 +7,11 @@
 #include "cc_str.h"
 #include "cc_char.h"
 
-void select_choise(void *files, t_inp *inp, char *current)
+void	select_choise(void *files, t_inp *inp, char *current)
 {
-	char *selection;
-	size_t i;
-	struct winsize ws;
+	struct winsize	ws;
+	char			*selection;
+	size_t			i;
 
 	i = 0;
 	clear_last_disp_token(current, inp);
@@ -21,8 +21,7 @@ void select_choise(void *files, t_inp *inp, char *current)
 	tputs(tgetstr("up", NULL), 1, putchar);
 	if (!selection)
 		selection = strdup(current);
-	while (i++ != inp->curs_x_pos % ws.ws_col)
+	while (i++ != inp->x_pos % ws.ws_col)
 		tputs(tgetstr("nd", NULL), 1, putchar);
 	put_str_to_input(inp, selection);
 }
-

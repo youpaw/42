@@ -8,7 +8,7 @@
 #include "cc.h"
 #include "ft_select.h"
 
-static void			check_cr(char filename[1027])
+static void		check_cr(char filename[1027])
 {
 	char *cr;
 
@@ -16,7 +16,7 @@ static void			check_cr(char filename[1027])
 		strcpy(cr, "^M");
 }
 
-static t_list		*get_file_lst(struct dirent *dir)
+static t_list	*get_file_lst(struct dirent *dir)
 {
 	char		filename[1027];
 	t_list		*file;
@@ -34,7 +34,7 @@ static t_list		*get_file_lst(struct dirent *dir)
 	return (file);
 }
 
-static void			del_at_end(DIR *d, char *fullname, t_list *lst)
+static void		del_at_end(DIR *d, char *fullname, t_list *lst)
 {
 	free(fullname);
 	closedir(d);
@@ -46,7 +46,7 @@ static void			del_at_end(DIR *d, char *fullname, t_list *lst)
 ** scan dir in which we can find file and returns filenames
 */
 
-static t_list		*get_list_files(char *path, char *n, int check_exe)
+static t_list	*get_list_files(char *path, char *n, int check_exe)
 {
 	DIR				*d;
 	struct dirent	*dir;
@@ -75,11 +75,11 @@ static t_list		*get_list_files(char *path, char *n, int check_exe)
 	return (lst);
 }
 
-void				handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
+void			handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m)
 {
 	t_list	*files;
-	char 	*part;
-	char 	**filename;
+	char	*part;
+	char	**filename;
 
 	filename = parse_filename(token->raw);
 	files = get_list_files(filename[0], filename[1], acc_m);

@@ -11,25 +11,25 @@
 ** and put them into filename[0] and [1] respectively
 */
 
-static char 		**fullname_with_delim(char *fullname, char **filename, char *delimiter)
+static char		**fullname_with_delim(char *full, char **file, char *delimiter)
 {
 	if (!(delimiter[1]))
 	{
-		filename[0] = strdup(fullname);
-		filename[1] = strdup("");
+		file[0] = strdup(full);
+		file[1] = strdup("");
 	}
-	else if (delimiter == fullname)
+	else if (delimiter == full)
 	{
-		filename[0] = strdup("/");
-		filename[1] = strdup(fullname + 1);
+		file[0] = strdup("/");
+		file[1] = strdup(full + 1);
 	}
 	else
 	{
 		*delimiter = '\0';
-		filename[0] = strdup(fullname);
-		filename[1] = strdup(delimiter + 1);
+		file[0] = strdup(full);
+		file[1] = strdup(delimiter + 1);
 	}
-	return (filename);
+	return (file);
 }
 
 char			**parse_filename(char *fullname)

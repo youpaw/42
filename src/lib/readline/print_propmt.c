@@ -5,7 +5,7 @@
 #include "readline.h"
 #include <string.h>
 
-int 	get_prompt_len(int y)
+int		get_prompt_len(int y)
 {
 	if (y)
 		return (NEXT_PROMPT_LEN);
@@ -21,15 +21,15 @@ char	*get_prompt(int y)
 		return (strdup(FIRST_PROMPT_TEXT));
 }
 
-void 	print_prompt(t_inp *inp)
+void	print_prompt(t_inp *inp)
 {
-	int i;
-	char sym[4];
-	char *prompt;
+	int		i;
+	char	sym[4];
+	char	*prompt;
 
 	i = 0;
 	bzero(sym, 4);
-	prompt = get_prompt(inp->curs_y_pos);
+	prompt = get_prompt(inp->y_pos);
 	while (prompt[i])
 	{
 		sym[0] = prompt[i++];

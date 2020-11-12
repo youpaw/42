@@ -12,9 +12,9 @@ void	del_input(t_inp *input)
 	while (input->line[i])
 		vec_del(&(input->line[i++]));
 	vec_del(&(input->line[i]));
-	free(input->line_len);
+	free(input->l_len);
 	free(input->line);
-	input->line_len = NULL;
+	input->l_len = NULL;
 	input->line = NULL;
 }
 

@@ -15,11 +15,11 @@
 #include "cc.h"
 #include <stdio.h>
 
-int			handle_tab(t_inp *inp)
+int		handle_tab(t_inp *inp)
 {
 	static t_list	*options;
-	t_prdct_tkn *token;
-	char *str;
+	t_prdct_tkn		*token;
+	char			*str;
 
 	str = input_to_n_str(*inp);
 	token = get_predict_token(str);
@@ -31,5 +31,5 @@ int			handle_tab(t_inp *inp)
 	else if (token->type == r_param)
 		handle_param_token(inp, token);
 	del_predict_token(&token);
-	return 0;
+	return (0);
 }

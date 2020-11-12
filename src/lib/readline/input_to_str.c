@@ -13,24 +13,24 @@ char	*input_to_str(t_inp input, int newline)
 
 	if (!input.line)
 		return (strdup(""));
-	while (input.line[input.curs_y_pos])
-		input.curs_y_pos++;
-	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.curs_y_pos);
+	while (input.line[input.y_pos])
+		input.y_pos++;
+	string = xmalloc((sizeof(char) * input.len * 4) + 1 + input.y_pos);
 	*string = '\0';
-	input.curs_y_pos = 0;
+	input.y_pos = 0;
 	bzero(let, 5);
-	while (input.line[input.curs_y_pos])
+	while (input.line[input.y_pos])
 	{
-		input.curs_x_pos = get_prompt_len(input.curs_y_pos);
-		while (input.curs_x_pos != input.line_len[input.curs_y_pos])
+		input.x_pos = get_prompt_len(input.y_pos);
+		while (input.x_pos != input.l_len[input.y_pos])
 		{
-			vec_get_at(let, input.line[input.curs_y_pos], input.curs_x_pos);
+			vec_get_at(let, input.line[input.y_pos], input.x_pos);
 			strcat(string, let);
-			input.curs_x_pos++;
+			input.x_pos++;
 		}
-		if (input.line[input.curs_y_pos + 1] && newline)
+		if (input.line[input.y_pos + 1] && newline)
 			strcat(string, "\n");
-		input.curs_y_pos++;
+		input.y_pos++;
 	}
 	return (string);
 }

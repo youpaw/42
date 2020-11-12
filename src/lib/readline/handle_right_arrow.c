@@ -13,17 +13,18 @@
 #include "readline.h"
 #include <termcap.h>
 #include <sys/ioctl.h>
-#include <zconf.h>
+#include <unistd.h>
 #include "cc_mem.h"
 #include "cc_char.h"
-int handle_right_arrow(t_inp *inp)
+
+int		handle_right_arrow(t_inp *inp)
 {
 	struct winsize ws;
 
-	if (inp->curs_x_pos != inp->line_len[inp->curs_y_pos])
+	if (inp->x_pos != inp->l_len[inp->y_pos])
 	{
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-		if (!(inp->curs_x_pos % (ws.ws_col - 1)) && inp->curs_x_pos)
+		if (!(inp->x_pos % (ws.ws_col - 1)) && inp->x_pos)
 		{
 			tputs(tgetstr("do", NULL), 1, &putchar);
 			tputs(tgetstr("cr", NULL), 1, &putchar);
@@ -31,12 +32,9 @@ int handle_right_arrow(t_inp *inp)
 		}
 		else
 			tputs(tgetstr("nd", NULL), 1, &putchar);
-		inp->curs_x_pos++;
+		inp->x_pos++;
 	}
 	else
-	{
 		putchar('\7');
-	}
-	return 0;
+	return (0);
 }
-
