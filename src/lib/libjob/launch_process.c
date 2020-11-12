@@ -43,6 +43,28 @@ static void 	destruct_process(t_process *p)
 	free(p->env);
 }
 
+static	void 	try_execv(const char *path, t_process *p)
+{
+	int 		err_code;
+	const char	*err_args[2];
+
+	err_args[1] = "";
+	if (access(path, F_OK) == 0)
+	{
+		if (access(path, X_OK) == 0)
+			execve(path, p->argv, p->env);
+		error_print(E_ACCES, (const char **) p->argv);
+		err_code = 126;
+	} else
+	{
+		err_args[0] = path;
+		error_print(E_NOENT, err_args);
+		err_code = 127;
+	}
+	destruct_process(p);
+	exit(err_code);
+}
+
 void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 {
 	const char	*path;
@@ -66,7 +88,7 @@ void	launch_process(t_process *p, pid_t pgid, int is_foreground)
 		path = hash_get_path(p->argv[0]);
 	get_exec_env(p);
 	if (path)
-		execve(path, p->argv, p->env);
+		try_execv(path, p);
 	error_print(E_NOCMD, (const char **)p->argv);
 	destruct_process(p);
 	exit(127);

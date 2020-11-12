@@ -12,7 +12,7 @@ const char 	*g_error_msg[] = {
 		"Input/output error",
 		"Bad file descriptor",
 		"Cannot allocate memory",
-		"Permission denied",
+		"%: Permission denied",
 		"File exists",
 		"%: %: Not a directory",
 		"%: %: Is a directory",

@@ -24,7 +24,7 @@ typedef enum	e_error_code
 	E_IO,                           /* Input/output error */
 	E_BADF,                         /* Bad file descriptor */
 	E_NOMEM,                        /* Cannot allocate memory */
-	E_ACCES,                        /* Permission denied */
+	E_ACCES,                        /* %: Permission denied */
 	E_EXIST,                        /* File exists */
 	E_NOTDIR,                       /* Not a directory */
 	E_ISDIR,                        /* Is a directory */
