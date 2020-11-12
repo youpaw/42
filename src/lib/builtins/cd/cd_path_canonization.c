@@ -1,6 +1,14 @@
-//
-// Created by Halfhand Lorrine on 9/14/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_path_canonization.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:13 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:16 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cd.h"
 #include "cc_mem.h"
@@ -8,8 +16,8 @@
 static char		*fill_empty_path(const char *path)
 {
 	char		*new_path;
-	const char *oldpwd;
-	int 		len;
+	const char	*oldpwd;
+	int			len;
 
 	oldpwd = exec_env_get_value("OLDPWD");
 	len = strlen(path) - 1;
@@ -24,10 +32,10 @@ static char		*fill_empty_path(const char *path)
 	return (new_path);
 }
 
-static char *tokens_join(char **tokens, int len)
+static char		*tokens_join(char **tokens, int len)
 {
-	char	*new_path;
-	int 	cnt;
+	char		*new_path;
+	int			cnt;
 
 	cnt = 0;
 	new_path = memalloc(MAX_PATH + 1);
@@ -42,13 +50,13 @@ static char *tokens_join(char **tokens, int len)
 	}
 	if (!*new_path)
 		strcpy(new_path, "/");
-	return(new_path);
+	return (new_path);
 }
 
-static void tokens_handler(char **tokens, int len)
+static void		tokens_handler(char **tokens, int len)
 {
-	int curr_e;
-	int prev_e;
+	int			curr_e;
+	int			prev_e;
 
 	curr_e = 0;
 	prev_e = 0;
@@ -63,16 +71,16 @@ static void tokens_handler(char **tokens, int len)
 			*tokens[curr_e] = '\0';
 		prev_e = curr_e;
 		while (prev_e > 0 && *tokens[prev_e] == '\0')
-				prev_e--;
+			prev_e--;
 		curr_e++;
 	}
 }
 
-static int 	tokenizer(const char *path, char ***tokens)
+static int		tokenizer(const char *path, char ***tokens)
 {
-	char 		*full_path;
-	char 		*pwd;
-	const char 	*oldpwd;
+	char		*full_path;
+	char		*pwd;
+	const char	*oldpwd;
 
 	oldpwd = exec_env_get_value("OLDPWD");
 	if (strcmp(path, "-") == 0 && oldpwd != NULL)
@@ -96,11 +104,11 @@ static int 	tokenizer(const char *path, char ***tokens)
 	return (0);
 }
 
-char	*cd_path_canonization(const char *path)
+char			*cd_path_canonization(const char *path)
 {
-	char **tokens;
-	char *new_path;
-	int len;
+	char		**tokens;
+	char		*new_path;
+	int			len;
 
 	len = 0;
 	new_path = NULL;

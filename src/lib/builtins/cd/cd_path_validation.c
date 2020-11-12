@@ -1,13 +1,21 @@
-//
-// Created by slava-nya on 9/24/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_path_validation.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:07 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:10 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cd.h"
 
-static int len_check(const char *cn_path, const char *path)
+static int			len_check(const char *cn_path, const char *path)
 {
-	int cnt;
-	int file_len;
+	int				cnt;
+	int				file_len;
 
 	file_len = 0;
 	cnt = 0;
@@ -31,9 +39,9 @@ static int len_check(const char *cn_path, const char *path)
 	return (1);
 }
 
-static int valid_dir(const char *cn_path, const char *path)
+static int			valid_dir(const char *cn_path, const char *path)
 {
-	struct	stat s;
+	struct stat		s;
 
 	if (!*cn_path || stat(cn_path, &s))
 	{
@@ -53,9 +61,9 @@ static int valid_dir(const char *cn_path, const char *path)
 	return (1);
 }
 
-static int envv_set(const char *cn_path, const char *path)
+static int			envv_set(const char *cn_path, const char *path)
 {
-	const char 	*(env_paths[N_PATHS]);
+	const char		*(env_paths[N_PATHS]);
 
 	env_paths[home] = exec_env_get_value("HOME");
 	env_paths[oldpwd] = exec_env_get_value("OLDPWD");
@@ -67,7 +75,7 @@ static int envv_set(const char *cn_path, const char *path)
 	return (1);
 }
 
-int cd_path_validation(const char *cn_path, const char *path)
+int					cd_path_validation(const char *cn_path, const char *path)
 {
 	if (!cn_path || !(*cn_path))
 		return (0);

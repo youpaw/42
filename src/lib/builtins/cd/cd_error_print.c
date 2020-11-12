@@ -1,10 +1,18 @@
-//
-// Created by Halfhand Lorrine on 10/25/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_error_print.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:19 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:22 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cd.h"
 
-int cd_error_print(t_error_code er_code, const char *arg)
+int	cd_error_print(t_error_code er_code, const char *arg)
 {
 	char	*er_arr[3];
 

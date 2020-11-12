@@ -1,6 +1,14 @@
-//
-// Created by slava-nya on 10/2/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 18:38:41 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 18:38:48 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ECHO_H
 #define ECHO_H
@@ -22,4 +30,4 @@ typedef struct		s_echo
 char		*handle_esc_chars(char *str);
 
 
-#endif //ECHO_H
+#endif
