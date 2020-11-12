@@ -9,7 +9,7 @@
 #include <termcap.h>
 #include <zconf.h>
 
-int handle_left_arrow(t_inp *inp)
+int	handle_left_arrow(t_inp *inp)
 {
 	struct winsize ws;
 
@@ -19,7 +19,8 @@ int handle_left_arrow(t_inp *inp)
 		if (!(inp->x_pos % ws.ws_col) && inp->x_pos)
 		{
 			tputs(tgetstr("up", NULL), 1, &putchar);
-			tputs(tgoto(tgetstr("ch", NULL), 1, (inp->x_pos - 1) % ws.ws_col), 1, putchar);
+			tputs(tgoto(tgetstr("ch", NULL), 1, (inp->x_pos - 1) % \
+				ws.ws_col), 1, putchar);
 		}
 		else
 			tputs(tgetstr("le", NULL), 1, &putchar);
@@ -27,5 +28,5 @@ int handle_left_arrow(t_inp *inp)
 	}
 	else
 		putchar('\7');
-	return 0;
+	return (0);
 }

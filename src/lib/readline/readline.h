@@ -28,9 +28,9 @@
 # include "cc_graph.h"
 # include "lexer.h"
 
-struct termios		g_tty_backup;
+struct termios	g_tty_backup;
 
-typedef struct		s_input
+typedef struct	s_input
 {
 	t_vec			**line;
 	size_t			x_pos;
@@ -38,37 +38,37 @@ typedef struct		s_input
 	size_t			len;
 	size_t			*l_len;
 	char			*hist_storage;
-}					t_inp;
+}				t_inp;
 
-typedef union		u_letter
+typedef union	u_letter
 {
 	char			ch[5];
 	int				num;
-}					t_let;
+}				t_let;
 
-typedef struct		s_key_readline_handler
+typedef struct	s_key_readline_handler
 {
 	char			primary_key[5];
 	int				(*handler)(t_inp *);
-}					t_key_readline_handler;
+}				t_key_readline_handler;
 
-typedef	enum		e_predict_type
+typedef	enum	e_predict_type
 {
 	r_cmd,
 	r_file,
 	r_param
-}					t_predict_type;
+}				t_predict_type;
 
-typedef	struct		s_predict_token
+typedef	struct	s_predict_token
 {
 	char				*raw;
 	enum e_predict_type	type;
-}					t_prdct_tkn;
+}				t_prdct_tkn;
 
-int tty_init();
+int				tty_init();
 void			tty_restore(void);
 
-t_prdct_tkn	*get_predict_token(char *raw);
+t_prdct_tkn		*get_predict_token(char *raw);
 void			del_predict_token(t_prdct_tkn **token);
 
 void			select_choise(void *files, t_inp *inp, char *current);
@@ -90,8 +90,7 @@ int				handle_down_arrow(t_inp *inp);
 int				handle_up_arrow(t_inp *inp);
 int				handle_home_key(t_inp *inp);
 int				handle_end_key(t_inp *inp);
-int				handle_eox(t_inp *inp);
-int				handle_eot(t_inp *inp);
+int				handle_etx(t_inp *inp);
 
 int				handle_key(char *key, t_inp *input);
 
@@ -111,9 +110,9 @@ void			handle_file_token(t_inp *input, t_prdct_tkn *token, int acc_m);
 void			handle_param_token(t_inp *input, t_prdct_tkn *token);
 
 char			**parse_filename(char *fullname);
-int				check_for_utf8_comb_charecter(char *p, char *let, size_t len);
+int				check_for_utf8_comb_character(char *pr, char *let, size_t len);
 char			*find_same_part(t_list *files, char*filename);
-void			clear_last_disp_token(char *token, t_inp *input);
+void			clear_last_display_token(char *token, t_inp *input);
 
 void			print_prompt(t_inp *inp);
 char			*get_prompt(int y);

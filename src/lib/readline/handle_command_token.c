@@ -7,11 +7,11 @@
 #include "cc_str.h"
 #include "ft_select.h"
 
-void 	handle_command_token(t_inp *inp, t_prdct_tkn *token)
+void	handle_command_token(t_inp *inp, t_prdct_tkn *token)
 {
-	size_t i;
-	t_graph graph;
-	char **cmds;
+	size_t	i;
+	t_graph	graph;
+	char	**cmds;
 
 	if (strchr(token->raw, '/'))
 		handle_file_token(inp, token, 1);

@@ -29,7 +29,7 @@ static void	inner_circle(t_inp *input, size_t cur_x_pos, size_t cur_y_pos)
 	write(STDIN_FILENO, buf, i);
 }
 
-void	common_redraw(t_inp *input)
+void		common_redraw(t_inp *input)
 {
 	int		cur_y_pos;
 	int		cur_x_pos;

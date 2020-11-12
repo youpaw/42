@@ -14,7 +14,7 @@ void	select_choise(void *files, t_inp *inp, char *current)
 	size_t			i;
 
 	i = 0;
-	clear_last_disp_token(current, inp);
+	clear_last_display_token(current, inp);
 	tputs(tgetstr("do", NULL), 1, putchar);
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	selection = ft_select(files);

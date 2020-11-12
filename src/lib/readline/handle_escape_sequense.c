@@ -12,14 +12,14 @@ static int	(*get_handler(char *key))(t_inp*)
 			{"\103", &handle_right_arrow},
 			{"\104", &handle_left_arrow},
 			{"\63\176", &handle_del},
-			{"\101", &handle_up_arrow}, // up
-			{"\102", &handle_down_arrow}, // down
-			{"\61\73\62\101", &handle_shift_up}, //shift + up
-			{"\61\73\62\102", &handle_shift_down}, // shift + down
-			{"\61\73\62\103", &handle_shift_right}, //shift + right
-			{"\61\73\62\104", &handle_shift_left}, //shift + left
-			{"\110", &handle_home_key}, //home
-			{"\106", &handle_end_key} //end
+			{"\101", &handle_up_arrow},
+			{"\102", &handle_down_arrow},
+			{"\61\73\62\101", &handle_shift_up},
+			{"\61\73\62\102", &handle_shift_down},
+			{"\61\73\62\103", &handle_shift_right},
+			{"\61\73\62\104", &handle_shift_left},
+			{"\110", &handle_home_key},
+			{"\106", &handle_end_key}
 	};
 	int									index;
 
