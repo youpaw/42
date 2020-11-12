@@ -11,23 +11,15 @@
 /* ************************************************************************** */
 
 #ifndef ECHO_H
-#define ECHO_H
+# define ECHO_H
 
-#include "builtins.h"
-#include "cc.h"
-#include "optparse.h"
+# define ECHO_N_FLAG 00000001
+# define ECHO_E_LC_FLAG 00000010
+# define ECHO_E_UPC_FLAG 00000100
 
-#define ECHO_n_FLAG 00000001
-#define ECHO_e_FLAG 00000010
-#define ECHO_E_FLAG 00000100
-
-typedef struct		s_echo
-{
-	char			first;
-	char			second;
-}					t_echo;
+# include "builtins.h"
+# include "optparse.h"
 
 char		*handle_esc_chars(char *str);
-
 
 #endif

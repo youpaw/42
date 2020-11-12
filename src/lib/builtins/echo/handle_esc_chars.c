@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "echo.h"
+#include "cc_char.h"
 
-static char	*handle_chr(char *str, int cnt)
+static char		*handle_chr(char *str, int cnt)
 {
-	char *rchars;
+	char		*rchars;
 
 	if (cnt == 3)
 		return (NULL);
@@ -25,11 +26,10 @@ static char	*handle_chr(char *str, int cnt)
 	return (str);
 }
 
-
-static int	get_hex(char c)
+static int		get_hex(char c)
 {
-	int		cnt;
-	char	*set;
+	int			cnt;
+	char		*set;
 
 	cnt = 0;
 	set = "0123456789ABCDEF";
@@ -42,8 +42,8 @@ static int	get_hex(char c)
 
 static char		*handle_hex(char *str)
 {
-	int		ch;
-	int		tmp;
+	int			ch;
+	int			tmp;
 
 	str += 2;
 	if ((ch = get_hex(toupper(*str))) >= 0)
@@ -60,10 +60,9 @@ static char		*handle_hex(char *str)
 	return (str);
 }
 
-
-static char	*handle_oct(char *str)
+static char		*handle_oct(char *str)
 {
-	int ch;
+	int			ch;
 
 	str += 2;
 	if (*str >= '0' && *str < '8')
@@ -83,12 +82,11 @@ static char	*handle_oct(char *str)
 	return (str);
 }
 
-
-char	*handle_esc_chars(char *str)
+char			*handle_esc_chars(char *str)
 {
-	int		cnt;
-	char	c;
-	char	*echars;
+	int			cnt;
+	char		c;
+	char		*echars;
 
 	c = *(str + 1);
 	cnt = 0;

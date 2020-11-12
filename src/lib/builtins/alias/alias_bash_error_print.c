@@ -13,7 +13,7 @@
 #include "alias_builtins.h"
 
 void		alias_bash_error_print(t_error_code er_code, const char *cmd,\
-							  const char *arg)
+			const char *arg)
 {
 	char	*er_arr[3];
 

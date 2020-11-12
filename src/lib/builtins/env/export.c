@@ -1,6 +1,14 @@
-//
-// Created by Azzak Omega on 9/16/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 20:22:14 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 20:22:18 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "optparse.h"
 #include "error.h"
@@ -8,11 +16,11 @@
 #include "cc_hash_map.h"
 #include "env.h"
 #include "cc_str.h"
-#include "cc_num.h"
-static	int	try_export(const char *arg)
+
+static int			try_export(const char *arg)
 {
-	t_hash_pair	pair;
-	size_t		name_len;
+	t_hash_pair		pair;
+	size_t			name_len;
 
 	if (!(name_len = get_valid_name_length_no_check(arg)) ||
 		(arg[name_len] && arg[name_len] != '='))
@@ -25,10 +33,10 @@ static	int	try_export(const char *arg)
 	return (hash_map_insert(g_env, &pair));
 }
 
-static int 	check_opt(const char **av, char *opt, int *er_code)
+static int			check_opt(const char **av, char *opt, int *er_code)
 {
 	t_parsed_opt	opt_res;
-	int 			skip;
+	int				skip;
 
 	if (!(skip = optparse(av, opt, &opt_res)))
 	{
@@ -38,12 +46,11 @@ static int 	check_opt(const char **av, char *opt, int *er_code)
 	return (skip);
 }
 
-int 	export(const char **av)
+int					export(const char **av)
 {
-	int 			skip;
+	int				skip;
 	const char		*args[2];
-	int 			err_code;
-
+	int				err_code;
 
 	if (!(skip = check_opt(av, "p", &err_code)))
 		return (err_code);

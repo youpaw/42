@@ -12,10 +12,10 @@
 
 #include "alias_builtins.h"
 
-static void 	value_parse(const char *cmd, const char *arg, int *er_code)
+static void			value_parse(const char *cmd, const char *arg, int *er_code)
 {
 	if (!(alias_remove(arg)))
-		return;
+		return ;
 	else
 	{
 		*er_code = 1;
@@ -23,11 +23,11 @@ static void 	value_parse(const char *cmd, const char *arg, int *er_code)
 	}
 }
 
-int				unalias(const char **av)
+int					unalias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;
-	int 			er_code;
+	int				er_code;
 
 	er_code = 0;
 	flag = 0;

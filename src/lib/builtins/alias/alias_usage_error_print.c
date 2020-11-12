@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "alias.h"
+#include "alias_builtins.h"
 #include "cc_str.h"
 
-void alias_usage_error_print(const char *cmd, int *er_code)
+void	alias_usage_error_print(const char *cmd, int *er_code)
 {
 	*er_code = 2;
 	puts(cmd);

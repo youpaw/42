@@ -12,7 +12,7 @@
 
 #include "alias_builtins.h"
 
-static void		alias_pint_pair(const char *key, const char *value)
+static void			alias_pint_pair(const char *key, const char *value)
 {
 	puts("alias ");
 	puts(key);
@@ -21,25 +21,27 @@ static void		alias_pint_pair(const char *key, const char *value)
 	putendl("'");
 }
 
-static void		value_parse(const char *arg, int *er_code)
+static void			value_parse(const char *arg, int *er_code)
 {
 	const char		*value;
 
 	if ((value = alias_get_value(arg)) != NULL)
 		alias_pint_pair(arg, value);
 	else
+	{
 		if (alias_add(arg))
 		{
 			*er_code = 1;
 			alias_bash_error_print(E_NOTFOUND, "alias", arg);
 		}
+	}
 }
 
-int		alias(const char **av)
+int					alias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;
-	int 			er_code;
+	int				er_code;
 
 	er_code = 0;
 	flag = 0;

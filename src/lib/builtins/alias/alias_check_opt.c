@@ -13,10 +13,10 @@
 #include "alias_builtins.h"
 #include "cc_str.h"
 
-int alias_check_opt(t_opt_map built_i, const char **av, unsigned char *flags,
-					int *er_code)
+int						alias_check_opt(t_opt_map built_i, const char **av,\
+						unsigned char *flags, int *er_code)
 {
-	t_parsed_opt 		opt;
+	t_parsed_opt		opt;
 	int					skip_args;
 	static const char	opt_alias_map[N_ALIAS_BUILTINS][2] = {"p\0", "a\0"};
 	static const char	*built_map[N_ALIAS_BUILTINS] = {"alias", "unalias"};
