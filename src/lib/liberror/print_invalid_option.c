@@ -4,7 +4,7 @@
 
 #include "error.h"
 
-int	print_invalid_option(const char *bin, char opt)
+int				print_invalid_option(const char *bin, char opt)
 {
 	char		str[2];
 	const char	*args[2];
