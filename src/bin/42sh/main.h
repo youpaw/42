@@ -3,9 +3,9 @@
 //
 
 #ifndef MAIN_H
-#define MAIN_H
+# define MAIN_H
 
-int 	main_init(const char *name, const char *av[], const char *en[]);
-int 	main_manager(void);
+int		main_init(const char *name, const char *av[], const char *en[]);
+int		main_manager(void);
 
-#endif //MAIN_H
+#endif
