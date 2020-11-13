@@ -3,7 +3,6 @@
 //
 
 #include "jobs.h"
-#include <stdlib.h>
 
 void	remove_job_by_index(int job_index)
 {

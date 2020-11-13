@@ -3,7 +3,6 @@
 //
 
 #include "readline.h"
-#include "cc_char.h"
 #include <termcap.h>
 #include <sys/ioctl.h>
 #include <zconf.h>

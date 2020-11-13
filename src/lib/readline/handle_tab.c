@@ -12,9 +12,6 @@
 
 #include "readline.h"
 
-#include "cc.h"
-#include <stdio.h>
-
 int		handle_tab(t_inp *inp)
 {
 	static t_list	*options;

@@ -3,7 +3,6 @@
 //
 
 #include "jobs.h"
-#include "env.h"
 
 int	run_builtin(t_process *p)
 {

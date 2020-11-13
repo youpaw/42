@@ -12,7 +12,6 @@
 
 #include "ft_select.h"
 #include "cc_str.h"
-#include "cc_char.h"
 
 void		select_init(void)
 {

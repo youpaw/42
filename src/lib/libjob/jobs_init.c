@@ -2,7 +2,6 @@
 // Created by Azzak Omega on 10/8/20.
 //
 
-#include <sys/types.h>
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>

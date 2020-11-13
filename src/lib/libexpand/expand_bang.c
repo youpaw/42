@@ -3,7 +3,6 @@
 //
 #include "cc_char.h"
 #include "cc_str.h"
-#include "cc_num.h"
 #include "history.h"
 #include "stdlib.h"
 

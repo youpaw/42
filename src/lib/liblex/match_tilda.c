@@ -2,7 +2,6 @@
 // Created by youpaw on 9/24/20.
 //
 #include "lexer.h"
-#include "cc_char.h"
 
 int		match_tilda(t_lexer *lexer)
 {
