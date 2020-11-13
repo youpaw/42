@@ -1,6 +1,14 @@
-//
-// Created by Darth Butterwell on 8/16/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calc.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 22:03:22 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/12 22:03:28 by hlorrine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CALC_H
 # define CALC_H
@@ -17,9 +25,19 @@
 enum						e_calc_type
 {
 	c_negative,
+	c_positive,
+	c_multiplication,
+	c_division,
+	c_modulo,
 	c_subtraction,
 	c_addition,
+	c_greater,
 	c_lower,
+	c_greater_or_equal,
+	c_lower_or_equal,
+	c_equal,
+	c_not_equal,
+	c_and,
 	c_or,
 	c_none,
 	c_parenthesis,
