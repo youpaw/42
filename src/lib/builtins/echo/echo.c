@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <sys/stat.h>
-#include <error.h>
+#include "error.h"
 #include "echo.h"
 #include "cc_str.h"
 #include "cc_char.h"
