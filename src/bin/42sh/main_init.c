@@ -21,17 +21,19 @@ static void	termcap_init(void)
 	else
 	{
 		if (error == 0)
-			puts("Terminal recognition error\nSorry, try another terminal\n");
+			puts("Terminal recognition error\n"
+		"Sorry, try another terminal\n");
 		if (error == -1)
-			puts("Terminal initialization error\nSorry, check termcap file\n");
+			puts("Terminal initialization error\n"
+		"Sorry, check termcap file\n");
 		else
 			exit(0);
 	}
 }
 
-static void change_shlvl(void)
+static void	change_shlvl(void)
 {
-	int 		n_lvl;
+	int			n_lvl;
 	char		*str_lvl;
 	char		*field_lvl;
 
@@ -48,7 +50,7 @@ static void change_shlvl(void)
 	free(str_lvl);
 }
 
-int 	main_init(const char *name, const char *av[], const char *en[])
+int			main_init(const char *name, const char *av[], const char *en[])
 {
 	termcap_init();
 	av_init(name, av);
