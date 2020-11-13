@@ -57,7 +57,7 @@ void	restore_displayed(t_selection *selection)
 	}
 }
 
-void move_start()
+void	move_start(void)
 {
 	int shift;
 
@@ -69,5 +69,4 @@ void move_start()
 	}
 	tputs(tgetstr("cr", NULL), 1, putchar);
 	tputs(tgetstr("cd", NULL), 1, putchar);
-
 }

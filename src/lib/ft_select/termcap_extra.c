@@ -21,8 +21,3 @@ void	set_term_str(void)
 	g_out.move_right = tgetstr("nd", NULL);
 	g_out.move_down = tgetstr("do", NULL);
 }
-
-void	tinit(void)
-{
-		set_term_str();
-}

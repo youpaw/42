@@ -16,10 +16,10 @@
 #include "cc_char.h"
 #include "cc_mem.h"
 
-t_selection *convert_list_2_selection(t_list *lst)
+t_selection	*convert_list_2_selection(t_list *lst)
 {
-	t_list *first;
-	t_selection *res;
+	t_list		*first;
+	t_selection	*res;
 
 	res = NULL;
 	first = lst;
@@ -32,6 +32,7 @@ t_selection *convert_list_2_selection(t_list *lst)
 	}
 	return (res);
 }
+
 t_selection	*convert_array_2_selection(char **argv)
 {
 	t_selection	*res;
@@ -48,11 +49,11 @@ t_selection	*convert_array_2_selection(char **argv)
 	return (res);
 }
 
-char	*prepare_choise(t_selection *selection, char *letter)
+char		*prepare_choise(t_selection *selection, char *letter)
 {
-	size_t i;
-	size_t k;
-	char *ret;
+	size_t	i;
+	size_t	k;
+	char	*ret;
 
 	i = 0;
 	k = 0;
@@ -77,7 +78,7 @@ char	*prepare_choise(t_selection *selection, char *letter)
 	return (ret);
 }
 
-char *ft_select(t_selection *selections)
+char		*ft_select(t_selection *selections)
 {
 	char	*last_letter;
 
