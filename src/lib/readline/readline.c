@@ -51,7 +51,7 @@ int			readline(char **line)
 		print_prompt(&input);
 	while (42)
 	{
-		key.num = getch();
+		key.num = sh_getch();
 		if (handle_key(key.ch, &input))
 		{
 			*line = input_to_str(input, 1);

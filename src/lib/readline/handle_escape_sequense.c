@@ -42,7 +42,7 @@ int			handle_escape_sequence(t_inp *input)
 	int		(*handler)(t_inp *);
 
 	ch[1] = '\0';
-	key.num = getch();
+	key.num = sh_getch();
 	if ((handler = get_handler(key.ch)))
 		return (handler(input));
 	index = 1;

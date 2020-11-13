@@ -97,7 +97,7 @@ int				handle_key(char *key, t_inp *input);
 void			handle_command_token(t_inp *inp, t_prdct_tkn *token);
 
 t_inp			input_init(char *line);
-int				readline(char **line);
+int				sh_readline(char **line);
 
 void			clear_display_input(t_inp *inp);
 void			common_redraw(t_inp *input);

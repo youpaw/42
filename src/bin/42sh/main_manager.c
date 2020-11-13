@@ -39,7 +39,7 @@ int				main_manager(void)
 	str = strdup("");
 	while (42)
 	{
-		readline(&str);
+		sh_readline(&str);
 		tokens = validate_input(&str);
 		if (tokens && !tokens->error)
 			if ((ast = parse(tokens)))
