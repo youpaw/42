@@ -7,33 +7,14 @@
 #include "cc_str.h"
 #include <termcap.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
-
-void	draw_letter(size_t *i, size_t *line_len, char *str)
-{
-	struct winsize	ws;
-	int				len;
-
-	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	len = utf8_sizeof_symbol(*str);
-	write(STDOUT_FILENO, str, len);
-	(*line_len)++;
-	if (!(*line_len % ws.ws_col))
-	{
-		tputs(tgetstr("do", NULL), 1, &putchar);
-		tputs(tgetstr("cr", NULL), 1, &putchar);
-	}
-	*i += len;
-}
 
 void	redraw_input(t_inp inp, char *str)
 {
 	size_t	i;
 	char	*prompt;
-	size_t	line_len;
+	int		len;
 
 	i = 0;
-	line_len = get_prompt_len(inp.y_pos);
 	while (str[i] != 0)
 	{
 		if (str[i] == '\n')
@@ -43,10 +24,13 @@ void	redraw_input(t_inp inp, char *str)
 			prompt = get_prompt(inp.y_pos);
 			puts(prompt);
 			free(prompt);
-			line_len += get_prompt_len(inp.y_pos);
 			i++;
 		}
 		else
-			draw_letter(&i, &line_len, &str[i]);
+		{
+			len = utf8_sizeof_symbol(*str);
+			write(STDOUT_FILENO, &str[i], len);
+			i += len;
+		}
 	}
 }

@@ -24,7 +24,8 @@ int		handle_right_arrow(t_inp *inp)
 	if (inp->x_pos != inp->l_len[inp->y_pos])
 	{
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-		if (!(inp->x_pos % (ws.ws_col - 1)) && inp->x_pos)
+		inp->x_pos++;
+		if (!(inp->x_pos % ws.ws_col) && inp->x_pos)
 		{
 			tputs(tgetstr("do", NULL), 1, &putchar);
 			tputs(tgetstr("cr", NULL), 1, &putchar);
@@ -32,7 +33,6 @@ int		handle_right_arrow(t_inp *inp)
 		}
 		else
 			tputs(tgetstr("nd", NULL), 1, &putchar);
-		inp->x_pos++;
 	}
 	else
 		putchar('\7');
