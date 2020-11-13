@@ -9,7 +9,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-static void	set_process_group(int *pgid, int is_foreground)
+static	void	set_process_group(int *pgid, int is_foreground)
 {
 	pid_t		pid;
 
@@ -17,10 +17,9 @@ static void	set_process_group(int *pgid, int is_foreground)
 	if (*pgid == 0)
 		*pgid = pid;
 	setpgid(pid, *pgid);
-
 	if (is_foreground)
 	{
-		if( tcsetpgrp(g_terminal, *pgid) < 0)
+		if (tcsetpgrp(g_terminal, *pgid) < 0)
 		{
 			fdputendl("Terminal failed to return", 2);
 			exit(1);
@@ -28,24 +27,23 @@ static void	set_process_group(int *pgid, int is_foreground)
 	}
 }
 
-static void		get_exec_env(t_process *p)
+static	void	get_exec_env(t_process *p)
 {
-
 	prepare_exec_env(p->ast->left);
 	p->env = exec_env_2array();
 	exec_env_del();
 }
 
-static void 	destruct_process(t_process *p)
+static	void	destruct_process(t_process *p)
 {
 	free(p->argv);
 	strarr_del(p->env);
 	free(p->env);
 }
 
-static	void 	try_execv(const char *path, t_process *p)
+static	void	try_execv(const char *path, t_process *p)
 {
-	int 		err_code;
+	int			err_code;
 	const char	*err_args[2];
 
 	err_args[1] = "";
@@ -53,9 +51,10 @@ static	void 	try_execv(const char *path, t_process *p)
 	{
 		if (access(path, X_OK) == 0)
 			execve(path, p->argv, p->env);
-		error_print(E_ACCES, (const char **) p->argv);
+		error_print(E_ACCES, (const char **)p->argv);
 		err_code = 126;
-	} else
+	}
+	else
 	{
 		err_args[0] = path;
 		error_print(E_NOENT, err_args);
@@ -65,10 +64,10 @@ static	void 	try_execv(const char *path, t_process *p)
 	exit(err_code);
 }
 
-void	launch_process(t_process *p, pid_t pgid, int is_foreground)
+void			launch_process(t_process *p, pid_t pgid, int is_foreground)
 {
 	const char	*path;
-	int 		err_code;
+	int			err_code;
 
 	g_has_job_control = 0;
 	restore_job_and_interactive_signals();

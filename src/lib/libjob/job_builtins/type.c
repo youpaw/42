@@ -28,14 +28,22 @@ static void	print_builtin(const char *av)
 	putendl(" is a shell builtin");
 }
 
+static int	print_err_not_found(const char *arg)
+{
+	const char	*err_args[2];
+
+	err_args[0] = "type";
+	err_args[1] = arg;
+	error_print(E_NOTFOUND, err_args);
+	return (1);
+}
+
 int			type(const char **av)
 {
-	const char		*err_args[2];
 	char			*path;
 	t_hash_bin_pair *pair;
 	int				err;
 
-	err_args[0] = *av;
 	err = 0;
 	while (*(++av))
 	{
@@ -49,11 +57,7 @@ int			type(const char **av)
 			free(path);
 		}
 		else
-		{
-			err = 1;
-			err_args[1] = *av;
-			error_print(E_NOTFOUND, err_args);
-		}
+			err = print_err_not_found(*av);
 	}
 	return (err);
 }
