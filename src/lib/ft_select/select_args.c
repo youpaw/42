@@ -14,34 +14,34 @@
 #include "cc_str.h"
 #include "cc_mem.h"
 
-int select_handle_key(char *key)
+static int		select_handle_key(char *key)
 {
-	size_t index;
-	t_selection *selection;
-	static const t_key_select_handler hanlders[N_SELECT_KEY_HANDLERS_COUNT] = {
-			{"\t", move_cursor_right},			//tab
-			{"\33\133\101", move_cursor_up},	//up
-			{"\33\133\102", move_cursor_down},	//down
-			{"\33\133\103", move_cursor_right},	//down
-			{"\33\133\104", move_cursor_left}	//down
+	size_t								index;
+	t_selection							*selection;
+	static const t_key_select_handler	handlers[N_SELECT_KEY_HANDL_C] = {
+			{"\t", move_cursor_right},
+			{"\33\133\101", move_cursor_up},
+			{"\33\133\102", move_cursor_down},
+			{"\33\133\103", move_cursor_right},
+			{"\33\133\104", move_cursor_left}
 	};
 
 	index = 0;
 	selection = g_selection;
-	while (index < N_SELECT_KEY_HANDLERS_COUNT)
+	while (index < N_SELECT_KEY_HANDL_C)
 	{
-		if (!strcmp(hanlders[index].primary_key, key))
+		if (!strcmp(handlers[index].primary_key, key))
 		{
-			hanlders[index].handler(&selection);
+			handlers[index].handler(&selection);
 			g_selection = selection;
 			return (0);
 		}
 		index++;
 	}
-	return 1;
+	return (1);
 }
 
-char	*select_args(t_selection *selections)
+char			*select_args(t_selection *selections)
 {
 	char	key[5];
 

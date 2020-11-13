@@ -59,14 +59,11 @@ int			del_double_list_item(t_selection *lst)
 {
 	bool flag;
 
-//	puts("!");
-//	sleep(1);
 	flag = false;
 	if (lst == lst->next)
 		flag = true;
 	lst->prev->next = lst->next;
 	lst->next->prev = lst->prev;
-//	free(&lst->word);
 	free(lst);
 	lst = NULL;
 	if (flag)
