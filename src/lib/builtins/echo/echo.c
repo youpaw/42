@@ -74,7 +74,7 @@ static int			check_fd(void)
 	return (0);
 }
 
-int					echo(const char **av)
+int					sh_echo(const char **av)
 {
 	unsigned char	flags;
 	int				arg_cnt;

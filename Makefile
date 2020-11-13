@@ -8,8 +8,8 @@ OBJ_DIR = build
 
 C_COMPILER = gcc
 C_STANDART = 
-C_CFLAGS =  $(CFLAGS) $(CPPFLAGS)
-C_LFLAGS =  $(CFLAGS) $(CPPFLAGS)
+C_CFLAGS =  $(CFLAGS) $(CPPFLAGS) -g
+C_LFLAGS =  $(CFLAGS) $(CPPFLAGS) -g
 
 # **************************************************************************** #
 # FT_SELECT TARGET DESCRIPTION

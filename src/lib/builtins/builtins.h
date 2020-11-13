@@ -18,7 +18,7 @@ int		set(const char **args);
 int		unset(const char **args);
 int		export(const char **av);
 int		hash(const char **av);
-int		echo(const char **av);
+int		sh_echo(const char **av);
 int		alias(const char **av);
 int		unalias(const char **av);
 int		history(const char **av);

@@ -38,7 +38,6 @@ CMakeFiles/
 cmake_install.cmake
 .idea/
 # TODO need to be returned after all
-**/Makefile
 cmake-build-debug/
 
 # Debug files

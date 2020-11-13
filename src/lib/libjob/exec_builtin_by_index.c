@@ -8,7 +8,7 @@
 int			exec_builtin_by_index(const char **av, int index)
 {
 	static int (*builtins_funcs[N_BUILTINS])(const char **) = {
-			exit_builtin, set, unset, cd, export, hash, echo,
+			exit_builtin, set, unset, cd, export, hash, sh_echo,
 			alias, unalias,
 			jobs, fg_builtin, bg_builtin, history, type};
 
