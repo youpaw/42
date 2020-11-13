@@ -17,4 +17,3 @@ void	del_input(t_inp *input)
 	input->l_len = NULL;
 	input->line = NULL;
 }
-

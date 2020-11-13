@@ -14,5 +14,5 @@ int			handle_etx(t_inp *inp)
 		free(inp->hist_storage);
 	del_input(inp);
 	g_exit_code = 1;
-	return(1);
+	return (1);
 }
