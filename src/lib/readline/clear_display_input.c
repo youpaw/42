@@ -5,6 +5,7 @@
 #include "readline.h"
 #include "cc_char.h"
 #include "termcap.h"
+#include <zconf.h>
 
 static void	clear_second_display_input(t_inp *inp)
 {
@@ -37,7 +38,7 @@ void		clear_display_input(t_inp *inp)
 	{
 		tputs(tgetstr("do", NULL), 1, putchar);
 		tputs(tgetstr("cr", NULL), 1, putchar);
-		tputs(tgetstr("ce", NULL), 1, putchar);
+		tputs(tgetstr("cd", NULL), 1, putchar);
 	}
 	tputs(tgetstr("rc", NULL), 1, putchar);
 }
