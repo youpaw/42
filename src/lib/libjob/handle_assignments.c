@@ -6,11 +6,11 @@
 #include "env.h"
 #include "cc_str.h"
 
-void 	handle_assignments(t_process *process)
+void	handle_assignments(t_process *process)
 {
-	t_ast *ast;
-	char *tmp;
-	t_hash_map *env;
+	t_ast		*ast;
+	char		*tmp;
+	t_hash_map	*env;
 
 	ast = process->ast->left;
 	while (ast)

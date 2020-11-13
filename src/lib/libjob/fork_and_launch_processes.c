@@ -39,14 +39,14 @@ static void	continue_in_parent(t_job *job, t_process *process, pid_t pid)
 			job->pgid = pid;
 		setpgid(pid, job->pgid);
 	}
-	if(job->is_fg && tcsetpgrp(g_terminal, job->pgid) < 0)
+	if (job->is_fg && tcsetpgrp(g_terminal, job->pgid) < 0)
 	{
 		fdputendl("Terminal failed to return", 2);
 		exit(1);
 	}
 }
 
-void		set_process_io(t_process *p, const int *in_out_fds, int *pipe_fds)
+static void	set_process_io(t_process *p, const int *in_out_fds, int *pipe_fds)
 {
 	if (in_out_fds[0] != pipe_fds[0])
 		close(pipe_fds[0]);
@@ -54,12 +54,12 @@ void		set_process_io(t_process *p, const int *in_out_fds, int *pipe_fds)
 	p->stdout = in_out_fds[1];
 }
 
-void fork_and_launch_processes(t_job *job, int is_foreground)
+void		fork_and_launch_processes(t_job *job, int is_foreground)
 {
 	pid_t		pid;
 	t_process	*p;
 	int			in_out_fds[2];
-	int 		pipe_fds[2];
+	int			pipe_fds[2];
 
 	set_default_pipe_fds(in_out_fds, pipe_fds);
 	p = job->first_process;

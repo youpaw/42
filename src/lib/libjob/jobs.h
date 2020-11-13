@@ -4,10 +4,10 @@
 
 #ifndef JOBS_H
 # define JOBS_H
-#include <termios.h>
-#include <stddef.h>
-#include "lexer.h"
-#include "parser.h"
+# include <termios.h>
+# include <stddef.h>
+# include "lexer.h"
+# include "parser.h"
 # define N_BUILTINS 14
 # define JOB_VEC_CAPACITY 15
 
@@ -15,36 +15,36 @@ extern pid_t			g_pgid;
 extern struct termios	g_tmodes;
 extern int				g_terminal;
 extern int				g_is_interactive;
-extern int 				g_has_job_control;
-extern int 				g_can_exit;
+extern int				g_has_job_control;
+extern int				g_can_exit;
 extern t_vec			*g_job_queue;
 
-typedef struct	s_process
+typedef struct			s_process
 {
-	struct s_process *next;
-	t_ast *ast;
-	char **argv;
-	char **env;
-	pid_t pid;
-	char completed;
-	char stopped;
-	int status;
-	int stdin;
-	int	stdout;
-	int	stderr;
-}				t_process;
+	struct s_process	*next;
+	t_ast				*ast;
+	char				**argv;
+	char				**env;
+	pid_t				pid;
+	char				completed;
+	char				stopped;
+	int					status;
+	int					stdin;
+	int					stdout;
+	int					stderr;
+}						t_process;
 
-typedef struct s_job
+typedef struct			s_job
 {
-	struct s_job 	*next;
-	char 			*command;
-	t_process 		*first_process;
-	pid_t 			pgid;
-	int				index;
-	char			notified;
-	int 			is_fg;
-	struct termios	tmodes;
-} t_job;
+	struct s_job		*next;
+	char				*command;
+	t_process			*first_process;
+	pid_t				pgid;
+	int					index;
+	char				notified;
+	int					is_fg;
+	struct termios		tmodes;
+}						t_job;
 
 extern	t_job	*g_first_job;
 
@@ -55,8 +55,6 @@ typedef enum	e_job_print_mode
 	JPM_LONG,
 	JPM_BG
 }				t_job_print_mode;
-
-
 
 /*
 ** Job management
@@ -79,14 +77,14 @@ int		job_is_stopped (t_job *j);
 int		job_is_completed (t_job *j);
 t_job	*find_job_by_index(int index);
 void	remove_job_by_index(int job_index);
-void 	handle_assignments(t_process *process);
+void	handle_assignments(t_process *process);
 
 /*
 ** Processes management
 */
 
 t_process	*process_new(void);
-int 	process_init(t_process *p);
+int		process_init(t_process *p);
 void	fork_and_launch_processes(t_job *job, int is_foreground);
 void	launch_process (t_process *p, pid_t pgid, int is_foreground);
 int		mark_process_status (pid_t pid, int status);
@@ -101,7 +99,7 @@ int		run_builtin(t_process *p);
 int		run_builtin_by_index(t_process *p, int index);
 int		run_builtin_or_hash(t_process *process);
 int		get_builtin_index(const char *name);
-int 	exec_builtin_by_index(const char **av, int index);
+int		exec_builtin_by_index(const char **av, int index);
 
 void	exit_shell(int exit_code);
 int		exit_builtin(const char **av);
@@ -126,9 +124,10 @@ int		queue_get_job_index_by_str(const char *str);
 ** Job print functions
 */
 
-void    print_job_pid(t_job *job);
+void	print_job_pid(t_job *job);
 void	print_job_status_str(t_job *job);
-void    print_job_formatted(t_job *job, int is_job_builtin, t_job_print_mode mode);
+void	print_job_formatted(t_job *job, int is_job_builtin,
+							t_job_print_mode mode);
 char	get_status_sign_for_job(int job_index, int is_job_builtin);
 char	*get_status_message(int status);
 

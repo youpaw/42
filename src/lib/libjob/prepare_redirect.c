@@ -4,7 +4,8 @@
 
 #include "exec.h"
 #include "cc_str.h"
-static int		map_redirects(t_ast *ast, t_process *process)
+
+static int	map_redirects(t_ast *ast, t_process *process)
 {
 	int		err;
 
@@ -24,7 +25,7 @@ static int		map_redirects(t_ast *ast, t_process *process)
 	return (err);
 }
 
-int				prepare_redirect(t_ast *ast, t_process *process)
+int			prepare_redirect(t_ast *ast, t_process *process)
 {
 	t_ast		**redirects;
 	size_t		i;
@@ -39,7 +40,7 @@ int				prepare_redirect(t_ast *ast, t_process *process)
 		if (map_redirects(redirects[i], process) != 0)
 			error = 1;
 		if (error)
-			break;
+			break ;
 		i++;
 	}
 	free(redirects);
