@@ -19,7 +19,7 @@ static int	is_numeric(const char *nb)
 	return (1);
 }
 
-int exit_builtin(const char **av)
+int			exit_builtin(const char **av)
 {
 	if (!av[1])
 		exit_shell(0);
@@ -31,6 +31,9 @@ int exit_builtin(const char **av)
 	else if (!av[2])
 		exit_shell(atoi(av[1]));
 	else
+	{
 		error_print(E_TOOMANYARGS, av);
+		return (1);
+	}
 	return (0);
 }

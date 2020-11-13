@@ -4,10 +4,10 @@
 
 #include "cc_char.h"
 
-static int isspecial(char c)
+static int	isspecial(char c)
 {
-	static const char *str = "*+-/%()<=>!&|";
-	int index;
+	static const char	*str = "*+-/%()<=>!&|";
+	int					index;
 
 	index = 0;
 	while (str[index] && c != str[index])

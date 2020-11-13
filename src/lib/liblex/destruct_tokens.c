@@ -4,7 +4,7 @@
 
 #include "lexer.h"
 
-void 		destruct_tokens(t_tokens **tokens)
+void	destruct_tokens(t_tokens **tokens)
 {
 	t_tokens	*p_tokens;
 	size_t		index;

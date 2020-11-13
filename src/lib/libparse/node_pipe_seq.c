@@ -3,7 +3,7 @@
 //
 #include "parser.h"
 
-t_ast *node_pipe_seq(t_tokens *tokens)
+t_ast	*node_pipe_seq(t_tokens *tokens)
 {
 	t_ast *node;
 

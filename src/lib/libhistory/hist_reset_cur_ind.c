@@ -4,7 +4,7 @@
 
 #include "history.h"
 
-void 	hist_reset_cur_ind(void)
+void		hist_reset_cur_ind(void)
 {
 	g_hist.cur_ind = g_hist.commands->size;
 }

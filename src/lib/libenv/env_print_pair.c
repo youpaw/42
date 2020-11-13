@@ -13,4 +13,3 @@ void	env_print_pair(const t_hash_pair *pair)
 	puts("=");
 	putendl(pair->value);
 }
-

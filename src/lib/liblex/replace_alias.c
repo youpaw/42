@@ -6,7 +6,7 @@
 #include "alias.h"
 #include "cc_str.h"
 
-static void backup_lexer(t_lexer *lexer, t_lexer *bck)
+static void	backup_lexer(t_lexer *lexer, t_lexer *bck)
 {
 	bck->raw = lexer->raw;
 	bck->index = lexer->index;
@@ -14,7 +14,7 @@ static void backup_lexer(t_lexer *lexer, t_lexer *bck)
 	bck->begin = lexer->begin;
 }
 
-static void restore_lexer(t_lexer *lexer, t_lexer *bck)
+static void	restore_lexer(t_lexer *lexer, t_lexer *bck)
 {
 	free(lexer->raw);
 	lexer->raw = bck->raw;
@@ -23,7 +23,7 @@ static void restore_lexer(t_lexer *lexer, t_lexer *bck)
 	lexer->begin = bck->begin;
 }
 
-static void set_lexer(t_lexer *lexer, const char *alias)
+static void	set_lexer(t_lexer *lexer, const char *alias)
 {
 	lexer->raw = strdup(alias);
 	lexer->size = strlen(alias);
@@ -31,7 +31,7 @@ static void set_lexer(t_lexer *lexer, const char *alias)
 	lexer->begin = 0;
 }
 
-int 		replace_alias(t_lexer *lexer, t_token *token)
+int			replace_alias(t_lexer *lexer, t_token *token)
 {
 	const char	*alias;
 	t_lexer		bck;

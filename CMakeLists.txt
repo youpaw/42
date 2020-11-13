@@ -12,7 +12,3 @@ set(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
 
 
 add_subdirectory(src)
-
-enable_testing()
-add_subdirectory(tests)
-

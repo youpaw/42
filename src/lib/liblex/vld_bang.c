@@ -6,18 +6,18 @@
 #include "cc_str.h"
 #include "expand.h"
 
-static void handle_error(const char *str)
+static void		handle_error(const char *str)
 {
-	const char *args[1];
+	const char	*args[1];
 
 	args[0] = str;
 	error_print(E_NOEVENT, args);
 }
 
-int 	vld_bang(t_lexer *lexer)
+int				vld_bang(t_lexer *lexer)
 {
-	char *expand;
-	size_t index;
+	char	*expand;
+	size_t	index;
 
 	index = lexer->index;
 	if (match_bang(lexer))

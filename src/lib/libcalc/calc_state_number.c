@@ -4,7 +4,7 @@
 #include "calc.h"
 #include "error.h"
 
-int 	calc_state_number(t_calc *calc)
+int	calc_state_number(t_calc *calc)
 {
 	if (calc_get_operator(calc))
 	{

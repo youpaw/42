@@ -6,7 +6,7 @@
 #include "jobs.h"
 #include "cc_str.h"
 
-void	put_job_in_background (t_job *j, int cont)
+void	put_job_in_background(t_job *j, int cont)
 {
 	if (cont)
 		if (kill(-j->pgid, SIGCONT) < 0)

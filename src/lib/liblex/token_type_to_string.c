@@ -1,6 +1,6 @@
 #include "lexer.h"
 
-const char *token_type_to_string(t_token_type t)
+const char	*token_type_to_string(t_token_type t)
 {
 	static const char *token_types_map[N_TOKEN_TYPES] = {
 			"and_if",
@@ -19,6 +19,7 @@ const char *token_type_to_string(t_token_type t)
 			"io number",
 			"assignment word",
 			"command name",
+			"filename",
 			"word"
 	};
 

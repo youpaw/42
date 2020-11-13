@@ -7,7 +7,7 @@
 #include "history.h"
 #include "stdlib.h"
 
-static int is_number(const char *num)
+static int	is_number(const char *num)
 {
 	if (*num == '-')
 		num++;
@@ -18,9 +18,9 @@ static int is_number(const char *num)
 	return (0);
 }
 
-int 	expand_bang(char **str)
+int			expand_bang(char **str)
 {
-	char 	*value;
+	char	*value;
 
 	value = NULL;
 	if (strcmp(*str, "!") == 0)

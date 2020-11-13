@@ -5,7 +5,7 @@
 #include "env.h"
 #include "cc_str.h"
 
-int 		env_cmp_pair(const t_hash_pair *lhs, const t_hash_pair *rhs)
+int		env_cmp_pair(const t_hash_pair *lhs, const t_hash_pair *rhs)
 {
 	return (strcmp(lhs->key, rhs->key));
 }

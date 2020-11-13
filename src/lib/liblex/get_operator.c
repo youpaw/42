@@ -5,7 +5,7 @@
 #include "lexer.h"
 #include "cc_str.h"
 
-t_token_type get_operator(const char *str, t_operator *op)
+t_token_type	get_operator(const char *str, t_operator *op)
 {
 	static const t_operator operator_map[N_TOKEN_OPERATORS] = {
 			{"&&", 2},
@@ -21,7 +21,7 @@ t_token_type get_operator(const char *str, t_operator *op)
 			{";", 1},
 			{"\n", 1}
 	};
-	int index;
+	int						index;
 
 	index = 0;
 	while (index < N_TOKEN_OPERATORS && \

@@ -4,7 +4,7 @@
 
 #include "lexer.h"
 
-void destruct_token(t_token **token)
+void	destruct_token(t_token **token)
 {
 	if (!token && !*token)
 		return ;

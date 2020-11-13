@@ -6,7 +6,7 @@
 
 int	print_invalid_option(const char *bin, char opt)
 {
-	char 		str[2];
+	char		str[2];
 	const char	*args[2];
 
 	str[0] = opt;
@@ -16,5 +16,3 @@ int	print_invalid_option(const char *bin, char opt)
 	error_print(E_INVALOPT, args);
 	return (E_INVALOPT);
 }
-
-

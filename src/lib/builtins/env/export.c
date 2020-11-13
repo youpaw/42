@@ -1,6 +1,14 @@
-//
-// Created by Azzak Omega on 9/16/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/12 23:31:37 by azomega           #+#    #+#             */
+/*   Updated: 2020/11/12 23:31:41 by azomega          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "optparse.h"
 #include "error.h"
@@ -8,21 +16,60 @@
 #include "cc_hash_map.h"
 #include "env.h"
 #include "cc_str.h"
+#include "expand.h"
 
-static int	print_error_option(char opt)
+static char	*join_tilda(char *result, char *tilda, size_t index, size_t end)
 {
-	char 		str[2];
-	const char	*args[2];
+	char		*raw;
+	const char	*arr[4];
 
-	str[0] = opt;
-	str[1] = '\0';
-	args[0] = "export";
-	args[1] = str;
-	error_print(E_INVALOPT, args);
-	return (E_INVALOPT);
+	if (index && result[index])
+	{
+		result[index] = '\0';
+		arr[0] = result;
+		arr[1] = tilda;
+		arr[2] = result + end;
+		arr[3] = NULL;
+		raw = strnjoin(arr);
+	}
+	else if (!result[end])
+	{
+		result[index] = '\0';
+		raw = strjoin(result, tilda);
+	}
+	else
+		raw = strjoin(tilda, result + end);
+	return (raw);
 }
 
-static	int	try_export(const char *arg)
+static void	expand_tildas(char **str)
+{
+	char	*result;
+	char	*tilda;
+	size_t	i;
+	size_t	end;
+
+	i = -1;
+	result = *str;
+	while (result[++i])
+		if (result[i] == '~' && (!i || result[i - 1] == ':'))
+		{
+			end = i + 1;
+			if (result[end] == '+' || result[end] == '-')
+				end++;
+			if (!result[end] || result[end] == '/' || result[end] == ':')
+			{
+				tilda = strsub(result, i, end - i);
+				expand_tilda(&tilda);
+				*str = join_tilda(result, tilda, i, end);
+				free(result);
+				free(tilda);
+				result = *str;
+			}
+		}
+}
+
+static int	try_export(const char *arg)
 {
 	t_hash_pair	pair;
 	size_t		name_len;
@@ -33,20 +80,35 @@ static	int	try_export(const char *arg)
 	pair.key = strsub(arg, 0, name_len);
 	pair.value = NULL;
 	if (arg[name_len])
+	{
 		pair.value = strdup(arg + name_len + 1);
+		expand_tildas((char **)&pair.value);
+	}
 	hash_map_del_one(g_inter_env, pair.key);
 	return (hash_map_insert(g_env, &pair));
 }
 
-int 	export(const char **av)
+static int	check_opt(const char **av, char *opt, int *er_code)
 {
 	t_parsed_opt	opt_res;
-	int 			skip;
-	const char		*args[2];
-	int 			err_code;
+	int				skip;
 
-	if (!(skip = optparse(av, "p", &opt_res)))
-		return (print_error_option(opt_res.invalid_opt));
+	if (!(skip = optparse(av, opt, &opt_res)))
+	{
+		print_invalid_option("export", opt_res.invalid_opt);
+		*er_code = 2;
+	}
+	return (skip);
+}
+
+int			export(const char **av)
+{
+	int				skip;
+	const char		*args[2];
+	int				err_code;
+
+	if (!(skip = check_opt(av, "p", &err_code)))
+		return (err_code);
 	if (!av[skip])
 		return (print_exported_env());
 	args[0] = "export";
@@ -55,7 +117,7 @@ int 	export(const char **av)
 	{
 		if (try_export(av[skip]) == E_INVIDENT)
 		{
-			err_code = E_INVIDENT;
+			err_code = 1;
 			args[1] = av[skip];
 			error_print(E_INVIDENT, args);
 		}

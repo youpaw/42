@@ -5,7 +5,8 @@
 #include "jobs.h"
 
 int		get_new_job_index(void)
-{	t_job	*tmp;
+{
+	t_job	*tmp;
 
 	if (!(tmp = g_first_job))
 		return (1);
