@@ -3,8 +3,6 @@
 //
 
 #include <cc.h>
-#include <stdio.h>
-#include "cc_char.h"
 #include "readline.h"
 #include "cc_str.h"
 

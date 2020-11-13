@@ -4,11 +4,7 @@
 
 #include "readline.h"
 #include "history.h"
-#include "cc_num.h"
 #include "cc_str.h"
-#include "termcap.h"
-#include "cc_char.h"
-#include <sys/ioctl.h>
 
 int	handle_up_arrow(t_inp *inp)
 {

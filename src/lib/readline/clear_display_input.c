@@ -5,7 +5,6 @@
 #include "readline.h"
 #include "cc_char.h"
 #include "termcap.h"
-#include <zconf.h>
 
 static void	clear_second_display_input(t_inp *inp)
 {

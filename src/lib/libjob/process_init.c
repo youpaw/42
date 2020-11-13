@@ -2,7 +2,6 @@
 // Created by Darth Butterwell on 11/7/20.
 //
 #include "jobs.h"
-#include "env.h"
 
 int		process_init(t_process *p)
 {

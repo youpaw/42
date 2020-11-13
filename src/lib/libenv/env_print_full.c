@@ -12,7 +12,6 @@
 
 #include "env.h"
 #include "cc_lst.h"
-#include "cc_str.h"
 #include "cc_hash_map.h"
 
 static void	print_by_names(const char **names)

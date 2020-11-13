@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_select.h"
-#include "cc_str.h"
 
 struct winsize	get_winsize(void)
 {

@@ -7,7 +7,6 @@
 #include "cc_char.h"
 #include <unistd.h>
 #include <termcap.h>
-#include <sys/ioctl.h>
 
 static void	inner_circle(t_inp *input, size_t cur_x_pos, size_t cur_y_pos)
 {

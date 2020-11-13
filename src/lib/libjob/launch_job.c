@@ -4,8 +4,6 @@
 
 #include "jobs.h"
 #include "cc_str.h"
-#include <unistd.h>
-#include "builtins.h"
 
 static int	get_job_return_value(t_job *j, int is_foreground, int is_forked)
 {

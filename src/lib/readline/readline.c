@@ -2,12 +2,10 @@
 // Created by Darth Butterwell on 8/16/20.
 //
 
-#include <zconf.h>
 #include "readline.h"
 #include "cc_char.h"
 #include "cc_graph.h"
 #include "cc_str.h"
-#include "cc_num.h"
 
 static void	del_input_st(t_inp *input)
 {

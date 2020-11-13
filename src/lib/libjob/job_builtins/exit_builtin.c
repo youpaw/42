@@ -2,12 +2,9 @@
 // Created by Azzak Omega on 9/16/20.
 //
 
-#include <stdlib.h>
 #include "cc_char.h"
-#include "cc_num.h"
 #include "error.h"
 #include "jobs.h"
-#include "cc_str.h"
 
 static int	is_numeric(const char *nb)
 {
