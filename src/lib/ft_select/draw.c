@@ -15,7 +15,6 @@
 #include "cc_mem.h"
 #include "cc_num.h"
 
-
 void	draw_letters(t_selection *selection, int wide)
 {
 	if (selection->under_cursor)

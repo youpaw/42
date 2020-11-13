@@ -34,7 +34,7 @@ int			move_cursor_right(t_selection **selection)
 	cpy->next->under_cursor = true;
 	if (cpy->next->hor_pos == -1)
 		*selection = cpy->next;
-	return(0);
+	return (0);
 }
 
 int			move_cursor_left(t_selection **selection)
@@ -46,7 +46,7 @@ int			move_cursor_left(t_selection **selection)
 	cpy->prev->under_cursor = true;
 	if (cpy->prev->hor_pos == -1)
 		*selection = move_display_left(cpy);
-	return(0);
+	return (0);
 }
 
 t_selection	*set_cursor_on_pos(t_selection *cpy, int fnd_hor, int fnd_vert)
