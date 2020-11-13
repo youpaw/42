@@ -35,7 +35,7 @@ static int	check_eox(t_inp *inp)
 	return (0);
 }
 
-int			readline(char **line)
+int			sh_readline(char **line)
 {
 	t_let		key;
 	t_inp		input;
