@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azomega <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fmallist <fmallist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 23:31:37 by azomega           #+#    #+#             */
-/*   Updated: 2020/11/12 23:31:41 by azomega          ###   ########.fr       */
+/*   Created: 2020/11/10 15:54:42 by fmallist          #+#    #+#             */
+/*   Updated: 2020/11/10 15:59:49 by fmallist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ static int	check_opt(const char **av, char *opt, int *er_code)
 
 	if (!(skip = optparse(av, opt, &opt_res)))
 	{
-		print_invalid_option("export", opt_res.invalid_opt);
+		print_invalid_option("setenv", opt_res.invalid_opt);
 		*er_code = 2;
 	}
+	free(opt_res.options);
 	return (skip);
 }
 
@@ -111,7 +112,7 @@ int			sh_export(const char **av)
 		return (err_code);
 	if (!av[skip])
 		return (print_exported_env());
-	args[0] = "export";
+	args[0] = "setenv";
 	err_code = 0;
 	while (av[skip])
 	{
