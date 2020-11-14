@@ -100,6 +100,7 @@ static int	check_opt(const char **av, char *opt, int *er_code)
 	if (!(skip = optparse(av, opt, &opt_res)))
 	{
 		print_invalid_option("export", opt_res.invalid_opt);
+		print_usage(2, "export", "[name[=value] ...] or export -p");
 		*er_code = 2;
 	}
 	free(opt_res.options);

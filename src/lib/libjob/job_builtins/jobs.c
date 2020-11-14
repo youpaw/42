@@ -53,12 +53,16 @@ static int				print_specific_jobs(const char **av,
 static int				print_all_jobs(t_job_print_mode mode)
 {
 	t_job	*job;
+	t_job	*next_job;
 
 	if ((job = g_first_job) && g_has_job_control)
 		while (job->next)
 		{
+			next_job = job->next;
 			print_job_formatted(job, 1, mode);
-			job = job->next;
+			if (job_is_completed(job))
+				remove_job_by_index(job->index);
+			job = next_job;
 		}
 	return (0);
 }
@@ -70,6 +74,7 @@ int						jobs(const char **av)
 	int				err_code;
 
 	g_can_exit = 1;
+	update_status();
 	if (!(skip = optparse(av, "pl", &opt_res)))
 	{
 		err_code = print_invalid_option("jobs", opt_res.invalid_opt);

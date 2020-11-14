@@ -27,6 +27,7 @@ void	do_job_notification(void)
 		{
 			print_job_formatted(j, 0, JPM_DEFAULT);
 			j->notified = 1;
+			j->is_fg = 0;
 		}
 		j = jnext;
 	}
