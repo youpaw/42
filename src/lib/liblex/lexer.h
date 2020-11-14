@@ -5,7 +5,7 @@
 # define SLICES_STACK_SIZE 5
 # define BRACES_STACK_SIZE 5
 # define TOKENS_STACK_SIZE 15
-# define N_LEX_FLAGS 1
+# define N_LEX_FLAGS 2
 # define N_LEX_STAGES 3
 # define N_TOKEN_TYPES 18
 # define N_TOKEN_OPERATORS 12
@@ -87,7 +87,8 @@ enum						e_stage
 
 enum						e_flag
 {
-	l_print_command
+	l_print_command,
+	l_cmd_appeared
 };
 
 struct						s_slice

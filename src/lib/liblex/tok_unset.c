@@ -27,6 +27,8 @@ static void		delimit_operator(t_lexer *lexer, t_token_type type,
 	token.raw = strsub(lexer->raw, lexer->begin, token_size);
 	token.type = type;
 	vec_push(lexer->tokens, &token);
+	if (is_delimiter(type))
+		lexer->flags[l_cmd_appeared] = 0;
 	if (type == l_double_less)
 	{
 		slice.index = lexer->index;
