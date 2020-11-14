@@ -22,15 +22,16 @@ static t_list	*get_file_lst(struct dirent *dir)
 	t_list		*file;
 
 	*filename = '\0';
+	bzero(filename, 1027);
 	if (DT_DIR == dir->d_type)
 	{
 		strcpy(filename, dir->d_name);
 		check_cr(filename);
 		strcat(filename, "/");
-		file = lst_new(filename, 1025);
+		file = lst_new(filename, 1027);
 	}
 	else
-		file = lst_new(dir->d_name, 1024);
+		file = lst_new(dir->d_name, 1025);
 	return (file);
 }
 
