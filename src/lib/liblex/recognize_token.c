@@ -15,6 +15,7 @@ t_token_type	recognize_token(t_lexer *lexer)
 			return (l_bang);
 		if (get_valid_name_length(lexer->raw + lexer->begin))
 			return (l_assignment_word);
+		lexer->flags[l_cmd_appeared] = 1;
 		return (l_command_name);
 	}
 	vec_get_last(&token, lexer->tokens);
@@ -22,11 +23,11 @@ t_token_type	recognize_token(t_lexer *lexer)
 		return (l_filename);
 	if (is_delimiter(token.type) && lexer->raw[lexer->begin] == '!')
 		return (l_bang);
-	if (token.type == l_assignment_word || token.type == l_bang || \
-		token.type == l_filename || is_delimiter(token.type))
+	if (!lexer->flags[l_cmd_appeared])
 	{
 		if (get_valid_name_length(lexer->raw + lexer->begin))
 			return (l_assignment_word);
+		lexer->flags[l_cmd_appeared] = 1;
 		return (l_command_name);
 	}
 	return (l_word);
