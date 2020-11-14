@@ -42,8 +42,8 @@ int				main_manager(void)
 		sh_readline(&str);
 		tokens = validate_input(&str);
 		if (tokens && !tokens->error)
-			if ((ast = parse(tokens)))
-				exec(ast);
+			if ((ast = sh_parse(tokens)))
+				sh_exec(ast);
 		del_ast(&ast);
 		destruct_tokens(&tokens);
 		hist_reset_cur_ind();

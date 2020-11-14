@@ -6,7 +6,7 @@
 #include "error.h"
 #include "env.h"
 
-t_ast				*parse(t_tokens *tokens)
+t_ast				*sh_parse(t_tokens *tokens)
 {
 	const char	*args[1];
 	t_ast		*ast;

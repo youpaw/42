@@ -12,7 +12,7 @@
 
 #include "env.h"
 
-int		set(const char **args)
+int		sh_set(const char **args)
 {
 	env_print_full();
 	return (0);

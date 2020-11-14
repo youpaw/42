@@ -110,6 +110,6 @@ int							calc_operate(t_vec *stack, t_calc_token *token);
 int							calc_evaluate(char **raw, t_vec *postfix);
 t_vec						*calc_convert_to_postfix(t_vec *tokens);
 int							calc_tokenize(t_calc *calc);
-int							calc(char **raw);
+int							sh_calc(char **raw);
 
 #endif

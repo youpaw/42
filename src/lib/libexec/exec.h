@@ -18,5 +18,6 @@ void	exec_and_or(t_ast *ast, char is_foreground,
 				char is_forked, t_token *token);
 void	exec_list(t_ast *ast);
 void	exec_complete_cmd(t_ast *ast);
-void	exec(t_ast *ast);
+void	sh_exec(t_ast *ast);
+
 #endif

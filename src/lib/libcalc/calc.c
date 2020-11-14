@@ -34,7 +34,7 @@ static void		calc_destruct(t_calc *calc)
 	vec_del(&calc->tokens);
 }
 
-int				calc(char **raw)
+int				sh_calc(char **raw)
 {
 	t_calc	calc;
 	t_vec	*postfix;

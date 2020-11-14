@@ -12,7 +12,7 @@
 
 #include "history.h"
 
-int		history(const char **av)
+int		sh_history(const char **av)
 {
 	hist_print();
 	return (0);

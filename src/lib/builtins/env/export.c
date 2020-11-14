@@ -101,7 +101,7 @@ static int	check_opt(const char **av, char *opt, int *er_code)
 	return (skip);
 }
 
-int			export(const char **av)
+int			sh_export(const char **av)
 {
 	int				skip;
 	const char		*args[2];

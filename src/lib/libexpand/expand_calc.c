@@ -21,5 +21,5 @@ int			expand_calc(char **str)
 		free(*str);
 		*str = tmp;
 	}
-	return (calc(str));
+	return (sh_calc(str));
 }

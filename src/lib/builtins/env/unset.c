@@ -24,7 +24,7 @@ static int		print_error(const char *arg)
 	return (1);
 }
 
-int				unset(const char **args)
+int				sh_unset(const char **args)
 {
 	int			error;
 

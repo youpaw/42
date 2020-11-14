@@ -38,7 +38,7 @@ static void			value_parse(const char *arg, int *er_code)
 	}
 }
 
-int					alias(const char **av)
+int					sh_alias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;

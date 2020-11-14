@@ -45,7 +45,7 @@ static int			is_path(const char *str)
 	return (0);
 }
 
-int					hash(const char **av)
+int					sh_hash(const char **av)
 {
 	t_parsed_opt	opt_res;
 	int				skip;

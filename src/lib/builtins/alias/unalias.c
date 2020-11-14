@@ -23,7 +23,7 @@ static void			value_parse(const char *cmd, const char *arg, int *er_code)
 	}
 }
 
-int					unalias(const char **av)
+int					sh_unalias(const char **av)
 {
 	unsigned char	flag;
 	int				arg_i;

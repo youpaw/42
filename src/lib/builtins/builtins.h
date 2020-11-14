@@ -13,14 +13,14 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-int		cd(const char **av);
-int		set(const char **args);
-int		unset(const char **args);
-int		export(const char **av);
-int		hash(const char **av);
+int		sh_cd(const char **av);
+int		sh_set(const char **args);
+int		sh_unset(const char **args);
+int		sh_export(const char **av);
+int		sh_hash(const char **av);
 int		sh_echo(const char **av);
-int		alias(const char **av);
-int		unalias(const char **av);
-int		history(const char **av);
+int		sh_alias(const char **av);
+int		sh_unalias(const char **av);
+int		sh_history(const char **av);
 
 #endif

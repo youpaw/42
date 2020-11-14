@@ -75,7 +75,7 @@ static void				init_chdir(const char *cn_path, const char *path,\
 		*er_code = run_chdir(cn_path, pwd, path, flags);
 }
 
-int						cd(const char **av)
+int						sh_cd(const char **av)
 {
 	int						path_i;
 	char					*cn_path;

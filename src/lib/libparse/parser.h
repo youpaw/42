@@ -54,6 +54,6 @@ t_ast						*node_complete_cmd(t_tokens *tokens);
 void						del_ast(t_ast **node);
 t_ast						*new_ast_node(t_node_type type);
 int							get_node_token(t_ast *node, t_tokens *tokens);
-t_ast						*parse(t_tokens *tokens);
+t_ast						*sh_parse(t_tokens *tokens);
 
 #endif
