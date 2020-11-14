@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbutterw <dbutterw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 20:23:01 by hlorrine          #+#    #+#             */
-/*   Updated: 2020/11/12 20:23:04 by hlorrine         ###   ########.fr       */
+/*   Created: 2020/11/12 14:52:34 by dbutterw          #+#    #+#             */
+/*   Updated: 2020/11/12 19:11:12 by dbutterw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "hash.h"
 #include "optparse.h"
 #include "error.h"
@@ -56,6 +57,7 @@ int					sh_hash(const char **av)
 		return (print_error_option(opt_res.invalid_opt));
 	if (skip > 1)
 		hash_remove_all();
+	free(opt_res.options);
 	args[0] = "hash";
 	err_code = 0;
 	while (av[skip])
