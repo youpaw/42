@@ -15,8 +15,10 @@ int		redirect_less(t_ast *leafs, t_process *process)
 	in = -1;
 	if (leafs->left->left->token->type == l_filename)
 	{
-		if (!access(leafs->left->left->token->raw, R_OK))
+		if (!access(leafs->left->left->token->raw, F_OK))
 		{
+			if (access(leafs->left->left->token->raw, R_OK))
+				return (redirect_print_error(E_ACCES, leafs->left->left->token->raw));
 			in = open(leafs->left->left->token->raw, O_RDONLY);
 			if (-1 == in)
 				return (1);
