@@ -14,6 +14,7 @@
 
 int		sh_history(const char **av)
 {
+	(void)av;
 	hist_print();
 	return (0);
 }

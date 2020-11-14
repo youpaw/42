@@ -19,7 +19,7 @@ void	hist_print(void)
 	char	*str;
 
 	i = 0;
-	while (i++ < g_hist.commands->size)
+	while (i++ < (int)g_hist.commands->size)
 	{
 		if (i < 10)
 			putchar(' ');

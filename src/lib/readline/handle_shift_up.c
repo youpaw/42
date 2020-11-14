@@ -10,7 +10,7 @@
 
 static void	move_on_right_place(t_inp *inp, int wide)
 {
-	if (inp->x_pos < wide || inp->x_pos == 0)
+	if (inp->x_pos < (size_t)wide || inp->x_pos == 0)
 	{
 		inp->y_pos--;
 		if (inp->x_pos % wide > inp->l_len[inp->y_pos] % wide)
@@ -36,7 +36,7 @@ int			handle_shift_up(t_inp *inp)
 	{
 		tputs(tgetstr("up", NULL), 1, putchar);
 		move_on_right_place(inp, ws.ws_col);
-		if (inp->x_pos < get_prompt_len(inp->y_pos))
+		if (inp->x_pos < (size_t)get_prompt_len(inp->y_pos))
 		{
 			tputs(tgoto(tgetstr("ch", NULL), 1,\
 				get_prompt_len(inp->y_pos)), 1, putchar);

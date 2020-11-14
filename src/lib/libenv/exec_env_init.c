@@ -37,7 +37,7 @@ static t_list	*cpy_bucket(t_list *bucket)
 
 void			exec_env_init(void)
 {
-	int cnt;
+	size_t cnt;
 
 	cnt = 0;
 	g_exec_env = hash_map_new(N_MAX_EXEC_ENV, \

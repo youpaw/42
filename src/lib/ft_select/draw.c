@@ -55,7 +55,7 @@ int		get_max_words_len(t_selection *selection)
 	selection = selection->next;
 	while (selection != first)
 	{
-		if (selection->display_len > max_len)
+		if (selection->display_len > (size_t)max_len)
 			max_len = selection->display_len;
 		selection = selection->next;
 	}

@@ -14,6 +14,7 @@
 
 int		sh_set(const char **args)
 {
+	(void)args;
 	env_print_full();
 	return (0);
 }

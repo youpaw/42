@@ -27,7 +27,7 @@ void	hist_save(void)
 	i = 0;
 	if (g_hist.commands->size > HIST_FILE_SIZE)
 		i = (int)g_hist.commands->size - HIST_FILE_SIZE;
-	while (i < g_hist.commands->size)
+	while (i < (int)g_hist.commands->size)
 	{
 		vec_get_at(&str, g_hist.commands, i++);
 		fdputendl(str, file_fd);

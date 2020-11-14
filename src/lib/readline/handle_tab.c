@@ -14,7 +14,6 @@
 
 int		handle_tab(t_inp *inp)
 {
-	static t_list	*options;
 	t_prdct_tkn		*token;
 	char			*str;
 

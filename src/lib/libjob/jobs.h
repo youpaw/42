@@ -6,6 +6,7 @@
 # define JOBS_H
 # include <termios.h>
 # include <stddef.h>
+# include <unistd.h>
 # include "lexer.h"
 # include "parser.h"
 # define N_BUILTINS 14

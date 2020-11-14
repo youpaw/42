@@ -17,9 +17,9 @@ char	*hist_get_next(void)
 {
 	char	*str;
 
-	if (g_hist.cur_ind == g_hist.commands->size - 1)
+	if (g_hist.cur_ind == (int)g_hist.commands->size - 1)
 		g_hist.cur_ind++;
-	if (g_hist.cur_ind == g_hist.commands->size)
+	if (g_hist.cur_ind == (int)g_hist.commands->size)
 		return (NULL);
 	vec_get_at(&str, g_hist.commands, ++g_hist.cur_ind);
 	return (str);

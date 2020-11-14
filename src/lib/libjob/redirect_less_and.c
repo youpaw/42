@@ -3,7 +3,6 @@
 //
 
 #include "jobs.h"
-#include "cc_num.h"
 
 static void		from_stdin(t_process *process, int from, int to)
 {

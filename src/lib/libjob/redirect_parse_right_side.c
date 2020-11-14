@@ -13,7 +13,6 @@ int		redirect_parse_right_side(t_token *token, int open_options,
 {
 	int right_side;
 
-	right_side = -1;
 	if (can_be_number && strisnum(token->raw))
 	{
 		right_side = atoi(token->raw);

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <termcap.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 #include "readline.h"
 #include "cc_char.h"
 #include "cc_str.h"
-#include "cc_num.h"
-#include <sys/ioctl.h>
-#include <termcap.h>
 
 int		handle_symbol_key(t_inp *inp, char *key)
 {
