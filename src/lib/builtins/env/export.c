@@ -78,11 +78,15 @@ static int	try_export(const char *arg)
 		(arg[name_len] && arg[name_len] != '='))
 		return (E_INVIDENT);
 	pair.key = strsub(arg, 0, name_len);
-	pair.value = NULL;
 	if (arg[name_len])
 	{
 		pair.value = strdup(arg + name_len + 1);
 		expand_tildas((char **)&pair.value);
+	}
+	else
+	{
+		pair.value = (void *)env_get_value(pair.key);
+		pair.value = pair.value ? strdup(pair.value) : NULL;
 	}
 	hash_map_del_one(g_inter_env, pair.key);
 	return (hash_map_insert(g_env, &pair));
@@ -95,7 +99,7 @@ static int	check_opt(const char **av, char *opt, int *er_code)
 
 	if (!(skip = optparse(av, opt, &opt_res)))
 	{
-		print_invalid_option("setenv", opt_res.invalid_opt);
+		print_invalid_option("export", opt_res.invalid_opt);
 		*er_code = 2;
 	}
 	free(opt_res.options);
@@ -112,7 +116,7 @@ int			sh_export(const char **av)
 		return (err_code);
 	if (!av[skip])
 		return (print_exported_env());
-	args[0] = "setenv";
+	args[0] = "export";
 	err_code = 0;
 	while (av[skip])
 	{
