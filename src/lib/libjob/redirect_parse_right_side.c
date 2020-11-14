@@ -25,6 +25,8 @@ int		redirect_parse_right_side(t_token *token, int open_options,
 		if (strcmp(token->raw, "-") == 0)
 			return (-2);
 	}
+	if ((!access(token->raw, F_OK)) && (access(token->raw, W_OK) == -1))
+		return (redirect_print_error(E_ACCES, token->raw));
 	if ((right_side = open(token->raw, open_options, 0644)) == -1)
 		return (1);
 	return (right_side);
