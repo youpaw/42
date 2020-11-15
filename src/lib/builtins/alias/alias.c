@@ -26,16 +26,22 @@ static void			value_parse(const char *arg, int *er_code)
 {
 	const char		*value;
 
-	if ((value = alias_get_value(arg)) != NULL)
-		alias_pint_pair(arg, value);
-	else
+	if (strchr(arg, '=') != NULL)
 	{
-		if (alias_add(arg))
+		if (alias_add(arg) == 1)
 		{
 			*er_code = 1;
-			alias_bash_error_print(E_NOTFOUND, "alias", arg);
+			alias_bash_error_print(E_INVALALIAS, "alias", arg);
 		}
+		return ;
 	}
+	if ((value = alias_get_value(arg)) != NULL)
+	{
+		alias_pint_pair(arg, value);
+		return ;
+	}
+	*er_code = 1;
+	alias_bash_error_print(E_NOTFOUND, "alias", arg);
 }
 
 int					sh_alias(const char **av)

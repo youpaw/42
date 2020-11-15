@@ -51,7 +51,8 @@ typedef enum	e_error_code
 	E_BADFD,
 	E_AMBIG,
 	E_ARGCNOTENOUGH,
-	E_EXPAND
+	E_EXPAND,
+	E_INVALALIAS
 }				t_error_code;
 
 /*

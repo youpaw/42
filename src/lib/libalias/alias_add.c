@@ -17,7 +17,7 @@
 
 static int	is_char_valid(char c)
 {
-	return (!(isspace(c) || c == '=') || c == '/');
+	return (c != '\\' && c != '=' && c != '/');
 }
 
 size_t		get_valid_alias_name_len(const char *name)
