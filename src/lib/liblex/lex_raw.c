@@ -43,6 +43,8 @@ int				lex_raw(t_lexer *lexer, const char *raw, t_stage stage)
 			break ;
 		lexer->index++;
 	}
+	if (error == E_HEREDOC && lexer->stage == l_vld)
+		error = match_heredoc(lexer);
 	if (lexer->size && lexer->raw[lexer->size - 1] == '\4')
 		return (E_EOF);
 	return (error);

@@ -20,6 +20,7 @@ const char	*token_type_to_string(t_token_type t)
 			"assignment word",
 			"command name",
 			"filename",
+			"here end",
 			"word"
 	};
 
