@@ -5,35 +5,6 @@
 #include "lexer.h"
 #include "cc_str.h"
 
-static int	match_end(t_lexer *lexer, size_t start_token_index, t_token *token)
-{
-	char	*end;
-	size_t	index;
-	int		error;
-
-	end = strjoin(token->raw, "\n");
-	index = lexer->size - 1;
-	if (lexer->raw[index] != 4)
-		while (index && lexer->raw[index - 1] != '\n')
-			index--;
-	error = E_INCINP;
-	if (lexer->raw[index] == 4 || (index && !strcmp(lexer->raw + index, end)))
-	{
-		if (lexer->raw[index] == 4)
-			putendl("");
-		token->raw = strsub(lexer->raw, lexer->begin, index - lexer->begin);
-		token->type = l_filename;
-		vec_rm_at(lexer->tokens, start_token_index);
-		vec_push_at(lexer->tokens, token, start_token_index);
-		lexer->raw[lexer->begin] = '\0';
-		lexer->size = strlen(lexer->raw);
-		lexer->index = lexer->size;
-		error = 0;
-	}
-	free(end);
-	return (error);
-}
-
 static int	get_end(t_vec *tokens, size_t start_token_index, t_token *end)
 {
 	const char	*arr[1];
@@ -56,10 +27,12 @@ static int	tokenize_end(t_lexer *lexer)
 	int		error;
 	t_state	current;
 	t_slice	slice;
+	size_t	slice_index;
 
 	error = 0;
 	slice.index = lexer->index;
 	slice.state = l_unset;
+	slice_index = lexer->slices->size;
 	vec_push(lexer->slices, &slice);
 	while (lexer->index < lexer->size)
 	{
@@ -70,25 +43,33 @@ static int	tokenize_end(t_lexer *lexer)
 			break ;
 		lexer->index++;
 	}
-	lexer->index++;
-	if (!error && lexer->index >= lexer->size)
+	if (error == E_HEREDOC)
+		error = 0;
+	if (!error && lexer->index >= lexer->size - 1)
 		error = E_INCINP;
-	if (!error)
-		vec_rm_last(lexer->slices);
+	vec_rm_at(lexer->slices, slice_index);
 	return (error);
 }
 
 int			vld_heredoc(t_lexer *lexer)
 {
+	t_slice slice;
+	size_t	slice_index;
 	t_token	end;
 	size_t	start_token_index;
 	int		error;
 
+	slice_index = lexer->slices->size - 1;
 	start_token_index = lexer->tokens->size;
 	error = tokenize_end(lexer);
 	if (!error && !(error = get_end(lexer->tokens, start_token_index, &end)))
-		error = match_end(lexer, start_token_index, &end);
+	{
+		vec_rm_at(lexer->slices, slice_index);
+		slice.index = start_token_index;
+		slice.state = l_heredoc;
+		vec_push(lexer->slices, &slice);
+	}
 	if (!error)
-		vec_rm_last(lexer->slices);
+		error = E_HEREDOC;
 	return (error);
 }

@@ -7,7 +7,7 @@
 # define TOKENS_STACK_SIZE 15
 # define N_LEX_FLAGS 2
 # define N_LEX_STAGES 3
-# define N_TOKEN_TYPES 18
+# define N_TOKEN_TYPES 19
 # define N_TOKEN_OPERATORS 12
 # define N_TOKEN_DELIMITERS 5
 # define N_TOKEN_REDIRECTIONS 6
@@ -35,6 +35,7 @@ enum						e_token_type
 	l_assignment_word,
 	l_command_name,
 	l_filename,
+	l_here_end,
 	l_word,
 	l_token
 };
@@ -139,6 +140,7 @@ int							match_parameter(t_lexer *lexer);
 int							match_brace(t_lexer *lexer, t_brace brace);
 int							match_bang(t_lexer *lexer);
 int							match_tilda(t_lexer *lexer);
+int 						match_heredoc(t_lexer *lexer);
 
 void						strjoin_expanded(t_lexer *lexer, size_t index,
 						const char *expand, int pad);

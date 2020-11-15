@@ -13,7 +13,7 @@ int	tok_dollar(t_lexer *lexer)
 		error = match_brace(lexer, brace);
 	else
 		match_parameter(lexer);
-	if (!error)
+	if (!error && lexer->index < lexer->size)
 	{
 		lexer->index--;
 		vec_rm_last(lexer->slices);

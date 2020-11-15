@@ -30,6 +30,7 @@ typedef enum	e_error_code
 	E_NOINP,
 	E_INCINP,
 	E_EOF,
+	E_HEREDOC,
 	E_BADSUBS,
 	E_NOEVENT,
 	E_UNEXPTOK,

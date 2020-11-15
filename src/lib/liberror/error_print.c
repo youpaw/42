@@ -22,6 +22,7 @@ const char	*g_error_msg[] = {
 	NULL,\
 	NULL,\
 	NULL,\
+	NULL,\
 	"${%}: bad substitution",\
 	"!%: event not found",\
 	"syntax error near unexpected token `%'",\

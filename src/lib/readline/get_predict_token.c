@@ -16,7 +16,8 @@ static t_prdct_tkn	*init_token(t_lexer *lexer, t_slice *slice)
 	{
 		token->type = r_param;
 		if (slice->index == lexer->begin)
-			lexer->begin += lexer->raw[lexer->begin] == '{' ? 2 : 1;
+			lexer->begin +=
+					!strncmp(lexer->raw + lexer->begin, "${", 2) ? 2 : 1;
 	}
 	else if (lexer->tokens->size)
 	{
