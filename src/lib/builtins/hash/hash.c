@@ -19,6 +19,7 @@
 static int			print_error_option(char opt)
 {
 	print_invalid_option("hash", opt);
+	print_usage(2, "hash", "[-r] [name ...]");
 	return (2);
 }
 

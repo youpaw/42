@@ -27,5 +27,8 @@ int		put_job_in_foreground(t_job *j, int cont)
 	}
 	tcgetattr(g_terminal, &j->tmodes);
 	tcsetattr(g_terminal, TCSADRAIN, &g_tmodes);
+	if ((WIFSIGNALED(return_value) && WTERMSIG(return_value) == SIGINT) ||
+			WIFSTOPPED(return_value))
+		fdputendl("", 2);
 	return (return_value);
 }
