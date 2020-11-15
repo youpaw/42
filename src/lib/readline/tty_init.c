@@ -1,16 +1,17 @@
-/*
-* Created by Maxon Gena on 8/28/20.
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tty_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmallist <fmallist@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/10 15:54:42 by fmallist          #+#    #+#             */
+/*   Updated: 2020/11/15 18:23:39 by fmallist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "readline.h"
 #include "unistd.h"
-
-/*
- * Initialize terminal: make termcap init, enter input mode
- * to be able to move left and right in line, check that stdin
- * is terminal, save current terminal settings in global
- * variable and set terminal in noncanonical mode.
- */
 
 int	tty_init(void)
 {

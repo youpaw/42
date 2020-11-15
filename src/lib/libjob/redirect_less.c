@@ -1,6 +1,14 @@
-//
-// Created by Fidelia Mallister on 11/4/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect_less.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azomega <azomega@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/14 13:44:15 by azomega           #+#    #+#             */
+/*   Updated: 2020/11/15 18:29:16 by fmallist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "jobs.h"
 #include <unistd.h>
@@ -18,7 +26,8 @@ int		redirect_less(t_ast *leafs, t_process *process)
 		if (!access(leafs->left->left->token->raw, F_OK))
 		{
 			if (access(leafs->left->left->token->raw, R_OK))
-				return (redirect_print_error(E_ACCES, leafs->left->left->token->raw));
+				return (redirect_print_error(E_ACCES,\
+							leafs->left->left->token->raw));
 			in = open(leafs->left->left->token->raw, O_RDONLY);
 			if (-1 == in)
 				return (1);
