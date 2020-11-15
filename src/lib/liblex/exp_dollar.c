@@ -42,6 +42,8 @@ static void			handle_field_expand(t_lexer *lexer)
 
 	index = lexer->index;
 	match_parameter(lexer);
+	if (index == lexer->index)
+		return ;
 	sub = strsub(lexer->raw, index, lexer->index - index);
 	if (*sub == '?')
 		expand_exit_code(&sub);

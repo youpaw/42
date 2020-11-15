@@ -47,8 +47,7 @@ static int	tokenize_end(t_lexer *lexer)
 		error = 0;
 	if (!error && lexer->index >= lexer->size - 1)
 		error = E_INCINP;
-	if (!error)
-		vec_rm_at(lexer->slices, slice_index);
+	vec_rm_at(lexer->slices, slice_index);
 	return (error);
 }
 
