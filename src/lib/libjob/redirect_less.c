@@ -27,8 +27,8 @@ int		redirect_less(t_ast *leafs, t_process *process)
 		{
 			if (access(leafs->left->left->token->raw, R_OK))
 				return (redirect_print_error(E_ACCES,\
-							leafs->left->left->token->raw));
-			in = open(leafs->left->left->token->raw, O_RDONLY);
+					leafs->left->left->token->raw));\
+					in = open(leafs->left->left->token->raw, O_RDONLY);
 			if (-1 == in)
 				return (1);
 			redirect_init_process_file(process, to, in);
