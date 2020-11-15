@@ -44,7 +44,8 @@ const char	*g_error_msg[] = {
 	"%: Bad file descriptor",\
 	"%: ambiguous redirect",\
 	"%: not enough arguments",\
-	"%: %"
+	"%: %",\
+	"%: %: invalid alias name"
 };
 
 void			error_print(t_error_code er_code, const char **args)

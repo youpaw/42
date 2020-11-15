@@ -15,9 +15,23 @@
 #include "cc_char.h"
 #include "alias.h"
 
+const char	g_invalid_sym[] = {
+		'=', '|', '\n', '\t', ' ', '/', '$', '\\',\
+		'"', ';', '(', ')', '<', '>', '&'
+};
+
 static int	is_char_valid(char c)
 {
-	return (!(isspace(c) || c == '=') || c == '/');
+	int i;
+
+	i = 0;
+	while (g_invalid_sym[i])
+	{
+		if (c == g_invalid_sym[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 size_t		get_valid_alias_name_len(const char *name)
@@ -25,7 +39,7 @@ size_t		get_valid_alias_name_len(const char *name)
 	size_t index;
 
 	index = 0;
-	while (name[index] && is_char_valid(name[index]))
+	while (name[index] && is_char_valid(name[index]) == 0)
 		index++;
 	if (name[index] != '=')
 		return (0);
