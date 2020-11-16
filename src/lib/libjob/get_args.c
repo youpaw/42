@@ -31,7 +31,7 @@ char	**get_args(t_ast *ast)
 	}
 	if (vec->size)
 	{
-		args = (char **) vec->data;
+		args = (char **)vec->data;
 		free(vec);
 	}
 	else
