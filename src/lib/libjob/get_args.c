@@ -10,8 +10,10 @@ char	**get_args(t_ast *ast)
 	t_vec	*vec;
 	char	**args;
 
+	args = NULL;
 	vec = vec_new(JOB_VEC_CAPACITY, sizeof(char *), NULL);
-	vec_push(vec, &ast->token->raw);
+	if (ast->token)
+		vec_push(vec, &ast->token->raw);
 	ast = ast->right;
 	while (ast)
 	{
@@ -19,7 +21,12 @@ char	**get_args(t_ast *ast)
 			vec_push(vec, &ast->token->raw);
 		ast = ast->right;
 	}
-	args = (char **)vec->data;
-	free(vec);
+	if (vec->size)
+	{
+		args = (char **) vec->data;
+		free(vec);
+	}
+	else
+		vec_del(&vec);
 	return (args);
 }

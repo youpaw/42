@@ -52,7 +52,7 @@ int			run_builtin_or_hash(t_process *process)
 {
 	int		return_value;
 
-	if (process->ast->token && process_init(process))
+	if (process_init(process))
 		return (1);
 	return_value = exec_or_hash(process);
 	if (return_value >= 0)
