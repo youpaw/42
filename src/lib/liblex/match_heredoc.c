@@ -1,6 +1,14 @@
-//
-// Created by Darth Butterwell on 11/15/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   match_heredoc.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/18 23:30:26 by hlorrine          #+#    #+#             */
+/*   Updated: 2020/11/15 18:24:38 by fmallist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lexer.h"
 #include "cc_str.h"
@@ -13,7 +21,7 @@ static char	*join_end(char *end)
 	ar[1] = end;
 	ar[2] = "\n";
 	ar[3] = NULL;
-	return (strnjoin((const char **) ar));
+	return (strnjoin((const char **)ar));
 }
 
 static int	match_end(t_lexer *lexer, t_token *token, size_t start_token_index)
@@ -33,7 +41,7 @@ static int	match_end(t_lexer *lexer, t_token *token, size_t start_token_index)
 		vec_rm_at(lexer->tokens, start_token_index);
 		sub_len = fnd - (lexer->raw + lexer->index);
 		sub_len += *fnd == '\4' ? 0 : 1;
-		token->raw = strsub(lexer->raw, lexer->index,sub_len);
+		token->raw = strsub(lexer->raw, lexer->index, sub_len);
 		token->type = l_here_end;
 		vec_push_at(lexer->tokens, token, start_token_index);
 		sp_len = *fnd == '\4' ? 1 : strlen(end);
@@ -45,7 +53,7 @@ static int	match_end(t_lexer *lexer, t_token *token, size_t start_token_index)
 	return (error);
 }
 
-int 		match_heredoc(t_lexer *lexer)
+int			match_heredoc(t_lexer *lexer)
 {
 	t_slice slice;
 	t_token token;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azomega <azomega@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/14 13:44:15 by azomega           #+#    #+#             */
+/*   Updated: 2020/11/15 18:25:57 by fmallist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEXER_H
 # define LEXER_H
 # define N_BRACES 3
@@ -140,7 +152,7 @@ int							match_parameter(t_lexer *lexer);
 int							match_brace(t_lexer *lexer, t_brace brace);
 int							match_bang(t_lexer *lexer);
 int							match_tilda(t_lexer *lexer);
-int 						match_heredoc(t_lexer *lexer);
+int							match_heredoc(t_lexer *lexer);
 
 void						strjoin_expanded(t_lexer *lexer, size_t index,
 						const char *expand, int pad);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_valid_name_length_no_check.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlorrine <hlorrine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azomega <azomega@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 22:05:30 by hlorrine          #+#    #+#             */
-/*   Updated: 2020/11/12 22:05:33 by hlorrine         ###   ########.fr       */
+/*   Created: 2020/11/14 13:44:15 by azomega           #+#    #+#             */
+/*   Updated: 2020/11/14 15:11:11 by azomega          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
