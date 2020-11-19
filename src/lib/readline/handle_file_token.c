@@ -73,7 +73,7 @@ static t_list	*get_list_files(char *path, char *n, int check_exe)
 			if (!*n && (!strcmp(".", dir->d_name) \
 				|| !strcmp("..", dir->d_name)))
 				continue;
-			strcat(strcpy(fullname, path), dir->d_name);
+			strcat(strcat(strcpy(fullname, path), dir->d_name), "/");
 			if (!check_exe || !access(fullname, X_OK))
 				lst_add_sort(&lst, get_file_lst(dir), \
 				(int (*)(const void *, const void *)) &strcmp);
